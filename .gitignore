@@ -1,0 +1,43 @@
+# Ignore Visual Studio specific files
+.vs/
+*.user
+*.suo
+
+# Build output directories
+bin/
+obj/
+
+# NuGet Packages
+packages/
+*.nupkg
+
+# User-specific files
+*.swp
+*.bak
+*.tmp
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+*.orig
+*.rej
+
+# Android build artifacts
+*.apk
+*.aab
+*.keystore
+*.dex
+*.class
+
+# Ignore auto-generated files
+*.Designer.cs
+*.dll
+*.pdb
+
+# macOS or Linux specific
+.DS_Store
+*.directory
+
+# Rider specific
+.idea/
