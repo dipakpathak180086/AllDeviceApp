@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ThreePointCheck_App.Pages.MainWIndow" BackgroundColor="Black" Appearing="ContentPage_Appearing">
+
+    <!--<ScrollView>-->
+    <Frame  Margin="10,15,10,15" CornerRadius="20"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" >
+
+        <StackLayout>
+            <Grid  VerticalOptions="Start"  Margin="0,-18,0,0"   HorizontalOptions="CenterAndExpand"  >
+                <Label HorizontalTextAlignment="Center"  TextDecorations="Underline" HorizontalOptions="Center" TextColor="Red" FontAttributes="Bold" FontSize="22"   Text="MAIN WINDOW" Grid.Row="0" ></Label>
+            </Grid>
+            <Grid Margin="0,60,0,0" VerticalOptions="Center" HorizontalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="230"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150"></RowDefinition>
+                    <RowDefinition Height="150"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button FontSize="35" HeightRequest="150"  x:Name="btnSIL" Clicked="BtnSIL_Clicked" BackgroundColor="LightBlue" Text="SIL SCANNING"></Button>
+                <Button FontSize="35" HeightRequest="150"  x:Name="btnKanban" Clicked="BtnKanban_Clicked" Grid.Row="1" BackgroundColor="LightSlateGray" Text="KANBAN SCANNING"></Button>
+            </Grid>
+          
+
+        </StackLayout>
+        </Frame>
+</ContentPage>

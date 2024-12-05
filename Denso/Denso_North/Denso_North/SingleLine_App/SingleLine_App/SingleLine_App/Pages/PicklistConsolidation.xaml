@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="ThreePointCheck_App.Pages.PicklistConsolidation" Appearing="Pick_Appearing" x:Name="Pick" BackgroundColor="Black">
+
+    <!--<ScrollView>-->
+        <Frame  Margin="0,15,0,15" CornerRadius="20"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" >
+            <StackLayout>
+            <!--<Grid  VerticalOptions="Start"  Margin="0,-25,0,0"   HorizontalOptions="CenterAndExpand"  >
+            </Grid>-->
+            <Grid Margin="0,-20,0,0" VerticalOptions="Start" HorizontalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="18"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label x:Name="lblHeader" Grid.ColumnSpan="2" HorizontalTextAlignment="Center"  TextDecorations="Underline" HorizontalOptions="Center" TextColor="Red" FontAttributes="Bold" FontSize="22"   Text="3 POINTS CHECK SYSTEM" Grid.Row="0"  ></Label>
+                <Label x:Name="lblWH" TextColor="DarkBlue" FontSize="15" HorizontalTextAlignment="Start" FontAttributes="Bold"  Grid.Row="1" Grid.Column="0"></Label>
+                <Label x:Name="lblUser" TextColor="DarkOrange" FontSize="15" HorizontalTextAlignment="Start" FontAttributes="Bold"  Grid.Row="1" Grid.Column="1"></Label>
+            </Grid>
+            <Grid Margin="0,0,0,0" VerticalOptions="Start" HorizontalOptions="StartAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition Height="18"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Picker SelectedIndexChanged="PkSIL_SelectedIndexChanged" FontAttributes="Bold" x:Name="pkSIL" Title="SELECT SIL TRUCK NO" Grid.Column="0"  BackgroundColor="Transparent" ></Picker>
+                    <Label x:Name="lblCust" TextColor="DarkMagenta" FontSize="15"  Grid.Row="1" Grid.Column="0"></Label>
+                    <Entry Completed="TxtDenso_Completed" FontSize="15" Placeholder="SCAN DENSO BARCODE" x:Name="txtDenso" Grid.Row="2"></Entry>
+                    <Entry Completed="TxtCustomer_Completed" FontSize="15" Placeholder="SCAN CUSTOMER BARCODE" x:Name="txtCustomer" Grid.Row="3"></Entry>
+            </Grid>
+                <Grid Margin="0,0,0,0" VerticalOptions="Start" HorizontalOptions="StartAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="65"></ColumnDefinition>
+                        <ColumnDefinition Width="50"></ColumnDefinition>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label TextColor="Black" FontSize="15" HorizontalTextAlignment="End" FontAttributes="Bold" Text="BINS : " Grid.Row="0" Grid.Column="0"></Label>
+                    <Label x:Name="lblqty" TextColor="DarkGreen" FontSize="15" HorizontalTextAlignment="Start" FontAttributes="Bold" Text="0/0" Grid.Row="0" Grid.Column="1"></Label>
+                    <Label TextColor="Black" FontSize="15" HorizontalTextAlignment="End" FontAttributes="Bold" Text="TOTAL QTY : " Grid.Row="0" Grid.Column="2"></Label>
+                    <Label x:Name="lblTotqty" TextColor="DarkGreen" FontSize="15" HorizontalTextAlignment="Start" FontAttributes="Bold" Text="0/0" Grid.Row="0" Grid.Column="3"></Label>
+
+                </Grid>
+                <Grid Margin="0,0,0,0"  VerticalOptions="Start" HorizontalOptions="StartAndExpand">
+                    <ListView  BackgroundColor="White" x:Name="ListTag" Header="" HasUnevenRows="True">
+                        <ListView.HeaderTemplate>
+                            <DataTemplate>
+                            <StackLayout Orientation="Vertical">
+                                <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" Padding="5">
+                                    <Label WidthRequest="60" FontAttributes="Bold" TextColor="Blue" Text="Part No" VerticalOptions="Start" HorizontalOptions="StartAndExpand"/>
+                                    <Label FontAttributes="Bold" TextColor="Blue" Text="SIL Qty" VerticalOptions="Start" HorizontalOptions="StartAndExpand"/>
+                                    <Label FontAttributes="Bold" TextColor="Blue" Text="Denso Qty" VerticalOptions="Start" HorizontalOptions="StartAndExpand"/>
+                                    <Label FontAttributes="Bold" TextColor="Blue" Text="Cust Qty" VerticalOptions="Start" HorizontalOptions="StartAndExpand"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </DataTemplate>
+                        </ListView.HeaderTemplate>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" Padding="5">
+                                    <Label WidthRequest="60" FontAttributes="Bold" TextColor="Black" Text="{Binding ItemArray[0]}" VerticalOptions="Start" HorizontalOptions="StartAndExpand"/>
+                                    <Label FontAttributes="Bold" TextColor="Black" Text="{Binding ItemArray[1]}" VerticalOptions="Start" HorizontalOptions="StartAndExpand"/>
+                                    <Label FontAttributes="Bold" TextColor="Black" Text="{Binding ItemArray[2]}" VerticalOptions="Start" HorizontalOptions="StartAndExpand"/>
+                                    <Label FontAttributes="Bold" TextColor="Black" Text="{Binding ItemArray[3]}" VerticalOptions="Start" HorizontalOptions="StartAndExpand"/>
+
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+
+
+                <Grid Margin="-10,0,0,0" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90"></ColumnDefinition>
+                        <ColumnDefinition Width="140"></ColumnDefinition>
+                        <ColumnDefinition Width="90"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button x:Name="btnExit" Clicked="BtnExit_Clicked" Grid.Column="0" Text="EXIT" BackgroundColor="DarkCyan" WidthRequest="120"></Button>
+
+                <Button x:Name="btnClear" Clicked="BtnClear_Clicked" Grid.Column="1" Text="BACK-UP/CLEAR" BackgroundColor="DarkCyan" WidthRequest="120"></Button>
+                <Button x:Name="btnGen" Clicked="BtnGen_Clicked" Grid.Column="2" Text="FILE-GEN" BackgroundColor="DarkCyan" WidthRequest="130"></Button>
+                </Grid>
+                <!--<Grid VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" Margin="0,0,0,-10">
+                    <Image x:Name="Logo" Source="Logo.png"  Aspect="AspectFit" WidthRequest="200"   ></Image>
+                </Grid>-->
+            </StackLayout>
+        </Frame>
+    <!--</ScrollView>-->
+</ContentPage>

@@ -1,0 +1,290 @@
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\bin\Release\ScanAndSaveApp.dll
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\bin\Release\ScanAndSaveApp.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\bin\Release\ScanAndSaveApp.ScanAndSaveApp.apk
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\bin\Release\ScanAndSaveApp.ScanAndSaveApp-Signed.apk
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\MonoAndroid,Version=v8.1.AssemblyAttributes.cs
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\ScanAndSave.nuget.stamp
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\ScanAndSave.csprojAssemblyReference.cache
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\libraryimports.cache.stamp
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res.flag
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\ScanAndSave.csproj.CoreCompileInputs.cache
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\ScanAndSaveApp.dll
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\ScanAndSaveApp.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\android\bin\ScanAndSaveApp.ScanAndSaveApp.apk
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\layout\activity_main.xml
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\values\colors.xml
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\values\ic_launcher_background.xml
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\values\strings.xml
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\values\styles.xml
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\mipmap-anydpi-v26\ic_launcher.xml
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\mipmap-anydpi-v26\ic_launcher_round.xml
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\mipmap-hdpi\ic_launcher.png
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\mipmap-hdpi\ic_launcher_foreground.png
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\mipmap-hdpi\ic_launcher_round.png
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\mipmap-mdpi\ic_launcher.png
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\mipmap-mdpi\ic_launcher_foreground.png
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\mipmap-mdpi\ic_launcher_round.png
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\mipmap-xhdpi\ic_launcher.png
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\mipmap-xhdpi\ic_launcher_foreground.png
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\mipmap-xhdpi\ic_launcher_round.png
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\mipmap-xxhdpi\ic_launcher.png
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\mipmap-xxhdpi\ic_launcher_foreground.png
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\mipmap-xxhdpi\ic_launcher_round.png
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\mipmap-xxxhdpi\ic_launcher.png
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\mipmap-xxxhdpi\ic_launcher_foreground.png
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\mipmap-xxxhdpi\ic_launcher_round.png
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\layout\activity_setting.xml
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\layout\view_case_item.xml
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\raw\beep.mp3
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\layout\activity_passkey.xml
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\layout\spiner.xml
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\res\drawable\sato_logo.png
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\R.cs.flag
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\R.txt
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\uploadflags.txt
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\bin\Release\Mono.Android.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\bin\Release\mscorlib.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\bin\Release\System.Core.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\bin\Release\System.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\bin\Release\System.Xml.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\bin\Release\System.Net.Http.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\bin\Release\System.Runtime.Serialization.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\bin\Release\System.ServiceModel.Internals.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\bin\Release\Mono.Security.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\linksrc\Mono.Android.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\linksrc\mscorlib.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\linksrc\System.Core.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\linksrc\System.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\linksrc\System.Xml.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\linksrc\System.Net.Http.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\linksrc\System.Runtime.Serialization.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\linksrc\System.ServiceModel.Internals.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\linksrc\Mono.Security.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\linksrc\ScanAndSaveApp.dll.mdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\bin\Release\ScanAndSaveApp.dll.mdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\android\assets\ScanAndSaveApp.dll.mdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\android\assets\Mono.Android.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\android\assets\Mono.Security.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\android\assets\mscorlib.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\android\assets\System.Core.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\android\assets\System.Net.Http.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\android\assets\System.pdb
+D:\Akhilesh Kumar\Projects\Android FileScanSaveApp\ScanAndSave\ScanAndSave\obj\Release\81\android\assets\System.Runtime.Serialization.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\bin\Release\ScanAndSaveApp.dll
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\bin\Release\ScanAndSaveApp.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\bin\Release\ScanAndSaveApp.ScanAndSaveApp.apk
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\bin\Release\ScanAndSaveApp.ScanAndSaveApp-Signed.apk
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\MonoAndroid,Version=v8.1.AssemblyAttributes.cs
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\ScanAndSave.nuget.stamp
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\ScanAndSave.csprojAssemblyReference.cache
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\libraryimports.cache.stamp
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res.flag
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\ScanAndSave.csproj.CoreCompileInputs.cache
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\ScanAndSaveApp.dll
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\ScanAndSaveApp.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\android\bin\ScanAndSaveApp.ScanAndSaveApp.apk
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\layout\activity_main.xml
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\values\colors.xml
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\values\ic_launcher_background.xml
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\values\strings.xml
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\values\styles.xml
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\mipmap-anydpi-v26\ic_launcher.xml
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\mipmap-anydpi-v26\ic_launcher_round.xml
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\mipmap-hdpi\ic_launcher.png
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\mipmap-hdpi\ic_launcher_foreground.png
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\mipmap-hdpi\ic_launcher_round.png
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\mipmap-mdpi\ic_launcher.png
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\mipmap-mdpi\ic_launcher_foreground.png
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\mipmap-mdpi\ic_launcher_round.png
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\mipmap-xhdpi\ic_launcher.png
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\mipmap-xhdpi\ic_launcher_foreground.png
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\mipmap-xhdpi\ic_launcher_round.png
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\mipmap-xxhdpi\ic_launcher.png
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\mipmap-xxhdpi\ic_launcher_foreground.png
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\mipmap-xxhdpi\ic_launcher_round.png
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\mipmap-xxxhdpi\ic_launcher.png
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\mipmap-xxxhdpi\ic_launcher_foreground.png
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\mipmap-xxxhdpi\ic_launcher_round.png
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\layout\activity_setting.xml
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\layout\view_case_item.xml
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\raw\beep.mp3
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\layout\activity_passkey.xml
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\layout\spiner.xml
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\res\drawable\sato_logo.png
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\R.cs.flag
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\R.txt
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\uploadflags.txt
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\bin\Release\Mono.Android.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\bin\Release\Mono.Security.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\bin\Release\mscorlib.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\bin\Release\System.Core.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\bin\Release\System.Net.Http.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\bin\Release\System.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\bin\Release\System.Runtime.Serialization.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\bin\Release\System.ServiceModel.Internals.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\bin\Release\System.Xml.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\bin\Release\ScanAndSaveApp.dll.mdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\linksrc\Mono.Android.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\linksrc\mscorlib.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\linksrc\System.Core.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\linksrc\System.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\linksrc\System.Xml.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\linksrc\System.Net.Http.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\linksrc\System.Runtime.Serialization.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\linksrc\System.ServiceModel.Internals.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\linksrc\Mono.Security.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\linksrc\ScanAndSaveApp.dll.mdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\android\assets\ScanAndSaveApp.dll.mdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\android\assets\Mono.Android.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\android\assets\Mono.Security.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\android\assets\mscorlib.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\android\assets\System.Core.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\android\assets\System.Net.Http.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\android\assets\System.pdb
+D:\Akhilesh Kumar\Projects\BIRA\OfflineScan\ScanAndSave\obj\Release\81\android\assets\System.Runtime.Serialization.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\bin\Release\ScanAndSaveApp.dll
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\bin\Release\ScanAndSaveApp.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\bin\Release\ScanAndSaveApp.ScanAndSaveApp.apk
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\bin\Release\ScanAndSaveApp.ScanAndSaveApp-Signed.apk
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\MonoAndroid,Version=v8.1.AssemblyAttributes.cs
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\ScanAndSave.nuget.stamp
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\ScanAndSave.csprojAssemblyReference.cache
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\libraryimports.cache.stamp
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res.flag
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\ScanAndSave.csproj.CoreCompileInputs.cache
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\ScanAndSaveApp.dll
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\ScanAndSaveApp.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\android\bin\ScanAndSaveApp.ScanAndSaveApp.apk
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\layout\activity_main.xml
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\values\colors.xml
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\values\ic_launcher_background.xml
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\values\strings.xml
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\values\styles.xml
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\mipmap-anydpi-v26\ic_launcher.xml
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\mipmap-anydpi-v26\ic_launcher_round.xml
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\mipmap-hdpi\ic_launcher.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\mipmap-hdpi\ic_launcher_foreground.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\mipmap-hdpi\ic_launcher_round.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\mipmap-mdpi\ic_launcher.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\mipmap-mdpi\ic_launcher_foreground.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\mipmap-mdpi\ic_launcher_round.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\mipmap-xhdpi\ic_launcher.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\mipmap-xhdpi\ic_launcher_foreground.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\mipmap-xhdpi\ic_launcher_round.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\mipmap-xxhdpi\ic_launcher.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\mipmap-xxhdpi\ic_launcher_foreground.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\mipmap-xxhdpi\ic_launcher_round.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\mipmap-xxxhdpi\ic_launcher.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\mipmap-xxxhdpi\ic_launcher_foreground.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\mipmap-xxxhdpi\ic_launcher_round.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\layout\activity_setting.xml
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\layout\view_case_item.xml
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\raw\beep.mp3
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\layout\activity_passkey.xml
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\layout\spiner.xml
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\res\drawable\sato_logo.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\R.cs.flag
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\R.txt
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\uploadflags.txt
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\bin\Release\Mono.Android.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\bin\Release\Mono.Security.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\bin\Release\mscorlib.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\bin\Release\System.Core.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\bin\Release\System.Net.Http.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\bin\Release\System.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\bin\Release\System.Runtime.Serialization.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\bin\Release\System.ServiceModel.Internals.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\bin\Release\System.Xml.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\bin\Release\ScanAndSaveApp.dll.mdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\linksrc\Mono.Android.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\linksrc\mscorlib.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\linksrc\System.Core.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\linksrc\System.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\linksrc\System.Xml.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\linksrc\System.Net.Http.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\linksrc\System.Runtime.Serialization.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\linksrc\System.ServiceModel.Internals.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\linksrc\Mono.Security.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\linksrc\ScanAndSaveApp.dll.mdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\android\assets\ScanAndSaveApp.dll.mdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\android\assets\Mono.Android.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\android\assets\Mono.Security.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\android\assets\mscorlib.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\android\assets\System.Core.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\android\assets\System.Net.Http.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\android\assets\System.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\Delhi\DEVICE\Offline\Packing\ScanAndSave\obj\Release\81\android\assets\System.Runtime.Serialization.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\bin\Release\ScanAndSaveApp.dll
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\bin\Release\ScanAndSaveApp.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\MonoAndroid,Version=v8.1.AssemblyAttributes.cs
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\ScanAndSave.nuget.stamp
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\libraryimports.cache.stamp
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res.flag
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\ScanAndSave.csproj.CoreCompileInputs.cache
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\ScanAndSaveApp.dll
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\ScanAndSaveApp.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\layout\activity_main.xml
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\values\colors.xml
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\values\ic_launcher_background.xml
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\values\strings.xml
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\values\styles.xml
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\mipmap-anydpi-v26\ic_launcher.xml
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\mipmap-anydpi-v26\ic_launcher_round.xml
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\mipmap-hdpi\ic_launcher.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\mipmap-hdpi\ic_launcher_foreground.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\mipmap-hdpi\ic_launcher_round.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\mipmap-mdpi\ic_launcher.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\mipmap-mdpi\ic_launcher_foreground.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\mipmap-mdpi\ic_launcher_round.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\mipmap-xhdpi\ic_launcher.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\mipmap-xhdpi\ic_launcher_foreground.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\mipmap-xhdpi\ic_launcher_round.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\mipmap-xxhdpi\ic_launcher.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\mipmap-xxhdpi\ic_launcher_foreground.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\mipmap-xxhdpi\ic_launcher_round.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\mipmap-xxxhdpi\ic_launcher.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\mipmap-xxxhdpi\ic_launcher_foreground.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\mipmap-xxxhdpi\ic_launcher_round.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\layout\activity_setting.xml
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\layout\view_case_item.xml
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\raw\beep.mp3
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\layout\activity_passkey.xml
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\layout\spiner.xml
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\res\drawable\sato_logo.png
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\R.cs.flag
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\R.txt
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\uploadflags.txt
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\bin\Release\UpOfflineScanAndSaveApp.UpOfflineScanAndSaveApp.apk
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\bin\Release\UpOfflineScanAndSaveApp.UpOfflineScanAndSaveApp-Signed.apk
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\ScanAndSave.csprojAssemblyReference.cache
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\android\bin\UpOfflineScanAndSaveApp.UpOfflineScanAndSaveApp.apk
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\bin\Release\Mono.Android.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\bin\Release\mscorlib.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\bin\Release\System.Core.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\bin\Release\System.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\bin\Release\System.Xml.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\bin\Release\System.Net.Http.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\bin\Release\System.Runtime.Serialization.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\bin\Release\System.ServiceModel.Internals.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\bin\Release\Mono.Security.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\linksrc\Mono.Android.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\linksrc\mscorlib.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\linksrc\System.Core.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\linksrc\System.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\linksrc\System.Xml.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\linksrc\System.Net.Http.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\linksrc\System.Runtime.Serialization.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\linksrc\System.ServiceModel.Internals.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\linksrc\Mono.Security.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\linksrc\ScanAndSaveApp.dll.mdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\bin\Release\ScanAndSaveApp.dll.mdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\android\assets\ScanAndSaveApp.dll.mdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\android\assets\Mono.Android.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\android\assets\Mono.Security.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\android\assets\mscorlib.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\android\assets\System.Core.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\android\assets\System.Net.Http.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\android\assets\System.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\android\assets\System.Runtime.Serialization.pdb
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\bin\Release\ScanAndSaveApp.dll
+D:\Projects\Live Project\New Project\BIRA\BIRA_APPS\UP\DEVICE\Offline\Packing&Dispatch\ScanAndSave\obj\Release\81\linksrc\ScanAndSaveApp.dll.mdb

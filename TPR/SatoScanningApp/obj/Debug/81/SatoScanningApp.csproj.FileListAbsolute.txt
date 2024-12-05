@@ -1,0 +1,483 @@
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\SatoOnlineApp.dll
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\SatoOnlineApp.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\SatoOnlineApp.SatoOnlineApp.apk
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\SatoOnlineApp.SatoOnlineApp-Signed.apk
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\MonoAndroid,Version=v8.1.AssemblyAttributes.cs
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\SatoScanningApp.nuget.stamp
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\SatoScanningApp.csprojAssemblyReference.cache
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\libraryimports.cache.stamp
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res.flag
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\SatoScanningApp.csproj.CoreCompileInputs.cache
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\SatoOnlineApp.dll
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\SatoOnlineApp.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\bin\SatoOnlineApp.SatoOnlineApp.apk
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_main.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\values\colors.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\values\ic_launcher_background.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\values\strings.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\values\styles.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-anydpi-v26\ic_launcher.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-anydpi-v26\ic_launcher_round.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-hdpi\ic_launcher.png
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-hdpi\ic_launcher_foreground.png
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-hdpi\ic_launcher_round.png
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-mdpi\ic_launcher.png
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-mdpi\ic_launcher_foreground.png
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-mdpi\ic_launcher_round.png
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xhdpi\ic_launcher.png
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xhdpi\ic_launcher_foreground.png
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xhdpi\ic_launcher_round.png
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xxhdpi\ic_launcher.png
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xxhdpi\ic_launcher_foreground.png
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xxhdpi\ic_launcher_round.png
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xxxhdpi\ic_launcher.png
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xxxhdpi\ic_launcher_foreground.png
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xxxhdpi\ic_launcher_round.png
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_setting.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\view_case_item.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\raw\beep.mp3
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_passkey.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\spiner.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_login.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\arrow_down.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\arrow_left.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\calender_res.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\common_edittext.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\currency_inr.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\emoticon_happy_outline.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\emoticon_neutral_outline.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\emoticon_sad_outline.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\ic_dashboard_black_24dp.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\ic_home_black_24dp.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\ic_launcher_background.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\ic_notifications_black_24dp.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\icon_calendar.jpg
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\splash_logo.png
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\splash_screen.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\logo_header.gif
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\values\dimens.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\sato_logo.png
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_machining.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_machining_defect.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\common_edittext_readonly.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_reoiling.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_reoiling_defect.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_finalpacking.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_finalpacking_defect.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_trolleyreceiving.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_dispatch.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_addprinttrolley.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_machiningsplit.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\R.cs.flag
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\R.txt
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\uploadflags.txt
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_trolleyexchange.xml
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\Mono.Android.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\mscorlib.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\System.Core.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\System.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\System.Xml.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\System.Net.Http.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\System.Runtime.Serialization.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\System.ServiceModel.Internals.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\Mono.Security.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\linksrc\SatoOnlineApp.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\linksrc\Mono.Android.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\linksrc\mscorlib.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\linksrc\System.Core.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\linksrc\System.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\linksrc\System.Xml.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\linksrc\System.Net.Http.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\linksrc\System.Runtime.Serialization.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\linksrc\System.ServiceModel.Internals.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\linksrc\Mono.Security.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\Mono.Android.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\Mono.Security.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\mscorlib.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\SatoOnlineApp.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\System.Core.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\System.Net.Http.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\System.pdb
+E:\DIPAK\Development\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\System.Runtime.Serialization.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\SatoOnlineApp.dll
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\SatoOnlineApp.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\SatoOnlineApp.SatoOnlineApp.apk
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\SatoOnlineApp.SatoOnlineApp-Signed.apk
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\MonoAndroid,Version=v8.1.AssemblyAttributes.cs
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\SatoScanningApp.nuget.stamp
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\SatoScanningApp.csprojAssemblyReference.cache
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\libraryimports.cache.stamp
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res.flag
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\SatoScanningApp.csproj.CoreCompileInputs.cache
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\SatoOnlineApp.dll
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\SatoOnlineApp.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\bin\SatoOnlineApp.SatoOnlineApp.apk
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_main.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\values\colors.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\values\ic_launcher_background.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\values\strings.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\values\styles.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-anydpi-v26\ic_launcher.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-anydpi-v26\ic_launcher_round.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-hdpi\ic_launcher.png
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-hdpi\ic_launcher_foreground.png
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-hdpi\ic_launcher_round.png
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-mdpi\ic_launcher.png
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-mdpi\ic_launcher_foreground.png
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-mdpi\ic_launcher_round.png
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xhdpi\ic_launcher.png
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xhdpi\ic_launcher_foreground.png
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xhdpi\ic_launcher_round.png
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xxhdpi\ic_launcher.png
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xxhdpi\ic_launcher_foreground.png
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xxhdpi\ic_launcher_round.png
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xxxhdpi\ic_launcher.png
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xxxhdpi\ic_launcher_foreground.png
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xxxhdpi\ic_launcher_round.png
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_setting.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\view_case_item.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\raw\beep.mp3
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_passkey.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\spiner.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_login.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\arrow_down.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\arrow_left.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\calender_res.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\common_edittext.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\currency_inr.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\emoticon_happy_outline.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\emoticon_neutral_outline.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\emoticon_sad_outline.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\ic_dashboard_black_24dp.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\ic_home_black_24dp.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\ic_launcher_background.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\ic_notifications_black_24dp.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\icon_calendar.jpg
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\splash_logo.png
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\splash_screen.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\logo_header.gif
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\values\dimens.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\sato_logo.png
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_machining.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_machining_defect.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\common_edittext_readonly.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_reoiling.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_reoiling_defect.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_finalpacking.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_finalpacking_defect.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_trolleyreceiving.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_dispatch.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_addprinttrolley.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_machiningsplit.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_trolleyexchange.xml
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\R.cs.flag
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\R.txt
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\uploadflags.txt
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\Mono.Android.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\mscorlib.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\System.Core.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\System.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\System.Xml.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\System.Net.Http.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\System.Runtime.Serialization.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\System.ServiceModel.Internals.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\bin\Debug\Mono.Security.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\linksrc\SatoOnlineApp.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\linksrc\Mono.Android.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\linksrc\mscorlib.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\linksrc\System.Core.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\linksrc\System.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\linksrc\System.Xml.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\linksrc\System.Net.Http.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\linksrc\System.Runtime.Serialization.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\linksrc\System.ServiceModel.Internals.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\linksrc\Mono.Security.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\Mono.Android.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\Mono.Security.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\mscorlib.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\SatoOnlineApp.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\System.Core.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\System.Net.Http.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\System.pdb
+D:\Projects\Live Project\New Project\TPR\Code\Android\Version7.2\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\System.Runtime.Serialization.pdb
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\bin\Debug\SatoOnlineApp.dll
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\bin\Debug\SatoOnlineApp.pdb
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\bin\Debug\SatoOnlineApp.SatoOnlineApp.apk
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\bin\Debug\SatoOnlineApp.SatoOnlineApp.aab
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\bin\Debug\SatoOnlineApp.SatoOnlineApp-Signed.aab
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\bin\Debug\SatoOnlineApp.SatoOnlineApp-Signed.apk
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\bin\Debug\SatoOnlineApp.SatoOnlineApp-Signed.apk.idsig
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\MonoAndroid,Version=v8.1.AssemblyAttributes.cs
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\build.props
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\adb.props
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\SatoScanningApp.csproj.AssemblyReference.cache
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\stamp\_BuildLibraryImportsCache.stamp
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res.flag
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\lp\5\jl\files.cache
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\lp\8\jl\files.cache
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\lp\10\jl\files.cache
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\lp\11\jl\files.cache
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\lp\12\jl\files.cache
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\lp\13\jl\files.cache
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\R.txt
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\R.cs.flag
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\SatoScanningApp.csproj.CoreCompileInputs.cache
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\SatoOnlineApp.dll
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\SatoOnlineApp.pdb
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\bin\SatoOnlineApp.SatoOnlineApp.apk
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\bin\base.zip
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\bin\SatoOnlineApp.SatoOnlineApp.aab
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\bin\SatoOnlineApp.SatoOnlineApp.apks
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_main.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\values\colors.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\values\ic_launcher_background.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\values\strings.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\values\styles.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-anydpi-v26\ic_launcher.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-anydpi-v26\ic_launcher_round.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-hdpi\ic_launcher.png
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-hdpi\ic_launcher_foreground.png
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-hdpi\ic_launcher_round.png
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-mdpi\ic_launcher.png
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-mdpi\ic_launcher_foreground.png
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-mdpi\ic_launcher_round.png
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xhdpi\ic_launcher.png
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xhdpi\ic_launcher_foreground.png
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xhdpi\ic_launcher_round.png
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xxhdpi\ic_launcher.png
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xxhdpi\ic_launcher_foreground.png
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xxhdpi\ic_launcher_round.png
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xxxhdpi\ic_launcher.png
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xxxhdpi\ic_launcher_foreground.png
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\mipmap-xxxhdpi\ic_launcher_round.png
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_setting.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\view_case_item.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\raw\beep.mp3
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_passkey.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\spiner.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_login.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\arrow_down.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\arrow_left.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\calender_res.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\common_edittext.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\currency_inr.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\emoticon_happy_outline.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\emoticon_neutral_outline.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\emoticon_sad_outline.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\ic_dashboard_black_24dp.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\ic_home_black_24dp.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\ic_launcher_background.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\ic_notifications_black_24dp.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\icon_calendar.jpg
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\splash_logo.png
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\splash_screen.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\logo_header.gif
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\values\dimens.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\sato_logo.png
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_machining.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_machining_defect.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\drawable\common_edittext_readonly.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_reoiling.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_reoiling_defect.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_finalpacking.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_finalpacking_defect.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_trolleyreceiving.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_dispatch.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_addprinttrolley.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_machiningsplit.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\res\layout\activity_trolleyexchange.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\uploadflags.txt
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\resolvedassemblies.hash
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\link.flag
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\Java.Interop.dll
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\Java.Interop.pdb
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\Mono.Android.dll
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\Mono.Android.pdb
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\Mono.Security.dll
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\Mono.Security.pdb
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\mscorlib.dll
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\mscorlib.pdb
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\SatoOnlineApp.dll
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\SatoOnlineApp.pdb
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\System.Core.dll
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\System.Core.pdb
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\System.dll
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\System.Net.Http.dll
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\System.Net.Http.pdb
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\System.Numerics.dll
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\System.Numerics.pdb
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\System.pdb
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\Xamarin.Android.Arch.Lifecycle.Common.dll
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\Xamarin.Android.Support.Compat.dll
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\Xamarin.Android.Support.Core.UI.dll
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\Xamarin.Android.Support.Core.Utils.dll
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\Xamarin.Android.Support.Fragment.dll
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\Xamarin.Android.Support.v7.AppCompat.dll
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\typemaps.armeabi-v7a.ll
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\typemaps.arm64-v8a.ll
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\AndroidManifest.xml
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\__environment__.txt
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\mono\MonoRuntimeProvider.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\assets\machine.config
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\bin\mono.android.jar
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\static.flag
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\buildid.txt
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\environment.armeabi-v7a.ll
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\environment.arm64-v8a.ll
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\android\support\compat\R.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\android\support\design\R.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\android\support\mediacompat\R.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\android\support\transition\R.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\android\support\v7\appcompat\R.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\android\support\v7\recyclerview\R.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\android\support\v7\widget\Toolbar_NavigationOnClickEventDispatcher.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\crc6417718efd60173fe7\AddPrintTrolleyActivity.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\crc6417718efd60173fe7\DispatchActivity.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\crc6417718efd60173fe7\FinalPackingActivity.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\crc6417718efd60173fe7\FinalPackingDefectActivity.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\crc6417718efd60173fe7\LoginActivity.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\crc6417718efd60173fe7\MachiningActivity.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\crc6417718efd60173fe7\MachiningDefectActivity.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\crc6417718efd60173fe7\MachiningSplitActivity.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\crc6417718efd60173fe7\MainActivity.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\crc6417718efd60173fe7\ReOilingActivity.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\crc6417718efd60173fe7\ReOilingDefectActivity.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\crc6417718efd60173fe7\TrolleyExchangeActivity.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\crc6417718efd60173fe7\TrolleyReceivingActivity.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\crc64366570ca3b8d67fd\DatePickerFragmentForActivity.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\crc644699b83cce26e9ef\CaseItemAdapter.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\crc644699b83cce26e9ef\PassKeyActivity.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\crc644699b83cce26e9ef\SettingActivity.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\crc64b5614058b691180b\clsGlobal.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\mono\android\app\ApplicationRegistration.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\mono\android\support\v4\app\FragmentManager_OnBackStackChangedListenerImplementor.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\mono\android\support\v4\view\ActionProvider_SubUiVisibilityListenerImplementor.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\mono\android\support\v4\view\ActionProvider_VisibilityListenerImplementor.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\mono\android\support\v4\widget\DrawerLayout_DrawerListenerImplementor.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\mono\android\support\v7\app\ActionBar_OnMenuVisibilityListenerImplementor.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\mono\android\support\v7\widget\Toolbar_OnMenuItemClickListenerImplementor.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\mono\MonoPackageManager_Resources.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\bin\packaged_resources
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\src\satoonlineapp\satoonlineapp\R.java
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\compressed_assemblies.armeabi-v7a.ll
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\compressed_assemblies.arm64-v8a.ll
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\typemaps.armeabi-v7a.o
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\typemaps.arm64-v8a.o
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\environment.armeabi-v7a.o
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\environment.arm64-v8a.o
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\compressed_assemblies.armeabi-v7a.o
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\compressed_assemblies.arm64-v8a.o
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\jni_remap.armeabi-v7a.o
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\jni_remap.arm64-v8a.o
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\app_shared_libraries\armeabi-v7a\libxamarin-app.so
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\app_shared_libraries\arm64-v8a\libxamarin-app.so
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\android\bin\classes.dex
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\stamp\_CleanIntermediateIfNeeded.stamp
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\stamp\_CompileJava.stamp
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\stamp\_CompileToDalvik.stamp
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\stamp\_ConvertCustomView.stamp
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\stamp\_ConvertResourcesCases.stamp
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\stamp\_GenerateJavaStubs.stamp
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\stamp\_GeneratePackageManagerJava.stamp
+D:\Projects\TPR\SatoScanningApp\SatoScanningApp\obj\Debug\81\stamp\_ResolveLibraryProjectImports.stamp
+D:\TPR\SatoScanningApp\bin\Debug\SatoOnlineApp.dll
+D:\TPR\SatoScanningApp\bin\Debug\SatoOnlineApp.pdb
+D:\TPR\SatoScanningApp\bin\Debug\SatoOnlineApp.SatoOnlineApp.apk
+D:\TPR\SatoScanningApp\bin\Debug\SatoOnlineApp.SatoOnlineApp-Signed.apk
+D:\TPR\SatoScanningApp\obj\Debug\81\MonoAndroid,Version=v8.1.AssemblyAttributes.cs
+D:\TPR\SatoScanningApp\obj\Debug\81\SatoScanningApp.nuget.stamp
+D:\TPR\SatoScanningApp\obj\Debug\81\libraryimports.cache.stamp
+D:\TPR\SatoScanningApp\obj\Debug\81\res.flag
+D:\TPR\SatoScanningApp\obj\Debug\81\SatoScanningApp.csproj.CoreCompileInputs.cache
+D:\TPR\SatoScanningApp\obj\Debug\81\SatoOnlineApp.dll
+D:\TPR\SatoScanningApp\obj\Debug\81\SatoOnlineApp.pdb
+D:\TPR\SatoScanningApp\obj\Debug\81\android\bin\SatoOnlineApp.SatoOnlineApp.apk
+D:\TPR\SatoScanningApp\obj\Debug\81\res\layout\activity_main.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\values\colors.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\values\ic_launcher_background.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\values\strings.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\values\styles.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\mipmap-anydpi-v26\ic_launcher.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\mipmap-anydpi-v26\ic_launcher_round.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\mipmap-hdpi\ic_launcher.png
+D:\TPR\SatoScanningApp\obj\Debug\81\res\mipmap-hdpi\ic_launcher_foreground.png
+D:\TPR\SatoScanningApp\obj\Debug\81\res\mipmap-hdpi\ic_launcher_round.png
+D:\TPR\SatoScanningApp\obj\Debug\81\res\mipmap-mdpi\ic_launcher.png
+D:\TPR\SatoScanningApp\obj\Debug\81\res\mipmap-mdpi\ic_launcher_foreground.png
+D:\TPR\SatoScanningApp\obj\Debug\81\res\mipmap-mdpi\ic_launcher_round.png
+D:\TPR\SatoScanningApp\obj\Debug\81\res\mipmap-xhdpi\ic_launcher.png
+D:\TPR\SatoScanningApp\obj\Debug\81\res\mipmap-xhdpi\ic_launcher_foreground.png
+D:\TPR\SatoScanningApp\obj\Debug\81\res\mipmap-xhdpi\ic_launcher_round.png
+D:\TPR\SatoScanningApp\obj\Debug\81\res\mipmap-xxhdpi\ic_launcher.png
+D:\TPR\SatoScanningApp\obj\Debug\81\res\mipmap-xxhdpi\ic_launcher_foreground.png
+D:\TPR\SatoScanningApp\obj\Debug\81\res\mipmap-xxhdpi\ic_launcher_round.png
+D:\TPR\SatoScanningApp\obj\Debug\81\res\mipmap-xxxhdpi\ic_launcher.png
+D:\TPR\SatoScanningApp\obj\Debug\81\res\mipmap-xxxhdpi\ic_launcher_foreground.png
+D:\TPR\SatoScanningApp\obj\Debug\81\res\mipmap-xxxhdpi\ic_launcher_round.png
+D:\TPR\SatoScanningApp\obj\Debug\81\res\layout\activity_setting.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\layout\view_case_item.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\raw\beep.mp3
+D:\TPR\SatoScanningApp\obj\Debug\81\res\layout\activity_passkey.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\layout\spiner.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\layout\activity_login.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\drawable\arrow_down.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\drawable\arrow_left.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\drawable\calender_res.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\drawable\common_edittext.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\drawable\currency_inr.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\drawable\emoticon_happy_outline.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\drawable\emoticon_neutral_outline.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\drawable\emoticon_sad_outline.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\drawable\ic_dashboard_black_24dp.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\drawable\ic_home_black_24dp.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\drawable\ic_launcher_background.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\drawable\ic_notifications_black_24dp.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\drawable\icon_calendar.jpg
+D:\TPR\SatoScanningApp\obj\Debug\81\res\drawable\splash_logo.png
+D:\TPR\SatoScanningApp\obj\Debug\81\res\drawable\splash_screen.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\drawable\logo_header.gif
+D:\TPR\SatoScanningApp\obj\Debug\81\res\values\dimens.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\drawable\sato_logo.png
+D:\TPR\SatoScanningApp\obj\Debug\81\res\layout\activity_machining.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\layout\activity_machining_defect.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\drawable\common_edittext_readonly.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\layout\activity_reoiling.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\layout\activity_reoiling_defect.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\layout\activity_finalpacking.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\layout\activity_finalpacking_defect.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\layout\activity_trolleyreceiving.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\layout\activity_dispatch.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\layout\activity_addprinttrolley.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\layout\activity_machiningsplit.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\res\layout\activity_trolleyexchange.xml
+D:\TPR\SatoScanningApp\obj\Debug\81\R.cs.flag
+D:\TPR\SatoScanningApp\obj\Debug\81\R.txt
+D:\TPR\SatoScanningApp\obj\Debug\81\uploadflags.txt
+D:\TPR\SatoScanningApp\obj\Debug\81\SatoScanningApp.csprojAssemblyReference.cache
+D:\TPR\SatoScanningApp\bin\Debug\Mono.Android.pdb
+D:\TPR\SatoScanningApp\bin\Debug\mscorlib.pdb
+D:\TPR\SatoScanningApp\bin\Debug\System.Core.pdb
+D:\TPR\SatoScanningApp\bin\Debug\System.pdb
+D:\TPR\SatoScanningApp\bin\Debug\System.Xml.pdb
+D:\TPR\SatoScanningApp\bin\Debug\System.Net.Http.pdb
+D:\TPR\SatoScanningApp\bin\Debug\System.Runtime.Serialization.pdb
+D:\TPR\SatoScanningApp\bin\Debug\System.ServiceModel.Internals.pdb
+D:\TPR\SatoScanningApp\bin\Debug\Mono.Security.pdb
+D:\TPR\SatoScanningApp\obj\Debug\81\linksrc\SatoOnlineApp.pdb
+D:\TPR\SatoScanningApp\obj\Debug\81\linksrc\Mono.Android.pdb
+D:\TPR\SatoScanningApp\obj\Debug\81\linksrc\mscorlib.pdb
+D:\TPR\SatoScanningApp\obj\Debug\81\linksrc\System.Core.pdb
+D:\TPR\SatoScanningApp\obj\Debug\81\linksrc\System.pdb
+D:\TPR\SatoScanningApp\obj\Debug\81\linksrc\System.Xml.pdb
+D:\TPR\SatoScanningApp\obj\Debug\81\linksrc\System.Net.Http.pdb
+D:\TPR\SatoScanningApp\obj\Debug\81\linksrc\System.Runtime.Serialization.pdb
+D:\TPR\SatoScanningApp\obj\Debug\81\linksrc\System.ServiceModel.Internals.pdb
+D:\TPR\SatoScanningApp\obj\Debug\81\linksrc\Mono.Security.pdb
+D:\TPR\SatoScanningApp\obj\Debug\81\android\assets\Mono.Android.pdb
+D:\TPR\SatoScanningApp\obj\Debug\81\android\assets\Mono.Security.pdb
+D:\TPR\SatoScanningApp\obj\Debug\81\android\assets\mscorlib.pdb
+D:\TPR\SatoScanningApp\obj\Debug\81\android\assets\SatoOnlineApp.pdb
+D:\TPR\SatoScanningApp\obj\Debug\81\android\assets\System.Core.pdb
+D:\TPR\SatoScanningApp\obj\Debug\81\android\assets\System.Net.Http.pdb
+D:\TPR\SatoScanningApp\obj\Debug\81\android\assets\System.pdb
+D:\TPR\SatoScanningApp\obj\Debug\81\android\assets\System.Runtime.Serialization.pdb

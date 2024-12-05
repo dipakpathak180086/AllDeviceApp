@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_width="fill_parent">
+    <TextView
+        android:text="Server IP"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+       />
+    <EditText
+        android:id="@+id/txtServerIP"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:maxLines="1"
+		android:hint="Enter Server IP"
+		android:background="@drawable/common_edittext"
+        android:singleLine="true"
+        android:imeOptions="actionGo|flagNoFullscreen"
+        android:layout_width="fill_parent" />
+    <TextView
+        android:layout_marginTop="30dp"
+        android:text="Port"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+       />
+    <EditText
+        android:id="@+id/txtPort"
+       android:layout_height="wrap_content"
+        android:layout_weight="1"
+		android:background="@drawable/common_edittext"
+        android:maxLines="1"
+        android:singleLine="true"
+		android:hint="Enter Server Port"
+		android:inputType="number"
+        android:imeOptions="actionGo|flagNoFullscreen"
+        android:layout_width="fill_parent" />
+
+	<TextView
+        android:layout_marginTop="30dp"
+        android:text="Plant Code"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+       />
+	
+	<EditText
+        android:id="@+id/txtPlant"
+       android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:maxLines="1"
+		android:background="@drawable/common_edittext"
+        android:singleLine="true"
+		android:hint="Enter Plant Code"
+        android:imeOptions="actionGo|flagNoFullscreen"
+        android:layout_width="fill_parent" />
+		<TextView
+        android:layout_marginTop="30dp"
+        android:text="TAG Power"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+       />
+	<EditText
+        android:id="@+id/txtTagPower"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:maxLines="1"
+		android:background="@drawable/common_edittext"
+		android:hint="Enter value in between 5 to 30 only"
+        android:singleLine="true"
+		android:inputType="number"
+		android:maxLength="2"
+        android:imeOptions="actionGo|flagNoFullscreen"
+        android:layout_width="fill_parent" />
+    <Button
+		android:theme="@style/MyButton"
+				android:textColor="@color/white"
+        android:layout_marginTop="30dp"
+        android:text="Save"
+		
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSave" />
+    <Button
+		android:theme="@style/MyButton"
+				android:textColor="@color/white"
+        android:text="Back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnBack" />
+</LinearLayout>

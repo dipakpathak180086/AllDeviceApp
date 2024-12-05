@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ThreePointCheck_App.Pages.Lock_Screen" BackgroundColor="Black" Appearing="ContentPage_Appearing" >
+    <ContentPage.Content>
+        <Frame  Margin="10,15,10,15" CornerRadius="20"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" >
+            <StackLayout>
+                <Grid  VerticalOptions="Start" HeightRequest="50" WidthRequest="200" Margin="0,10,0,0"   HorizontalOptions="CenterAndExpand"  >
+                    <Label  TextDecorations="Underline" HorizontalOptions="Center" TextColor="Red" FontAttributes="Bold" FontSize="25"   Text="LOCK SCREEN" Grid.Row="0" ></Label>
+                </Grid>
+                <Grid  Margin="0,30,0,0"  VerticalOptions="Start" HorizontalOptions="StartAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Entry FontSize="15" Placeholder="ENTER USERID HERE" x:Name="txtUserID" Grid.Row="0" ></Entry>
+                    <Entry FontSize="15" Placeholder="ENTER PASSWORD HERE" Completed="TxtPassword_Completed" IsPassword="True" x:Name="txtPassword" Grid.Row="1" ></Entry>
+                </Grid>
+                <Grid Margin="0,0,0,0" VerticalOptions="Start" HorizontalOptions="CenterAndExpand" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="btnUnLock" Clicked="btnUnLock_Clicked" Grid.Column="0" Text="UN-LOCK" BackgroundColor="DarkCyan" WidthRequest="100"></Button>
+                    <Button x:Name="btnExit" Clicked="BtnExit_Clicked" Grid.Column="1" Text="EXIT" BackgroundColor="DarkCyan" WidthRequest="100"></Button>
+                </Grid>
+                <Grid  Margin="0,30,0,0"  VerticalOptions="Start" HorizontalOptions="StartAndExpand">
+                  
+                    <Label x:Name="lblError" Text="ERROR" FontAttributes="Bold" FontSize="20" TextColor="Red"  HorizontalOptions="Center"></Label>             
+                </Grid>
+            </StackLayout>
+        </Frame>
+
+    </ContentPage.Content>
+</ContentPage>

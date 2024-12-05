@@ -1,0 +1,221 @@
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.deps.json
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.dll
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.pdb
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\Mono.Android.dll
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\App.xaml.g.cs
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Login.xaml.g.cs
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\PicklistConsolidation.xaml.g.cs
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\UserCreation.xaml.g.cs
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csproj.CoreCompileInputs.cache
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.AssemblyInfoInputs.cache
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.AssemblyInfo.cs
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\XamlC.stamp
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csproj.CopyComplete
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.dll
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.pdb
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Settings.xaml.g.cs
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\MainWIndow.xaml.g.cs
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\SIL_Scanning.xaml.g.cs
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csprojAssemblyReference.cache
+D:\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.deps.json
+D:\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.dll
+D:\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.pdb
+D:\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\Mono.Android.dll
+D:\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\App.xaml.g.cs
+D:\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Lock_Screen.xaml.g.cs
+D:\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Login.xaml.g.cs
+D:\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\MainWIndow.xaml.g.cs
+D:\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\PicklistConsolidation.xaml.g.cs
+D:\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Settings.xaml.g.cs
+D:\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\SIL_Scanning.xaml.g.cs
+D:\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\UserCreation.xaml.g.cs
+D:\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csproj.CoreCompileInputs.cache
+D:\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.AssemblyInfoInputs.cache
+D:\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.AssemblyInfo.cs
+D:\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\XamlC.stamp
+D:\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csproj.CopyComplete
+D:\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.dll
+D:\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.pdb
+D:\Putta_Data\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.deps.json
+D:\Putta_Data\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.dll
+D:\Putta_Data\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.pdb
+D:\Putta_Data\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\Mono.Android.dll
+D:\Putta_Data\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\App.xaml.g.cs
+D:\Putta_Data\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Lock_Screen.xaml.g.cs
+D:\Putta_Data\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Login.xaml.g.cs
+D:\Putta_Data\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\MainWIndow.xaml.g.cs
+D:\Putta_Data\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\PicklistConsolidation.xaml.g.cs
+D:\Putta_Data\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Settings.xaml.g.cs
+D:\Putta_Data\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\SIL_Scanning.xaml.g.cs
+D:\Putta_Data\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\UserCreation.xaml.g.cs
+D:\Putta_Data\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csproj.CoreCompileInputs.cache
+D:\Putta_Data\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.AssemblyInfoInputs.cache
+D:\Putta_Data\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.AssemblyInfo.cs
+D:\Putta_Data\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\XamlC.stamp
+D:\Putta_Data\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csproj.CopyComplete
+D:\Putta_Data\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.dll
+D:\Putta_Data\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.pdb
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.deps.json
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.dll
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.pdb
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\Mono.Android.dll
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\App.xaml.g.cs
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Lock_Screen.xaml.g.cs
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Login.xaml.g.cs
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\MainWIndow.xaml.g.cs
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\PicklistConsolidation.xaml.g.cs
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Settings.xaml.g.cs
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\SIL_Scanning.xaml.g.cs
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\UserCreation.xaml.g.cs
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csproj.CoreCompileInputs.cache
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.AssemblyInfoInputs.cache
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.AssemblyInfo.cs
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\XamlC.stamp
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csproj.CopyComplete
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.dll
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.pdb
+D:\Projects\Running Projects\Denso Haryana\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.deps.json
+D:\Projects\Running Projects\Denso Haryana\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.dll
+D:\Projects\Running Projects\Denso Haryana\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.pdb
+D:\Projects\Running Projects\Denso Haryana\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\Mono.Android.dll
+D:\Projects\Running Projects\Denso Haryana\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\Running Projects\Denso Haryana\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\App.xaml.g.cs
+D:\Projects\Running Projects\Denso Haryana\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Lock_Screen.xaml.g.cs
+D:\Projects\Running Projects\Denso Haryana\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Login.xaml.g.cs
+D:\Projects\Running Projects\Denso Haryana\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\MainWIndow.xaml.g.cs
+D:\Projects\Running Projects\Denso Haryana\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\PicklistConsolidation.xaml.g.cs
+D:\Projects\Running Projects\Denso Haryana\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Settings.xaml.g.cs
+D:\Projects\Running Projects\Denso Haryana\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\SIL_Scanning.xaml.g.cs
+D:\Projects\Running Projects\Denso Haryana\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\UserCreation.xaml.g.cs
+D:\Projects\Running Projects\Denso Haryana\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.AssemblyInfoInputs.cache
+D:\Projects\Running Projects\Denso Haryana\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.AssemblyInfo.cs
+D:\Projects\Running Projects\Denso Haryana\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csproj.CoreCompileInputs.cache
+D:\Projects\Running Projects\Denso Haryana\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\XamlC.stamp
+D:\Projects\Running Projects\Denso Haryana\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csproj.CopyComplete
+D:\Projects\Running Projects\Denso Haryana\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.dll
+D:\Projects\Running Projects\Denso Haryana\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.pdb
+D:\Projects\Running Projects\Denso Haryana\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csproj.AssemblyReference.cache
+D:\Projects\Denso\3PointsCheck\Latest_Application\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.deps.json
+D:\Projects\Denso\3PointsCheck\Latest_Application\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.dll
+D:\Projects\Denso\3PointsCheck\Latest_Application\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.pdb
+D:\Projects\Denso\3PointsCheck\Latest_Application\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\Mono.Android.dll
+D:\Projects\Denso\3PointsCheck\Latest_Application\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csprojAssemblyReference.cache
+D:\Projects\Denso\3PointsCheck\Latest_Application\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\App.xaml.g.cs
+D:\Projects\Denso\3PointsCheck\Latest_Application\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Lock_Screen.xaml.g.cs
+D:\Projects\Denso\3PointsCheck\Latest_Application\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Login.xaml.g.cs
+D:\Projects\Denso\3PointsCheck\Latest_Application\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\MainWIndow.xaml.g.cs
+D:\Projects\Denso\3PointsCheck\Latest_Application\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\PicklistConsolidation.xaml.g.cs
+D:\Projects\Denso\3PointsCheck\Latest_Application\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Settings.xaml.g.cs
+D:\Projects\Denso\3PointsCheck\Latest_Application\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\SIL_Scanning.xaml.g.cs
+D:\Projects\Denso\3PointsCheck\Latest_Application\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\UserCreation.xaml.g.cs
+D:\Projects\Denso\3PointsCheck\Latest_Application\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csproj.CoreCompileInputs.cache
+D:\Projects\Denso\3PointsCheck\Latest_Application\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.AssemblyInfoInputs.cache
+D:\Projects\Denso\3PointsCheck\Latest_Application\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.AssemblyInfo.cs
+D:\Projects\Denso\3PointsCheck\Latest_Application\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\XamlC.stamp
+D:\Projects\Denso\3PointsCheck\Latest_Application\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csproj.CopyComplete
+D:\Projects\Denso\3PointsCheck\Latest_Application\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.dll
+D:\Projects\Denso\3PointsCheck\Latest_Application\SingleLine_App\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.pdb
+D:\Projects\Denso\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.deps.json
+D:\Projects\Denso\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.dll
+D:\Projects\Denso\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.pdb
+D:\Projects\Denso\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\Mono.Android.dll
+D:\Projects\Denso\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\App.xaml.g.cs
+D:\Projects\Denso\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Lock_Screen.xaml.g.cs
+D:\Projects\Denso\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Login.xaml.g.cs
+D:\Projects\Denso\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\MainWIndow.xaml.g.cs
+D:\Projects\Denso\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\PicklistConsolidation.xaml.g.cs
+D:\Projects\Denso\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Settings.xaml.g.cs
+D:\Projects\Denso\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\SIL_Scanning.xaml.g.cs
+D:\Projects\Denso\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\UserCreation.xaml.g.cs
+D:\Projects\Denso\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csproj.CoreCompileInputs.cache
+D:\Projects\Denso\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.AssemblyInfoInputs.cache
+D:\Projects\Denso\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.AssemblyInfo.cs
+D:\Projects\Denso\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\XamlC.stamp
+D:\Projects\Denso\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csproj.CopyComplete
+D:\Projects\Denso\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.dll
+D:\Projects\Denso\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.pdb
+D:\Projects\Denso\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csprojAssemblyReference.cache
+D:\Projects\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csprojAssemblyReference.cache
+D:\Projects\Denso\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.deps.json
+D:\Projects\Denso\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.dll
+D:\Projects\Denso\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.pdb
+D:\Projects\Denso\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\Mono.Android.dll
+D:\Projects\Denso\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\App.xaml.g.cs
+D:\Projects\Denso\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Lock_Screen.xaml.g.cs
+D:\Projects\Denso\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Login.xaml.g.cs
+D:\Projects\Denso\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\MainWIndow.xaml.g.cs
+D:\Projects\Denso\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\PicklistConsolidation.xaml.g.cs
+D:\Projects\Denso\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Settings.xaml.g.cs
+D:\Projects\Denso\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\SIL_Scanning.xaml.g.cs
+D:\Projects\Denso\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\UserCreation.xaml.g.cs
+D:\Projects\Denso\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csproj.CoreCompileInputs.cache
+D:\Projects\Denso\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.AssemblyInfoInputs.cache
+D:\Projects\Denso\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.AssemblyInfo.cs
+D:\Projects\Denso\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\XamlC.stamp
+D:\Projects\Denso\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csproj.CopyComplete
+D:\Projects\Denso\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.dll
+D:\Projects\Denso\Denso\3PointsCheck\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.pdb
+D:\Projects\Denso\Denso\3PointsCheck\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.deps.json
+D:\Projects\Denso\Denso\3PointsCheck\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.dll
+D:\Projects\Denso\Denso\3PointsCheck\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.pdb
+D:\Projects\Denso\Denso\3PointsCheck\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\Mono.Android.dll
+D:\Projects\Denso\Denso\3PointsCheck\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csproj.AssemblyReference.cache
+D:\Projects\Denso\Denso\3PointsCheck\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\Denso\Denso\3PointsCheck\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\App.xaml.g.cs
+D:\Projects\Denso\Denso\3PointsCheck\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Lock_Screen.xaml.g.cs
+D:\Projects\Denso\Denso\3PointsCheck\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Login.xaml.g.cs
+D:\Projects\Denso\Denso\3PointsCheck\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\MainWIndow.xaml.g.cs
+D:\Projects\Denso\Denso\3PointsCheck\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\PicklistConsolidation.xaml.g.cs
+D:\Projects\Denso\Denso\3PointsCheck\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Settings.xaml.g.cs
+D:\Projects\Denso\Denso\3PointsCheck\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\SIL_Scanning.xaml.g.cs
+D:\Projects\Denso\Denso\3PointsCheck\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\UserCreation.xaml.g.cs
+D:\Projects\Denso\Denso\3PointsCheck\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.AssemblyInfoInputs.cache
+D:\Projects\Denso\Denso\3PointsCheck\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.AssemblyInfo.cs
+D:\Projects\Denso\Denso\3PointsCheck\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csproj.CoreCompileInputs.cache
+D:\Projects\Denso\Denso\3PointsCheck\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\XamlC.stamp
+D:\Projects\Denso\Denso\3PointsCheck\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csproj.CopyComplete
+D:\Projects\Denso\Denso\3PointsCheck\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.dll
+D:\Projects\Denso\Denso\3PointsCheck\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.pdb
+D:\Projects\Live Project\New Project\Denso-IMT\NEW\Smart Pass\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.deps.json
+D:\Projects\Live Project\New Project\Denso-IMT\NEW\Smart Pass\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.dll
+D:\Projects\Live Project\New Project\Denso-IMT\NEW\Smart Pass\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.pdb
+D:\Projects\Live Project\New Project\Denso-IMT\NEW\Smart Pass\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\Mono.Android.dll
+D:\Projects\Live Project\New Project\Denso-IMT\NEW\Smart Pass\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csproj.AssemblyReference.cache
+D:\Projects\Live Project\New Project\Denso-IMT\NEW\Smart Pass\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\Live Project\New Project\Denso-IMT\NEW\Smart Pass\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\App.xaml.g.cs
+D:\Projects\Live Project\New Project\Denso-IMT\NEW\Smart Pass\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Lock_Screen.xaml.g.cs
+D:\Projects\Live Project\New Project\Denso-IMT\NEW\Smart Pass\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Login.xaml.g.cs
+D:\Projects\Live Project\New Project\Denso-IMT\NEW\Smart Pass\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\MainWIndow.xaml.g.cs
+D:\Projects\Live Project\New Project\Denso-IMT\NEW\Smart Pass\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\PicklistConsolidation.xaml.g.cs
+D:\Projects\Live Project\New Project\Denso-IMT\NEW\Smart Pass\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Settings.xaml.g.cs
+D:\Projects\Live Project\New Project\Denso-IMT\NEW\Smart Pass\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\SIL_Scanning.xaml.g.cs
+D:\Projects\Live Project\New Project\Denso-IMT\NEW\Smart Pass\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\UserCreation.xaml.g.cs
+D:\Projects\Live Project\New Project\Denso-IMT\NEW\Smart Pass\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.AssemblyInfoInputs.cache
+D:\Projects\Live Project\New Project\Denso-IMT\NEW\Smart Pass\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.AssemblyInfo.cs
+D:\Projects\Live Project\New Project\Denso-IMT\NEW\Smart Pass\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csproj.CoreCompileInputs.cache
+D:\Projects\Live Project\New Project\Denso-IMT\NEW\Smart Pass\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.sourcelink.json
+D:\Projects\Live Project\New Project\Denso-IMT\NEW\Smart Pass\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\XamlC.stamp
+D:\Projects\Live Project\New Project\Denso-IMT\NEW\Smart Pass\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePoi.3C027352.Up2Date
+D:\Projects\Live Project\New Project\Denso-IMT\NEW\Smart Pass\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.dll
+D:\Projects\Live Project\New Project\Denso-IMT\NEW\Smart Pass\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.pdb
+D:\ALL DEVICE PROJECT\Denso\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.deps.json
+D:\ALL DEVICE PROJECT\Denso\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.dll
+D:\ALL DEVICE PROJECT\Denso\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\ThreePointCheck_App.pdb
+D:\ALL DEVICE PROJECT\Denso\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\bin\Debug\netstandard2.0\Mono.Android.dll
+D:\ALL DEVICE PROJECT\Denso\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csproj.AssemblyReference.cache
+D:\ALL DEVICE PROJECT\Denso\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.GeneratedMSBuildEditorConfig.editorconfig
+D:\ALL DEVICE PROJECT\Denso\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\App.xaml.g.cs
+D:\ALL DEVICE PROJECT\Denso\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Lock_Screen.xaml.g.cs
+D:\ALL DEVICE PROJECT\Denso\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Login.xaml.g.cs
+D:\ALL DEVICE PROJECT\Denso\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\MainWIndow.xaml.g.cs
+D:\ALL DEVICE PROJECT\Denso\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\PicklistConsolidation.xaml.g.cs
+D:\ALL DEVICE PROJECT\Denso\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\Settings.xaml.g.cs
+D:\ALL DEVICE PROJECT\Denso\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\SIL_Scanning.xaml.g.cs
+D:\ALL DEVICE PROJECT\Denso\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\Pages\UserCreation.xaml.g.cs
+D:\ALL DEVICE PROJECT\Denso\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.AssemblyInfoInputs.cache
+D:\ALL DEVICE PROJECT\Denso\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.AssemblyInfo.cs
+D:\ALL DEVICE PROJECT\Denso\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.csproj.CoreCompileInputs.cache
+D:\ALL DEVICE PROJECT\Denso\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\XamlC.stamp
+D:\ALL DEVICE PROJECT\Denso\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePoi.3C027352.Up2Date
+D:\ALL DEVICE PROJECT\Denso\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.dll
+D:\ALL DEVICE PROJECT\Denso\Denso_North\Denso_North\SingleLine_App\SingleLine_App\SingleLine_App\obj\Debug\netstandard2.0\ThreePointCheck_App.pdb

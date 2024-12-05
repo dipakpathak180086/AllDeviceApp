@@ -1,0 +1,55 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\HMCL\\Main\\BatteryDispatchScannerOnline\\BatteryDispatchScannerOnline.csproj": {}
+  },
+  "projects": {
+    "D:\\HMCL\\Main\\BatteryDispatchScannerOnline\\BatteryDispatchScannerOnline.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\HMCL\\Main\\BatteryDispatchScannerOnline\\BatteryDispatchScannerOnline.csproj",
+        "projectName": "BatteryDispatchScannerOnline",
+        "projectPath": "D:\\HMCL\\Main\\BatteryDispatchScannerOnline\\BatteryDispatchScannerOnline.csproj",
+        "packagesPath": "C:\\Users\\sar.dipak.pathak\\.nuget\\packages\\",
+        "outputPath": "D:\\HMCL\\Main\\BatteryDispatchScannerOnline\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\sar.dipak.pathak\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "monoandroid80"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "monoandroid80": {
+            "projectReferences": {}
+          }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "monoandroid80": {
+          "dependencies": {
+            "Xamarin.Android.Support.Design": {
+              "target": "Package",
+              "version": "[28.0.0.3, )"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ThreePointCheck_App.Pages.SIL_Scanning" Appearing="ContentPage_Appearing" BackgroundColor="Black" >
+        <Frame  Margin="10,15,10,15" CornerRadius="20"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" >
+            <StackLayout>
+
+                <Grid  VerticalOptions="Start" HeightRequest="50" WidthRequest="200" Margin="0,-20,0,0"   HorizontalOptions="CenterAndExpand"  >
+                    <Label  TextDecorations="Underline" HorizontalOptions="Center" TextColor="Red" FontAttributes="Bold" FontSize="25"   Text="SIL SCANNING" Grid.Row="0" ></Label>
+                </Grid>
+                <Grid  Margin="0,5,0,0"  VerticalOptions="Start" HorizontalOptions="StartAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Entry FontSize="15" Completed="TxtSILBarcode_Completed"  Placeholder="SCAN SIL BARCODE HERE" x:Name="txtSILBarcode" Grid.Row="0" ></Entry>
+                    <Label x:Name="lblTruck" TextColor="Red" Text="TRUCK NO" FontSize="25" Grid.Row="1" HorizontalTextAlignment="Center" ></Label>
+                </Grid>
+                <Grid Margin="0,0,0,0" VerticalOptions="Start" HorizontalOptions="StartAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"></ColumnDefinition>
+                        <ColumnDefinition Width="50"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label TextColor="Black" FontSize="25" HorizontalTextAlignment="End" FontAttributes="Bold" Text="COUNT : " Grid.Row="0" Grid.Column="0"></Label>
+                    <Label x:Name="lblqty" TextColor="DarkGreen" FontSize="25" HorizontalTextAlignment="Start" FontAttributes="Bold" Text="0/0" Grid.Row="0" Grid.Column="1"></Label>
+                </Grid>
+                <Grid Margin="0,0,0,0"  VerticalOptions="Start" HorizontalOptions="StartAndExpand">
+                    <ListView  BackgroundColor="White" x:Name="ListTag" Header="" HasUnevenRows="True">
+                        <ListView.HeaderTemplate>
+                            <DataTemplate>
+                                <StackLayout Orientation="Vertical">
+                                    <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" Padding="5">
+                                        <Label WidthRequest="200" FontAttributes="Bold" TextColor="Blue" Text="TRUCK NO" VerticalOptions="Start" HorizontalOptions="StartAndExpand"/>
+                                </StackLayout>
+                                </StackLayout>
+                            </DataTemplate>
+                        </ListView.HeaderTemplate>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    
+                                    <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" Padding="5">
+                                  
+                                    <Label WidthRequest="200" FontAttributes="Bold" TextColor="Black" Text="{Binding ItemArray[0]}" VerticalOptions="Start" HorizontalOptions="StartAndExpand">
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label" Binding="{Binding ItemArray[3]}" Value="Completed">
+                                                <Setter Property="TextColor" Value="Green" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Label" Binding="{Binding ItemArray[3]}" Value="">
+                                                <Setter Property="TextColor" Value="Black" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                    <!--<StackLayout.Triggers>
+                                        <DataTrigger TargetType="BoxView" Binding="{Binding ItemArray[1]}" Value="Completed">
+                                            <Setter Property="BackgroundColor" Value="Green" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="BoxView" Binding="{Binding ItemArray[1]}" Value="">
+                                            <Setter Property="BackgroundColor" Value="White" />
+                                        </DataTrigger>
+                                    </StackLayout.Triggers>-->
+                                </StackLayout>
+                               
+                            </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                   
+                </ListView>
+                </Grid>
+
+                <Grid Margin="0,0,0,0" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <!--<ColumnDefinition Width="130"></ColumnDefinition>-->
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                </Grid.RowDefinitions>
+                <!--<Button x:Name="btnDelete" Clicked="BtnDelete_Clicked" Grid.Column="0" Text="DELETE ALL SIL" BackgroundColor="DarkCyan" WidthRequest="130"></Button>-->
+
+                <Button x:Name="btnExit" Clicked="BtnExit_Clicked" Grid.Column="0" Text="EXIT" BackgroundColor="DarkCyan" WidthRequest="100"></Button>
+
+                </Grid>
+                <!--<Grid VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" Margin="0,0,0,-10">
+                    <Image x:Name="Logo" Source="Logo.png"  Aspect="AspectFit" WidthRequest="200"   ></Image>
+                </Grid>-->
+
+            </StackLayout>
+        </Frame>
+
+</ContentPage>

@@ -1,0 +1,464 @@
+D:\Denso\Device\SMPDisptach\bin\Debug\SMPDisptach.dll
+D:\Denso\Device\SMPDisptach\bin\Debug\SMPDisptach.pdb
+D:\Denso\Device\SMPDisptach\bin\Debug\SMPDisptach.SMPDisptach.apk
+D:\Denso\Device\SMPDisptach\bin\Debug\SMPDisptach.SMPDisptach.aab
+D:\Denso\Device\SMPDisptach\bin\Debug\SMPDisptach.SMPDisptach-Signed.aab
+D:\Denso\Device\SMPDisptach\bin\Debug\SMPDisptach.SMPDisptach-Signed.apk
+D:\Denso\Device\SMPDisptach\bin\Debug\SMPDisptach.SMPDisptach-Signed.apk.idsig
+D:\Denso\Device\SMPDisptach\obj\Debug\80\MonoAndroid,Version=v8.0.AssemblyAttributes.cs
+D:\Denso\Device\SMPDisptach\obj\Debug\80\build.props
+D:\Denso\Device\SMPDisptach\obj\Debug\80\adb.props
+D:\Denso\Device\SMPDisptach\obj\Debug\80\SMPDisptach.csproj.AssemblyReference.cache
+D:\Denso\Device\SMPDisptach\obj\Debug\80\stamp\_BuildLibraryImportsCache.stamp
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res.flag
+D:\Denso\Device\SMPDisptach\obj\Debug\80\lp\5\jl\files.cache
+D:\Denso\Device\SMPDisptach\obj\Debug\80\lp\8\jl\files.cache
+D:\Denso\Device\SMPDisptach\obj\Debug\80\lp\10\jl\files.cache
+D:\Denso\Device\SMPDisptach\obj\Debug\80\lp\11\jl\files.cache
+D:\Denso\Device\SMPDisptach\obj\Debug\80\lp\12\jl\files.cache
+D:\Denso\Device\SMPDisptach\obj\Debug\80\lp\13\jl\files.cache
+D:\Denso\Device\SMPDisptach\obj\Debug\80\R.txt
+D:\Denso\Device\SMPDisptach\obj\Debug\80\R.cs.flag
+D:\Denso\Device\SMPDisptach\obj\Debug\80\SMPDisptach.csproj.CoreCompileInputs.cache
+D:\Denso\Device\SMPDisptach\obj\Debug\80\SMPDisptach.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\SMPDisptach.pdb
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\bin\SMPDisptach.SMPDisptach.apk
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\bin\base.zip
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\bin\SMPDisptach.SMPDisptach.aab
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\bin\SMPDisptach.SMPDisptach.apks
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\layout\activity_main.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\raw\oksound.mp3
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\values\colors.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\values\ic_launcher_background.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\values\strings.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\values\styles.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-anydpi-v26\ic_launcher.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-anydpi-v26\ic_launcher_round.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-hdpi\ic_launcher.png
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-hdpi\ic_launcher_foreground.png
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-hdpi\ic_launcher_round.png
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-mdpi\ic_launcher.png
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-mdpi\ic_launcher_foreground.png
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-mdpi\ic_launcher_round.png
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-xhdpi\ic_launcher.png
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-xhdpi\ic_launcher_foreground.png
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-xhdpi\ic_launcher_round.png
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-xxhdpi\ic_launcher.png
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-xxhdpi\ic_launcher_foreground.png
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-xxhdpi\ic_launcher_round.png
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-xxxhdpi\ic_launcher.png
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-xxxhdpi\ic_launcher_foreground.png
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-xxxhdpi\ic_launcher_round.png
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\raw\beep.mp3
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\layout\activity_setting.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\layout\spinner.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\layout\activity_silscanning.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\bordered_rect_background.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\borderstyle.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\common_edittext.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\common_edittext_readonly.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\ic_dashboard_black_24dp.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\ic_home_black_24dp.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\ic_launcher_background.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\ic_notifications_black_24dp.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\values\dimens.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\rounded_edittext.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\layout\viewsilscanningdata.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\layout\activity_reversedelivery.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\scrollbarrecyclerview.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\delete.png
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\raw\savedsound.mp3
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\layout\activity_sildelete.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\denso.jpg
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\layout\activity_login.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\layout\activity_processtype.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\spinner_background.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\layout\activity_alert.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\iconseye.png
+D:\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\densologo.png
+D:\Denso\Device\SMPDisptach\obj\Debug\80\uploadflags.txt
+D:\Denso\Device\SMPDisptach\obj\Debug\80\resolvedassemblies.hash
+D:\Denso\Device\SMPDisptach\obj\Debug\80\link.flag
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Java.Interop.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Java.Interop.pdb
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Mono.Android.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Mono.Android.pdb
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Mono.Security.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Mono.Security.pdb
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\mscorlib.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\mscorlib.pdb
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\SMPDisptach.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\SMPDisptach.pdb
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.Core.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.Core.pdb
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.Data.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.Data.pdb
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.Net.Http.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.Net.Http.pdb
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.Numerics.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.Numerics.pdb
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.pdb
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.Xml.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.Xml.pdb
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Arch.Core.Common.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Arch.Lifecycle.Common.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Arch.Lifecycle.Runtime.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Support.Animated.Vector.Drawable.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Support.Annotations.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Support.Compat.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Support.Core.UI.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Support.Core.Utils.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Support.Design.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Support.Fragment.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Support.Media.Compat.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Support.Transition.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Support.v7.AppCompat.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Support.v7.RecyclerView.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Support.Vector.Drawable.dll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\typemaps.armeabi-v7a.ll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\typemaps.arm64-v8a.ll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\AndroidManifest.xml
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\MonoRuntimeProvider.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\JavaInteropTypeManager.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\machine.config
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\bin\mono.android.jar
+D:\Denso\Device\SMPDisptach\obj\Debug\80\static.flag
+D:\Denso\Device\SMPDisptach\obj\Debug\80\__environment__.txt
+D:\Denso\Device\SMPDisptach\obj\Debug\80\buildid.txt
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\environment.armeabi-v7a.ll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\environment.arm64-v8a.ll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\android\support\compat\R.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\android\support\design\R.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\android\support\design\widget\Snackbar_SnackbarActionClickImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\android\support\mediacompat\R.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\android\support\transition\R.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\android\support\v7\appcompat\R.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\android\support\v7\app\AlertDialog_IDialogInterfaceOnCancelListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\android\support\v7\app\AlertDialog_IDialogInterfaceOnClickListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\android\support\v7\app\AlertDialog_IDialogInterfaceOnMultiChoiceClickListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\android\support\v7\recyclerview\R.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\android\support\v7\widget\Toolbar_NavigationOnClickEventDispatcher.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64277791f208295c36\SILDelete.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64277791f208295c36\SILScanning.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64c00ef5cd42ddd50f\AlertActivity.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64c00ef5cd42ddd50f\clsGlobal.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64c00ef5cd42ddd50f\LoginActivity.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64c00ef5cd42ddd50f\MainActivity.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64c00ef5cd42ddd50f\ModFunctions.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64c00ef5cd42ddd50f\ModNet.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64c00ef5cd42ddd50f\PopupActivity.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64c00ef5cd42ddd50f\SettingActivity.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64c00ef5cd42ddd50f\SILScanItemAdapter.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64c00ef5cd42ddd50f\SILScanItemAdapter_ViewHolder.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\app\ApplicationRegistration.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\design\widget\AppBarLayout_OnOffsetChangedListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\design\widget\BottomNavigationView_OnNavigationItemReselectedListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\design\widget\BottomNavigationView_OnNavigationItemSelectedListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\design\widget\NavigationView_OnNavigationItemSelectedListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\design\widget\SwipeDismissBehavior_OnDismissListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\design\widget\TabLayout_OnTabSelectedListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\transition\Transition_TransitionListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\app\FragmentManager_OnBackStackChangedListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\app\SharedElementCallback_OnSharedElementsReadyListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\content\Loader_OnLoadCanceledListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\content\Loader_OnLoadCompleteListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\media\session\MediaSessionCompat_OnActiveChangeListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\os\CancellationSignal_OnCancelListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\view\accessibility\AccessibilityManagerCompat_AccessibilityStateChangeListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\view\accessibility\AccessibilityManagerCompat_TouchExplorationStateChangeListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\view\ActionProvider_SubUiVisibilityListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\view\ActionProvider_VisibilityListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\view\AsyncLayoutInflater_OnInflateFinishedListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\view\MenuItemCompat_OnActionExpandListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\view\OnApplyWindowInsetsListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\view\ViewPager_OnAdapterChangeListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\view\ViewPager_OnPageChangeListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\view\ViewPropertyAnimatorListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\view\ViewPropertyAnimatorUpdateListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\widget\DrawerLayout_DrawerListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\widget\NestedScrollView_OnScrollChangeListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\widget\SearchViewCompat_OnCloseListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\widget\SearchViewCompat_OnQueryTextListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\widget\SlidingPaneLayout_PanelSlideListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\widget\SwipeRefreshLayout_OnRefreshListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\app\ActionBar_OnMenuVisibilityListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\app\ActionBar_OnNavigationListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\app\ActionBar_TabListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\ActionMenuView_OnMenuItemClickListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\ContentFrameLayout_OnAttachListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\FitWindowsViewGroup_OnFitSystemWindowsListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\MenuItemHoverListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\PopupMenu_OnDismissListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\PopupMenu_OnMenuItemClickListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\RecyclerView_ItemAnimator_ItemAnimatorFinishedListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\RecyclerView_OnChildAttachStateChangeListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\RecyclerView_OnItemTouchListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\RecyclerView_RecyclerListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\SearchView_OnCloseListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\SearchView_OnQueryTextListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\SearchView_OnSuggestionListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\ShareActionProvider_OnShareTargetSelectedListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\Toolbar_OnMenuItemClickListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\ViewStubCompat_OnInflateListenerImplementor.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\MonoPackageManager_Resources.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\bin\packaged_resources
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\src\smpdisptach\smpdisptach\R.java
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\compressed_assemblies.armeabi-v7a.ll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\compressed_assemblies.arm64-v8a.ll
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\typemaps.armeabi-v7a.o
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\typemaps.arm64-v8a.o
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\environment.armeabi-v7a.o
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\environment.arm64-v8a.o
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\compressed_assemblies.armeabi-v7a.o
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\compressed_assemblies.arm64-v8a.o
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\marshal_methods.armeabi-v7a.o
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\marshal_methods.arm64-v8a.o
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\jni_remap.armeabi-v7a.o
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\jni_remap.arm64-v8a.o
+D:\Denso\Device\SMPDisptach\obj\Debug\80\app_shared_libraries\armeabi-v7a\libxamarin-app.so
+D:\Denso\Device\SMPDisptach\obj\Debug\80\app_shared_libraries\arm64-v8a\libxamarin-app.so
+D:\Denso\Device\SMPDisptach\obj\Debug\80\android\bin\classes.dex
+D:\Denso\Device\SMPDisptach\obj\Debug\80\stamp\_CleanIntermediateIfNeeded.stamp
+D:\Denso\Device\SMPDisptach\obj\Debug\80\stamp\_CompileJava.stamp
+D:\Denso\Device\SMPDisptach\obj\Debug\80\stamp\_CompileToDalvik.stamp
+D:\Denso\Device\SMPDisptach\obj\Debug\80\stamp\_ConvertCustomView.stamp
+D:\Denso\Device\SMPDisptach\obj\Debug\80\stamp\_ConvertResourcesCases.stamp
+D:\Denso\Device\SMPDisptach\obj\Debug\80\stamp\_GenerateJavaStubs.stamp
+D:\Denso\Device\SMPDisptach\obj\Debug\80\stamp\_GeneratePackageManagerJava.stamp
+D:\Denso\Device\SMPDisptach\obj\Debug\80\stamp\_ResolveLibraryProjectImports.stamp
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\bin\Debug\SMPDisptach.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\bin\Debug\SMPDisptach.pdb
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\bin\Debug\SMPDisptach.SMPDisptach.apk
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\bin\Debug\SMPDisptach.SMPDisptach.aab
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\bin\Debug\SMPDisptach.SMPDisptach-Signed.aab
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\bin\Debug\SMPDisptach.SMPDisptach-Signed.apk
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\bin\Debug\SMPDisptach.SMPDisptach-Signed.apk.idsig
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\MonoAndroid,Version=v8.0.AssemblyAttributes.cs
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\build.props
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\adb.props
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\SMPDisptach.csproj.AssemblyReference.cache
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\stamp\_BuildLibraryImportsCache.stamp
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res.flag
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\lp\5\jl\files.cache
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\lp\8\jl\files.cache
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\lp\10\jl\files.cache
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\lp\11\jl\files.cache
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\lp\12\jl\files.cache
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\lp\13\jl\files.cache
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\R.txt
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\R.cs.flag
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\SMPDisptach.csproj.CoreCompileInputs.cache
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\SMPDisptach.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\SMPDisptach.pdb
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\bin\SMPDisptach.SMPDisptach.apk
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\bin\base.zip
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\bin\SMPDisptach.SMPDisptach.aab
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\bin\SMPDisptach.SMPDisptach.apks
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\values\styles.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\layout\activity_main.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\raw\oksound.mp3
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\values\colors.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\values\ic_launcher_background.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\values\strings.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-anydpi-v26\ic_launcher.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-anydpi-v26\ic_launcher_round.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-hdpi\ic_launcher.png
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-hdpi\ic_launcher_foreground.png
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-hdpi\ic_launcher_round.png
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-mdpi\ic_launcher.png
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-mdpi\ic_launcher_foreground.png
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-mdpi\ic_launcher_round.png
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-xhdpi\ic_launcher.png
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-xhdpi\ic_launcher_foreground.png
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-xhdpi\ic_launcher_round.png
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-xxhdpi\ic_launcher.png
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-xxhdpi\ic_launcher_foreground.png
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-xxhdpi\ic_launcher_round.png
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-xxxhdpi\ic_launcher.png
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-xxxhdpi\ic_launcher_foreground.png
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\mipmap-xxxhdpi\ic_launcher_round.png
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\raw\beep.mp3
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\layout\spinner.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\layout\activity_silscanning.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\bordered_rect_background.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\borderstyle.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\common_edittext.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\common_edittext_readonly.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\ic_dashboard_black_24dp.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\ic_home_black_24dp.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\ic_launcher_background.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\ic_notifications_black_24dp.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\values\dimens.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\rounded_edittext.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\layout\viewsilscanningdata.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\scrollbarrecyclerview.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\delete.png
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\raw\savedsound.mp3
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\layout\activity_sildelete.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\denso.jpg
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\layout\activity_login.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\spinner_background.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\layout\activity_alert.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\iconseye.png
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\drawable\densologo.png
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\layout\activity_settingmain.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\layout\activity_ftpsetting.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\layout\activity_ftptransfer.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\uploadflags.txt
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\resolvedassemblies.hash
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\link.flag
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Java.Interop.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Java.Interop.pdb
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Mono.Android.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Mono.Android.pdb
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Mono.Security.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Mono.Security.pdb
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\mscorlib.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\mscorlib.pdb
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\SMPDisptach.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\SMPDisptach.pdb
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.Core.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.Core.pdb
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.Data.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.Data.pdb
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.Net.Http.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.Net.Http.pdb
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.Numerics.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.Numerics.pdb
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.pdb
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.Xml.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.Xml.pdb
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Arch.Core.Common.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Arch.Lifecycle.Common.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Arch.Lifecycle.Runtime.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Support.Animated.Vector.Drawable.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Support.Annotations.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Support.Compat.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Support.Core.UI.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Support.Core.Utils.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Support.Design.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Support.Fragment.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Support.Media.Compat.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Support.Transition.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Support.v7.AppCompat.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Support.v7.RecyclerView.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\Xamarin.Android.Support.Vector.Drawable.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\typemaps.armeabi-v7a.ll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\typemaps.arm64-v8a.ll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\AndroidManifest.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\MonoRuntimeProvider.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\JavaInteropTypeManager.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\machine.config
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\bin\mono.android.jar
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\static.flag
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\__environment__.txt
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\buildid.txt
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\environment.armeabi-v7a.ll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\environment.arm64-v8a.ll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\android\support\compat\R.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\android\support\design\R.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\android\support\design\widget\Snackbar_SnackbarActionClickImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\android\support\mediacompat\R.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\android\support\transition\R.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\android\support\v7\appcompat\R.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\android\support\v7\app\AlertDialog_IDialogInterfaceOnCancelListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\android\support\v7\app\AlertDialog_IDialogInterfaceOnClickListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\android\support\v7\app\AlertDialog_IDialogInterfaceOnMultiChoiceClickListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\android\support\v7\recyclerview\R.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\android\support\v7\widget\Toolbar_NavigationOnClickEventDispatcher.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64277791f208295c36\SILDelete.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64277791f208295c36\SILScanning.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64c00ef5cd42ddd50f\AlertActivity.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64c00ef5cd42ddd50f\clsGlobal.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64c00ef5cd42ddd50f\FTPSettingActivity.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64c00ef5cd42ddd50f\LoginActivity.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64c00ef5cd42ddd50f\MainActivity.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64c00ef5cd42ddd50f\ModFunctions.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64c00ef5cd42ddd50f\ModNet.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64c00ef5cd42ddd50f\SettingMainActivity.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64c00ef5cd42ddd50f\SILScanItemAdapter.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64c00ef5cd42ddd50f\SILScanItemAdapter_ViewHolder.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\app\ApplicationRegistration.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\design\widget\AppBarLayout_OnOffsetChangedListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\design\widget\BottomNavigationView_OnNavigationItemReselectedListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\design\widget\BottomNavigationView_OnNavigationItemSelectedListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\design\widget\NavigationView_OnNavigationItemSelectedListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\design\widget\SwipeDismissBehavior_OnDismissListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\design\widget\TabLayout_OnTabSelectedListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\transition\Transition_TransitionListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\app\FragmentManager_OnBackStackChangedListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\app\SharedElementCallback_OnSharedElementsReadyListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\content\Loader_OnLoadCanceledListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\content\Loader_OnLoadCompleteListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\media\session\MediaSessionCompat_OnActiveChangeListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\os\CancellationSignal_OnCancelListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\view\accessibility\AccessibilityManagerCompat_AccessibilityStateChangeListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\view\accessibility\AccessibilityManagerCompat_TouchExplorationStateChangeListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\view\ActionProvider_SubUiVisibilityListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\view\ActionProvider_VisibilityListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\view\AsyncLayoutInflater_OnInflateFinishedListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\view\MenuItemCompat_OnActionExpandListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\view\OnApplyWindowInsetsListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\view\ViewPager_OnAdapterChangeListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\view\ViewPager_OnPageChangeListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\view\ViewPropertyAnimatorListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\view\ViewPropertyAnimatorUpdateListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\widget\DrawerLayout_DrawerListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\widget\NestedScrollView_OnScrollChangeListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\widget\SearchViewCompat_OnCloseListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\widget\SearchViewCompat_OnQueryTextListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\widget\SlidingPaneLayout_PanelSlideListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v4\widget\SwipeRefreshLayout_OnRefreshListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\app\ActionBar_OnMenuVisibilityListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\app\ActionBar_OnNavigationListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\app\ActionBar_TabListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\ActionMenuView_OnMenuItemClickListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\ContentFrameLayout_OnAttachListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\FitWindowsViewGroup_OnFitSystemWindowsListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\MenuItemHoverListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\PopupMenu_OnDismissListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\PopupMenu_OnMenuItemClickListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\RecyclerView_ItemAnimator_ItemAnimatorFinishedListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\RecyclerView_OnChildAttachStateChangeListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\RecyclerView_OnItemTouchListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\RecyclerView_RecyclerListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\SearchView_OnCloseListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\SearchView_OnQueryTextListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\SearchView_OnSuggestionListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\ShareActionProvider_OnShareTargetSelectedListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\Toolbar_OnMenuItemClickListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\android\support\v7\widget\ViewStubCompat_OnInflateListenerImplementor.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\mono\MonoPackageManager_Resources.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\bin\packaged_resources
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\smpdisptach\smpdisptach\R.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\compressed_assemblies.armeabi-v7a.ll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\compressed_assemblies.arm64-v8a.ll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\typemaps.armeabi-v7a.o
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\typemaps.arm64-v8a.o
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\environment.armeabi-v7a.o
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\environment.arm64-v8a.o
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\compressed_assemblies.armeabi-v7a.o
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\compressed_assemblies.arm64-v8a.o
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\marshal_methods.armeabi-v7a.o
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\marshal_methods.arm64-v8a.o
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\jni_remap.armeabi-v7a.o
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\jni_remap.arm64-v8a.o
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\app_shared_libraries\armeabi-v7a\libxamarin-app.so
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\app_shared_libraries\arm64-v8a\libxamarin-app.so
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\bin\classes.dex
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\stamp\_CleanIntermediateIfNeeded.stamp
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\stamp\_CompileJava.stamp
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\stamp\_CompileToDalvik.stamp
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\stamp\_ConvertCustomView.stamp
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\stamp\_ConvertResourcesCases.stamp
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\stamp\_GenerateJavaStubs.stamp
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\stamp\_GeneratePackageManagerJava.stamp
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\stamp\_ResolveLibraryProjectImports.stamp
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64277791f208295c36\FTPFileTransfer.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\res\layout\viewftpscanningdata.xml
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64c00ef5cd42ddd50f\SILFTPScanningItemAdapter.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\src\crc64c00ef5cd42ddd50f\SILFTPScanningItemAdapter_ViewHolder.java
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.Data.DataSetExtensions.dll
+D:\ALL DEVICE PROJECT\Denso\Device\SMPDisptach\obj\Debug\80\android\assets\System.Data.DataSetExtensions.pdb

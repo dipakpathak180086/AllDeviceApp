@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="ThreePointCheck_App.SingleLine_App" android:installLocation="auto" android:versionCode="16" android:versionName="2.0">
+	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="27" />
+	<!--<action android:name="android.intent.action.MAIN" />
+  <category android:name="android.intent.category.HOME" />
+  <category android:name="android.intent.category.DEFAULT" />
+  <category android:name="android.intent.category.MONKEY"/>-->
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.VIBRATE" />
+	<application android:label="ThreePointCheck_App.Android">
+		<!--<activity android:launchMode="singleInstance" android:name=".MainActivity">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.HOME" />
+			</intent-filter>
+		</activity>-->
+	</application>
+</manifest>

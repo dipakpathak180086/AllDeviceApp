@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:gravity="center_horizontal">
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:gravity="center_horizontal"
+                android:layout_marginVertical="10dp">
+                <TextView
+                    android:text="SMP SACANNING SYSTEM"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingTop="5dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:paddingBottom="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/orange2"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:gravity="center_horizontal"
+                android:layout_marginVertical="5dp">
+
+                <TextView
+                    android:id="@+id/txtDate"
+                    android:text="Date:"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/orange2"
+                    android:layout_gravity="top"
+                    android:layout_weight=".2"
+                    android:textStyle="bold"
+                    android:layout_alignParentBottom="true"
+                    android:backgroundTint="@color/red"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <TextView
+                    android:id="@+id/txtTime"
+                    android:text="Time:"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="10dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/orange2"
+                    android:layout_gravity="left"
+                    android:layout_weight=".2"
+                    android:textStyle="bold"
+                    android:layout_alignParentBottom="true"
+                    android:backgroundTint="@color/red"
+                    android:layout_height="wrap_content">
+                </TextView>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_marginVertical="30dp"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="100dp"
+                android:src="@drawable/denso"
+        />
+
+            <Button
+                android:text="SIL SCANNING"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnSILScanning"
+                android:autoSizeMinTextSize="40dp"
+                android:layout_marginVertical="20dp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/rounded_edittext"
+                android:backgroundTint="@color/orange2"/>
+            <Button
+                android:text="SIL DELETE"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:id="@+id/btnSILDelete"
+                android:autoSizeMinTextSize="40dp"
+                android:layout_marginVertical="20dp"
+                android:textColor="#FFFFFF"
+                android:visibility="visible"
+                android:background="@drawable/rounded_edittext"
+                android:backgroundTint="@color/orange2"/>
+            <Button
+                android:text="FTP TRANSFER"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:id="@id/btnFTPTransfer"
+                android:autoSizeMinTextSize="40dp"
+                android:layout_marginVertical="20dp"
+                android:textColor="#FFFFFF"
+                android:visibility="visible"
+                android:background="@drawable/rounded_edittext"
+                android:backgroundTint="@color/orange2"/>
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
