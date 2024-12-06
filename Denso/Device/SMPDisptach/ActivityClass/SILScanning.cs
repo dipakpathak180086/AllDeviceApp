@@ -27,6 +27,9 @@ using static Android.Support.V7.Widget.RecyclerView;
 
 namespace SMPDisptach.ActivityClass
 {
+    /// <summary>
+    /// Main
+    /// </summary>
     [Activity(Label = "SILScanning", WindowSoftInputMode = Android.Views.SoftInput.StateAlwaysHidden, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class SILScanning : Activity
     {
