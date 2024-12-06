@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Android.Text;
 using static Android.Renderscripts.ScriptGroup;
+using System.Data;
 
 namespace SMPDisptach
 {
@@ -79,6 +80,67 @@ namespace SMPDisptach
         public static string mDatabaseUserId = "";
         public static string mDatabasePassword = "";
         public static string mCustSeqNo = "";
+        public static void ConvertDataTableToTxt(DataTable dataTable, string filePath)
+        {
+            using (StreamWriter writer = new StreamWriter(filePath, false)) // 'false' ensures overriding
+            {
+                // Write the rows only (skip column headers)
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    for (int i = 0; i < dataTable.Columns.Count; i++)
+                    {
+                        writer.Write(row[i].ToString());
+                        if (i < dataTable.Columns.Count - 1)
+                        {
+                            writer.Write("$"); // Use tab or comma as delimiter
+                        }
+                    }
+                    writer.WriteLine();
+                }
+            }
+        }
+        public static bool ReadServerSetting()
+        {
+            try
+            {
+                string filename = Path.Combine(clsGlobal.FilePath, "ServerSetting.txt");
+                FileInfo ServerFile = new FileInfo(filename);
+                StreamReader ReadServer;
+                string[] strCon;
+                if (ServerFile.Exists == true)
+                {
+                    ReadServer = new StreamReader(filename);
+                    strCon = ReadServer.ReadLine().Split("~");
+                    if (strCon.Length >= 1)
+                    {
+                        mDatabaseServer = strCon[0].Trim();
+                        mDatabaseName = strCon[1].Trim();
+                        mDatabaseUserId = strCon[2].Trim();
+                        mDatabasePassword = strCon[3].Trim();
+                    }
+                    else
+                    {
+                        ReadServer.Close();
+                        ReadServer = null;
+                        ServerFile = null;
+                        return false;
+                    }
+                    ReadServer.Close();
+                    ReadServer = null;
+                    ServerFile = null;
+                    return true;
+                }
+                else
+                {
+                    ServerFile = null;
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
         public static void DeleteDirectory(string directoryPath)
         {
             if (Directory.Exists(directoryPath))

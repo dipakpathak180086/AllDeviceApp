@@ -208,10 +208,10 @@ namespace SMPDisptach
             try
             {
                 string filename = Path.Combine(clsGlobal.FilePath, "ServerSetting.txt");
-                FileInfo FTPServerFile = new FileInfo(filename);
+                FileInfo ServerFile = new FileInfo(filename);
                 StreamReader ReadServer;
                 string[] strCon;
-                if (FTPServerFile.Exists == true)
+                if (ServerFile.Exists == true)
                 {
                     ReadServer = new StreamReader(filename);
                     strCon = ReadServer.ReadLine().Split("~");
@@ -226,17 +226,17 @@ namespace SMPDisptach
                     {
                         ReadServer.Close();
                         ReadServer = null;
-                        FTPServerFile = null;
+                        ServerFile = null;
                         return false;
                     }
                     ReadServer.Close();
                     ReadServer = null;
-                    FTPServerFile = null;
+                    ServerFile = null;
                     return true;
                 }
                 else
                 {
-                    FTPServerFile = null;
+                    ServerFile = null;
                     return false;
                 }
             }
