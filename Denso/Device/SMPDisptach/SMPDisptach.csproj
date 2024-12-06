@@ -75,6 +75,9 @@
     <Compile Include="ActivityClass\SILFTPScanningItemAdapter.cs" />
     <Compile Include="ActivityClass\SILScanning.cs" />
     <Compile Include="ActivityClass\SILScanItemAdapter.cs" />
+    <Compile Include="Assets\BL\BL_HHT_UPLOAD.cs" />
+    <Compile Include="Assets\DL\DL_HHT_UPLOAD.cs" />
+    <Compile Include="Assets\PL\PL_HHT_UPLOAD.cs" />
     <Compile Include="Models\BiSocket.cs" />
     <Compile Include="ActivityClass\MainActivity.cs" />
     <Compile Include="Models\clsDB.cs" />
@@ -93,7 +96,6 @@
     <None Include="Properties\AndroidManifest.xml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\values\styles.xml">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
@@ -261,6 +263,7 @@
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

@@ -8,12 +8,14 @@
         android:id="@+id/scrollView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
+        
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_height="fill_parent"
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:gravity="center_horizontal">
+
             <LinearLayout
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -21,7 +23,7 @@
                 android:gravity="center_horizontal"
                 android:layout_marginVertical="10dp">
                 <TextView
-                    android:text="SMP SACANNING SYSTEM"
+                    android:text="              MAIN MENU             "
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
                     android:paddingTop="5dp"
@@ -73,13 +75,7 @@
                 </TextView>
             </LinearLayout>
 
-            <ImageView
-                android:layout_marginVertical="30dp"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_height="100dp"
-                android:src="@drawable/denso"
-        />
+
 
             <Button
                 android:text="SIL SCANNING"
@@ -110,6 +106,18 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:id="@id/btnFTPTransfer"
+                android:autoSizeMinTextSize="40dp"
+                android:layout_marginVertical="20dp"
+                android:textColor="#FFFFFF"
+                android:visibility="visible"
+                android:background="@drawable/rounded_edittext"
+                android:backgroundTint="@color/orange2"/>
+          <Button
+                android:text="MASTER SYNC"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:id="@id/btnMasterSync"
                 android:autoSizeMinTextSize="40dp"
                 android:layout_marginVertical="20dp"
                 android:textColor="#FFFFFF"

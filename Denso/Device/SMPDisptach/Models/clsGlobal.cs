@@ -33,6 +33,7 @@ namespace SMPDisptach
 
     public class clsGlobal : Activity
     {
+        public static string mMainSqlConString = "";
         public static string MainFolder = "SatoFiles";
         public static string MasterFolder = "Master";
         public static string TranscationFolder = "Transcation";
@@ -113,10 +114,12 @@ namespace SMPDisptach
                     strCon = ReadServer.ReadLine().Split("~");
                     if (strCon.Length >= 1)
                     {
+                        System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
                         mDatabaseServer = strCon[0].Trim();
                         mDatabaseName = strCon[1].Trim();
                         mDatabaseUserId = strCon[2].Trim();
                         mDatabasePassword = strCon[3].Trim();
+                        mMainSqlConString = "Server=" + mDatabaseServer + "; Database=" + mDatabaseName + ";Uid=" + mDatabaseUserId + "; pwd=" + mDatabasePassword + "; pooling=true";
                     }
                     else
                     {

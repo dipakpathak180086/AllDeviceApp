@@ -113,9 +113,31 @@ namespace SMPDisptach
               
                 vibrator = this.GetSystemService(VibratorService) as Vibrator;
                 clsGlobal.ReadAlertPasswordMaster();
+               
                 //GetLoginUser();
                 editUserId.RequestFocus();
-               // GetVersionAsync();
+                DirectoryInfo _dir = null;
+                _dir = new DirectoryInfo(clsGlobal.FilePath + "\\HHTUpload\\" + "\\" + clsGlobal.MasterFolder);
+                if (_dir.Exists == false)
+                {
+                    _dir.Create();
+                }
+                _dir = new DirectoryInfo(clsGlobal.FilePath + "\\HHTUpload\\" + clsGlobal.MasterFolder + "\\" + clsGlobal.mPatternPath + "\\" + clsGlobal.mDNHADir);
+                if (_dir.Exists == false)
+                {
+                    _dir.Create();
+                }
+                _dir = new DirectoryInfo(clsGlobal.FilePath + "\\HHTUpload\\" + clsGlobal.MasterFolder + "\\" + clsGlobal.mPatternPath + "\\" + clsGlobal.mCustomerDir);
+                if (_dir.Exists == false)
+                {
+                    _dir.Create();
+                }
+                _dir = new DirectoryInfo(clsGlobal.FilePath + "\\HHTUpload\\" + clsGlobal.MasterFolder + "\\" + clsGlobal.mPatternPath + "\\" + clsGlobal.mSupplierDir);
+                if (_dir.Exists == false)
+                {
+                    _dir.Create();
+                }
+                // GetVersionAsync();
             }
             catch (Exception ex)
             {

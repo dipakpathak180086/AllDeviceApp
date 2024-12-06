@@ -13,6 +13,8 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Timers;
+using Java.Sql;
+using System.Data;
 namespace SMPDisptach
 {
     [Activity(Label = "SMPDisptach", WindowSoftInputMode = SoftInput.StateHidden, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
@@ -27,7 +29,8 @@ namespace SMPDisptach
         TextView txtDate;
         TextView txtTime;
         const int RequestId = 1;
-        
+        private BL_HHT_UPLOAD _blObj = null;
+        private PL_HHT_UPLOAD _plObj = null;
         readonly string[] PermissionsGroup =
             {
                             //TODO add more permissions
@@ -136,8 +139,13 @@ namespace SMPDisptach
 
                 Button btnFTPTransfer = FindViewById<Button>(Resource.Id.btnFTPTransfer);
                 btnFTPTransfer.Click += BtnFTPTransfer_Click;
-                ReadFTPSetting();
 
+                //Button btnMasterSync = FindViewById<Button>(Resource.Id.btnMaserSyncData);
+                //btnMasterSync.Click += BtnMasterSync_Click;
+
+
+                ReadFTPSetting();
+                clsGlobal.ReadServerSetting();
                 txtDate =FindViewById<TextView>(Resource.Id.txtDate);
                 txtTime=FindViewById<TextView>(Resource.Id.txtTime);
 
@@ -204,64 +212,27 @@ namespace SMPDisptach
                 clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
-        public bool ReadServerIP()
+        private void BtnMasterSync_Click(object sender, EventArgs e)
         {
             try
             {
-                string filename = Path.Combine(ModInit.GstrPath, "Server.SYS");
-                FileInfo ServerFile = new FileInfo(filename);
-                StreamReader ReadServer;
-                string[] strCon;
-                if (ServerFile.Exists == true)
+                _plObj = new PL_HHT_UPLOAD();
+                _plObj.DbType = "USER_LIST";
+                DataTable dtData = _blObj.BL_ExecuteTask(_plObj);
+                if (dtData.Rows.Count > 0)
                 {
-                    ReadServer = new StreamReader(filename);
-                    strCon = ReadServer.ReadLine().Split("~");
-                    if (strCon.Length >= 1)
-                    {
-                        ModInit.GstrServerIP = strCon[0];
-                        ModInit.GintServerPort = Convert.ToInt32(strCon[1].Trim());
-                        ModInit.GstrMarkingLocation = strCon[2];
-                    }
-                    else
-                    {
-                        ReadServer.Close();
-                        ReadServer = null;
-                        ServerFile = null;
-                        return false;
-                    }
-                    ReadServer.Close();
-                    ReadServer = null;
-                    ServerFile = null;
-                    return true;
-                }
-                else
-                {
-                    ServerFile = null;
-                    return false;
+                    string strFinaPath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "\\LOGIN.txt");
+                    clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
                 }
             }
             catch (Exception ex)
             {
-                return false;
+                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
+        
 
-        public void WriteServerIP()
-        {
-            try
-            {
-                string filename = Path.Combine(ModInit.GstrPath, "Server.SYS");
-                StreamWriter WriteServer = new StreamWriter(filename, false);
-                //WriteServer.WriteLine(ModInit.GstrServerIP + "~" + ModInit.GintServerPort);
-                WriteServer.WriteLine("10.30.51.117" + "~" + "5100");
-                WriteServer.Close();
-                WriteServer = null;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+      
 
         #region Methods
 
