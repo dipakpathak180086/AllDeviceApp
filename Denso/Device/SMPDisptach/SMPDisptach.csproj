@@ -64,6 +64,7 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityClass\ServerSettingActivity.cs" />
     <Compile Include="ActivityClass\FTPSettingActivity.cs" />
     <Compile Include="ActivityClass\LoginActivity.cs" />
     <Compile Include="ActivityClass\AlertActivity.cs" />
@@ -247,6 +248,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\ViewFTPScanningdata.axml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_ServerSetting.axml">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
       <SubType>Designer</SubType>
     </AndroidResource>

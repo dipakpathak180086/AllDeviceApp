@@ -19,7 +19,7 @@
                 android:gravity="center_horizontal"
                 android:layout_marginVertical="5dp">
                 <TextView
-                    android:text="FTP SERVER SETTINGS"
+                    android:text="DATABASE SERVER SETTINGS"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="5dp"
@@ -43,15 +43,15 @@
                     android:layout_height="30dp"
                     android:layout_weight=".7"
                     android:padding="2dp"
-                        android:text="WAREHOUSE NO"
+                        android:text="SERVER"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
                 <EditText
-                    android:id="@+id/editWarehouseNo"
+                    android:id="@+id/editServer"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
-                    android:hint="  Enter Warehouse No"
+                    android:hint="  Enter Server Name/IP"
                     android:background="@drawable/common_edittext"
                     android:imeOptions="actionGo|flagNoFullscreen"
                     android:gravity="center_vertical"
@@ -80,15 +80,52 @@
                     android:layout_height="30dp"
                     android:layout_weight=".7"
                     android:padding="2dp"
-                        android:text="DEVICE ID"
+                        android:text="DATABASE"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
                 <EditText
-                    android:id="@+id/editDeviceId"
+                    android:id="@+id/editDatabase"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
-                    android:hint="  Enter Device ID"
+                    android:hint="  Enter Database name"
+                    android:background="@drawable/common_edittext"
+                    android:imeOptions="actionGo|flagNoFullscreen"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1.2"
+                    android:maxLength="9000"
+                    android:maxLines="1"
+                    android:padding="2dp"
+                    android:paddingLeft="5dp"
+                    android:paddingStart="8dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+
+
+            </LinearLayout>
+        
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight=".7"
+                    android:padding="2dp"
+                        android:text="USER ID"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+                <EditText
+                    android:id="@+id/editUserID"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:hint="  Enter  User ID"
                     android:background="@drawable/common_edittext"
                     android:imeOptions="actionGo|flagNoFullscreen"
                     android:gravity="center_vertical"
@@ -116,87 +153,15 @@
                     android:layout_height="30dp"
                     android:layout_weight=".7"
                     android:padding="2dp"
-                    android:text="FTP IP"
+                    android:text="PASSWORD"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
                 <EditText
-                    android:id="@+id/editFTPIP"
+                    android:id="@+id/editPassword"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
-                    android:hint="  Enter FTP IP"
-                    android:background="@drawable/common_edittext"
-                    android:imeOptions="actionGo|flagNoFullscreen"
-                    android:gravity="center_vertical"
-                    android:layout_weight="1.2"
-                    android:maxLength="9000"
-                    android:maxLines="1"
-                    android:padding="2dp"
-                    android:paddingLeft="5dp"
-                    android:paddingStart="8dp"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textSize="14dp" />
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:layout_marginTop="2dp"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight=".7"
-                    android:padding="2dp"
-                        android:text="FTP USER ID"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:textSize="14dp" />
-                <EditText
-                    android:id="@+id/editFTPUserID"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:hint="  Enter FTP User ID"
-                    android:background="@drawable/common_edittext"
-                    android:imeOptions="actionGo|flagNoFullscreen"
-                    android:gravity="center_vertical"
-                    android:layout_weight="1.2"
-                    android:maxLength="9000"
-                    android:maxLines="1"
-                    android:padding="2dp"
-                    android:paddingLeft="5dp"
-                    android:paddingStart="8dp"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textSize="14dp" />
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:layout_marginTop="2dp"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight=".7"
-                    android:padding="2dp"
-                    android:text="FTP PASSWORD"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:textSize="14dp" />
-                <EditText
-                    android:id="@+id/editFTPPassword"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:hint="  Enter FTP Password"
+                    android:hint="  Enter Password"
                     android:background="@drawable/common_edittext"
                     android:imeOptions="actionGo|flagNoFullscreen"
                     android:gravity="center_vertical"

@@ -123,7 +123,7 @@ namespace SMPDisptach
         {
             try
             {
-               //OpenActivity(typeof(SILDelete));
+                OpenActivity(typeof(ServerSettingActivity));
             }
             catch (Exception ex)
             {

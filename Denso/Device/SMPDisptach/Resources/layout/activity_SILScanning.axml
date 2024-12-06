@@ -50,8 +50,8 @@
                 <EditText
                     android:id="@+id/editSILCode"
                     android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:hint=" Scan SIL"
+                    android:layout_height="40dp"
+                    android:hint="  Scan SIL"
                     android:background="@drawable/common_edittext"
                     android:imeOptions="actionGo|flagNoFullscreen"
                     android:gravity="center_vertical"
@@ -94,8 +94,8 @@
                 <EditText
                     android:id="@+id/editDNHAKanban"
                     android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:hint=" Scan DNHA/Supplier Kanban"
+                    android:layout_height="40dp"
+                    android:hint="  Scan DNHA/Supplier Kanban"
                     android:background="@drawable/common_edittext"
                     android:imeOptions="actionGo|flagNoFullscreen"
                     android:gravity="center_vertical"
@@ -136,8 +136,8 @@
                 <EditText
                     android:id="@+id/editCustKanban"
                     android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:hint=" Scan Customer Kanban"
+                    android:layout_height="40dp"
+                    android:hint="  Scan Customer Kanban"
                     android:background="@drawable/common_edittext"
                     android:imeOptions="actionGo|flagNoFullscreen"
                     android:gravity="center_vertical"

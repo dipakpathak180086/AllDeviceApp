@@ -1,20 +1,17 @@
-﻿using Android.App;
+﻿using Android;
+using Android.App;
+using Android.Content;
+using Android.Content.PM;
+using Android.Media;
 using Android.OS;
 using Android.Support.V7.App;
-using Android.Runtime;
-using Android.Widget;
-using Android.Content.PM;
 using Android.Views;
-using SMPDisptach;
-using Android.Content;
+using Android.Widget;
+using SMPDisptach.ActivityClass;
 using System;
 using System.IO;
-using SMPDisptach;
-using SMPDisptach.ActivityClass;
-using System.Collections.Generic;
-using Android.Media;
 using System.Threading.Tasks;
-using Android;
+using System.Data.SqlClient;
 using System.Timers;
 namespace SMPDisptach
 {
@@ -30,7 +27,7 @@ namespace SMPDisptach
         TextView txtDate;
         TextView txtTime;
         const int RequestId = 1;
-
+        
         readonly string[] PermissionsGroup =
             {
                             //TODO add more permissions
@@ -126,7 +123,8 @@ namespace SMPDisptach
                 // Set our view from the "main" layout resource
                 SetContentView(Resource.Layout.activity_main);
 
-
+                //SqlConnection con = new SqlConnection("Server=10.91.4.3;Database=SATO_DENSO_SMART_PASS;User Id=sa;Password=sato@123;Encrypt=False;");
+                //con.Open();
 
 
                 Button btnSILScanning = FindViewById<Button>(Resource.Id.btnSILScanning);

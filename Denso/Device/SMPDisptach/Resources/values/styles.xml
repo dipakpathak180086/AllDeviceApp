@@ -34,4 +34,5 @@
 		<!-- Adjust dropdown height -->
 		<item name="android:padding">8dp</item>
 	</style>
+	
 </resources>

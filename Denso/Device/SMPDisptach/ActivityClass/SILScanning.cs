@@ -1222,6 +1222,7 @@ namespace SMPDisptach.ActivityClass
                             clsGLB.showToastOKMessage($"SIL No. {TruckNo} Completed! ", this);
                             txtDNHASUPKanbanBarcode.Text = "";
                             txtDNHASUPKanbanBarcode.RequestFocus();
+                            clear();
                         }
                     }
                     else
@@ -2008,6 +2009,7 @@ namespace SMPDisptach.ActivityClass
                                 clsGLB.showToastOKMessage($"SIL No. {TruckNo} Completed! ", this);
                                 txtDNHASUPKanbanBarcode.Text = "";
                                 txtDNHASUPKanbanBarcode.RequestFocus();
+                                clear();
                             }
                             SoundForOK();
                         }

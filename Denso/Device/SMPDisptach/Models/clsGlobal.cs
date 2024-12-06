@@ -74,6 +74,10 @@ namespace SMPDisptach
         public static string mFTPIP = "";
         public static string mFTPUserID = "";
         public static string mFTPPassword = "";
+        public static string mDatabaseServer = "";
+        public static string mDatabaseName = "";
+        public static string mDatabaseUserId = "";
+        public static string mDatabasePassword = "";
         public static string mCustSeqNo = "";
         public static void DeleteDirectory(string directoryPath)
         {
