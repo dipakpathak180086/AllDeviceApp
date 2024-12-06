@@ -140,8 +140,8 @@ namespace SMPDisptach
                 Button btnFTPTransfer = FindViewById<Button>(Resource.Id.btnFTPTransfer);
                 btnFTPTransfer.Click += BtnFTPTransfer_Click;
 
-                //Button btnMasterSync = FindViewById<Button>(Resource.Id.btnMaserSyncData);
-                //btnMasterSync.Click += BtnMasterSync_Click;
+                Button btnMasterSync = FindViewById<Button>(Resource.Id.btnMasterDataSync);
+                btnMasterSync.Click += BtnMasterSync_Click;
 
 
                 ReadFTPSetting();

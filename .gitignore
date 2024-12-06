@@ -34,6 +34,7 @@ packages/
 *.Designer.cs
 *.dll
 *.pdb
+Resource.Designer.cs
 
 # macOS or Linux specific
 .DS_Store
