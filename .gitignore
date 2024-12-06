@@ -41,3 +41,5 @@ packages/
 
 # Rider specific
 .idea/
+/Denso/Device/SMPDisptach/Resources/Resource.Designer.cs
+/Denso/Device/SMPDisptach.sln
