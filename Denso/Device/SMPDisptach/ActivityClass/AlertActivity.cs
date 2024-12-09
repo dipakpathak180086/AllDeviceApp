@@ -100,7 +100,7 @@ namespace SMPDisptach
                 Button btnUnlock= FindViewById<Button>(Resource.Id.btnUnlock);
                 btnUnlock.Click += (e, a) =>
                 {
-                    clsGlobal.ReadAlertMessage();
+                    clsGlobal.ReadAlertPasswordMaster();
                     if (clsGlobal.mAlertPassword=="")
                     {
                         clsGLB.showToastNGMessage("Password is not available,Try again!!!", this.Context);

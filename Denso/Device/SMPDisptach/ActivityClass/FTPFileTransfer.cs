@@ -23,7 +23,7 @@ using System.Net;
 
 namespace SMPDisptach.ActivityClass
 {
-    [Activity(Label = "SILDelete", WindowSoftInputMode = Android.Views.SoftInput.StateAlwaysHidden, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(Label = "FTPFileTransfer", WindowSoftInputMode = Android.Views.SoftInput.StateAlwaysHidden, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class FTPFileTransfer : Activity
     {
 
@@ -412,7 +412,11 @@ namespace SMPDisptach.ActivityClass
                 clsGlobal.WriteToFile(sequencePath, "0");
 
                 WriteFTPFile("ftp://" + clsGlobal.mFTPIP + "/SS" + System.DateTime.Now.ToString("yyMMdd") + System.DateTime.Now.ToString("HHmmss") + clsGlobal.mDeviceID + ".DAT", clsGlobal.mFTPUserID, clsGlobal.mFTPPassword);
-
+                //clsGlobal.DeleteDirectory(strFinal);
+                clsGLB.ShowMessage($"This SIL File Transferred {spinnerSIL.SelectedItem.ToString()} Successfully!!!", this, MessageTitle.INFORMATION);
+                BindSpinnerCompltedSIL();
+                _ListItem.Clear();
+                receivingItemAdapter.NotifyDataSetChanged();
 
             }
             catch (Exception ex)
@@ -473,11 +477,7 @@ namespace SMPDisptach.ActivityClass
                 {
                     DtSIL = ToDataTable(_ListItem);
                     FileGenerate(dtMain);
-                    //clsGlobal.DeleteDirectory(strFinal);
-                    clsGLB.ShowMessage($"This SIL File Transferred {spinnerSIL.SelectedItem.ToString()} Successfully!!!", this, MessageTitle.INFORMATION);
-                    BindSpinnerCompltedSIL();
-                    _ListItem.Clear();
-                    receivingItemAdapter.NotifyDataSetChanged();
+                    
                 }
             }
             catch (Exception ex)

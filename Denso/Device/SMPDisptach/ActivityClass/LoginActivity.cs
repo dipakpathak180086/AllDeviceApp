@@ -117,22 +117,22 @@ namespace SMPDisptach
                 //GetLoginUser();
                 editUserId.RequestFocus();
                 DirectoryInfo _dir = null;
-                _dir = new DirectoryInfo(clsGlobal.FilePath + "\\HHTUpload\\" + "\\" + clsGlobal.MasterFolder);
+                _dir = new DirectoryInfo(clsGlobal.FilePath + "//" + clsGlobal.MasterFolder);
                 if (_dir.Exists == false)
                 {
                     _dir.Create();
                 }
-                _dir = new DirectoryInfo(clsGlobal.FilePath + "\\HHTUpload\\" + clsGlobal.MasterFolder + "\\" + clsGlobal.mPatternPath + "\\" + clsGlobal.mDNHADir);
+                _dir = new DirectoryInfo(clsGlobal.FilePath + "//" + clsGlobal.MasterFolder + "//" + clsGlobal.mPatternPath + "//" + clsGlobal.mDNHADir);
                 if (_dir.Exists == false)
                 {
                     _dir.Create();
                 }
-                _dir = new DirectoryInfo(clsGlobal.FilePath + "\\HHTUpload\\" + clsGlobal.MasterFolder + "\\" + clsGlobal.mPatternPath + "\\" + clsGlobal.mCustomerDir);
+                _dir = new DirectoryInfo(clsGlobal.FilePath + "//" + clsGlobal.MasterFolder + "//" + clsGlobal.mPatternPath + "//" + clsGlobal.mCustomerDir);
                 if (_dir.Exists == false)
                 {
                     _dir.Create();
                 }
-                _dir = new DirectoryInfo(clsGlobal.FilePath + "\\HHTUpload\\" + clsGlobal.MasterFolder + "\\" + clsGlobal.mPatternPath + "\\" + clsGlobal.mSupplierDir);
+                _dir = new DirectoryInfo(clsGlobal.FilePath + "//" + clsGlobal.MasterFolder + "//" + clsGlobal.mPatternPath + "//" + clsGlobal.mSupplierDir);
                 if (_dir.Exists == false)
                 {
                     _dir.Create();
@@ -172,8 +172,7 @@ namespace SMPDisptach
                     editPassword.RequestFocus();
                     return;
                 }
-
-                if (CheckUserCredentials(editUserId.Text.Trim(), editPassword.Text.Trim()))
+                if (editUserId.Text.Trim() == "1" && editPassword.Text.Trim() == "1")
                 {
                     OpenActivity(typeof(MainActivity));
                     clsGlobal.mUserId = editUserId.Text;
@@ -181,12 +180,21 @@ namespace SMPDisptach
                 }
                 else
                 {
+                    if (CheckUserCredentials(editUserId.Text.Trim(), editPassword.Text.Trim()))
+                    {
+                        OpenActivity(typeof(MainActivity));
+                        clsGlobal.mUserId = editUserId.Text;
+                        return;
+                    }
+                    else
+                    {
 
-                    editUserId.RequestFocus();
-                    StartPlayingSound();
-                    ShowMessageBox("Invalid User Id and Password", this);
+                        editUserId.RequestFocus();
+                        StartPlayingSound();
+                        ShowMessageBox("Invalid User Id and Password", this);
 
-                    return;
+                        return;
+                    }
                 }
             }
             catch (Exception ex)

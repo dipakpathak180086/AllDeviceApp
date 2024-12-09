@@ -36,6 +36,7 @@ namespace SMPDisptach
         public static string mMainSqlConString = "";
         public static string MainFolder = "SatoFiles";
         public static string MasterFolder = "Master";
+       // public static string mUploadPath = "HHTUpload";
         public static string TranscationFolder = "Transcation";
         public static string mPatternPath = "Patterns";
         public static string mDNHADir = "DNHA";
@@ -56,6 +57,7 @@ namespace SMPDisptach
         public static string SILMasterDataFile = "SILMasterData.txt";
         public static string SILDetailsFile = "SILDetailsData.txt";
         public static string SILCompletedFile = "SILCompleted.txt";
+        public static string SILBarcode = "SILBarcode.txt";
         public static string mSILType = "";
         public static string FilePath = global::Android.OS.Environment.ExternalStorageDirectory.AbsolutePath + "/" + MainFolder;
         public static TcpClient mTcpClient;
@@ -83,6 +85,8 @@ namespace SMPDisptach
         public static string mCustSeqNo = "";
         public static void ConvertDataTableToTxt(DataTable dataTable, string filePath)
         {
+            //if (!File.Exists(filePath)) { File.Create(filePath); }
+            //else { File.Delete(filePath); }
             using (StreamWriter writer = new StreamWriter(filePath, false)) // 'false' ensures overriding
             {
                 // Write the rows only (skip column headers)
@@ -724,6 +728,14 @@ namespace SMPDisptach
             }
 
         }
+        public static void WriteNGMSGToFile(string filePath, string content)
+        {
+            // Using StreamWriter to write to the file
+            using (StreamWriter writer = new StreamWriter(filePath, false)) // 'true' appends to the file
+            {
+                writer.WriteLine(content);
+            }
+        }
         public static void WriteToFile(string filePath, string content)
         {
             // Using StreamWriter to write to the file
@@ -929,6 +941,48 @@ namespace SMPDisptach
             }
 
             return list;
+        }
+
+        public static string  ReadSILBarcodeFromFile(string filePath)
+        {
+            string strBarcode = "";
+
+            // Ensure the file exists before attempting to read
+            if (!File.Exists(filePath))
+            {
+                throw new FileNotFoundException("The specified file was not found.");
+            }
+
+            // Open the file using StreamReader and read the entire content
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                // Read all the file content at once
+                string fileContent = reader.ReadToEnd();
+
+                // Split the content into lines by newline characters (handles different OS line endings)
+                string[] lines = fileContent.Split(new[] { "\r\n", "\n", "\r" }, StringSplitOptions.None);
+
+                // Process each line separately
+                foreach (string line in lines)
+                {
+                    // Skip empty lines
+                    if (string.IsNullOrWhiteSpace(line))
+                    {
+                        continue;
+                    }
+
+                    // Split the line by the '~' delimiter
+                    string[] parts = line.Split('~');
+
+                    // Assuming the file has columns: PartNo, Barcode1, Barcode2
+                    if (parts.Length >= 0)
+                    {
+                      strBarcode = parts[0];
+                    }
+                }
+            }
+
+            return strBarcode;
         }
 
         public static string ReplaceNewlinesWithCaret(string input)
@@ -1202,7 +1256,7 @@ namespace SMPDisptach
                 {
                     string filePath = Path.Combine(FilePath, MasterFolder + "/" + mAlertMessageFileName);
                     DeleteAlertMessage();
-                    WriteToFile(filePath, Message);
+                    WriteNGMSGToFile(filePath, Message);
                     ReadAlertMessage();
                 }
             }

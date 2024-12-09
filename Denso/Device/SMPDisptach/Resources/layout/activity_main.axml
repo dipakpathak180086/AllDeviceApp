@@ -75,10 +75,20 @@
                 </TextView>
             </LinearLayout>
 
-
+             <Button
+                android:text="SIL REGISTRATION"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnSILRegister"
+                android:autoSizeMinTextSize="40dp"
+                android:layout_marginVertical="20dp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/rounded_edittext"
+                android:backgroundTint="@color/orange2"/>
 
             <Button
-                android:text="SIL SCANNING"
+                android:text="KANBAN SCANNING"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnSILScanning"

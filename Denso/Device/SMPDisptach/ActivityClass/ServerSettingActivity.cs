@@ -96,7 +96,8 @@ namespace SMPDisptach
                     //if (!Directory.Exists(folderPath))
                     //    Directory.CreateDirectory(folderPath);
 
-                    string filename = Path.Combine(ModInit.GstrPath, "Server.SYS");
+                    string filename = Path.Combine(clsGlobal.FilePath, "ServerSetting.txt");
+                    FileInfo ServerFile = new FileInfo(filename);
 
                     //using (var streamWriter = new StreamWriter(filename, false))
                     //{
@@ -221,6 +222,7 @@ namespace SMPDisptach
                         txtDatabase.Text = strCon[1].Trim();
                         txtUserID.Text= strCon[2].Trim();
                         txtPassword.Text = strCon[3].Trim();
+
                     }
                     else
                     {
@@ -250,7 +252,7 @@ namespace SMPDisptach
         {
             try
             {
-                string filename = Path.Combine(clsGlobal.FilePath, "FTPSetting.txt");
+                string filename = Path.Combine(clsGlobal.FilePath, "ServerSetting.txt");
                 StreamWriter WriteServer = new StreamWriter(filename, false);
                 //WriteServer.WriteLine(ModInit.GstrServerIP + "~" + ModInit.GintServerPort);
                 WriteServer.WriteLine(txtServerIp.Text + "~" + txtDatabase.Text + "~" + txtUserID.Text + "~" + txtPassword.Text);

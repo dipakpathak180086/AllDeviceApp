@@ -66,6 +66,7 @@ namespace SMPDisptach
             try
             {
                 clsGLB = new clsGlobal();
+                _blObj = new BL_HHT_UPLOAD();
                 //modnet = new ModNet();
                 //modfunction = new ModFunctions();
                 //oNetwork = new clsNetwork();
@@ -118,6 +119,120 @@ namespace SMPDisptach
                 return false;
             }
         }
+        protected void MasterSyncAll(object sender, DialogClickEventArgs e)
+        {
+            var progressDialog = ProgressDialog.Show(this, "", "Please Wait....", true);
+            try
+            {
+                DirectoryInfo _dir = null;
+                _dir = new DirectoryInfo(clsGlobal.FilePath  +"//"+ clsGlobal.MasterFolder);
+                if (_dir.Exists == false)
+                {
+                    _dir.Create();
+                }
+                _dir = new DirectoryInfo(clsGlobal.FilePath + "//" + clsGlobal.MasterFolder + "//" + clsGlobal.mPatternPath + "//" + clsGlobal.mDNHADir);
+                if (_dir.Exists == false)
+                {
+                    _dir.Create();
+                }
+                _dir = new DirectoryInfo(clsGlobal.FilePath + "//" + clsGlobal.MasterFolder + "//" + clsGlobal.mPatternPath + "//" + clsGlobal.mCustomerDir);
+                if (_dir.Exists == false)
+                {
+                    _dir.Create();
+                }
+                _dir = new DirectoryInfo(clsGlobal.FilePath + "//" + clsGlobal.MasterFolder + "//" + clsGlobal.mPatternPath + "//" + clsGlobal.mSupplierDir);
+                if (_dir.Exists == false)
+                {
+                    _dir.Create();
+                }
+                DataTable dtData = null;
+                _plObj = new PL_HHT_UPLOAD();
+                _plObj.DbType = "USER_LIST";
+                dtData = _blObj.BL_ExecuteTask(_plObj);
+                if (dtData.Rows.Count > 0)
+                {
+                    string strFinaPath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "//LOGIN.txt");
+                    clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
+
+                }
+                _plObj = new PL_HHT_UPLOAD();
+                _plObj.DbType = "DNHA_PART_LIST";
+                dtData = _blObj.BL_ExecuteTask(_plObj);
+                if (dtData.Rows.Count > 0)
+                {
+                    string strFinaPath = Path.Combine(clsGlobal.FilePath,  clsGlobal.MasterFolder + "//DNHA_PART_DATA.txt");
+                    clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
+
+                }
+                _plObj = new PL_HHT_UPLOAD();
+                _plObj.DbType = "SUP_PART_LIST";
+                dtData = _blObj.BL_ExecuteTask(_plObj);
+                if (dtData.Rows.Count > 0)
+                {
+                    string strFinaPath = Path.Combine(clsGlobal.FilePath,   clsGlobal.MasterFolder + "//SUP_PART_DATA.txt");
+                    clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
+
+                }
+                _plObj = new PL_HHT_UPLOAD();
+                _plObj.DbType = "CUST_PART_LIST";
+                dtData = _blObj.BL_ExecuteTask(_plObj);
+                if (dtData.Rows.Count > 0)
+                {
+                    string strFinaPath = Path.Combine(clsGlobal.FilePath,   clsGlobal.MasterFolder + "//CUST_PART_DATA.txt");
+                    clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
+
+                }
+                _plObj = new PL_HHT_UPLOAD();
+                _plObj.DbType = "DNHA_PATTERN_LIST";
+                dtData = _blObj.BL_ExecuteTask(_plObj);
+                if (dtData.Rows.Count > 0)
+                {
+                    string strFinaPath = Path.Combine(clsGlobal.FilePath,   clsGlobal.MasterFolder + "//" + clsGlobal.mPatternPath + "//" +clsGlobal.mDNHADir + "//DNHA_PATTERN_DATA.txt");
+                    clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
+
+                }
+                _plObj.DbType = "SUPPLIER_PATTERN_LIST";
+                dtData = _blObj.BL_ExecuteTask(_plObj);
+                if (dtData.Rows.Count > 0)
+                {
+                    string strFinaPath = Path.Combine(clsGlobal.FilePath,  clsGlobal.MasterFolder + "//" + clsGlobal.mPatternPath + "//" + clsGlobal.mSupplierDir + "//SUPPLIER_PATTERN_DATA.txt");
+                    clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
+
+                }
+                _plObj.DbType = "CUSTOMER_PATTERN_LIST";
+                dtData = _blObj.BL_ExecuteTask(_plObj);
+                if (dtData.Rows.Count > 0)
+                {
+                    string strFinaPath = Path.Combine(clsGlobal.FilePath,  clsGlobal.MasterFolder + "//" + clsGlobal.mPatternPath + "//" + clsGlobal.mCustomerDir + "//CUSTOMER_PATTERN_DATA.txt");
+                    clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
+
+                }
+                _plObj.DbType = "ALERT_PASSWORD";
+                dtData = _blObj.BL_ExecuteTask(_plObj);
+                if (dtData.Rows.Count > 0)
+                {
+                    string strFinaPath = Path.Combine(clsGlobal.FilePath,  clsGlobal.MasterFolder + "//ALERT_PASS.txt");
+                    clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
+
+                }
+                _plObj.DbType = "NG_LOT_LIST";
+                dtData = _blObj.BL_ExecuteTask(_plObj);
+                if (dtData.Rows.Count > 0)
+                {
+                    string strFinaPath = Path.Combine(clsGlobal.FilePath,  clsGlobal.MasterFolder + "//NG_PART_DATA.txt");
+                    clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
+
+                }
+
+                progressDialog.Hide();
+                clsGLB.ShowMessage($"All Master Data Sync Successfully!!!", this, MessageTitle.INFORMATION);
+            }
+            catch (Exception ex)
+            {
+                progressDialog.Hide();
+                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+            }
+        }
         protected override void OnCreate(Bundle savedInstanceState)
         {
             try
@@ -129,6 +244,8 @@ namespace SMPDisptach
                 //SqlConnection con = new SqlConnection("Server=10.91.4.3;Database=SATO_DENSO_SMART_PASS;User Id=sa;Password=sato@123;Encrypt=False;");
                 //con.Open();
 
+                Button btnSILRegistration = FindViewById<Button>(Resource.Id.btnSILRegister);
+                btnSILRegistration.Click += BtnSILRegistration_Click;
 
                 Button btnSILScanning = FindViewById<Button>(Resource.Id.btnSILScanning);
                 btnSILScanning.Click += btnSILScanning_Click;
@@ -146,8 +263,8 @@ namespace SMPDisptach
 
                 ReadFTPSetting();
                 clsGlobal.ReadServerSetting();
-                txtDate =FindViewById<TextView>(Resource.Id.txtDate);
-                txtTime=FindViewById<TextView>(Resource.Id.txtTime);
+                txtDate = FindViewById<TextView>(Resource.Id.txtDate);
+                txtTime = FindViewById<TextView>(Resource.Id.txtTime);
 
                 timer = new Timer();
                 timer.Interval = 1000; // 1 second
@@ -164,13 +281,13 @@ namespace SMPDisptach
             }
         }
 
-       
+        
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             // Update the TextView with the current date and time on the UI thread
             RunOnUiThread(() =>
             {
-                txtDate.Text = "Date: "+DateTime.Now.ToString("dd/MM/yyyy");
+                txtDate.Text = "Date: " + DateTime.Now.ToString("dd/MM/yyyy");
                 txtTime.Text = "Time: " + DateTime.Now.ToString("HH:mm:ss");
             });
         }
@@ -179,7 +296,7 @@ namespace SMPDisptach
         {
             try
             {
-               OpenActivity(typeof(SILDelete));
+                OpenActivity(typeof(SILDelete));
             }
             catch (Exception ex)
             {
@@ -199,8 +316,19 @@ namespace SMPDisptach
             }
         }
 
+        private void BtnSILRegistration_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenActivity(typeof(SILRegistration));
+            }
+            catch (Exception ex)
+            {
+                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+            }
+        }
 
-       
+
         private void btnSILScanning_Click(object sender, EventArgs e)
         {
             try
@@ -212,31 +340,39 @@ namespace SMPDisptach
                 clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
+
         private void BtnMasterSync_Click(object sender, EventArgs e)
         {
             try
             {
-                _plObj = new PL_HHT_UPLOAD();
-                _plObj.DbType = "USER_LIST";
-                DataTable dtData = _blObj.BL_ExecuteTask(_plObj);
-                if (dtData.Rows.Count > 0)
-                {
-                    string strFinaPath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "\\LOGIN.txt");
-                    clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
-                }
+
+                ShowConfirmBox($"Are you sure want to sync all master data?", this, MasterSyncAll);
+
             }
             catch (Exception ex)
             {
                 clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
+            
         }
-        
 
-      
+
+
 
         #region Methods
 
-
+        public void ShowConfirmBox(string msg, Activity activity, EventHandler<DialogClickEventArgs> handler)
+        {
+            //scanningComplete = true;
+            //SoundForFinalSave();
+            Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(activity);
+            builder.SetTitle("Message");
+            builder.SetMessage(msg);
+            builder.SetCancelable(false);
+            builder.SetPositiveButton("Yes", handler);
+            builder.SetNegativeButton("No", handllerCancelButton);
+            builder.Show();
+        }
         public void ShowConfirmBox(string msg, Activity activity)
         {
             Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(activity);

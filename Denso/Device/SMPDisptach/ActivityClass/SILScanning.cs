@@ -36,7 +36,9 @@ namespace SMPDisptach.ActivityClass
         #region Private Variables
         Vibrator vibrator;
         clsGlobal clsGLB;
-        EditText txtSILBarcode, txtDNHASUPKanbanBarcode, txtCustKanbanBarcode;
+        Spinner spinnerSIL;
+        List<string> _lstSIL = new List<string>();
+        EditText txtDNHASUPKanbanBarcode, txtCustKanbanBarcode;
         Dictionary<string, string> dicRegPlant = new Dictionary<string, string>();
         TextView txtTotalQty, txtScanQty, txtTruckSILCodeNo, txtCheckPoint;
         TextView lblDNHAKanban, lblCustKanban;
@@ -53,6 +55,7 @@ namespace SMPDisptach.ActivityClass
 
         string selectedSKU = string.Empty;
         string strDNHAPartNo = string.Empty;
+        string _strSILBarCode= string.Empty;
         RecyclerView recyclerViewItem;
         SILScanItemAdapter receivingItemAdapter;
         RecyclerView.LayoutManager mLayoutManager;
@@ -124,11 +127,10 @@ namespace SMPDisptach.ActivityClass
                 Button btnClear = FindViewById<Button>(Resource.Id.btnClear);
                 btnClear.Click += BtnClear_Click;
 
+                spinnerSIL = FindViewById<Spinner>(Resource.Id.spinnerSIL);
+                spinnerSIL.ItemSelected += SpinnerSIL_ItemSelected;
 
-                txtSILBarcode = FindViewById<EditText>(Resource.Id.editSILCode);
-                txtSILBarcode.KeyPress += txtSILBarcode_KeyPress;
-                // txtSILBarcode.Text = "31302300000201400 11HA212400-06701H0000300HA212400-06701H0000100HA212400-06901H0000400HA212400-50201H0000550HA212400-50601H0001400HA212400-50711H0000300HA212400-50711H0000050HA212400-52101H0000200";
-                txtSILBarcode.Text = "";
+
 
                 lblDNHAKanban = FindViewById<TextView>(Resource.Id.lblDNHAKanban);
                 txtDNHASUPKanbanBarcode = FindViewById<EditText>(Resource.Id.editDNHAKanban);
@@ -184,7 +186,7 @@ namespace SMPDisptach.ActivityClass
                     ShowAlertPopUp();
                     return;
                 }
-                txtSILBarcode.RequestFocus();
+                BindSpinnerRegisteredSIL();
             }
             catch (Exception ex)
             {
@@ -339,19 +341,62 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex) { throw ex; }
         }
-        private void GetSILScanData()
+
+        public void BindALLSIL(string path)
+        {
+            try
+            {
+                _lstSIL.Clear();
+                _lstSIL.Add("--Select--");
+                string[] directoriesFinal = Directory.GetDirectories(path);
+                for (int i = 0; i < directoriesFinal.Length; i++)
+                {
+                    string strCompltedSIL = Path.Combine(directoriesFinal[i].TrimEnd(Path.DirectorySeparatorChar), clsGlobal.SILCompletedFile);
+                    if (File.Exists(strCompltedSIL))
+                    {
+                        string strSILCode = Path.GetFileName(directoriesFinal[i].TrimEnd(Path.DirectorySeparatorChar));
+                        _lstSIL.Add("*" + strSILCode);
+
+                    }
+                    else
+                    {
+                        string strSILCode = Path.GetFileName(directoriesFinal[i].TrimEnd(Path.DirectorySeparatorChar));
+                        _lstSIL.Add(strSILCode);
+                    }
+                }
+
+                // Get all directories
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions (e.g., path not found)
+                Console.WriteLine(ex.Message);
+            }
+        }
+        private void BindSpinnerRegisteredSIL()
+        {
+
+            string strTranscationPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
+            BindALLSIL(strTranscationPath);
+
+            ArrayAdapter arrayAdapter = new ArrayAdapter(this, Resource.Layout.Spinner, _lstSIL);
+            arrayAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            spinnerSIL.Adapter = arrayAdapter;
+            spinnerSIL.SetSelection(0);
+            spinnerSIL.RequestFocus();
+        }
+        private void GetSILScanData(string strSILBarcode)
         {
             try
             {
 
-                if (txtSILBarcode.Text.Length > 0)
+                if (strSILBarcode.Length > 0)
                 {
-                    clsGlobal.mSILType = clsGlobal.mGetCheckPoints(txtSILBarcode.Text.Trim());
-                    clsGlobal.mShipmentType = clsGlobal.mCheckSILTILType(txtSILBarcode.Text.Trim());
+                    clsGlobal.mSILType = clsGlobal.mGetCheckPoints(strSILBarcode.Trim());
+                    clsGlobal.mShipmentType = clsGlobal.mCheckSILTILType(strSILBarcode.Trim());
                     if (clsGlobal.mShipmentType != "SIL")
                     {
                         txtDNHASUPKanbanBarcode.Enabled = false;
-                        txtSILBarcode.Text = "";
                         clsGLB.showToastNGMessage("Invalid SIL Barcode.", this);
                         SoundForNG();
                         ShowAlertPopUp();
@@ -359,7 +404,7 @@ namespace SMPDisptach.ActivityClass
 
                     }
 
-                    var lstSIlData = clsGlobal.GetSILData(txtSILBarcode.Text.Trim());
+                    var lstSIlData = clsGlobal.GetSILData(strSILBarcode);
                     if (lstSIlData.Count > 0)
                     {
 
@@ -374,7 +419,7 @@ namespace SMPDisptach.ActivityClass
                             clsGlobal.ReadSupplierPatternFile();
                             txtDNHASUPKanbanBarcode.Enabled = true;
                             txtDNHASUPKanbanBarcode.RequestFocus();
-                            txtSILBarcode.Enabled = false;
+                            spinnerSIL.Enabled = false;
                         }
                         else
                         {
@@ -385,14 +430,14 @@ namespace SMPDisptach.ActivityClass
                             lblCustKanban.Visibility = ViewStates.Visible;
                             txtCustKanbanBarcode.Visibility = ViewStates.Visible;
                             clsGlobal.ReadCutomerPatternFile();
-                            txtSILBarcode.Enabled = false;
+                            spinnerSIL.Enabled = false;
                             txtDNHASUPKanbanBarcode.Enabled = true;
                             txtDNHASUPKanbanBarcode.RequestFocus();
 
                         }
                         try
                         {
-                            SILHeader = txtSILBarcode.Text.Trim().Substring(0, 20);
+                            SILHeader = strSILBarcode.Trim().Substring(0, 20);
                             TruckNo = SILHeader.Substring(0, 7);
                             CustCode = SILHeader.Substring(7, 8);
                             ShipTo = SILHeader.Substring(15, 2);
@@ -411,7 +456,7 @@ namespace SMPDisptach.ActivityClass
                     {
                         txtDNHASUPKanbanBarcode.Enabled = false;
 
-                        txtSILBarcode.Text = "";
+                        spinnerSIL.SetSelection(0);
                         clsGLB.showToastNGMessage("Invalid SIL Barcode.", this);
                         SoundForNG();
                         ShowAlertPopUp();
@@ -440,6 +485,7 @@ namespace SMPDisptach.ActivityClass
             txtTotalQty.Text = "Total Qty : " + _TotalQty.ToString();
             txtScanQty.Text = "Scan Qty : " + _ScanQty.ToString();
         }
+     
         private void BindRecycleView(List<KanbanData> lst)
         {
             try
@@ -1063,7 +1109,7 @@ namespace SMPDisptach.ActivityClass
                                 isMatchExpiryDate = true;
                                 bool atucalExp = clsGlobal.mlistDNHA.Where(x => x.DNHAPartNo == partNo).Select(p => p.IsExpDate).FirstOrDefault();
                                 string strExpShipDays = clsGlobal.mlistDNHA.Where(x => x.DNHAPartNo == partNo).Select(p => p.EXPShipDays).FirstOrDefault();
-                                int iExpShipDays = strExpShipDays == "" ? 0 : Convert.ToInt32( strExpShipDays);
+                                int iExpShipDays = strExpShipDays == "" ? 0 : Convert.ToInt32(strExpShipDays);
                                 if (DateTime.Today > DateTime.ParseExact(exp, "yyyy-MM-dd", CultureInfo.DefaultThreadCurrentCulture).AddDays(-iExpShipDays))
                                 {
                                     isProductExpired = true;
@@ -1212,7 +1258,7 @@ namespace SMPDisptach.ActivityClass
                         strDNHAPartNo = partNo;
                         //We will validate the Lot and Qty of kaban barcode, if any ng lot or qty should not be greater then balance qty
                         UpdateFinalListScanQty(partNo, qty);
-                        WriteDeatilsFile($"{txtSILBarcode.Text.Trim()}~{clsGlobal.ReplaceNewlinesWithCaret(txtDNHASUPKanbanBarcode.Text.Trim())}~{clsGlobal.ReplaceNewlinesWithCaret(txtCustKanbanBarcode.Text.Trim())}" +
+                        WriteDeatilsFile($"{_strSILBarCode.Trim()}~{clsGlobal.ReplaceNewlinesWithCaret(txtDNHASUPKanbanBarcode.Text.Trim())}~{clsGlobal.ReplaceNewlinesWithCaret(txtCustKanbanBarcode.Text.Trim())}" +
                             $"~{PartNo}~{CustPart}~{Qty}~{"0"}~{ProcessCode}~{TruckNo}~{ShipTo}~{CustCode}~{SequenceNo}~{clsGlobal.mCustSeqNo}~{clsGlobal.mUserId}" +
                             $"~{SILScannedON}~{DNHAScannedOn}~{CustScannedOn}~{strDNHAPattern}");
                         _dicBarcode1.Add(txtDNHASUPKanbanBarcode.Text.Trim(), txtDNHASUPKanbanBarcode.Text.Trim());
@@ -1624,7 +1670,7 @@ namespace SMPDisptach.ActivityClass
 
                         //We will validate the Lot and Qty of kaban barcode, if any ng lot or qty should not be greater then balance qty
                         UpdateFinalListScanQty(dnhaPartNo, qty);
-                        WriteDeatilsFile($"{txtSILBarcode.Text.Trim()}~{clsGlobal.ReplaceNewlinesWithCaret(txtDNHASUPKanbanBarcode.Text.Trim())}~{clsGlobal.mShipmentType}");
+                        WriteDeatilsFile($"{_strSILBarCode}~{clsGlobal.ReplaceNewlinesWithCaret(txtDNHASUPKanbanBarcode.Text.Trim())}~{clsGlobal.mShipmentType}");
                         _dicBarcode1.Add(txtDNHASUPKanbanBarcode.Text.Trim(), txtDNHASUPKanbanBarcode.Text.Trim());
                     }
                     else
@@ -1649,6 +1695,40 @@ namespace SMPDisptach.ActivityClass
         #endregion
 
         #region Activiy Events
+        private void SpinnerSIL_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            try
+            {
+                if (spinnerSIL.SelectedItemPosition > 0)
+                {
+                   
+                    lblDNHAKanban.Visibility = ViewStates.Gone;
+                    txtDNHASUPKanbanBarcode.Visibility = ViewStates.Gone;
+                    lblCustKanban.Visibility = ViewStates.Gone;
+                    txtCustKanbanBarcode.Visibility = ViewStates.Gone;
+                    //lblSupKanban.Visibility = ViewStates.Gone;
+                    //txtSUPKanbanBarcode.Visibility = ViewStates.Gone;
+                   
+                    if (spinnerSIL.SelectedItem.ToString().Contains("*"))
+                    {
+                        clsGLB.showToastNGMessage($"This SIL Already Completed!!", this);
+                        txtCustKanbanBarcode.Text = "";
+                        txtCustKanbanBarcode.RequestFocus();
+                        SoundForNG();
+                        return;
+                    }
+                    string strTranscationPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
+                    string strFinalSILWiseDirectory = Path.Combine(strTranscationPath, spinnerSIL.SelectedItem.ToString());
+                    string strFinalFilePath = Path.Combine(strFinalSILWiseDirectory, clsGlobal.SILMasterDataFile);
+                    _strSILBarCode = clsGlobal.ReadSILBarcodeFromFile(strFinalFilePath);
+                    GetSILScanData( _strSILBarCode );
+                }
+            }
+            catch (Exception ex)
+            {
+                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+            }
+        }
         private void TxtDNHAKanbanBarcode_KeyPress(object sender, View.KeyEventArgs e)
         {
             try
@@ -1953,7 +2033,7 @@ namespace SMPDisptach.ActivityClass
 
                             if (clsGlobal.mSILType == "2POINTS")
                             {
-                                WriteDeatilsFile($"{txtSILBarcode.Text.Trim()}~{clsGlobal.ReplaceNewlinesWithCaret(txtCustKanbanBarcode.Text.Trim())}~{clsGlobal.mShipmentType}");
+                                WriteDeatilsFile($"{_strSILBarCode.Trim()}~{clsGlobal.ReplaceNewlinesWithCaret(txtCustKanbanBarcode.Text.Trim())}~{clsGlobal.mShipmentType}");
                                 if (isMatchSeqNo)
                                 {
                                     //_dicBarcode1.Add(txtCustKanbanBarcode.Text.Trim(), txtCustKanbanBarcode.Text.Trim());
@@ -1985,7 +2065,7 @@ namespace SMPDisptach.ActivityClass
                                 }
                                 CustScannedOn = DateTime.Now.ToString();
                                 //WriteDeatilsFile($"{txtSILBarcode.Text.Trim()}~{strBarcode1}~{clsGlobal.ReplaceNewlinesWithCaret(txtCustKanbanBarcode.Text.Trim())}~{clsGlobal.mShipmentType}")
-                                WriteDeatilsFile($"{txtSILBarcode.Text.Trim()}~{clsGlobal.ReplaceNewlinesWithCaret(txtDNHASUPKanbanBarcode.Text.Trim())}" +
+                                WriteDeatilsFile($"{_strSILBarCode.Trim()}~{clsGlobal.ReplaceNewlinesWithCaret(txtDNHASUPKanbanBarcode.Text.Trim())}" +
                                 $"~{clsGlobal.ReplaceNewlinesWithCaret(txtCustKanbanBarcode.Text.Trim())}" +
                                 $"~{PartNo}~{CustPart}~{Qty}~{"0"}~{ProcessCode}~{TruckNo}~{ShipTo}~{CustCode}~{SequenceNo}~{clsGlobal.mCustSeqNo}~{clsGlobal.mUserId}" +
                                 $"~{SILScannedON}~{DNHAScannedOn}~{CustScannedOn}~{strCustomerPattern}");
@@ -2062,14 +2142,14 @@ namespace SMPDisptach.ActivityClass
                 {
                     if (e.KeyCode == Keycode.Enter)
                     {
-                        txtSILBarcode.SelectAll();
-                        lblDNHAKanban.Visibility = ViewStates.Gone;
-                        txtDNHASUPKanbanBarcode.Visibility = ViewStates.Gone;
-                        lblCustKanban.Visibility = ViewStates.Gone;
-                        txtCustKanbanBarcode.Visibility = ViewStates.Gone;
-                        //lblSupKanban.Visibility = ViewStates.Gone;
-                        //txtSUPKanbanBarcode.Visibility = ViewStates.Gone;
-                        GetSILScanData();
+                        //txtSILBarcode.SelectAll();
+                        //lblDNHAKanban.Visibility = ViewStates.Gone;
+                        //txtDNHASUPKanbanBarcode.Visibility = ViewStates.Gone;
+                        //lblCustKanban.Visibility = ViewStates.Gone;
+                        //txtCustKanbanBarcode.Visibility = ViewStates.Gone;
+                        ////lblSupKanban.Visibility = ViewStates.Gone;
+                        ////txtSUPKanbanBarcode.Visibility = ViewStates.Gone;
+                        //GetSILScanData();
 
                     }
                     else
@@ -2092,10 +2172,10 @@ namespace SMPDisptach.ActivityClass
                 bool IsValidate = true;
 
 
-                if (string.IsNullOrEmpty(txtSILBarcode.Text.Trim()))
+                if (spinnerSIL.SelectedItemPosition<=0)
                 {
                     clsGLB.showToastNGMessage($"Scan SIL Barcode.", this);
-                    txtSILBarcode.RequestFocus();
+                    spinnerSIL.RequestFocus();
                     IsValidate = false;
                     SoundForNG();
                     ShowAlertPopUp();
@@ -2151,10 +2231,10 @@ namespace SMPDisptach.ActivityClass
                 bool IsValidate = true;
 
 
-                if (string.IsNullOrEmpty(txtSILBarcode.Text.Trim()))
+                if (spinnerSIL.SelectedItemPosition <= 0)
                 {
-                    clsGLB.showToastNGMessage($"Scan SIL Barcode", this);
-                    txtSILBarcode.RequestFocus();
+                    clsGLB.showToastNGMessage($"Scan SIL Barcode.", this);
+                    spinnerSIL.RequestFocus();
                     IsValidate = false;
                     SoundForNG();
                     ShowAlertPopUp();
@@ -2208,10 +2288,10 @@ namespace SMPDisptach.ActivityClass
                 bool IsValidate = true;
 
 
-                if (string.IsNullOrEmpty(txtSILBarcode.Text.Trim()))
+                if (spinnerSIL.SelectedItemPosition <= 0)
                 {
-                    clsGLB.showToastNGMessage($"Scan SIL Barcode", this);
-                    txtSILBarcode.RequestFocus();
+                    clsGLB.showToastNGMessage($"Scan SIL Barcode.", this);
+                    spinnerSIL.RequestFocus();
                     IsValidate = false;
                     SoundForNG();
                     ShowAlertPopUp();
@@ -2273,12 +2353,12 @@ namespace SMPDisptach.ActivityClass
             iQrCode2Qty = 0;
             txtDNHASUPKanbanBarcode.Text = "";
             txtCustKanbanBarcode.Text = "";
-            txtSILBarcode.Text = "";
+            spinnerSIL.SetSelection(0);
             lblDNHAKanban.Visibility = ViewStates.Gone;
             txtDNHASUPKanbanBarcode.Visibility = ViewStates.Gone;
             lblCustKanban.Visibility = ViewStates.Gone;
             txtCustKanbanBarcode.Visibility = ViewStates.Gone;
-            txtSILBarcode.Enabled = true;
+            spinnerSIL.Enabled = true;
             txtDNHASUPKanbanBarcode.Enabled = true;
             txtCustKanbanBarcode.Enabled = true;
 
@@ -2301,7 +2381,7 @@ namespace SMPDisptach.ActivityClass
 
             txtTotalQty.Text = "Total Qty : " + _TotalQty.ToString();
             txtScanQty.Text = "Scan Qty : " + _ScanQty.ToString();
-            txtSILBarcode.RequestFocus();
+            spinnerSIL.RequestFocus();
 
             txtTruckSILCodeNo.Text = "Truck No:        ";
             txtCheckPoint.Text = "";

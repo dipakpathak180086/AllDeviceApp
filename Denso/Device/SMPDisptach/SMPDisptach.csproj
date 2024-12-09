@@ -73,6 +73,7 @@
     <Compile Include="ActivityClass\FTPFileTransfer.cs" />
     <Compile Include="ActivityClass\SILDelete.cs" />
     <Compile Include="ActivityClass\SILFTPScanningItemAdapter.cs" />
+    <Compile Include="ActivityClass\SILRegistration.cs" />
     <Compile Include="ActivityClass\SILScanning.cs" />
     <Compile Include="ActivityClass\SILScanItemAdapter.cs" />
     <Compile Include="Assets\BL\BL_HHT_UPLOAD.cs" />
@@ -263,7 +264,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_SILRegistration.axml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

@@ -47,103 +47,33 @@
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
-                <Spinner
-                    android:id="@+id/spinnerSIL"
-                    style="@style/SpinnerStyle"
-                    android:layout_width="0dp"
-                    android:popupBackground="#ffffff"
-                    android:layout_weight="2"
-                    android:textSize="14dp" />
-
-
-            </LinearLayout>
-
-
-
-
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:layout_marginTop="2dp"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight=".7"
-                    android:padding="2dp"
-                    android:text="Scan DN/SP Kanban"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:textSize="14dp"
-                    android:visibility="gone"
-                    android:id="@+id/lblDNHAKanban"/>
                 <EditText
-                    android:id="@+id/editDNHAKanban"
+                    android:id="@+id/editSILCode"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
-                    android:hint="  Scan DNHA/Supplier Kanban"
+                    android:hint="  Scan SIL"
                     android:background="@drawable/common_edittext"
                     android:imeOptions="actionGo|flagNoFullscreen"
                     android:gravity="center_vertical"
                     android:layout_weight="1.2"
-                    android:maxLength="500"
-                    android:maxLines="1"
-                    android:padding="2dp"
-                    android:paddingLeft="5dp"
-                    android:paddingStart="8dp"
-                    android:visibility="gone"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textSize="14dp" />
-
-
-            </LinearLayout>
-            
-           
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:layout_marginTop="2dp"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight=".7"
-                    android:padding="2dp"
-                    android:text="Cust. Kanban"
-                    android:textStyle="bold"
-                    android:visibility="gone"
-                    android:textColor="@color/black"
-                    android:textSize="14dp"
-                    android:id="@+id/lblCustKanban"/>
-                <EditText
-                    android:id="@+id/editCustKanban"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:hint="  Scan Customer Kanban"
-                    android:background="@drawable/common_edittext"
-                    android:imeOptions="actionGo|flagNoFullscreen"
-                    android:gravity="center_vertical"
-                    android:layout_weight="1.2"
-                    android:maxLength="500"
+                    android:maxLength="9000"
                     android:maxLines="1"
                     android:padding="2dp"
                     android:paddingLeft="5dp"
                     android:paddingStart="8dp"
                     android:singleLine="true"
-                    android:visibility="gone"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
 
 
             </LinearLayout>
+
+
+
+
+
+
+         
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -222,18 +152,7 @@
                     android:textColor="@color/white"
                     android:background="@color/orange2"
                     android:textSize="15dp" />
-                <TextView
-                    android:id="@+id/txtScanQty"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="Scan Qty : 0"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:background="@color/orange2"
-                    android:textSize="15dp" />
+               
 
 
             </LinearLayout>
