@@ -47,6 +47,7 @@ namespace SMPDisptach
 
         // Property for IsExpDate (manual set/get, no calculation)
         public bool IsExpDate { get; set; }
+        public string LotSize { get; set; }
     }
     public class PL_CUSTOMER_MASTER
     {
@@ -120,6 +121,7 @@ namespace SMPDisptach
         public string Qty { get; set; }
         public string ScanQty { get; set; }
 
+        public string Bin { get; set; }
         public string Plant { get; set; }
         public string MSG { get; set; }
         public string SrNo { get; set; }

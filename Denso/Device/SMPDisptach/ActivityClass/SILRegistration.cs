@@ -49,7 +49,7 @@ namespace SMPDisptach.ActivityClass
 
         Dictionary<string, string> _dicBarcode1 = new Dictionary<string, string>();
         Dictionary<string, string> _dicBarcode2 = new Dictionary<string, string>();
-        bool scanningComplete=false;
+        bool scanningComplete = false;
         string selectedSKU = string.Empty;
         string strDNHAPartNo = string.Empty;
         RecyclerView recyclerViewItem;
@@ -109,12 +109,12 @@ namespace SMPDisptach.ActivityClass
                 // txtSILBarcode.Text = "31302300000201400 11HA212400-06701H0000300HA212400-06701H0000100HA212400-06901H0000400HA212400-50201H0000550HA212400-50601H0001400HA212400-50711H0000300HA212400-50711H0000050HA212400-52101H0000200";
                 txtSILBarcode.Text = "";
 
-                
+
                 txtTotalQty = FindViewById<TextView>(Resource.Id.txtTotalQty);
                 txtTotalQty.Text = "Total Qty : " + _TotalQty.ToString();
 
                 txtTruckSILCodeNo = FindViewById<TextView>(Resource.Id.lblTruckNo);
-                txtTruckSILCodeNo.Text = "Truck No:        ";
+                txtTruckSILCodeNo.Text = "";
                 txtCheckPoint = FindViewById<TextView>(Resource.Id.lblTransName);
                 txtCheckPoint.Text = "";
 
@@ -128,20 +128,22 @@ namespace SMPDisptach.ActivityClass
                 mLayoutManager = new LinearLayoutManager(this);
                 recyclerViewItem.SetLayoutManager(mLayoutManager);
 
-              
+                string strTranscationPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
+                MediaScannerConnection.ScanFile(this, new String[] { strTranscationPath }, null, null);
+                clsGlobal.DeleteDirectoryWithOutFile(strTranscationPath);
 
                 //txtBattery.Enabled = txtTruckNo.Enabled = false;
 
-                clsGlobal.ReadCustomerMaster();
-                clsGlobal.ReadSupplierMaster();
+                //clsGlobal.ReadCustomerMaster();
+                //clsGlobal.ReadSupplierMaster();
                 clsGlobal.ReadDNHAMaster();
-                clsGlobal.ReadAlertMessage();
-                clsGlobal.ReadSuspectedLotMaster();
-                if (clsGlobal.mAlertMeassage != "")
-                {
-                    ShowAlertPopUp();
-                    return;
-                }
+                //clsGlobal.ReadAlertMessage();
+                //clsGlobal.ReadSuspectedLotMaster();
+                //if (clsGlobal.mAlertMeassage != "")
+                //{
+                //    ShowAlertPopUp();
+                //    return;
+                //}
                 txtSILBarcode.RequestFocus();
             }
             catch (Exception ex)
@@ -308,11 +310,21 @@ namespace SMPDisptach.ActivityClass
                     clsGlobal.mShipmentType = clsGlobal.mCheckSILTILType(txtSILBarcode.Text.Trim());
                     if (clsGlobal.mShipmentType != "SIL")
                     {
-                      
+
                         txtSILBarcode.Text = "";
                         clsGLB.showToastNGMessage("Invalid SIL Barcode.", this);
                         SoundForNG();
-                        ShowAlertPopUp();
+                       // ShowAlertPopUp();
+                        return;
+
+                    }
+                    if (txtSILBarcode.Text.Trim() .StartsWith("DISC"))
+                    {
+
+                        txtSILBarcode.Text = "";
+                        clsGLB.showToastNGMessage("Invalid SIL Barcode.", this);
+                        SoundForNG();
+                        //ShowAlertPopUp();
                         return;
 
                     }
@@ -324,8 +336,8 @@ namespace SMPDisptach.ActivityClass
 
 
                         BindRecycleView(lstSIlData);
-                        
-                        
+
+
                         SoundForOK();
                     }
                     else
@@ -333,7 +345,7 @@ namespace SMPDisptach.ActivityClass
                         txtSILBarcode.Text = "";
                         clsGLB.showToastNGMessage("Invalid SIL Barcode.", this);
                         SoundForNG();
-                        ShowAlertPopUp();
+                        //ShowAlertPopUp();
 
                     }
 
@@ -372,6 +384,7 @@ namespace SMPDisptach.ActivityClass
                 string strFinalSILWiseDirectory = Path.Combine(strTranscationPath, strSILCode);
                 string strFinalFilePath = Path.Combine(strFinalSILWiseDirectory, clsGlobal.SILMasterDataFile);
                 string strFinalDetailsFilePath = Path.Combine(strFinalSILWiseDirectory, clsGlobal.SILDetailsFile);
+                string strSILBarcodeFilePath = Path.Combine(strFinalSILWiseDirectory, clsGlobal.SILBarcode);
                 if (File.Exists(strFinalDetailsFilePath))
                 {
                     List<SILKanbanBarcodeScannedData> _ListDetails = clsGlobal.ReadSILScannedFileToList(strFinalDetailsFilePath);
@@ -393,30 +406,61 @@ namespace SMPDisptach.ActivityClass
                     _ListItem = clsGlobal.ReadSILFileToList(strFinalFilePath);
                     txtTruckSILCodeNo.Text = lst.GroupBy(x => x.TruckNo).Select(g => g.First().TruckNo).FirstOrDefault();
                     _SILCode = lst.GroupBy(x => x.TruckNo).Select(g => g.First().TruckNo).FirstOrDefault();
-                    txtCheckPoint.Text = lst.GroupBy(x => x.TruckNo).Select(g => g.First().PointCheck).FirstOrDefault();
+                    string strCheckPoints = lst.GroupBy(x => x.TruckNo).Select(g => g.First().PointCheck).FirstOrDefault();
+                    if (char.IsLetter(strCheckPoints, 0))
+                    {
+                        txtCheckPoint.Text = "3-Points";
+                    }
+                    else
+                    {
+                        txtCheckPoint.Text = "2-Points";
+                    }
+                    //txtCheckPoint.Text = lst.GroupBy(x => x.TruckNo).Select(g => g.First().PointCheck).FirstOrDefault();
                     txtSILBarcode.Text = "";
                     clsGLB.showToastNGMessage($"This SIL Already Registered!!!", this);
                     txtSILBarcode.RequestFocus();
                     SoundForNG();
+                    return;
                 }
                 else
                 {
                     for (int i = 0; i < lst.Count; i++)
                     {
+                        int BinQty = 0;
+                        int BinNo = 0;
+                        try
+                        {
+                            BinQty = Convert.ToInt32(clsGlobal.ReadDNHAMaster().Where(x => x.DNHAPartNo == lst[i].Part).Select(m => m.LotSize).FirstOrDefault());
+                            BinNo = Convert.ToInt32(lst[i].Qty) / BinQty;
+                        }
+                        catch
+                        {
+                            BinQty = 0;
+                        }
                         ViewSILScanData _listBindView = new ViewSILScanData();
                         _listBindView.PartNo = lst[i].Part;
+                        _listBindView.Bin = BinNo.ToString();
                         _listBindView.Qty = lst[i].Qty.ToString();
                         _listBindView.ScanQty = "0";
                         _listBindView.Balance = Convert.ToString(lst[i].Qty - 0);
                         txtTruckSILCodeNo.Text = _SILCode = lst[i].TruckNo;
-                        txtCheckPoint.Text = lst[i].PointCheck;
+
                         _ListItem.Add(_listBindView);
 
 
                     }
+                    string strCheckPoints = lst.GroupBy(x => x.TruckNo).Select(g => g.First().PointCheck).FirstOrDefault();
+                    if (char.IsLetter(strCheckPoints, 0))
+                    {
+                        txtCheckPoint.Text = "3-Points";
+                    }
+                    else
+                    {
+                        txtCheckPoint.Text = "2-Points";
+                    }
                     clsGlobal.WriteSILFileFromList(strFinalFilePath, _ListItem);
                     string strSILBarcode = $"{txtSILBarcode.Text.Trim()}";
-                    clsGlobal.WriteToFile(strFinalFilePath, strSILBarcode);
+                    clsGlobal.WriteToFile(strSILBarcodeFilePath, strSILBarcode);
                     clsGLB.showToastNGMessage($"This SIL Registered successfully!!!", this);
                     txtSILBarcode.Text = "";
                     txtSILBarcode.RequestFocus();
@@ -510,8 +554,8 @@ namespace SMPDisptach.ActivityClass
                 throw ex;
             }
         }
-       
-       
+
+
 
         private void SaveData(object sender, DialogClickEventArgs e)
         {
@@ -644,7 +688,7 @@ namespace SMPDisptach.ActivityClass
         #endregion
 
         #region Activiy Events
-       
+
 
 
         private void BtnClear_Click(object sender, EventArgs e)
@@ -753,10 +797,10 @@ namespace SMPDisptach.ActivityClass
                     txtSILBarcode.RequestFocus();
                     IsValidate = false;
                     SoundForNG();
-                   // ShowAlertPopUp();
+                    // ShowAlertPopUp();
                 }
 
-                
+
 
                 return IsValidate;
             }
@@ -773,11 +817,11 @@ namespace SMPDisptach.ActivityClass
             _dicBarcode2.Clear();
             _ScanQty = 0;
             _TotalQty = 0;
-           
+
             txtSILBarcode.Text = "";
-           
+
             txtSILBarcode.Enabled = true;
-            
+
 
             selectedSKU = "";
             if (_ListItem.Count > 0)
@@ -796,9 +840,9 @@ namespace SMPDisptach.ActivityClass
             txtTotalQty.Text = "Total Qty : " + _TotalQty.ToString();
             txtSILBarcode.RequestFocus();
 
-            txtTruckSILCodeNo.Text = "Truck No:        ";
+            txtTruckSILCodeNo.Text = "";
             txtCheckPoint.Text = "";
-            
+
         }
         public void OpenActivity(Type t)
         {

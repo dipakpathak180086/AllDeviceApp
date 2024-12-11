@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -43,6 +44,7 @@ namespace SMPDisptach.ActivityClass
         TextView txtTotalQty, txtScanQty, txtTruckSILCodeNo, txtCheckPoint;
         TextView lblDNHAKanban, lblCustKanban;
         TextView lblCount;
+        TextView lblPartCount;
         int _TotalQty = 0, _ScanQty = 0, _SrNoCounter = 0;
         int dispatchcunt = 0;
         int _DnhaSupQty = 0;
@@ -55,7 +57,7 @@ namespace SMPDisptach.ActivityClass
 
         string selectedSKU = string.Empty;
         string strDNHAPartNo = string.Empty;
-        string _strSILBarCode= string.Empty;
+        string _strSILBarCode = string.Empty;
         RecyclerView recyclerViewItem;
         SILScanItemAdapter receivingItemAdapter;
         RecyclerView.LayoutManager mLayoutManager;
@@ -68,6 +70,15 @@ namespace SMPDisptach.ActivityClass
         string strDNHAPattern = string.Empty;
         string strCustomerPattern = string.Empty;
         string strSupplierPattern = string.Empty;
+
+        string[] formats = {
+            "MM/dd/yyyy hh:mm:ss tt",  // Format with AM/PM
+            "dd/MM/yyyy hh:mm:ss tt",  // Another possible format
+            "MM/dd/yyyy HH:mm:ss",     // 24-hour format
+            "dd/MM/yyyy HH:mm:ss",     // 24-hour format with day first
+            "MM/dd/yyyy",              // Without time
+            "dd/MM/yyyy"               // Day first without time
+        };
         #region SILVariable
         string SILHeader = string.Empty;
         string TruckNo = string.Empty;
@@ -161,20 +172,15 @@ namespace SMPDisptach.ActivityClass
                 dispatchcunt = 0;
 
 
-                // lblCount = FindViewById<TextView>(Resource.Id.lblCount);
+                lblPartCount = FindViewById<TextView>(Resource.Id.lblPartCount);
 
                 recyclerViewItem = FindViewById<RecyclerView>(Resource.Id.recycleViewReceiveItem);
                 mLayoutManager = new LinearLayoutManager(this);
                 recyclerViewItem.SetLayoutManager(mLayoutManager);
 
-                //modnet.InitializeTCPClient();
-                //Button btnBack = FindViewById<Button>(Resource.Id.btnBack);
-                //btnBack.Click += (e, a) =>
-                //{
-                //    this.Finish();
-                //};    
-
-                //txtBattery.Enabled = txtTruckNo.Enabled = false;
+                string strTranscationPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
+                MediaScannerConnection.ScanFile(this, new String[] { strTranscationPath }, null, null);
+                clsGlobal.DeleteDirectoryWithOutFile(strTranscationPath);
 
                 clsGlobal.ReadCustomerMaster();
                 clsGlobal.ReadSupplierMaster();
@@ -485,7 +491,20 @@ namespace SMPDisptach.ActivityClass
             txtTotalQty.Text = "Total Qty : " + _TotalQty.ToString();
             txtScanQty.Text = "Scan Qty : " + _ScanQty.ToString();
         }
-     
+        public void BindDataWithZeroBalanceAtBottom(List<ViewSILScanData> data)
+        {
+            // Reorder the dataset: Move items with Balance == 0 to the bottom
+            var reorderedData = data
+                .Where(d => Convert.ToInt32(d.Balance) > 0) // Items with non-zero balance
+                .Concat(data.Where(d => Convert.ToInt32(d.Balance) == 0)) // Items with zero balance
+                .ToList();
+
+            // Update the dataset in the adapter
+            _ListItem = reorderedData;
+
+            // Notify the adapter that the data has changed
+            receivingItemAdapter.NotifyDataSetChanged();
+        }
         private void BindRecycleView(List<KanbanData> lst)
         {
             try
@@ -516,35 +535,65 @@ namespace SMPDisptach.ActivityClass
                 {
                     Directory.CreateDirectory(strFinalSILWiseDirectory);
                 }
+                string strCheckPoints = "";
                 if (File.Exists(strFinalFilePath))
                 {
                     _ListItem = clsGlobal.ReadSILFileToList(strFinalFilePath);
                     txtTruckSILCodeNo.Text = lst.GroupBy(x => x.TruckNo).Select(g => g.First().TruckNo).FirstOrDefault();
                     _SILCode = lst.GroupBy(x => x.TruckNo).Select(g => g.First().TruckNo).FirstOrDefault();
-                    txtCheckPoint.Text = lst.GroupBy(x => x.TruckNo).Select(g => g.First().PointCheck).FirstOrDefault();
+                    strCheckPoints = lst.GroupBy(x => x.TruckNo).Select(g => g.First().PointCheck).FirstOrDefault();
+                    if (char.IsLetter(strCheckPoints, 0))
+                    {
+                        txtCheckPoint.Text = "3-Points";
+                    }
+                    else
+                    {
+                        txtCheckPoint.Text = "2-Points";
+                    }
                 }
                 else
                 {
                     for (int i = 0; i < lst.Count; i++)
                     {
+                        int BinQty = 0;
+                        int BinNo = 0;
+                        try
+                        {
+                            BinQty = Convert.ToInt32(clsGlobal.ReadDNHAMaster().Where(x => x.DNHAPartNo == lst[i].Part).Select(m => m.LotSize).FirstOrDefault());
+                            BinNo = Convert.ToInt32(lst[i].Qty) / BinQty;
+                        }
+                        catch
+                        {
+                            BinQty = 0;
+                        }
+
                         ViewSILScanData _listBindView = new ViewSILScanData();
                         _listBindView.PartNo = lst[i].Part;
+                        _listBindView.Bin = BinNo.ToString();
                         _listBindView.Qty = lst[i].Qty.ToString();
                         _listBindView.ScanQty = "0";
                         _listBindView.Balance = Convert.ToString(lst[i].Qty - 0);
                         txtTruckSILCodeNo.Text = _SILCode = lst[i].TruckNo;
-                        txtCheckPoint.Text = lst[i].PointCheck;
                         _ListItem.Add(_listBindView);
 
 
                     }
                     clsGlobal.WriteSILFileFromList(strFinalFilePath, _ListItem);
                 }
-
+                strCheckPoints = lst.GroupBy(x => x.TruckNo).Select(g => g.First().PointCheck).FirstOrDefault();
+                if (char.IsLetter(strCheckPoints, 0))
+                {
+                    txtCheckPoint.Text = "3-Points";
+                }
+                else
+                {
+                    txtCheckPoint.Text = "2-Points";
+                }
                 GetSetTotalAndScanQty();
 
                 receivingItemAdapter = new SILScanItemAdapter(this, _ListItem);
                 recyclerViewItem.SetAdapter(receivingItemAdapter);
+                lblPartCount.Text = Convert.ToString(_ListItem.Count(x => x.Balance != "0"));
                 receivingItemAdapter.NotifyDataSetChanged();
 
             }
@@ -580,6 +629,7 @@ namespace SMPDisptach.ActivityClass
                     // _ScanQty = _ListScanItem.Sum(x=>Convert.ToInt32( Convert.ToDecimal( x.ScanQty)));
                     receivingItemAdapter.NotifyDataSetChanged();
                     GetSetTotalAndScanQty();
+                    lblPartCount.Text = Convert.ToString(_ListItem.Count(x => x.Balance != "0"));
                     txtScanQty.Text = "Scan Qty : " + _ScanQty.ToString();
                 }
                 //RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.recyclerView);
@@ -670,6 +720,7 @@ namespace SMPDisptach.ActivityClass
                     // _ScanQty = _ListScanItem.Count;
                     receivingItemAdapter.NotifyDataSetChanged();
                     GetSetTotalAndScanQty();
+                    lblPartCount.Text = Convert.ToString(_ListItem.Count(x => x.Balance != "0"));
                     txtScanQty.Text = "Scan Qty : " + _ScanQty.ToString();
                 }
                 //RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.recyclerView);
@@ -880,7 +931,8 @@ namespace SMPDisptach.ActivityClass
                     bool isMatchQty = false;
                     bool isMatchSuspectedLot = false;
                     bool isProductExpired = false;
-                    bool isProductShippedDateCross = false;
+                    bool isProductMFGShippedDateCross = false;
+                    bool isProductEXPShippedDateCross = false;
                     bool isNGSuspectedLot = false;
                     var maxEntry = clsGlobal.mlistDNHAPattern
                        .OrderByDescending(entry => entry.keyValueData.Count);
@@ -972,16 +1024,17 @@ namespace SMPDisptach.ActivityClass
                                 try
                                 {
 
-                                    string[] formats = { "dd-MM-yyyy", "MM-dd-yyyy", "yyyy-MM-dd" };  // Add all possible formats
-                                    DateTime date;
-                                    DateTime.TryParseExact(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length), formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out date);
-                                    if (date == DateTime.MinValue)
+                                    //string[] formats = { "dd-MM-yyyy", "MM-dd-yyyy", "yyyy-MM-dd" };  // Add all possible formats
+                                    DateTime? date;
+                                    //DateTime.TryParseExact(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length), formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out date);
+                                    date = clsGlobal.ParseDate(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length));
+                                    if (date==null || date == DateTime.MinValue)
                                     {
                                         mfg = "";
                                     }
                                     else
                                     {
-                                        mfg = date.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture).Trim();
+                                        mfg = date?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture).Trim();
                                     }
 
                                 }
@@ -995,16 +1048,18 @@ namespace SMPDisptach.ActivityClass
                             {
                                 try
                                 {
-                                    DateTime date;
-                                    DateTime.TryParse(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length), out date);
-
-                                    if (date == DateTime.MinValue)
+                                    DateTime? date;
+                                    //DateTime.TryParse(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length), out date);
+                                    //date = DateTime.ParseExact(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length), "MM/dd/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                    date = clsGlobal.ParseDate(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length));
+                                    if (date == null || date == DateTime.MinValue)
                                     {
                                         exp = "";
                                     }
                                     else
                                     {
-                                        exp = date.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture).Trim();
+                                        
+                                        exp = date?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture).Trim();
                                     }
                                 }
                                 catch
@@ -1087,7 +1142,7 @@ namespace SMPDisptach.ActivityClass
 
                                         else if (todayDateTime.Date >= dateShip.Date && todayDateTime.Date <= dateExp.Date)
                                         {
-                                            isProductShippedDateCross = true;
+                                            isProductMFGShippedDateCross = true;
                                             break;
                                         }
                                     }
@@ -1104,17 +1159,49 @@ namespace SMPDisptach.ActivityClass
                                 }
                             }
 
-                            else if (clsGlobal.mlistDNHA.Exists(x => x.DNHAPartNo == partNo && x.IsExpDate == true))
+                            else if (clsGlobal.mlistDNHA.Exists(x => x.DNHAPartNo == partNo && x.IsExpDate == true && exp != ""))
                             {
+                                isMatchPart = true;
+                                isMatchQty = true;
                                 isMatchExpiryDate = true;
                                 bool atucalExp = clsGlobal.mlistDNHA.Where(x => x.DNHAPartNo == partNo).Select(p => p.IsExpDate).FirstOrDefault();
                                 string strExpShipDays = clsGlobal.mlistDNHA.Where(x => x.DNHAPartNo == partNo).Select(p => p.EXPShipDays).FirstOrDefault();
                                 int iExpShipDays = strExpShipDays == "" ? 0 : Convert.ToInt32(strExpShipDays);
-                                if (DateTime.Today > DateTime.ParseExact(exp, "yyyy-MM-dd", CultureInfo.DefaultThreadCurrentCulture).AddDays(-iExpShipDays))
+                                if ( atucalExp == true && (iExpShipDays == 0 || iExpShipDays == null))
                                 {
-                                    isProductExpired = true;
-                                    break;
+                                    if (DateTime.TryParseExact(exp, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime expDate))
+                                    {
+                                        if (DateTime.Today > expDate)
+                                        {
+                                            isProductExpired = true;
+                                            break;
+                                        }
+                                    }
                                 }
+                                else if ( atucalExp == true && (iExpShipDays != 0 || iExpShipDays != null))
+                                {
+                                    
+                                    if (DateTime.TryParseExact(exp, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime expDate))
+                                    {
+                                        if (DateTime.Today > expDate)
+                                        {
+                                            isProductExpired = true;
+                                            break;
+                                        }
+                                        else if (DateTime.Today > expDate.AddDays(-iExpShipDays))
+                                        {
+                                            isProductEXPShippedDateCross = true;
+                                            break;
+                                        }
+
+                                    }
+                                }
+                                
+                                //if (DateTime.Today > DateTime.ParseExact(exp, "yyyy-MM-dd", CultureInfo.DefaultThreadCurrentCulture).AddDays(-iExpShipDays))
+                                //{
+                                //    isProductExpired = true;
+                                //    break;
+                                //}
                             }
                             else
                             {
@@ -1176,9 +1263,18 @@ namespace SMPDisptach.ActivityClass
                         ShowAlertPopUp();
                         return;
                     }
-                    if (isProductShippedDateCross)
+                    if (isProductMFGShippedDateCross)
                     {
-                        clsGLB.showToastNGMessage($"This product is Shipping date over {partNo},Scanned valid product", this);
+                        clsGLB.showToastNGMessage($"This product is MFG Shipping date over {partNo},Scanned valid product", this);
+                        txtDNHASUPKanbanBarcode.Text = "";
+                        txtDNHASUPKanbanBarcode.RequestFocus();
+                        SoundForNG();
+                        ShowAlertPopUp();
+                        return;
+                    }
+                    if (isProductEXPShippedDateCross)
+                    {
+                        clsGLB.showToastNGMessage($"This product is EXP Shipping date over {partNo},Scanned valid product", this);
                         txtDNHASUPKanbanBarcode.Text = "";
                         txtDNHASUPKanbanBarcode.RequestFocus();
                         SoundForNG();
@@ -1269,6 +1365,7 @@ namespace SMPDisptach.ActivityClass
                             txtDNHASUPKanbanBarcode.Text = "";
                             txtDNHASUPKanbanBarcode.RequestFocus();
                             clear();
+                            BindSpinnerRegisteredSIL();
                         }
                     }
                     else
@@ -1701,14 +1798,14 @@ namespace SMPDisptach.ActivityClass
             {
                 if (spinnerSIL.SelectedItemPosition > 0)
                 {
-                   
+
                     lblDNHAKanban.Visibility = ViewStates.Gone;
                     txtDNHASUPKanbanBarcode.Visibility = ViewStates.Gone;
                     lblCustKanban.Visibility = ViewStates.Gone;
                     txtCustKanbanBarcode.Visibility = ViewStates.Gone;
                     //lblSupKanban.Visibility = ViewStates.Gone;
                     //txtSUPKanbanBarcode.Visibility = ViewStates.Gone;
-                   
+
                     if (spinnerSIL.SelectedItem.ToString().Contains("*"))
                     {
                         clsGLB.showToastNGMessage($"This SIL Already Completed!!", this);
@@ -1720,8 +1817,9 @@ namespace SMPDisptach.ActivityClass
                     string strTranscationPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
                     string strFinalSILWiseDirectory = Path.Combine(strTranscationPath, spinnerSIL.SelectedItem.ToString());
                     string strFinalFilePath = Path.Combine(strFinalSILWiseDirectory, clsGlobal.SILMasterDataFile);
-                    _strSILBarCode = clsGlobal.ReadSILBarcodeFromFile(strFinalFilePath);
-                    GetSILScanData( _strSILBarCode );
+                    string strSILBarcodeFilePath = Path.Combine(strFinalSILWiseDirectory, clsGlobal.SILBarcode);
+                    _strSILBarCode = clsGlobal.ReadSILBarcodeFromFile(strSILBarcodeFilePath);
+                    GetSILScanData(_strSILBarCode);
                 }
             }
             catch (Exception ex)
@@ -2090,6 +2188,7 @@ namespace SMPDisptach.ActivityClass
                                 txtDNHASUPKanbanBarcode.Text = "";
                                 txtDNHASUPKanbanBarcode.RequestFocus();
                                 clear();
+                                BindSpinnerRegisteredSIL();
                             }
                             SoundForOK();
                         }
@@ -2172,7 +2271,7 @@ namespace SMPDisptach.ActivityClass
                 bool IsValidate = true;
 
 
-                if (spinnerSIL.SelectedItemPosition<=0)
+                if (spinnerSIL.SelectedItemPosition <= 0)
                 {
                     clsGLB.showToastNGMessage($"Scan SIL Barcode.", this);
                     spinnerSIL.RequestFocus();
@@ -2351,6 +2450,7 @@ namespace SMPDisptach.ActivityClass
             _TotalQty = 0;
             iQrCode1Qty = 0;
             iQrCode2Qty = 0;
+            lblPartCount.Text = "0";
             txtDNHASUPKanbanBarcode.Text = "";
             txtCustKanbanBarcode.Text = "";
             spinnerSIL.SetSelection(0);
@@ -2377,14 +2477,16 @@ namespace SMPDisptach.ActivityClass
             if (receivingItemAdapter != null)
             {
                 receivingItemAdapter.NotifyDataSetChanged();
+                lblPartCount.Text = Convert.ToString(_ListItem.Count(x => x.Balance != "0"));
             }
 
             txtTotalQty.Text = "Total Qty : " + _TotalQty.ToString();
             txtScanQty.Text = "Scan Qty : " + _ScanQty.ToString();
             spinnerSIL.RequestFocus();
 
-            txtTruckSILCodeNo.Text = "Truck No:        ";
+            txtTruckSILCodeNo.Text = "";
             txtCheckPoint.Text = "";
+            lblPartCount.Text = "";
             SILHeader = "";
             TruckNo = "";
             CustCode = "";

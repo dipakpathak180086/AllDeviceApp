@@ -138,6 +138,7 @@ namespace SMPDisptach
                 {
                     if (e.KeyCode == Keycode.Enter)
                     {
+                        clsGlobal.ReadAlertPasswordMaster();
                         if (clsGlobal.mAlertPassword != txtAlert.Text.Trim())
                         {
                             clsGLB.showToastNGMessage("Invalid Password,Try again!!!", this.Context);

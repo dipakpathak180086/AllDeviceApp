@@ -65,11 +65,13 @@ namespace SMPDisptach
           
             public TextView PartNo;
             public TextView Balance;
+            public TextView Bin;
             public TextView Qty;
             public TextView ScanQty;
             public ViewHolder(View v) : base(v)
             {
                 PartNo = (TextView)v.FindViewById(Resource.Id.listtxtPartNo);
+                Bin=(TextView)v.FindViewById(Resource.Id.listtxtBin);
                 Qty = (TextView)v.FindViewById(Resource.Id.listtxtQty);
                 ScanQty = (TextView)v.FindViewById(Resource.Id.listtxtSQty);
                 Balance = (TextView)v.FindViewById(Resource.Id.listtxtBalance);
@@ -105,9 +107,24 @@ namespace SMPDisptach
 
                 ViewHolder vh = holder as ViewHolder;
                 vh.PartNo.Text = data[position].PartNo.ToString();
+                vh.Bin.Text = data[position].Bin.ToString();
                 vh.Qty.Text = data[position].Qty.ToString();
                 vh.ScanQty.Text = data[position].ScanQty.ToString();
                 vh.Balance.Text = data[position].Balance.ToString();
+                // Change the text color based on conditions
+                //if (Convert.ToInt32( data[position].Balance) <= 0) // Example condition
+                //{
+                //    vh.Balance.SetTextColor(Android.Graphics.Color.Green); // Set color to green
+                //}
+                if (Convert.ToInt32(data[position].Balance) <= 0)
+                {
+                    vh.PartNo.SetBackgroundColor(Android.Graphics.Color.Green);
+                    vh.Bin.SetBackgroundColor(Android.Graphics.Color.Green);
+                    vh.Qty.SetBackgroundColor(Android.Graphics.Color.Green);
+                    vh.ScanQty.SetBackgroundColor(Android.Graphics.Color.Green);
+                    vh.Balance.SetBackgroundColor(Android.Graphics.Color.Green);
+                    // Set background color to green
+                }
 
             }
             catch (System.Exception ex) { Toast.MakeText(context, ex.Message, ToastLength.Long).Show(); }

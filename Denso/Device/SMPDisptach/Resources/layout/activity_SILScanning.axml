@@ -41,7 +41,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="30dp"
-                    android:layout_weight=".7"
+                    android:layout_weight="1.2"
                     android:padding="2dp"
                     android:text="Scan SIL"
                     android:textStyle="bold"
@@ -72,7 +72,7 @@
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="45dp"
                     android:layout_weight=".7"
                     android:padding="2dp"
                     android:text="Scan DN/SP Kanban"
@@ -114,7 +114,7 @@
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="30dp"
+                    android:layout_height="40dp"
                     android:layout_weight=".7"
                     android:padding="2dp"
                     android:text="Cust. Kanban"
@@ -156,7 +156,7 @@
                     android:id="@+id/lblHeaderTruck"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".3"
+                    android:layout_weight=".4"
                     android:padding="2dp"
                     android:textStyle="bold"
                     android:text="Truck/SIL No:"
@@ -167,9 +167,18 @@
                     android:id="@+id/lblCheckPoint"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".6"
+                    android:layout_weight=".4"
                     android:padding="2dp"
                     android:text="Check Points:"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+                 <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".4"
+                    android:padding="2dp"
+                    android:text="Part Count:"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
@@ -196,9 +205,19 @@
                     android:id="@+id/lblTransName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".2"
+                    android:layout_weight=".1"
                     android:padding="2dp"
                     android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+                <TextView
+                    android:id="@+id/lblPartCount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".1"
+                    android:padding="2dp"
+                    android:text=""
+                    android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
             </LinearLayout>
@@ -252,7 +271,18 @@
                     android:layout_width="0dp"
                     android:layout_height="fill_parent"
                     android:textStyle="bold"
-                    android:layout_weight="3"
+                    android:layout_weight="3.5"
+                    android:gravity="center"
+                    android:background="@drawable/borderstyle"
+                    android:textColor="#000000" />
+                 <TextView
+                    android:id="@+id/listBinQty"
+                    android:text="Bin"
+                    android:layout_marginLeft="3dp"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:background="@drawable/borderstyle"
                     android:textColor="#000000" />
@@ -263,10 +293,11 @@
                     android:layout_width="0dp"
                     android:layout_height="fill_parent"
                     android:textStyle="bold"
-                    android:layout_weight="1.5"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:background="@drawable/borderstyle"
                     android:textColor="#000000" />
+                
 
                 <TextView
                     android:id="@+id/listSQty"

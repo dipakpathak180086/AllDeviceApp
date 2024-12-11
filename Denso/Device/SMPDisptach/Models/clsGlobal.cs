@@ -21,6 +21,7 @@ using System.Text.RegularExpressions;
 using Android.Text;
 using static Android.Renderscripts.ScriptGroup;
 using System.Data;
+using System.Globalization;
 
 namespace SMPDisptach
 {
@@ -176,6 +177,39 @@ namespace SMPDisptach
                 Console.WriteLine("Directory does not exist: " + directoryPath);
             }
         }
+        public static DateTime? ParseDate(string dateStr)
+        {
+            // Possible formats
+            string[] formats = {
+            "dd-MM-yyyy", "MM-dd-yyyy", "yyyy-MM-dd",
+            "dd/MM/yyyy", "MM/dd/yyyy", "yyyy/MM/dd",
+            "dd.MM.yyyy", "MM.dd.yyyy", "yyyy.MM.dd"
+        };
+
+            foreach (string format in formats)
+            {
+                if (DateTime.TryParseExact(dateStr, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
+                {
+                    // Logical validation to resolve conflicts between MM-dd-yyyy and dd-MM-yyyy
+                    if (format == "MM-dd-yyyy" || format == "dd-MM-yyyy")
+                    {
+                        // If the day exceeds 12, it must be dd-MM-yyyy
+                        if (date.Day > 12 && format == "MM-dd-yyyy")
+                            continue;
+
+                        // If the month exceeds 12, it must be MM-dd-yyyy
+                        if (date.Month > 12 && format == "dd-MM-yyyy")
+                            continue;
+                    }
+
+                    // Return the first valid and logically correct date
+                    return date;
+                }
+            }
+
+            // If no format matches
+            return null;
+        }
         public static void DeleteDirectoryWithOutFile(string directoryPath)
         {
             if (Directory.Exists(directoryPath))
@@ -188,7 +222,8 @@ namespace SMPDisptach
                 foreach (var subDirectory in subDirectories)
                 {
                     var files = Directory.GetFiles(subDirectory).Length;
-                    if (files <= 1)
+                    bool fileExists = File.Exists(Path.Combine(subDirectory, SILMasterDataFile));
+                    if (!fileExists)
                     {
                         DeleteDirectory(subDirectory);
                     }
@@ -474,6 +509,7 @@ namespace SMPDisptach
                                 IsExpDate = parts[4].Trim() == "" ? Convert.ToBoolean(false) : Convert.ToBoolean(parts[4].Trim()),     // Valid product, not expired
 
                                 EXPShipDays = parts[5].Trim(),
+                                LotSize = parts[6].Trim(),
                             };
                             mlistDNHA.Add(plMaster);
                         }
@@ -807,7 +843,7 @@ namespace SMPDisptach
             {
                 foreach (var item in dataList)
                 {
-                    string line = $"{item.PartNo}~{item.Qty}~{item.ScanQty}~{item.Balance}";
+                    string line = $"{item.PartNo}~{item.Qty}~{item.ScanQty}~{item.Balance}~{item.Bin}";
                     writer.WriteLine(line);
                 }
             }
@@ -841,7 +877,8 @@ namespace SMPDisptach
                             PartNo = parts[0],
                             Qty = parts[1],
                             ScanQty = parts[2],
-                            Balance = parts[3]
+                            Balance = parts[3],
+                            Bin = parts[4],
                         };
 
                         // Add the parsed object to the list
