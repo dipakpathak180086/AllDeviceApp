@@ -233,7 +233,7 @@ namespace SMPDisptach.ActivityClass
             try
             {
 
-                ShowConfirmBox($"Are you sure want to Generate the File and Transfer to this SIL {spinnerSIL.SelectedItem.ToString()} Data on FTP?", this, FileGenerateData);
+                ShowConfirmBox($"Are you sure want to Generate the File and Transfer to this SIL {spinnerSIL.SelectedItem.ToString().Replace("*","")} Data on FTP?", this, FileGenerateData);
 
             }
             catch (Exception ex)
@@ -276,7 +276,7 @@ namespace SMPDisptach.ActivityClass
             {
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    if (dt.Rows[i]["SIL_TruckNo"].ToString() == spinnerSIL.SelectedItem.ToString())
+                    if (dt.Rows[i]["SIL_TruckNo"].ToString() == spinnerSIL.SelectedItem.ToString().Replace("*",""))
                     {
                         SILbarcode = dt.Rows[i]["SIL_Barcode"].ToString();
                         SILScannedon = dt.Rows[i]["SILScannedOn"].ToString();
@@ -289,7 +289,7 @@ namespace SMPDisptach.ActivityClass
                 ShipTo = SILHeader.Substring(15, 2);
                 Possition = SILHeader.Substring(17, 1);
                 string strTranscationPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
-                string Path_1 = Path.Combine(strTranscationPath, spinnerSIL.SelectedItem.ToString());
+                string Path_1 = Path.Combine(strTranscationPath, spinnerSIL.SelectedItem.ToString().Replace("*",""));
                 DataView dv = new DataView(dt);
                 dv.RowFilter = "SIL_Barcode='" + SILbarcode.ToString() + "'";
                 DataTable dt1 = dv.ToTable();
@@ -413,10 +413,12 @@ namespace SMPDisptach.ActivityClass
 
                 WriteFTPFile("ftp://" + clsGlobal.mFTPIP + "/SS" + System.DateTime.Now.ToString("yyMMdd") + System.DateTime.Now.ToString("HHmmss") + clsGlobal.mDeviceID + ".DAT", clsGlobal.mFTPUserID, clsGlobal.mFTPPassword);
                 //clsGlobal.DeleteDirectory(strFinal);
-                clsGLB.ShowMessage($"This SIL File Transferred {spinnerSIL.SelectedItem.ToString()} Successfully!!!", this, MessageTitle.INFORMATION);
+                clsGLB.ShowMessage($"This SIL File Transferred {spinnerSIL.SelectedItem.ToString().Replace("*","")} Successfully!!!", this, MessageTitle.INFORMATION);
+                clsGlobal.DeleteDirectory(Path_1);
                 BindSpinnerCompltedSIL();
-                _ListItem.Clear();
                 receivingItemAdapter.NotifyDataSetChanged();
+            
+               
 
             }
             catch (Exception ex)
@@ -428,7 +430,7 @@ namespace SMPDisptach.ActivityClass
         private string WriteFTPFile(string path, string Username, string password)
         {
             string strTranscationPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
-            string Path_1 = Path.Combine(strTranscationPath, spinnerSIL.SelectedItem.ToString());
+            string Path_1 = Path.Combine(strTranscationPath, spinnerSIL.SelectedItem.ToString().Replace("*",""));
             string filePath = Path_1 + "//" + SILHeader + ".DAT";
             Uri severUri = new Uri(path);
             if (severUri.Scheme != Uri.UriSchemeFtp)
@@ -444,7 +446,7 @@ namespace SMPDisptach.ActivityClass
 
             return filePath;
             //string strTransactionPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
-            //string path1 = Path.Combine(strTransactionPath, spinnerSIL.SelectedItem.ToString());
+            //string path1 = Path.Combine(strTransactionPath, spinnerSIL.SelectedItem.ToString().Replace("*",""));
             //string filePath = path1 + "//" + SILHeader + ".DAT";
             //int port = 5151;
             //// Modify the URI to include the port
@@ -469,7 +471,7 @@ namespace SMPDisptach.ActivityClass
             try
             {
                 string strTranscationPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
-                string strFinal = Path.Combine(strTranscationPath, spinnerSIL.SelectedItem.ToString());
+                string strFinal = Path.Combine(strTranscationPath, spinnerSIL.SelectedItem.ToString().Replace("*","").Replace("*",""));
                 string strMainScanFile = Path.Combine(strFinal, clsGlobal.SILDetailsFile);
                 string strAllString = File.ReadAllText(strMainScanFile);
                 DataTable dtMain = CreateDataTable(strAllString);
@@ -494,7 +496,7 @@ namespace SMPDisptach.ActivityClass
             {
 
                 _ListItem.Clear();
-                string strSILCode = spinnerSIL.SelectedItem.ToString();
+                string strSILCode = spinnerSIL.SelectedItem.ToString().Replace("*","");
                 string strTranscationPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
                 string strFinalSILWiseDirectory = Path.Combine(strTranscationPath, strSILCode);
                 string strFinalFilePath = Path.Combine(strFinalSILWiseDirectory, clsGlobal.SILMasterDataFile);
@@ -525,7 +527,7 @@ namespace SMPDisptach.ActivityClass
                     if (File.Exists(strCompltedSIL))
                     {
                         string strSILCode = Path.GetFileName(directoriesFinal[i].TrimEnd(Path.DirectorySeparatorChar));
-                        _lstFlag.Add(strSILCode);
+                        _lstFlag.Add("*"+strSILCode);
                     }
                 }
 
