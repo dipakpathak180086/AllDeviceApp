@@ -84,6 +84,56 @@ namespace SMPDisptach
         public static string mDatabaseUserId = "";
         public static string mDatabasePassword = "";
         public static string mCustSeqNo = "";
+        public static string ReplaceCaretWithNewlines(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return input; // Return the original string if it's null or empty
+            }
+
+            // Replace the caret symbol ('^') with the default newline sequence
+            // Since you need to reverse, choose one consistent newline format, usually \r\n.
+            return input.Replace("^", "\r\n");
+        }
+        public static void mBindDataTablesSep(string filePath1, string filePath2, string separator, ref DataTable masterTable, ref DataTable detailsTable)
+        {
+            masterTable = mReadFileToDataTableSep(filePath1, separator);
+            detailsTable = mReadFileToDataTableSep(filePath2, separator);
+
+            // Assuming you want to merge the data based on some key columns
+            // Modify the merging logic as per your actual use case
+            //DataTable mergedTable = masterTable.Clone(); // Clone structure
+
+        }
+
+        // Helper function to read a file and convert it to a DataTable
+        public static DataTable mReadFileToDataTableSep(string filePath, string separator)
+        {
+            DataTable dataTable = new DataTable();
+            string[] lines = File.ReadAllLines(filePath);
+
+            if (lines.Length > 0)
+            {
+                // Determine the number of columns based on the first row
+                string[] firstRowData = lines[0].Split('~');
+                int columnCount = firstRowData.Length;
+
+                // Add generic columns (Column1, Column2, etc.)
+                for (int i = 0; i < columnCount; i++)
+                {
+                    dataTable.Columns.Add("Column" + (i + 1));
+                }
+
+                // Add rows for each line in the file
+                foreach (string line in lines)
+                {
+                    string[] data = line.Split('~');
+                    dataTable.Rows.Add(data);
+                }
+            }
+
+            return dataTable;
+        }
         public static void ConvertDataTableToTxt(DataTable dataTable, string filePath)
         {
             //if (!File.Exists(filePath)) { File.Create(filePath); }

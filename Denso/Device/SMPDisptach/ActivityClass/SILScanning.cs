@@ -1871,7 +1871,7 @@ namespace SMPDisptach.ActivityClass
                         //DismissKeyboard();
                         txtCustKanbanBarcode.SelectAll();
                         if (ValidateCustomerControls())
-                        {
+                            {
                             //[] mfg = "12 D2009AAA4279 49400-76TM0-00 00001/00004,D2009,9,,2024100301,L211,5,AA,01,,LOC  -   3,D200,49400M76T00".Split(','); //06 index qty for tata
 
 

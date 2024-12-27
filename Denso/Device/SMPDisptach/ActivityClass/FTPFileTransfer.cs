@@ -20,6 +20,8 @@ using System.Collections;
 using Org.Apache.Http;
 using static Android.Support.V7.Widget.RecyclerView;
 using System.Net;
+using static Android.Telecom.Call;
+using Java.Sql;
 
 namespace SMPDisptach.ActivityClass
 {
@@ -466,17 +468,83 @@ namespace SMPDisptach.ActivityClass
 
             //return filePath;
         }
+        private void SaveDataIntoTable(ref DataTable dtHead, ref DataTable dtDetails)
+        {
+            PL_HHT_DOWNLOAD _plObj = null;
+            BL_HHT_DOWNLOAD _blObj = new BL_HHT_DOWNLOAD();
+            try
+            {
+                
+                _plObj = new PL_HHT_DOWNLOAD();
+                _plObj.DbType = "DELETE";
+                _plObj.SIL_CODE = spinnerSIL.SelectedItem.ToString().Replace("*", "");
+                _plObj.CreatedBy = clsGlobal.mUserId;
+                _blObj.BL_ExecuteTask(_plObj);
+
+                for (int iHeader = 0; iHeader < dtHead.Rows.Count; iHeader++)
+                {
+                    _plObj = new PL_HHT_DOWNLOAD();
+                    _plObj.DbType = "HEADER";
+                    _plObj.SIL_CODE = spinnerSIL.SelectedItem.ToString().Replace("*", "");
+                    _plObj.PART_NO = dtHead.Rows[iHeader][0].ToString();
+                    _plObj.TOTAL_QTY = Convert.ToInt32(dtHead.Rows[iHeader][1]);
+                    _plObj.SCAN_QTY = Convert.ToInt32(dtHead.Rows[iHeader][2]);
+                    _plObj.BAL_QTY = Convert.ToInt32(dtHead.Rows[iHeader][3]);
+                    _plObj.CP_PROCESS = dtDetails.Columns.Count == 3 ? "2POINTS" : "3POINTS";
+                    _plObj.CreatedBy = clsGlobal.mUserId;
+
+                    _blObj.BL_ExecuteTask(_plObj);
+                }
+                for (int iDetails = 0; iDetails < dtDetails.Rows.Count; iDetails++)
+                {
+                    _plObj = new PL_HHT_DOWNLOAD();
+                    _plObj.DbType = "DETAILS";
+                    _plObj.CP_PROCESS = dtDetails.Columns.Count == 3 ? "2POINTS" : "3POINTS";
+                    _plObj.SIL_CODE = spinnerSIL.SelectedItem.ToString().Replace("*", ""); ;
+                    _plObj.SIL_BARCODE = clsGlobal.ReplaceCaretWithNewlines(dtDetails.Rows[iDetails][0]?.ToString());
+                    _plObj.BARCODE1 = dtDetails.Rows[iDetails][1]?.ToString();
+                    if (_plObj.CP_PROCESS == "2POINTS")
+                    {
+                        _plObj.BARCODE2 = "";
+                    }
+                    else
+                    {
+                        _plObj.BARCODE2 = clsGlobal.ReplaceCaretWithNewlines(dtDetails.Rows[iDetails][2]?.ToString());
+                        if (_plObj.BARCODE2 == "SIL")
+                        {
+                            _plObj.BARCODE2 = "";
+                        }
+
+                    }
+                    _plObj.PATTERN_CODE = dtDetails.Rows[iDetails][17]?.ToString();
+                    _plObj.CreatedBy = clsGlobal.mUserId;
+                    _blObj.BL_ExecuteTask(_plObj);
+                
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
         private void FileGenerateData(object sender, DialogClickEventArgs e)
         {
             try
             {
                 string strTranscationPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
                 string strFinal = Path.Combine(strTranscationPath, spinnerSIL.SelectedItem.ToString().Replace("*","").Replace("*",""));
+                DataTable dtHead = null;
+                DataTable dtDetails = null;
                 string strMainScanFile = Path.Combine(strFinal, clsGlobal.SILDetailsFile);
+                string strHeaderPath = Path.Combine(strFinal, clsGlobal.SILMasterDataFile);
+                string strDetailsPath = Path.Combine(strFinal, clsGlobal.SILDetailsFile);
                 string strAllString = File.ReadAllText(strMainScanFile);
+                clsGlobal.mBindDataTablesSep(strHeaderPath, strDetailsPath, "~", ref dtHead, ref dtDetails);
                 DataTable dtMain = CreateDataTable(strAllString);
                 if (dtMain.Rows.Count > 0)
                 {
+                    SaveDataIntoTable(ref dtHead, ref dtDetails);
                     DtSIL = ToDataTable(_ListItem);
                     FileGenerate(dtMain);
                     

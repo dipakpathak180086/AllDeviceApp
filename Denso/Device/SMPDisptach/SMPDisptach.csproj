@@ -81,13 +81,16 @@
     <Compile Include="Assets\PL\PL_HHT_UPLOAD.cs" />
     <Compile Include="Models\BiSocket.cs" />
     <Compile Include="ActivityClass\MainActivity.cs" />
+    <Compile Include="Models\BL_HHT_DOWNLOAD.cs" />
     <Compile Include="Models\clsDB.cs" />
     <Compile Include="Models\clsGlobal.cs" />
     <Compile Include="Models\clsNetwork.cs" />
+    <Compile Include="Models\DL_HHT_DOWNLOAD.cs" />
     <Compile Include="Models\ModelClass.cs" />
     <Compile Include="Models\ModFunctions.cs" />
     <Compile Include="Models\ModInIt.cs" />
     <Compile Include="Models\ModNet.cs" />
+    <Compile Include="Models\PL_HHT_DOWNLOAD.cs" />
     <Compile Include="Models\SQLSqlHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
