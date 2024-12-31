@@ -69,7 +69,8 @@ namespace SMPDisptach
         public string ExpDays { get; set; }
 
         // Property for Ship Days
-        public string ShipDays { get; set; }
+        public string MFGShipDays { get; set; }
+        public string EXPShipDays { get; set; }
 
         // Property for IsMfgExp (manual set/get, no calculation)
         public bool IsMfgDate { get; set; }

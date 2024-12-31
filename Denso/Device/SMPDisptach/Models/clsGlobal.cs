@@ -84,6 +84,7 @@ namespace SMPDisptach
         public static string mDatabaseUserId = "";
         public static string mDatabasePassword = "";
         public static string mCustSeqNo = "";
+        public static string mDNHASupSeqNo = "";
         public static string ReplaceCaretWithNewlines(string input)
         {
             if (string.IsNullOrEmpty(input))
@@ -635,12 +636,13 @@ namespace SMPDisptach
 
                                 // Set manufacturing and expiry dates
                                 ExpDays = parts[3].Trim(),
-                                ShipDays = parts[4].Trim(),
+                                MFGShipDays = parts[4].Trim(),
 
                                 // Manually setting expiry-related fields
                                 IsMfgDate = parts[5].Trim() == "" ? Convert.ToBoolean(false) : Convert.ToBoolean(parts[5].Trim()),  // Assuming it's not expired
 
                                 IsExpDate = parts[6].Trim() == "" ? Convert.ToBoolean(false) : Convert.ToBoolean(parts[6].Trim()),     // Valid product, not expired
+                                EXPShipDays = parts[7].Trim(),
                             };
                             mlistSupplier.Add(plMaster);
                         }
