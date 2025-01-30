@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:background="#E8E8EC">
+    <TextView
+        android:text="Delivery No."
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        />
+    <EditText
+        android:id="@+id/editDeliveryNo"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:singleLine="true"
+        android:inputType="number"
+        android:maxLength="8"
+        android:imeOptions="actionGo|flagNoFullscreen"
+        android:layout_width="fill_parent" />
+    <TextView
+        android:text="Truck No."
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        />
+    <EditText
+        android:id="@+id/editTruckNo"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+		android:inputType="number"
+        android:singleLine="true"
+        android:maxLength="4"
+        android:layout_width="fill_parent" />
+    <TextView
+        android:text="Frame No"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        />
+    <EditText
+        android:id="@+id/editFrameNo"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:maxLines="1"
+        android:maxLength="17"
+        android:singleLine="true"
+        android:imeOptions="actionGo|flagNoFullscreen"
+        android:layout_width="fill_parent" />
+
+   
+    <Button
+        android:layout_marginTop="30dp"
+        android:text="Clear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnClear" />
+    <Button
+        android:text="Back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnExit" />
+
+  
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="fill_parent"
+        
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:gravity="center_horizontal">
+     <TextView
+        android:text="0"
+        android:textSize="@dimen/notification_large_icon_height"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/lblScanneCount" 
+        />
+  </LinearLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="fill_parent"
+        
+    android:orientation="vertical"
+    android:layout_width="fill_parent">
+     <TextView
+        android:text="Last Scan:"
+            android:textSize="17dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/lblLastScan1" 
+        />
+  </LinearLayout>
+
+  </LinearLayout>

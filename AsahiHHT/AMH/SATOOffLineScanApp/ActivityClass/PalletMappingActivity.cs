@@ -310,7 +310,7 @@ namespace SATOOffLineScanApp
 
                 else if ((clsGlobal.dictionary.ContainsKey(editItemBarcode.Text.Trim())) || clsGlobal.dictionary.ContainsValue(editItemBarcode.Text.Trim()))
                 {
-                    StartPlayingSound();
+                    StartWrongPlayingSound();
                     ShowMessageBox("Barcode already scanned", this);
                     editItemBarcode.Text = string.Empty;
                     editItemBarcode.RequestFocus();
@@ -360,7 +360,7 @@ namespace SATOOffLineScanApp
             }
             catch (System.Exception ex)
             {
-                StartPlayingSound();
+                StartWrongPlayingSound();
                 clsGLB.ShowMessage(ex.ToString(), this, MessageTitle.ERROR);
             }
 
@@ -392,7 +392,7 @@ namespace SATOOffLineScanApp
             }
             catch (Exception ex)
             {
-                StartPlayingSound();
+                StartWrongPlayingSound();
                 ShowMessageBox("Error : " + ex.Message, this);
             }
         }

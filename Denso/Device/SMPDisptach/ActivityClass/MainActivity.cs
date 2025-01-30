@@ -121,7 +121,9 @@ namespace SMPDisptach
         }
         protected void MasterSyncAll(object sender, DialogClickEventArgs e)
         {
-            var progressDialog = ProgressDialog.Show(this, "", "Please Wait....", true);
+            var progressDialog =  ProgressDialog.Show(this, "", "Please Wait....", true);
+          
+
             try
             {
                 DirectoryInfo _dir = null;
@@ -224,13 +226,15 @@ namespace SMPDisptach
 
                 }
 
-                progressDialog.Hide();
+               
                 clsGLB.ShowMessage($"All Master Data Sync Successfully!!!", this, MessageTitle.INFORMATION);
+                progressDialog.Hide();
             }
             catch (Exception ex)
             {
-                progressDialog.Hide();
+               
                 clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                progressDialog.Hide();
             }
         }
         protected override void OnCreate(Bundle savedInstanceState)
@@ -257,8 +261,13 @@ namespace SMPDisptach
                 Button btnFTPTransfer = FindViewById<Button>(Resource.Id.btnFTPTransfer);
                 btnFTPTransfer.Click += BtnFTPTransfer_Click;
 
-                Button btnMasterSync = FindViewById<Button>(Resource.Id.btnMasterDataSync);
-                btnMasterSync.Click += BtnMasterSync_Click;
+                Button btnFraction = FindViewById<Button>(Resource.Id.btnFraction);
+                btnFraction.Click += BtnFraction_Click;
+
+                Button btnReversal = FindViewById<Button>(Resource.Id.btnReversal);
+                btnReversal.Click += BtnReversal_Click;
+
+
 
 
                 ReadFTPSetting();
@@ -281,7 +290,8 @@ namespace SMPDisptach
             }
         }
 
-        
+      
+
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             // Update the TextView with the current date and time on the UI thread
@@ -340,12 +350,33 @@ namespace SMPDisptach
                 clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
-
+        private void BtnFraction_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenActivity(typeof(Fraction));
+            }
+            catch (Exception ex)
+            {
+                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+            }
+        }
+        private void BtnReversal_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenActivity(typeof(Reversal));
+            }
+            catch (Exception ex)
+            {
+                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+            }
+        }
         private void BtnMasterSync_Click(object sender, EventArgs e)
         {
             try
             {
-
+              
                 ShowConfirmBox($"Are you sure want to sync all master data?", this, MasterSyncAll);
 
             }

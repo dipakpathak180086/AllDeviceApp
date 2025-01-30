@@ -85,6 +85,7 @@ namespace SMPDisptach
         public static string mDatabasePassword = "";
         public static string mCustSeqNo = "";
         public static string mDNHASupSeqNo = "";
+        public static string mCustomerCode = "";
         public static string ReplaceCaretWithNewlines(string input)
         {
             if (string.IsNullOrEmpty(input))
@@ -362,6 +363,25 @@ namespace SMPDisptach
             }
 
             return strReturn;
+        }
+        public static string mGetCustomerCode(string strSILBarcode)
+        {
+            string strReturn = "";
+            try
+            {
+                if (strSILBarcode.Length > 20)
+                {
+                    string str = strSILBarcode.Substring(7, 8);
+                    mCustomerCode = str;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return mCustomerCode;
         }
         public static List<PL_DNHA_MASTER> mlistDNHA = new List<PL_DNHA_MASTER>();
         public static List<PL_CUSTOMER_MASTER> mlistCustomer = new List<PL_CUSTOMER_MASTER>();
@@ -1022,6 +1042,11 @@ namespace SMPDisptach
 
                         // Handle Barcode2 with a condition in case it's missing
                         data.Barcode2 = parts.Length > 2 ? parts[2].Replace("^", "\n") : string.Empty;
+                        data.isMatchBarcode1SeqNo = parts == null ? false : Convert.ToBoolean(parts[18].Trim());
+                        data.Barcode1SEQNo = parts.Length > 2 ? parts[19].Trim() : string.Empty;
+
+                        data.isMatchBarcode2SeqNo = parts == null ? false : Convert.ToBoolean(parts[20].Trim());
+                        data.Barcode2SEQNo = parts.Length > 2 ? parts[21].Trim() : string.Empty;
 
                         // Add the parsed object to the list
                         list.Add(data);
@@ -1341,13 +1366,14 @@ namespace SMPDisptach
             v.SetBackgroundColor(Android.Graphics.Color.Red);
             if (con is Activity act)
             {
-                if (act.Class.Name.Contains( "SILScanning"))
+                if (act.Class.Name.Contains( "SILScanning") || act.Class.Name.Contains("Fraction") || act.Class.Name.Contains("Reversal"))
                 {
                     string filePath = Path.Combine(FilePath, MasterFolder + "/" + mAlertMessageFileName);
                     DeleteAlertMessage();
                     WriteNGMSGToFile(filePath, Message);
                     ReadAlertMessage();
                 }
+                
             }
             tost.Show();
         }

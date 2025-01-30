@@ -1,0 +1,38 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/orange2</item>
+        <item name="colorPrimaryDark">@color/orange2</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+	<!-- Style for Spinner Dropdown Items -->
+	<style name="SpinnerDropdownItemStyle" parent="android:Widget.TextView">
+		<item name="android:textSize">20sp</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:padding">16dp</item>
+		<item name="android:textColor">#000000</item>
+	</style>
+	<style name="SpinnerTextBold" parent="TextAppearance.AppCompat.Body1">
+		<item name="android:textStyle">bold</item>
+		<item name="android:textSize">16sp</item>
+		<!-- Adjust size if needed -->
+		<item name="android:textColor">#000000</item>
+		<!-- Adjust color if needed -->
+	</style>
+
+	<!-- Style for Spinner -->
+	<style name="SpinnerStyle" parent="android:Widget.Spinner">
+		<item name="android:layout_width">75dp</item>
+		<item name="android:layout_height">40dp</item>
+		<item name="android:textSize">20sp</item>
+		<item name="android:textStyle">bold</item>
+		<!-- This affects the default text appearance -->
+		<item name="android:spinnerMode">dropdown</item>
+		<item name="android:dropDownHeight">200dp</item>
+		<!-- Adjust dropdown height -->
+		<item name="android:padding">8dp</item>
+	</style>
+	
+</resources>

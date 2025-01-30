@@ -122,19 +122,31 @@
                 android:visibility="visible"
                 android:background="@drawable/rounded_edittext"
                 android:backgroundTint="@color/orange2"/>
+           
             <Button
-                android:text="Master Sync"
+                android:text="Fraction"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:id="@+id/btnMasterDataSync"
+                android:id="@+id/btnFraction"
                 android:autoSizeMinTextSize="40dp"
                 android:layout_marginVertical="20dp"
                 android:textColor="#FFFFFF"
                 android:visibility="visible"
                 android:background="@drawable/rounded_edittext"
                 android:backgroundTint="@color/orange2"/>
-           
+             <Button
+                android:text="Reversal"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:id="@+id/btnReversal"
+                android:autoSizeMinTextSize="40dp"
+                android:layout_marginVertical="20dp"
+                android:textColor="#FFFFFF"
+                android:visibility="visible"
+                android:background="@drawable/rounded_edittext"
+                android:backgroundTint="@color/orange2"/>
 
 
 

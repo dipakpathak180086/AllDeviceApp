@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_width="fill_parent">
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:gravity="center_horizontal"
+                android:layout_marginVertical="5dp">
+                <TextView
+                    android:text="REVERSAL PROCESS"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:paddingBottom="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/orange2"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight=".7"
+                    android:padding="2dp"
+                    android:text="Scan SIL"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+                <EditText
+                    android:id="@+id/editSILBarcode"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:hint="  Scan SIL Barcode"
+                    android:background="@drawable/common_edittext"
+                    android:imeOptions="actionGo|flagNoFullscreen"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1.2"
+                    android:maxLength="9000"
+                    android:maxLines="1"
+                    android:padding="2dp"
+                    android:paddingLeft="5dp"
+                    android:paddingStart="8dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+
+
+            </LinearLayout>
+             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight=".7"
+                    android:padding="2dp"
+                    android:text="Scan (D/S) Barcode"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+                <EditText
+                    android:id="@+id/editDNHASupBarcode"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:hint="  Scan DNHA/SUP Kanban"
+                    android:background="@drawable/common_edittext"
+                    android:imeOptions="actionGo|flagNoFullscreen"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1.2"
+                    android:maxLength="9000"
+                    android:maxLines="1"
+                    android:padding="2dp"
+                    android:paddingLeft="5dp"
+                    android:paddingStart="8dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+
+
+            </LinearLayout>
+
+
+
+
+
+
+         
+
+       
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/lblTruckNo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".1"
+                    android:padding="2dp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/lblTransName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".2"
+                    android:padding="2dp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/txtTotalQty"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="2dp"
+                    android:text="Total Qty : 0"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:background="@color/orange2"
+                    android:textSize="15dp" />
+               
+                <TextView
+                    android:id="@+id/txtScanQty"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="Scan Qty : 0"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:background="@color/orange2"
+                    android:textSize="15dp" />
+
+            </LinearLayout>
+              <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:paddingBottom="3dp">
+
+                
+                <TextView
+                    android:id="@+id/listPartNo"
+                    android:text="Part No"
+                    android:layout_marginLeft="3dp"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:textStyle="bold"
+                    android:layout_weight="3.5"
+                    android:gravity="center"
+                    android:background="@drawable/borderstyle"
+                    android:textColor="#000000" />
+                 <TextView
+                    android:id="@+id/listBinQty"
+                    android:text="Bin"
+                    android:layout_marginLeft="3dp"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:background="@drawable/borderstyle"
+                    android:textColor="#000000" />
+               
+                <TextView
+                    android:id="@+id/listQty"
+                    android:text="Qty"
+                    android:layout_marginLeft="3dp"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:background="@drawable/borderstyle"
+                    android:textColor="#000000" />
+                
+
+                <TextView
+                    android:id="@+id/listSQty"
+                    android:text="Scan Qty"
+                    android:layout_marginLeft="3dp"
+                    android:layout_width="0dp"
+                    android:textStyle="bold"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
+                    android:background="@drawable/borderstyle"
+                    android:textColor="#000000" />
+                <TextView
+                    android:id="@+id/listBalance"
+                    android:text="Balance"
+                    android:layout_marginLeft="3dp"
+                    android:textStyle="bold"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/borderstyle"
+                    android:gravity="center"
+                    android:textColor="#000000" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycleViewReceiveItem"
+                    android:layout_width="fill_parent"
+                    android:layout_height="100dp"
+                    android:scrollbars="vertical"
+                    android:fadeScrollbars="false"
+                    android:scrollbarThumbVertical="@android:color/darker_gray"
+                    android:scrollbarSize="5dp"
+                    android:scrollbarStyle="outsideOverlay"/>
+            </LinearLayout>
+           
+           
+
+           
+            <LinearLayout
+                android:layout_height="fill_parent"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:gravity="center_horizontal"
+                android:layout_marginVertical="20dp">
+               
+                <Button
+                    android:text="Back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnBack"
+                    android:layout_marginRight="10dp"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/rounded_edittext"
+                    android:backgroundTint="@color/orange2"
+				/>
+
+                <Button
+                    android:text="Clear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnClear"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/rounded_edittext"
+                    android:backgroundTint="@color/orange2"
+                    />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

@@ -471,7 +471,10 @@ namespace SMPDisptach.ActivityClass
         private void SaveDataIntoTable(ref DataTable dtHead, ref DataTable dtDetails)
         {
             PL_HHT_DOWNLOAD _plObj = null;
+            
             BL_HHT_DOWNLOAD _blObj = new BL_HHT_DOWNLOAD();
+            PL_DETAILS_DATA _plObjDetailsData = null;
+            BL_DETAILS_DATA _blObjDetailsData = new BL_DETAILS_DATA();
             try
             {
                 
@@ -480,6 +483,11 @@ namespace SMPDisptach.ActivityClass
                 _plObj.SIL_CODE = spinnerSIL.SelectedItem.ToString().Replace("*", "");
                 _plObj.CreatedBy = clsGlobal.mUserId;
                 _blObj.BL_ExecuteTask(_plObj);
+
+                _plObjDetailsData = new PL_DETAILS_DATA();
+                _plObjDetailsData.DbType = "DELETE";
+                _plObjDetailsData.SILNo = spinnerSIL.SelectedItem.ToString().Replace("*", "");
+                _blObjDetailsData.BL_ExecuteTask(_plObjDetailsData);
 
                 for (int iHeader = 0; iHeader < dtHead.Rows.Count; iHeader++)
                 {
@@ -490,6 +498,7 @@ namespace SMPDisptach.ActivityClass
                     _plObj.TOTAL_QTY = Convert.ToInt32(dtHead.Rows[iHeader][1]);
                     _plObj.SCAN_QTY = Convert.ToInt32(dtHead.Rows[iHeader][2]);
                     _plObj.BAL_QTY = Convert.ToInt32(dtHead.Rows[iHeader][3]);
+                    _plObj.BinQty= Convert.ToInt32(dtHead.Rows[iHeader][4]);
                     _plObj.CP_PROCESS = dtDetails.Columns.Count == 3 ? "2POINTS" : "3POINTS";
                     _plObj.CreatedBy = clsGlobal.mUserId;
 
@@ -500,7 +509,7 @@ namespace SMPDisptach.ActivityClass
                     _plObj = new PL_HHT_DOWNLOAD();
                     _plObj.DbType = "DETAILS";
                     _plObj.CP_PROCESS = dtDetails.Columns.Count == 3 ? "2POINTS" : "3POINTS";
-                    _plObj.SIL_CODE = spinnerSIL.SelectedItem.ToString().Replace("*", ""); ;
+                    _plObj.SIL_CODE = spinnerSIL.SelectedItem.ToString().Replace("*", ""); 
                     _plObj.SIL_BARCODE = clsGlobal.ReplaceCaretWithNewlines(dtDetails.Rows[iDetails][0]?.ToString());
                     _plObj.BARCODE1 = dtDetails.Rows[iDetails][1]?.ToString();
                     if (_plObj.CP_PROCESS == "2POINTS")
@@ -517,9 +526,42 @@ namespace SMPDisptach.ActivityClass
 
                     }
                     _plObj.PATTERN_CODE = dtDetails.Rows[iDetails][17]?.ToString();
+                    _plObj.IsMatchBarcode1SeqNo = dtDetails.Rows[iDetails][18]?.ToString() == "" ? false : Convert.ToBoolean(dtDetails.Rows[iDetails][18]?.ToString());
+                    _plObj.Barcode1SeqNo = dtDetails.Rows[iDetails][19]?.ToString() == "" ? "" : dtDetails.Rows[iDetails][19]?.ToString();
+                    _plObj.IsMatchBarcode2SeqNo = dtDetails.Rows[iDetails][20]?.ToString() == "" ? false : Convert.ToBoolean(dtDetails.Rows[iDetails][20]?.ToString());
+                    _plObj.Barcode2SeqNo = dtDetails.Rows[iDetails][21]?.ToString() == "" ? "" : dtDetails.Rows[iDetails][21]?.ToString();
+                    _plObj.PART_NO = dtDetails.Rows[iDetails][3]?.ToString();
                     _plObj.CreatedBy = clsGlobal.mUserId;
                     _blObj.BL_ExecuteTask(_plObj);
-                
+                     _plObjDetailsData=new PL_DETAILS_DATA();
+                    _plObjDetailsData.DbType = "SAVE";
+                    _plObjDetailsData.SILNo = spinnerSIL.SelectedItem.ToString().Replace("*", "");
+                    _plObjDetailsData.SILBarcode = dtDetails.Rows[iDetails][0]?.ToString();
+                    _plObjDetailsData.DNHASupBarcode = dtDetails.Rows[iDetails][1]?.ToString();
+                    _plObjDetailsData.CUSBarcode = dtDetails.Rows[iDetails][2]?.ToString();
+                    _plObjDetailsData.PartNo = dtDetails.Rows[iDetails][3]?.ToString();
+                    _plObjDetailsData.CustPart = dtDetails.Rows[iDetails][4]?.ToString();
+                    _plObjDetailsData.Qty = dtDetails.Rows[iDetails][5]?.ToString();
+                    _plObjDetailsData.ExtChar = dtDetails.Rows[iDetails][6]?.ToString();
+                    _plObjDetailsData.ProcessCode = dtDetails.Rows[iDetails][7]?.ToString();
+                    _plObjDetailsData.TruckNo = dtDetails.Rows[iDetails][8]?.ToString();
+                    _plObjDetailsData.ShipTo = dtDetails.Rows[iDetails][9]?.ToString();
+                    _plObjDetailsData.CustCode = dtDetails.Rows[iDetails][10]?.ToString();
+                    _plObjDetailsData.SequenceNo = dtDetails.Rows[iDetails][11]?.ToString();
+                    _plObjDetailsData.CustSeqNo = dtDetails.Rows[iDetails][12]?.ToString();
+                    _plObjDetailsData.UserId = dtDetails.Rows[iDetails][13]?.ToString();
+                    _plObjDetailsData.SILScannedOn = dtDetails.Rows[iDetails][14]?.ToString();
+                    _plObjDetailsData.DNHAScannedOn = dtDetails.Rows[iDetails][15]?.ToString();
+                    _plObjDetailsData.CustScannedOn = dtDetails.Rows[iDetails][16]?.ToString();
+                    _plObjDetailsData.DNHAPattern = dtDetails.Rows[iDetails][17]?.ToString();
+                    _plObjDetailsData.MatchBarcode1SeqNo = dtDetails.Rows[iDetails][18]?.ToString() == "" ? false : Convert.ToBoolean(dtDetails.Rows[iDetails][18]?.ToString());
+                    _plObjDetailsData.Barcode1SeqNo = dtDetails.Rows[iDetails][19]?.ToString() == "" ? "" : dtDetails.Rows[iDetails][19]?.ToString();
+                    _plObjDetailsData.MatchBarcode2SeqNo = dtDetails.Rows[iDetails][20]?.ToString() == "" ? false : Convert.ToBoolean(dtDetails.Rows[iDetails][20]?.ToString());
+                    _plObjDetailsData.Barcode2SeqNo = dtDetails.Rows[iDetails][21]?.ToString() == "" ? "" : dtDetails.Rows[iDetails][21]?.ToString();
+                     _blObjDetailsData = new BL_DETAILS_DATA();
+                    _blObjDetailsData.BL_ExecuteTask(_plObjDetailsData);
+
+
                 }
             }
             catch (Exception ex)
@@ -648,7 +690,7 @@ namespace SMPDisptach.ActivityClass
             "SIL_Barcode", "DNKI_Barcode", "CUSTOMER_Barcode", "DNKI_PartNo", "CUST_PartNo",
             "DNKI_PartQty", "CUST_PartQty", "DNKI_ProcessID", "SIL_TruckNo", "SIL_ShipTo",
             "SIL_CustNo", "DNKI_Sequence", "CUST_Sequence", "ScannedBy", "SILScannedOn",
-            "DNKIScannedOn", "CustScannedOn", "PATTERNCODE"
+            "DNKIScannedOn", "CustScannedOn", "PATTERNCODE", "ISMatchBarcode1Data", "Barcode1Data", "ISMatchBarcode2Data", "Barcode2Data"
             };
 
             // Create a DataTable and define the columns
