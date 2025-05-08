@@ -21,9 +21,8 @@ namespace AISScanningApp.ActivityClass
     {
         clsNetwork oNetwork;
         clsGlobal clsGLB;
-        EditText editServerIP, editPLCIP, editPLCPort, editFTPIp,editFTPUser,editFTPPass,editLine;
+        EditText editServerIP, editPLCIP, editPLCPort, editFTPIp,editFTPUser,editFTPPass,editLine,editFTPFolder;
         EditText editPort;
-        Spinner sppinerLine;
         MediaPlayer mediaPlayerSound;
         Vibrator vibrator;
         List<string> _List=null;
@@ -56,6 +55,7 @@ namespace AISScanningApp.ActivityClass
                 editFTPIp = FindViewById<EditText>(Resource.Id.txtFTPIP);
                 editFTPUser = FindViewById<EditText>(Resource.Id.txtFTPUser);
                 editFTPPass = FindViewById<EditText>(Resource.Id.txtFTPPass);
+                editFTPFolder = FindViewById<EditText>(Resource.Id.txtFTPFolder);
                 editLine = FindViewById<EditText>(Resource.Id.txtLine);
                 vibrator = this.GetSystemService(VibratorService) as Vibrator;
 
@@ -75,13 +75,7 @@ namespace AISScanningApp.ActivityClass
             }
         }
 
-        private void SppinerLine_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
-        {
-            if (sppinerLine.SelectedItemPosition > 0)
-            {
-
-            }
-        }
+        
 
         public override void OnBackPressed() { }
 
@@ -102,12 +96,13 @@ namespace AISScanningApp.ActivityClass
                     {
                         streamWriter.WriteLine(editServerIP.Text.Trim());
                         streamWriter.WriteLine(editPort.Text.Trim());
-                        streamWriter.WriteLine(editLine.ToString().Trim());
+                        streamWriter.WriteLine(editLine.Text.Trim());
                         streamWriter.WriteLine(editPLCIP.Text.Trim());
                         streamWriter.WriteLine(editPLCPort.Text.Trim());
                         streamWriter.WriteLine(editFTPIp.Text.Trim());
                         streamWriter.WriteLine(editFTPUser.Text.Trim());
                         streamWriter.WriteLine(editFTPPass.Text.Trim());
+                        streamWriter.WriteLine(editFTPFolder.Text.Trim());
 
                         MediaScannerConnection.ScanFile(this, new string[] { filename }, null, null);
 
@@ -115,10 +110,11 @@ namespace AISScanningApp.ActivityClass
 
                         clsGlobal.mSockIp = editServerIP.Text.Trim();
                         clsGlobal.mSockPort = Convert.ToInt32(editPort.Text.Trim());
-                        clsGlobal.mLine = sppinerLine.SelectedItem.ToString().Trim();
+                        clsGlobal.mLine = editLine.Text.Trim();
 
                         clsGlobal.mPLCIp = editPLCPort.Text.Trim();
                         clsGlobal.mPLCPort = Convert.ToInt32(editPLCPort.Text.Trim());
+                        clsGlobal.mFtpFolder = editFTPFolder.Text.Trim();
                         clsGlobal.mFtpAddress = editFTPIp.Text.Trim();
                         clsGlobal.mFtpUserName = editFTPUser.Text.Trim();
                         clsGlobal.mFtpPassword = editFTPUser.Text.Trim();
@@ -238,9 +234,9 @@ namespace AISScanningApp.ActivityClass
                             }
                         }
                         ArrayAdapter<string> arrayAdapter = new ArrayAdapter<string>(this, Resource.Layout.Spiner, _List);
-                        sppinerLine.Adapter = arrayAdapter;
-                        sppinerLine.SetSelection(0);
-                        sppinerLine.RequestFocus();
+                        //sppinerLine.Adapter = arrayAdapter;
+                        //sppinerLine.SetSelection(0);
+                        //sppinerLine.RequestFocus();
                         break;
 
                     case "INVALID":
@@ -297,6 +293,7 @@ namespace AISScanningApp.ActivityClass
                     editFTPIp.Text = sr.ReadLine();
                     editFTPUser.Text = sr.ReadLine();
                     editFTPPass.Text = sr.ReadLine();
+                    editFTPFolder.Text = sr.ReadLine();
 
                     sr.Close();
                     sr.Dispose();
@@ -304,6 +301,11 @@ namespace AISScanningApp.ActivityClass
 
                     clsGlobal.mSockIp = editServerIP.Text.Trim();
                     clsGlobal.mSockPort = Convert.ToInt32(editPort.Text.Trim());
+                    clsGlobal.mLine = editLine.Text.Trim();
+                    clsGlobal.mFtpAddress = editFTPIp.Text.Trim();
+                    clsGlobal.mFtpUserName = editFTPUser.Text.Trim();
+                    clsGlobal.mFtpPassword = editFTPPass.Text.Trim();
+                    clsGlobal.mFtpFolder = editFTPFolder.Text.Trim();
                 }
             }
             catch (Exception ex)

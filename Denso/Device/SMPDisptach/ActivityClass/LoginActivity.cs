@@ -20,7 +20,7 @@ namespace SMPDisptach
     [Activity(Label = "SMPDisptach", MainLauncher = true, WindowSoftInputMode = SoftInput.StateHidden, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class LoginActivity : AppCompatActivity
     {
-        clsGlobal clsGLB;
+        clsGlobal clsGlobal;
         clsNetwork oNetwork;
         string _AppVersion;
         private DataTable dt = null;
@@ -64,7 +64,7 @@ namespace SMPDisptach
         {
             try
             {
-                clsGLB = new clsGlobal();
+                //clsGlobal = new clsGlobal();
                 oNetwork = new clsNetwork();
             }
             catch (Exception ex)
@@ -113,7 +113,9 @@ namespace SMPDisptach
               
                 vibrator = this.GetSystemService(VibratorService) as Vibrator;
                 clsGlobal.ReadAlertPasswordMaster();
-               
+
+                
+
                 //GetLoginUser();
                 editUserId.RequestFocus();
                 DirectoryInfo _dir = null;
@@ -141,7 +143,7 @@ namespace SMPDisptach
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
        
@@ -159,25 +161,28 @@ namespace SMPDisptach
         {
             try
             {
+                string strVersionFilePath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "//HHT_VERSION.txt");
                
+
                 if (string.IsNullOrEmpty(editUserId.Text.Trim()))
                 {
-                    Toast.MakeText(this, "Input user id", ToastLength.Long).Show();
+                    clsGlobal.showToastNGMessage($"Input user id", this);
                     editUserId.RequestFocus();
                     return;
                 }
                 if (string.IsNullOrEmpty(editPassword.Text.Trim()))
                 {
-                    Toast.MakeText(this, "Input password", ToastLength.Long).Show();
+                    clsGlobal.showToastNGMessage($"Input password", this);
                     editPassword.RequestFocus();
                     return;
                 }
-                if (editUserId.Text.Trim() == "1" && editPassword.Text.Trim() == "1")
+                if (!IsNewVersionAvailable(strVersionFilePath, this))
                 {
-                    OpenActivity(typeof(MainActivity));
-                    clsGlobal.mUserId = editUserId.Text;
+                    clsGlobal.showToastNGMessage($"Old version application is running,Please update!!", this);
+                    editPassword.RequestFocus();
                     return;
                 }
+
                 else
                 {
                     if (CheckUserCredentials(editUserId.Text.Trim(), editPassword.Text.Trim()))
@@ -192,14 +197,14 @@ namespace SMPDisptach
                         editUserId.RequestFocus();
                         StartPlayingSound();
                         ShowMessageBox("Invalid User Id and Password", this);
-
+                        clsGlobal.WriteLog("Invalid User Id and Password");
                         return;
                     }
                 }
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -207,8 +212,32 @@ namespace SMPDisptach
         #endregion
 
         #region Methods
+        public  bool IsNewVersionAvailable(string filePath, Context context)
+        {
+            try
+            {
+                // 1. Read the version from the file
+                string fileVersion = File.ReadAllText(filePath)?.Trim();
 
-      
+                // 2. Get the current app version
+                PackageManager pm = context.PackageManager;
+                var packageInfo = pm.GetPackageInfo(context.PackageName, 0);
+                string currentVersion = packageInfo.VersionName;
+
+                // 3. Optional: use Version object for better comparison
+                Version fileVer = new Version(fileVersion);
+                Version currentVer = new Version(currentVersion);
+
+                // 4. Compare versions
+                return fileVer == currentVer; // true if update is available
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error comparing versions: " + ex.Message);
+                return false;
+            }
+        }
+
         public bool CheckUserCredentials(string userId, string password)
         {
             // Get the list of logins
@@ -250,7 +279,7 @@ namespace SMPDisptach
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
         public void ShowMessageBox(string msg, Activity activity)
@@ -272,7 +301,7 @@ namespace SMPDisptach
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
         private void StartPlayingSound()

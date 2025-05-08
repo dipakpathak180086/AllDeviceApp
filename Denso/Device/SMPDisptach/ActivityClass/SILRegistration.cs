@@ -35,7 +35,7 @@ namespace SMPDisptach.ActivityClass
     {
         #region Private Variables
         Vibrator vibrator;
-        clsGlobal clsGLB;
+        clsGlobal clsGlobal;
         EditText txtSILBarcode;
         Dictionary<string, string> dicRegPlant = new Dictionary<string, string>();
         TextView txtTotalQty, txtTruckSILCodeNo, txtCheckPoint;
@@ -73,7 +73,7 @@ namespace SMPDisptach.ActivityClass
         {
             try
             {
-                clsGLB = new clsGlobal();
+                //clsGlobal = new clsGlobal();
 
                 //modnet = new ModNet();
 
@@ -148,7 +148,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -185,7 +185,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -197,7 +197,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
         private void StartPlayingSound(bool isSaved = false)
@@ -308,11 +308,11 @@ namespace SMPDisptach.ActivityClass
                 {
                     clsGlobal.mSILType = clsGlobal.mGetCheckPoints(txtSILBarcode.Text.Trim());
                     clsGlobal.mShipmentType = clsGlobal.mCheckSILTILType(txtSILBarcode.Text.Trim());
-                    if (clsGlobal.mShipmentType != "SIL")
+                    if (clsGlobal.mShipmentType != "SIL" && clsGlobal.mShipmentType != "TIL")
                     {
 
                         txtSILBarcode.Text = "";
-                        clsGLB.showToastNGMessage("Invalid SIL Barcode.", this);
+                        clsGlobal.showToastNGMessage("Invalid SIL/TIL Barcode.", this);
                         SoundForNG();
                        // ShowAlertPopUp();
                         return;
@@ -322,7 +322,7 @@ namespace SMPDisptach.ActivityClass
                     {
 
                         txtSILBarcode.Text = "";
-                        clsGLB.showToastNGMessage("Invalid SIL Barcode.", this);
+                        clsGlobal.showToastNGMessage("Invalid SIL Barcode.", this);
                         SoundForNG();
                         //ShowAlertPopUp();
                         return;
@@ -343,7 +343,7 @@ namespace SMPDisptach.ActivityClass
                     else
                     {
                         txtSILBarcode.Text = "";
-                        clsGLB.showToastNGMessage("Invalid SIL Barcode.", this);
+                        clsGlobal.showToastNGMessage("Invalid SIL Barcode.", this);
                         SoundForNG();
                         //ShowAlertPopUp();
 
@@ -353,7 +353,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
 
             }
 
@@ -385,18 +385,19 @@ namespace SMPDisptach.ActivityClass
                 string strFinalFilePath = Path.Combine(strFinalSILWiseDirectory, clsGlobal.SILMasterDataFile);
                 string strFinalDetailsFilePath = Path.Combine(strFinalSILWiseDirectory, clsGlobal.SILDetailsFile);
                 string strSILBarcodeFilePath = Path.Combine(strFinalSILWiseDirectory, clsGlobal.SILBarcode);
-                if (File.Exists(strFinalDetailsFilePath))
-                {
-                    List<SILKanbanBarcodeScannedData> _ListDetails = clsGlobal.ReadSILScannedFileToList(strFinalDetailsFilePath);
-                    for (int i = 0; i < _ListDetails.Count; i++)
-                    {
-                        if (!_dicBarcode1.ContainsKey(_ListDetails[i].Barcode1))
-                            _dicBarcode1.Add(_ListDetails[i].Barcode1, _ListDetails[i].Barcode1);
+                //Commented by dipak 25-03-2025 unused code the below
+                //if (File.Exists(strFinalDetailsFilePath))
+                //{
+                //    List<SILKanbanBarcodeScannedData> _ListDetails = clsGlobal.ReadSILScannedFileToList(strFinalDetailsFilePath);
+                //    for (int i = 0; i < _ListDetails.Count; i++)
+                //    {
+                //        if (!_dicBarcode1.ContainsKey(_ListDetails[i].Barcode1))
+                //            _dicBarcode1.Add(_ListDetails[i].Barcode1, _ListDetails[i].Barcode1);
 
-                        if (!_dicBarcode2.ContainsKey(_ListDetails[i].Barcode2))
-                            _dicBarcode2.Add(_ListDetails[i].Barcode2, _ListDetails[i].Barcode2);
-                    }
-                }
+                //        if (!_dicBarcode2.ContainsKey(_ListDetails[i].Barcode2))
+                //            _dicBarcode2.Add(_ListDetails[i].Barcode2, _ListDetails[i].Barcode2);
+                //    }
+                //}
                 if (!Directory.Exists(strFinalSILWiseDirectory))
                 {
                     Directory.CreateDirectory(strFinalSILWiseDirectory);
@@ -417,7 +418,7 @@ namespace SMPDisptach.ActivityClass
                     }
                     //txtCheckPoint.Text = lst.GroupBy(x => x.TruckNo).Select(g => g.First().PointCheck).FirstOrDefault();
                     txtSILBarcode.Text = "";
-                    clsGLB.showToastNGMessage($"This SIL Already Registered!!!", this);
+                    clsGlobal.showToastNGMessage($"This SIL Already Registered!!!", this);
                     txtSILBarcode.RequestFocus();
                     SoundForNG();
                     return;
@@ -461,7 +462,7 @@ namespace SMPDisptach.ActivityClass
                     clsGlobal.WriteSILFileFromList(strFinalFilePath, _ListItem);
                     string strSILBarcode = $"{txtSILBarcode.Text.Trim()}";
                     clsGlobal.WriteToFile(strSILBarcodeFilePath, strSILBarcode);
-                    clsGLB.showToastNGMessage($"This SIL Registered successfully!!!", this);
+                    clsGlobal.showToastNGMessage($"This SIL Registered successfully!!!", this);
                     txtSILBarcode.Text = "";
                     txtSILBarcode.RequestFocus();
                     SoundForOK();
@@ -571,7 +572,7 @@ namespace SMPDisptach.ActivityClass
                 //{
 
                 //    lblResult.Text = $"This Delivery ({txtSILBarcode.Text.Trim()}) Data Saved Successfully!!!";
-                //    clsGLB.ShowMessage($"This Delivery ({txtSILBarcode.Text.Trim()}) Data Saved Successfully!!!", this, MessageTitle.INFORMATION);
+                //    clsGlobal.ShowMessage($"This Delivery ({txtSILBarcode.Text.Trim()}) Data Saved Successfully!!!", this, MessageTitle.INFORMATION);
                 //    txtDNHAKanbanBarcode.Text = "";
                 //    txtDNHAKanbanBarcode.RequestFocus();
 
@@ -605,7 +606,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
 
 
@@ -699,7 +700,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -712,7 +713,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -734,7 +735,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -750,7 +751,7 @@ namespace SMPDisptach.ActivityClass
 
                 if (string.IsNullOrEmpty(txtSILBarcode.Text.Trim()))
                 {
-                    clsGLB.showToastNGMessage($"Scan SIL Barcode.", this);
+                    clsGlobal.showToastNGMessage($"Scan SIL Barcode.", this);
                     txtSILBarcode.RequestFocus();
                     IsValidate = false;
                     SoundForNG();
@@ -772,7 +773,7 @@ namespace SMPDisptach.ActivityClass
 
                 if (string.IsNullOrEmpty(txtSILBarcode.Text.Trim()))
                 {
-                    clsGLB.showToastNGMessage($"Scan SIL Barcode", this);
+                    clsGlobal.showToastNGMessage($"Scan SIL Barcode", this);
                     txtSILBarcode.RequestFocus();
                     IsValidate = false;
                     SoundForNG();
@@ -793,7 +794,7 @@ namespace SMPDisptach.ActivityClass
 
                 if (string.IsNullOrEmpty(txtSILBarcode.Text.Trim()))
                 {
-                    clsGLB.showToastNGMessage($"Scan SIL Barcode", this);
+                    clsGlobal.showToastNGMessage($"Scan SIL Barcode", this);
                     txtSILBarcode.RequestFocus();
                     IsValidate = false;
                     SoundForNG();

@@ -21,11 +21,11 @@ namespace AISScanningApp.ActivityClass
     {
         clsNetwork oNetwork;
         clsGlobal clsGLB;
-        EditText editServerIP, editPLCIP, editPLCPort, editFTPPath;
+        EditText editServerIP, editFTPIp,editFTPUser,editFTPPass,editMachineNo,editFTPFolder;
         EditText editPort;
-        Spinner sppinerLine;
         MediaPlayer mediaPlayerSound;
         Vibrator vibrator;
+        List<string> _List=null;
         public SettingActivity()
         {
             try
@@ -50,12 +50,11 @@ namespace AISScanningApp.ActivityClass
 
                 editServerIP = FindViewById<EditText>(Resource.Id.txtServerIP);
                 editPort = FindViewById<EditText>(Resource.Id.txtPort);
-                editPLCIP = FindViewById<EditText>(Resource.Id.txtPLCIP);
-                editPLCPort = FindViewById<EditText>(Resource.Id.txtPLCPort);
-                editFTPPath = FindViewById<EditText>(Resource.Id.txtFTPPath);
-                sppinerLine = FindViewById<Spinner>(Resource.Id.spinnerLinNo);
-                sppinerLine.ItemSelected += SppinerLine_ItemSelected;
-
+                editFTPIp = FindViewById<EditText>(Resource.Id.txtFTPIP);
+                editFTPUser = FindViewById<EditText>(Resource.Id.txtFTPUser);
+                editFTPPass = FindViewById<EditText>(Resource.Id.txtFTPPass);
+                editFTPFolder = FindViewById<EditText>(Resource.Id.txtFTPFolder);
+                editMachineNo = FindViewById<EditText>(Resource.Id.txtMachineNo);
                 vibrator = this.GetSystemService(VibratorService) as Vibrator;
 
                 ImageView imgBack = FindViewById<ImageView>(Resource.Id.imgBack);
@@ -63,6 +62,7 @@ namespace AISScanningApp.ActivityClass
                 {
                     this.Finish();
                 };
+               
                 ReadSettingFile();
 
                 editServerIP.RequestFocus();
@@ -73,13 +73,7 @@ namespace AISScanningApp.ActivityClass
             }
         }
 
-        private void SppinerLine_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
-        {
-            if (sppinerLine.SelectedItemPosition > 0)
-            {
-
-            }
-        }
+        
 
         public override void OnBackPressed() { }
 
@@ -100,6 +94,11 @@ namespace AISScanningApp.ActivityClass
                     {
                         streamWriter.WriteLine(editServerIP.Text.Trim());
                         streamWriter.WriteLine(editPort.Text.Trim());
+                        streamWriter.WriteLine(editMachineNo.Text.Trim());
+                        streamWriter.WriteLine(editFTPIp.Text.Trim());
+                        streamWriter.WriteLine(editFTPUser.Text.Trim());
+                        streamWriter.WriteLine(editFTPPass.Text.Trim());
+                        streamWriter.WriteLine(editFTPFolder.Text.Trim());
 
                         MediaScannerConnection.ScanFile(this, new string[] { filename }, null, null);
 
@@ -107,6 +106,12 @@ namespace AISScanningApp.ActivityClass
 
                         clsGlobal.mSockIp = editServerIP.Text.Trim();
                         clsGlobal.mSockPort = Convert.ToInt32(editPort.Text.Trim());
+                        clsGlobal.mMachineNo = editMachineNo.Text.Trim();
+
+                        clsGlobal.mFtpFolder = editFTPFolder.Text.Trim();
+                        clsGlobal.mFtpAddress = editFTPIp.Text.Trim();
+                        clsGlobal.mFtpUserName = editFTPUser.Text.Trim();
+                        clsGlobal.mFtpPassword = editFTPUser.Text.Trim();
 
                         Finish();
                     }
@@ -188,7 +193,7 @@ namespace AISScanningApp.ActivityClass
         {
             try
             {
-                string _MESSAGE = strCommString + "~" + clsGlobal.Db_Type + "~" + sppinerLine.SelectedItem + "}";
+                string _MESSAGE = strCommString +"}";
                 string[] _RESPONSE = oNetwork.fnSendReceiveData(_MESSAGE).Split('~');
                 return _RESPONSE;
             }
@@ -202,11 +207,11 @@ namespace AISScanningApp.ActivityClass
             var progressDialog = ProgressDialog.Show(this, "", "Please wait...", true);
             try
             {
-                clsGlobal.Db_Type = "BIND_PART";
-                string[] _RESPONSE = await Task.Run(() => SendDataToServer("BIND_LINE"));
+                clsGlobal.Db_Type = "BIND_LINE_DATA";
+                string[] _RESPONSE = await Task.Run(() => SendDataToServer("BIND_LINE_DATA"));
 
                 progressDialog.Hide();
-                List<string> _List = new List<string>();
+                _List = new List<string>();
                 switch (_RESPONSE[0])
                 {
                     case "VALID":
@@ -223,9 +228,9 @@ namespace AISScanningApp.ActivityClass
                             }
                         }
                         ArrayAdapter<string> arrayAdapter = new ArrayAdapter<string>(this, Resource.Layout.Spiner, _List);
-                        sppinerLine.Adapter = arrayAdapter;
-                        sppinerLine.SetSelection(0);
-                        sppinerLine.RequestFocus();
+                        //sppinerLine.Adapter = arrayAdapter;
+                        //sppinerLine.SetSelection(0);
+                        //sppinerLine.RequestFocus();
                         break;
 
                     case "INVALID":
@@ -274,12 +279,25 @@ namespace AISScanningApp.ActivityClass
                     editServerIP.Text = sr.ReadLine();
                     editPort.Text = sr.ReadLine();
 
+                    editMachineNo.Text = sr.ReadLine();
+                    
+                   
+                    editFTPIp.Text = sr.ReadLine();
+                    editFTPUser.Text = sr.ReadLine();
+                    editFTPPass.Text = sr.ReadLine();
+                    editFTPFolder.Text = sr.ReadLine();
+
                     sr.Close();
                     sr.Dispose();
                     sr = null;
 
                     clsGlobal.mSockIp = editServerIP.Text.Trim();
                     clsGlobal.mSockPort = Convert.ToInt32(editPort.Text.Trim());
+                    clsGlobal.mMachineNo = editMachineNo.Text.Trim();
+                    clsGlobal.mFtpAddress = editFTPIp.Text.Trim();
+                    clsGlobal.mFtpUserName = editFTPUser.Text.Trim();
+                    clsGlobal.mFtpPassword = editFTPPass.Text.Trim();
+                    clsGlobal.mFtpFolder = editFTPFolder.Text.Trim();
                 }
             }
             catch (Exception ex)
@@ -313,7 +331,42 @@ namespace AISScanningApp.ActivityClass
                     editPort.RequestFocus();
                     IsValidate = false;
                 }
-
+                //if (sppinerLine.SelectedItemPosition<=0)
+                //{
+                //    Toast.MakeText(this, "Select line", ToastLength.Long).Show();
+                //    sppinerLine.RequestFocus();
+                //    IsValidate = false;
+                //}
+                //if (string.IsNullOrEmpty(editPLCIP.Text.Trim()))
+                //{
+                //    Toast.MakeText(this, "Input PLC IP", ToastLength.Long).Show();
+                //    editPLCIP.RequestFocus();
+                //    IsValidate = false;
+                //}
+                //if (string.IsNullOrEmpty(editPLCPort.Text.Trim()))
+                //{
+                //    Toast.MakeText(this, "Input PLC Port", ToastLength.Long).Show();
+                //    editPLCPort.RequestFocus();
+                //    IsValidate = false;
+                //}
+                //if (string.IsNullOrEmpty(editFTPIp.Text.Trim()))
+                //{
+                //    Toast.MakeText(this, "Input FTP IP", ToastLength.Long).Show();
+                //    editFTPIp.RequestFocus();
+                //    IsValidate = false;
+                //}
+                //if (string.IsNullOrEmpty(editFTPUser.Text.Trim()))
+                //{
+                //    Toast.MakeText(this, "Input FTP User", ToastLength.Long).Show();
+                //    editFTPUser.RequestFocus();
+                //    IsValidate = false;
+                //}
+                //if (string.IsNullOrEmpty(editFTPPass.Text.Trim()))
+                //{
+                //    Toast.MakeText(this, "Input FTP Password", ToastLength.Long).Show();
+                //    editFTPPass.RequestFocus();
+                //    IsValidate = false;
+                //}
                 return IsValidate;
             }
             catch (Exception ex) { throw ex; }

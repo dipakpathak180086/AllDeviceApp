@@ -14,6 +14,7 @@ namespace IOCLAndroidApp
 
     public class clsGlobal : Activity
     {
+        public static string mFtpFolder = "";
         public static string mFtpAddress = "";
         public static string mFtpUserName = "";
         public static string mFtpPassword = "";

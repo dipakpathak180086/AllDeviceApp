@@ -47,18 +47,18 @@ namespace SMPDisptach
         public static int i1;
 
         // ModInit ModInit;
-        //clsGlobal clsGLB;
+        //clsGlobal clsGlobal;
         //public static ModNet()
         //{
         //    try
         //    {
         //        //ModInit = new ModInit();
-        //        clsGLB = new clsGlobal();
+        //        clsGlobal = new clsGlobal();
         //    }
 
         //    catch (Exception ex)
         //    {
-        //        clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+        //        clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
         //    }
         //}
 
@@ -98,9 +98,9 @@ namespace SMPDisptach
             catch (SocketException ex)
             {
                 //if (iConnected == 1)
-                //    clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                //    clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
                 //else
-                //clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                //clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
                 //throw ex;
 
                 return 2;
@@ -125,7 +125,7 @@ namespace SMPDisptach
             }
             catch (Exception ex)
             {
-                //clsGLB.ShowMessage("Could Not Connect to Server.Application Cannot Continue.", this, MessageTitle.ERROR);
+                //clsGlobal.ShowMessage("Could Not Connect to Server.Application Cannot Continue.", this, MessageTitle.ERROR);
                 // MessageBox.Show("Could Not Connect to Server. Application Cannot Continue.", GstrMsgApp, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                 //Application.Exit();
                 throw ex;
@@ -156,7 +156,7 @@ namespace SMPDisptach
 
                 if (InitializeTCPClient() != 0)
                 {
-                    //clsGLB.ShowMessage("Restart Application., Invalid Server IP Address", this, MessageTitle.ERROR);
+                    //clsGlobal.ShowMessage("Restart Application., Invalid Server IP Address", this, MessageTitle.ERROR);
                     // MessageBox.Show("Restart Application.", "Invalid Server IP Address", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                     return;
                 }
@@ -168,7 +168,7 @@ namespace SMPDisptach
             catch (Exception ex)
             {
                 throw ex;
-                //clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                //clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
                 //Interaction.MsgBox(ex.Message);
             }
         }
@@ -201,7 +201,7 @@ namespace SMPDisptach
             }
             catch (Exception ex)
             {
-                //clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                //clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
                 //MessageBox.Show(ex.Message);
                 throw ex;
             }

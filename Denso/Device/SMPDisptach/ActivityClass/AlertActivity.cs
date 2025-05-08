@@ -19,7 +19,7 @@ namespace SMPDisptach
     [Activity(Label = "AlertActivity")]
     public class AlertActivity : Dialog
     {
-        clsGlobal clsGLB;
+        clsGlobal clsGlobal;
         EditText txtAlert;
         Activity activity;
         MediaPlayer mediaPlayerSound;
@@ -28,7 +28,7 @@ namespace SMPDisptach
         bool scanningComplete = false;
         public AlertActivity(Activity activity) : base(activity)
         {
-            clsGLB = new clsGlobal();
+            //clsGlobal = new clsGlobal();
             this.activity = activity;
            
         }
@@ -103,13 +103,13 @@ namespace SMPDisptach
                     clsGlobal.ReadAlertPasswordMaster();
                     if (clsGlobal.mAlertPassword=="")
                     {
-                        clsGLB.showToastNGMessage("Password is not available,Try again!!!", this.Context);
+                        clsGlobal.showToastNGMessage("Password is not available,Try again!!!", this.Context);
                         SoundForNG();
                         return;
                     }
                     if (clsGlobal.mAlertPassword != txtAlert.Text.Trim())
                     {
-                        clsGLB.showToastNGMessage("Invalid Password,Try again!!!", this.Context);
+                        clsGlobal.showToastNGMessage("Invalid Password,Try again!!!", this.Context);
                         SoundForNG();
                         return;
                     }
@@ -124,7 +124,7 @@ namespace SMPDisptach
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, activity, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, activity, MessageTitle.ERROR);
             }
 
             // Create your application here
@@ -141,7 +141,7 @@ namespace SMPDisptach
                         clsGlobal.ReadAlertPasswordMaster();
                         if (clsGlobal.mAlertPassword != txtAlert.Text.Trim())
                         {
-                            clsGLB.showToastNGMessage("Invalid Password,Try again!!!", this.Context);
+                            clsGlobal.showToastNGMessage("Invalid Password,Try again!!!", this.Context);
                             SoundForNG();
                             return;
                         }
@@ -155,7 +155,7 @@ namespace SMPDisptach
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, activity, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, activity, MessageTitle.ERROR);
             }
         }
 

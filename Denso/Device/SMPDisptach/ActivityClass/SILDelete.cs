@@ -22,8 +22,8 @@ namespace SMPDisptach.ActivityClass
     [Activity(Label = "SILDelete", WindowSoftInputMode = Android.Views.SoftInput.StateAlwaysHidden, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class SILDelete : Activity
     {
-
-        clsGlobal clsGLB;
+        Vibrator vibrator;
+        clsGlobal clsGlobal;
         Spinner spinnerSIL;
         Button btnSILDelete;
         //ModNet modnet;
@@ -34,7 +34,7 @@ namespace SMPDisptach.ActivityClass
         {
             try
             {
-                clsGLB = new clsGlobal();
+                //clsGlobal = new clsGlobal();
 
                 //modnet = new ModNet();
 
@@ -74,7 +74,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -86,7 +86,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
         private void StartPlayingSound(bool isSaved = false)
@@ -98,7 +98,7 @@ namespace SMPDisptach.ActivityClass
 
                 if (isSaved)
                 {
-                    mediaPlayerSound = MediaPlayer.Create(this, Resource.Raw.SavedSound);
+                    mediaPlayerSound = MediaPlayer.Create(this, Resource.Raw.OkSound);
                 }
                 else
                 {
@@ -106,6 +106,24 @@ namespace SMPDisptach.ActivityClass
                     mediaPlayerSound = MediaPlayer.Create(this, Resource.Raw.Beep);
                 }
                 mediaPlayerSound.Start();
+            }
+            catch (Exception ex) { throw ex; }
+        }
+        private void SoundForOK()
+        {
+            try
+            {
+                Task.Run(() =>
+                { //Start Vibration
+                    long[] pattern = { 0, 2000, 500 }; //0 to start now, 200 to vibrate 200 ms, 0 to sleep for 0 ms.
+                    vibrator.Vibrate(pattern, -1);//
+                    StopPlayingSound();
+                    StartPlayingSound(true);
+                    Thread.Sleep(2000);
+                    StopPlayingSound();
+                    vibrator.Cancel();
+                });
+
             }
             catch (Exception ex) { throw ex; }
         }
@@ -145,7 +163,7 @@ namespace SMPDisptach.ActivityClass
             {
                 base.OnCreate(savedInstanceState);
                 SetContentView(Resource.Layout.activity_SILDelete);
-               
+                vibrator = this.GetSystemService(VibratorService) as Vibrator;
                 string strTranscationPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
                 MediaScannerConnection.ScanFile(this, new String[] { strTranscationPath }, null, null);
                 clsGlobal.DeleteDirectoryWithOutFile(strTranscationPath);
@@ -166,7 +184,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -188,7 +206,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
 
 
@@ -200,7 +218,8 @@ namespace SMPDisptach.ActivityClass
                 string strTranscationPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
                 string strFinal = Path.Combine(strTranscationPath, spinnerSIL.SelectedItem.ToString());
                 clsGlobal.DeleteDirectory(strFinal);
-                clsGLB.ShowMessage($"This SIL {spinnerSIL.SelectedItem.ToString()} Deleted Successfully!!!", this, MessageTitle.INFORMATION);
+                SoundForOK();
+                clsGlobal.ShowMessage($"This SIL {spinnerSIL.SelectedItem.ToString()} Deleted Successfully!!!", this, MessageTitle.INFORMATION);
                 BindSpinnerSIL();
             }
             catch (Exception ex)
@@ -217,7 +236,7 @@ namespace SMPDisptach.ActivityClass
             {
                 _lstFlag.Clear();
                 _lstFlag.Add("--Select--");
-                string[] directoriesFinal = Directory.GetDirectories(path);
+                string[] directoriesFinal = Directory.GetDirectories(path).OrderBy(x => x).ToArray();
                 for (int i = 0; i < directoriesFinal.Length; i++)
                 {
                     string strSILCode = Path.GetFileName(directoriesFinal[i].TrimEnd(Path.DirectorySeparatorChar));
@@ -275,7 +294,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -288,7 +307,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 

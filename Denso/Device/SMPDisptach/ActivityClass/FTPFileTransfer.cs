@@ -28,8 +28,8 @@ namespace SMPDisptach.ActivityClass
     [Activity(Label = "FTPFileTransfer", WindowSoftInputMode = Android.Views.SoftInput.StateAlwaysHidden, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class FTPFileTransfer : Activity
     {
-
-        clsGlobal clsGLB;
+        Vibrator vibrator;
+        clsGlobal clsGlobal;
         Spinner spinnerSIL;
         Button btnFTPTransfer;
         //ModNet modnet;
@@ -39,6 +39,7 @@ namespace SMPDisptach.ActivityClass
         RecyclerView recyclerViewItem;
         MediaPlayer mediaPlayerSound;
         RecyclerView.LayoutManager mLayoutManager;
+        ProgressBar editProgressbar;
         int ScannedQty = 0;
         string PartNo = "";
         string CustPart = "";
@@ -69,7 +70,7 @@ namespace SMPDisptach.ActivityClass
         {
             try
             {
-                clsGLB = new clsGlobal();
+                //clsGlobal = new clsGlobal();
 
                 //modnet = new ModNet();
 
@@ -109,7 +110,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -121,7 +122,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
         private void StartPlayingSound(bool isSaved = false)
@@ -133,7 +134,7 @@ namespace SMPDisptach.ActivityClass
 
                 if (isSaved)
                 {
-                    mediaPlayerSound = MediaPlayer.Create(this, Resource.Raw.SavedSound);
+                    mediaPlayerSound = MediaPlayer.Create(this, Resource.Raw.OkSound);
                 }
                 else
                 {
@@ -181,6 +182,7 @@ namespace SMPDisptach.ActivityClass
                 base.OnCreate(savedInstanceState);
                 SetContentView(Resource.Layout.activity_FTPTransfer);
 
+                vibrator = this.GetSystemService(VibratorService) as Vibrator;
 
                 //cmbSite = FindViewById<Spinner>(Resource.Id.cmbSite);
                 btnFTPTransfer = FindViewById<Button>(Resource.Id.btnFTPTransfer);
@@ -199,11 +201,13 @@ namespace SMPDisptach.ActivityClass
                 mLayoutManager = new LinearLayoutManager(this);
                 recyclerViewItem.SetLayoutManager(mLayoutManager);
 
+                editProgressbar = FindViewById<ProgressBar>(Resource.Id.progressBar);
+                clsGlobal.ReadDNHAMaster();
                 //txtBattery.Enabled = txtTruckNo.Enabled = false;
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -218,7 +222,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -235,12 +239,12 @@ namespace SMPDisptach.ActivityClass
             try
             {
 
-                ShowConfirmBox($"Are you sure want to Generate the File and Transfer to this SIL {spinnerSIL.SelectedItem.ToString().Replace("*","")} Data on FTP?", this, FileGenerateData);
+                ShowConfirmBox($"Are you sure want to Generate the File and Transfer to this SIL {spinnerSIL.SelectedItem.ToString().Replace("*", "")} Data on FTP?", this, FileGenerateData);
 
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
 
 
@@ -272,167 +276,253 @@ namespace SMPDisptach.ActivityClass
             return dataTable;
         }
 
-        private void FileGenerate(DataTable dt)
+        private async void FileGenerate(DataTable dt)
         {
             try
             {
-                for (int i = 0; i < dt.Rows.Count; i++)
+                editProgressbar.Visibility = ViewStates.Visible;
+                await Task.Run(() =>
                 {
-                    if (dt.Rows[i]["SIL_TruckNo"].ToString() == spinnerSIL.SelectedItem.ToString().Replace("*",""))
+                    RunOnUiThread(() =>
                     {
-                        SILbarcode = dt.Rows[i]["SIL_Barcode"].ToString();
-                        SILScannedon = dt.Rows[i]["SILScannedOn"].ToString();
-                        break;
-                    }
-                }
-                SILHeader = SILbarcode.Substring(0, 20);
-                TruckNo = SILHeader.Substring(0, 7);
-                CustCode = SILHeader.Substring(7, 8);
-                ShipTo = SILHeader.Substring(15, 2);
-                Possition = SILHeader.Substring(17, 1);
-                string strTranscationPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
-                string Path_1 = Path.Combine(strTranscationPath, spinnerSIL.SelectedItem.ToString().Replace("*",""));
-                DataView dv = new DataView(dt);
-                dv.RowFilter = "SIL_Barcode='" + SILbarcode.ToString() + "'";
-                DataTable dt1 = dv.ToTable();
+                        //editProgressbar.Visibility = ViewStates.Visible;
+                        //await Task.Run(() =>
+                        //{
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            if (dt.Rows[i]["SIL_TruckNo"].ToString() == spinnerSIL.SelectedItem.ToString().Replace("*", ""))
+                            {
+                                SILbarcode = dt.Rows[i]["SIL_Barcode"].ToString();
+                                SILScannedon = dt.Rows[i]["SILScannedOn"].ToString();
+                                break;
+                            }
+                        }
+                        SILHeader = SILbarcode.Substring(0, 20);
+                        TruckNo = SILHeader.Substring(0, 7);
+                        CustCode = SILHeader.Substring(7, 8);
+                        ShipTo = SILHeader.Substring(15, 2);
+                        Possition = SILHeader.Substring(17, 1);
+                        string strTranscationPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
+                        string Path_1 = Path.Combine(strTranscationPath, spinnerSIL.SelectedItem.ToString().Replace("*", ""));
+                        DataView dv = new DataView(dt);
+                        dv.RowFilter = "SIL_Barcode='" + SILbarcode.ToString() + "'";
+                        DataTable dt1 = dv.ToTable();
 
-                string sequencePath = Path_1 + "//Sequnce.txt";
-                if (!File.Exists(sequencePath))
-                    clsGlobal.WriteToFile(sequencePath, "0");
+                        string sequencePath = Path_1 + "//Sequnce.txt";
+                        if (!File.Exists(sequencePath))
+                            clsGlobal.WriteToFile(sequencePath, "0");
 
-                string Sequence = clsGlobal.ReadFromFile(sequencePath).Trim();
-                if (Sequence == "1000")
-                {
-                    File.Delete(sequencePath);
-                    clsGlobal.WriteToFile(sequencePath, "0");
-                }
+                        string Sequence = clsGlobal.ReadFromFile(sequencePath).Trim();
+                        if (Sequence == "1000")
+                        {
+                            File.Delete(sequencePath);
+                            clsGlobal.WriteToFile(sequencePath, "0");
+                        }
 
-                string datFilePath = Path_1 + "//" + SILHeader + ".DAT";
-                if (File.Exists(datFilePath)) File.Delete(datFilePath);
-                clsGlobal.WriteToFTPFile(datFilePath, dt1.Rows.Count.ToString().PadRight(177, ' ') + "\r\n");
+                        string datFilePath = Path_1 + "//" + SILHeader + ".DAT";
+                        if (File.Exists(datFilePath)) File.Delete(datFilePath);
+                        clsGlobal.WriteToFTPFile(datFilePath, dt1.Rows.Count.ToString().PadRight(177, ' ') + "\r\n");
 
-                foreach (DataRow row in DtSIL.Rows)
-                {
-                    DataView Dv1 = new DataView(dt1);
-                    Dv1.RowFilter = "DNKI_PartNo='" + row["PartNo"].ToString() + "'";
-                    DataTable dt3 = Dv1.ToTable(true, "DNKI_Barcode", "DNKI_PartNo", "DNKI_ProcessID", "DNKI_Sequence", "DNKI_PartQty", "CUST_PartQty", "CUST_PartNo");
+                        foreach (DataRow row in DtSIL.Rows)
+                        {
+                            DataView Dv1 = new DataView(dt1);
+                            Dv1.RowFilter = "DNKI_PartNo='" + row["PartNo"].ToString() + "'";
+                            DataTable dt3 = Dv1.ToTable(true, "DNKI_Barcode", "DNKI_PartNo", "DNKI_ProcessID", "DNKI_Sequence", "DNKI_PartQty", "CUST_PartQty", "CUST_PartNo");
 
-                    for (int A = 0; A < dt3.Rows.Count; A++)
-                    {
-                        //string str = $" 0521{dr["DNKI_PartNo"].ToString().PadRight(15)}        {dr["DNKI_ProcessID"].ToString().PadRight(5)}{dr["DNKI_Sequence"].ToString().PadRight(7)}         {dr["DNKI_PartQty"].ToString().PadLeft(7, '0')}{TruckNo}{Convert.ToDateTime(Dv1.ToTable().Rows[Dv1.ToTable().Rows.Count - 1]["CustScannedOn"]).ToString("yyyyMMdd")}1{dr["DNKI_PartQty"].ToString().PadLeft(7, '0')}{CustCode}{clsGlobal.mWarehouseNo}{Convert.ToDateTime(Dv1.ToTable().Rows[Dv1.ToTable().Rows.Count - 1]["CustScannedOn"]).ToString("yyyyMMddHHmmss")}{clsGlobal.mDeviceID}{ShipTo}{dr["CUST_PartNo"].ToString().PadRight(30)}00000000                         {clsGlobal.mUserId.PadRight(7)}";
-                        string custScannedOn = Dv1.ToTable().Rows[Dv1.ToTable().Rows.Count - 1]["CustScannedOn"].ToString();
-                        string formattedCustScannedOn = string.IsNullOrEmpty(custScannedOn) ? "" : Convert.ToDateTime(custScannedOn).ToString("yyyyMMdd");
+                            for (int A = 0; A < dt3.Rows.Count; A++)
+                            {
+                                //string str = $" 0521{dr["DNKI_PartNo"].ToString().PadRight(15)}        {dr["DNKI_ProcessID"].ToString().PadRight(5)}{dr["DNKI_Sequence"].ToString().PadRight(7)}         {dr["DNKI_PartQty"].ToString().PadLeft(7, '0')}{TruckNo}{Convert.ToDateTime(Dv1.ToTable().Rows[Dv1.ToTable().Rows.Count - 1]["CustScannedOn"]).ToString("yyyyMMdd")}1{dr["DNKI_PartQty"].ToString().PadLeft(7, '0')}{CustCode}{clsGlobal.mWarehouseNo}{Convert.ToDateTime(Dv1.ToTable().Rows[Dv1.ToTable().Rows.Count - 1]["CustScannedOn"]).ToString("yyyyMMddHHmmss")}{clsGlobal.mDeviceID}{ShipTo}{dr["CUST_PartNo"].ToString().PadRight(30)}00000000                         {clsGlobal.mUserId.PadRight(7)}";
+                                string custScannedOn = Dv1.ToTable().Rows[Dv1.ToTable().Rows.Count - 1]["CustScannedOn"].ToString();
+                                string dnhScannedOn = Dv1.ToTable().Rows[Dv1.ToTable().Rows.Count - 1]["DNKIScannedOn"].ToString();
 
-                        //string str = $" 0521{dr["DNKI_PartNo"].ToString().PadRight(15)}        {dr["DNKI_ProcessID"].ToString().PadRight(5)}{dr["DNKI_Sequence"].ToString().PadRight(7)}         {dr["DNKI_PartQty"].ToString().PadLeft(7, '0')}{TruckNo}{formattedCustScannedOn}1{dr["DNKI_PartQty"].ToString().PadLeft(7, '0')}{CustCode}{clsGlobal.mWarehouseNo}{formattedCustScannedOn}{clsGlobal.mDeviceID}{ShipTo}{dr["CUST_PartNo"].ToString().PadRight(30)}00000000                         {clsGlobal.mUserId.PadRight(7)}";
-                        string str = " 0521" + dt3.Rows[A]["DNKI_PartNo"].ToString().PadRight(15, ' ') + "        " + dt3.Rows[A]["DNKI_ProcessID"].ToString().PadRight(5, ' ') + dt3.Rows[A]["DNKI_Sequence"].ToString().PadRight(7, ' ') + "         " + dt3.Rows[A]["DNKI_PartQty"].ToString().PadLeft(7, '0') + TruckNo + Convert.ToDateTime(Dv1.ToTable().Rows[Dv1.ToTable().Rows.Count - 1]["CustScannedOn"]).ToString("yyyyMMdd") + "1" + dt3.Rows[A]["DNKI_PartQty"].ToString().PadLeft(7, '0') + CustCode + clsGlobal.mWarehouseNo + Convert.ToDateTime(Dv1.ToTable().Rows[Dv1.ToTable().Rows.Count - 1]["CustScannedOn"]).ToString("yyyyMMddHHmmss") + clsGlobal.mDeviceID + ShipTo + dt3.Rows[A]["CUST_PartNo"].ToString().PadRight(30, ' ') + "00000000                         " + clsGlobal.mUserId.PadRight(7, ' ');
-                        clsGlobal.WriteToFTPFile(datFilePath, str + "\r\n");
-                    }
-                }
+                                string formattedDNHAScannedOn = string.IsNullOrEmpty(dnhScannedOn) ? "" : Convert.ToDateTime(dnhScannedOn).ToString("yyyyMMdd");
 
-                foreach (DataRow row in DtSIL.Rows)
-                {
-                    DataView Dv1 = new DataView(dt1);
-                    Dv1.RowFilter = "DNKI_PartNo='" + row["PartNo"].ToString() + "'";
-                    DataTable dt3 = Dv1.ToTable(true, "DNKI_Barcode", "DNKI_PartNo", "DNKI_ProcessID", "DNKI_Sequence", "DNKI_PartQty", "CUST_PartQty", "CUST_PartNo");
+                                string formattedCustScannedOn = string.IsNullOrEmpty(custScannedOn) ? "" : Convert.ToDateTime(custScannedOn).ToString("yyyyMMdd");
 
-                    string PartNo1 = "";
-                    int Qty = 0;
-                    DataView dv2 = new DataView(dt3);
+                                string formattedDNHAScannedOnDateTime = string.IsNullOrEmpty(dnhScannedOn) ? "" : Convert.ToDateTime(dnhScannedOn).ToString("yyyyMMddHHmmss");
 
-                    foreach (DataRow dr2 in dv2.ToTable(true, "DNKI_PartNo").Rows)
-                    {
+                                string formattedCustScannedOnDateTime = string.IsNullOrEmpty(custScannedOn) ? "" : Convert.ToDateTime(custScannedOn).ToString("yyyyMMddHHmmss");
+                                string str = "";
+                                if (formattedCustScannedOnDateTime == "")
+                                {
+                                    //string str = $" 0521{dr["DNKI_PartNo"].ToString().PadRight(15)}        {dr["DNKI_ProcessID"].ToString().PadRight(5)}{dr["DNKI_Sequence"].ToString().PadRight(7)}         {dr["DNKI_PartQty"].ToString().PadLeft(7, '0')}{TruckNo}{formattedCustScannedOn}1{dr["DNKI_PartQty"].ToString().PadLeft(7, '0')}{CustCode}{clsGlobal.mWarehouseNo}{formattedCustScannedOn}{clsGlobal.mDeviceID}{ShipTo}{dr["CUST_PartNo"].ToString().PadRight(30)}00000000                         {clsGlobal.mUserId.PadRight(7)}";
+                                    str = " 0521" + dt3.Rows[A]["DNKI_PartNo"].ToString().PadRight(15, ' ') + "        " + dt3.Rows[A]["DNKI_ProcessID"].ToString().PadRight(5, ' ') + dt3.Rows[A]["DNKI_Sequence"].ToString().PadRight(7, ' ') + "         " + dt3.Rows[A]["DNKI_PartQty"].ToString().PadLeft(7, '0') + TruckNo + formattedDNHAScannedOn + "1" + dt3.Rows[A]["DNKI_PartQty"].ToString().PadLeft(7, '0') + CustCode + clsGlobal.mWarehouseNo + formattedDNHAScannedOnDateTime + clsGlobal.mDeviceID + ShipTo + dt3.Rows[A]["CUST_PartNo"].ToString().PadRight(30, ' ') + "00000000                         " + clsGlobal.mUserId.PadRight(7, ' ');
+                                }
+                                else
+                                {
+                                    str = " 0521" + dt3.Rows[A]["DNKI_PartNo"].ToString().PadRight(15, ' ') + "        " + dt3.Rows[A]["DNKI_ProcessID"].ToString().PadRight(5, ' ') + dt3.Rows[A]["DNKI_Sequence"].ToString().PadRight(7, ' ') + "         " + dt3.Rows[A]["DNKI_PartQty"].ToString().PadLeft(7, '0') + TruckNo + formattedCustScannedOn + "1" + dt3.Rows[A]["DNKI_PartQty"].ToString().PadLeft(7, '0') + CustCode + clsGlobal.mWarehouseNo + formattedCustScannedOnDateTime + clsGlobal.mDeviceID + ShipTo + dt3.Rows[A]["CUST_PartNo"].ToString().PadRight(30, ' ') + "00000000                         " + clsGlobal.mUserId.PadRight(7, ' ');
+                                }
+                                clsGlobal.WriteToFTPFile(datFilePath, str + "\r\n");
+                            }
+                        }
+
+                        foreach (DataRow row in DtSIL.Rows)
+                        {
+                            DataView Dv1 = new DataView(dt1);
+                            Dv1.RowFilter = "DNKI_PartNo='" + row["PartNo"].ToString() + "'";
+                            DataTable dt3 = Dv1.ToTable(true, "DNKI_Barcode", "DNKI_PartNo", "DNKI_ProcessID", "DNKI_Sequence", "DNKI_PartQty", "CUST_PartQty", "CUST_PartNo");
+
+                            string PartNo1 = "";
+                            int Qty = 0;
+                            DataView dv2 = new DataView(dt3);
+
+                            foreach (DataRow dr2 in dv2.ToTable(true, "DNKI_PartNo").Rows)
+                            {
+                                Sequence = (Convert.ToInt32(Sequence) + 1).ToString();
+                                PartNo1 = dr2["DNKI_PartNo"].ToString();
+                                Qty = dt3.AsEnumerable().Where(r => r["DNKI_PartNo"].ToString() == PartNo1).Sum(r => Convert.ToInt32(r["DNKI_PartQty"]));
+
+                                //string str = $"L{Sequence.PadLeft(4, '0')}{clsGlobal.mWarehouseNo.PadLeft(2, '0')}{clsGlobal.mDeviceID.PadLeft(2, '0')}    {clsGlobal.mUserId.PadRight(7)}{Convert.ToDateTime(SILScannedon).ToString("yyyyMMdd")}1000101000{TruckNo}{CustCode}{ShipTo}{Possition}{dr2["DNKI_PartNo"].ToString().PadRight(15)}{Qty.ToString().PadLeft(7, '0')}                                                        {Convert.ToDateTime(SILScannedon).ToString("yyyyMMddHHmmss")}                             ";
+                                string str = "L" + Sequence.PadLeft(4, '0') + clsGlobal.mWarehouseNo.PadLeft(2, '0') +
+                                clsGlobal.mDeviceID.PadLeft(2, '0') + "    " + clsGlobal.mUserId.PadRight(7, ' ') + Convert.ToDateTime(SILScannedon).ToString("yyyyMMdd") + "1000101000" +
+                                TruckNo + CustCode + ShipTo + Possition + dr2["DNKI_PartNo"].ToString().PadRight(15, ' ') +
+                                Qty.ToString().PadLeft(7, '0') + "                                                        " +
+                                Convert.ToDateTime(SILScannedon).ToString("yyyyMMddHHmmss") + "                             ";
+
+                                clsGlobal.WriteToFTPFile(datFilePath, str + "\r\n");
+                            }
+                        }
+
+                        int coUNT = 1;
+                        foreach (DataRow row in dt1.Rows)
+                        {
+                            coUNT++;
+                            Sequence = (Convert.ToInt32(Sequence) + 1).ToString();
+                            // string str = $"L{Sequence.PadLeft(4, '0')}{clsGlobal.mWarehouseNo.PadLeft(2, '0')}{clsGlobal.mDeviceID.PadLeft(2, '0')}    {clsGlobal.mUserId.PadRight(7)}{Convert.ToDateTime(row["DNKIScannedOn"]).ToString("yyyyMMdd")}1000{coUNT.ToString().PadRight(2, '0')}2000{TruckNo}{CustCode}{ShipTo}{Possition}                      21{row["DNKI_PartNo"].ToString().PadRight(15)}{row["CUST_PartNo"].ToString().PadRight(25)}{row["DNKI_PartQty"].ToString().PadLeft(7)}{row["DNKI_Sequence"].ToString().PadLeft(7, '0')}{Convert.ToDateTime(row["DNKIScannedOn"]).ToString("yyyyMMddHHmmss")}                             ";
+                            string str = "L" + Sequence.PadLeft(4, '0') + clsGlobal.mWarehouseNo.PadLeft(2, '0') +
+                                clsGlobal.mDeviceID.PadLeft(2, '0') + "    " + clsGlobal.mUserId.PadRight(7, ' ') + Convert.ToDateTime(row["DNKIScannedOn"]).ToString("yyyyMMdd") + "1000" + coUNT.ToString().PadRight(2, '0') + "2000" +
+                                TruckNo + CustCode + ShipTo + Possition + "                      21" + row["DNKI_PartNo"].ToString().PadRight(15, ' ') + row["CUST_PartNo"].ToString().PadRight(25, ' ') +
+                                row["DNKI_PartQty"].ToString().PadLeft(7, ' ') + row["DNKI_Sequence"].ToString().PadLeft(7, '0') +
+                                Convert.ToDateTime(row["DNKIScannedOn"]).ToString("yyyyMMddHHmmss") + "        " + row["DNKI_Sequence"].ToString().PadLeft(7, '0') + "              ";
+                            clsGlobal.WriteToFTPFile(datFilePath, str + "\r\n");
+                            coUNT++;
+
+                            if (DensoPart != "")
+                            {
+                                Sequence = (Convert.ToInt32(Sequence) + 1).ToString();
+                                // string str1 = $"L{Sequence.PadLeft(4, '0')}{clsGlobal.mWarehouseNo.PadLeft(2, '0')}{clsGlobal.mDeviceID.PadLeft(2, '0')}    {clsGlobal.mUserId.PadRight(7)}{Convert.ToDateTime(row["CustScannedOn"]).ToString("yyyyMMdd")}1000{coUNT.ToString().PadRight(2, '0')}3000{TruckNo}{CustCode}{ShipTo}{Possition}                      CS{row["DNKI_PartNo"].ToString().PadRight(15)}{row["CUST_PartNo"].ToString().PadRight(25)}{row["CUST_PartQty"].ToString().PadRight(7)}{row["CUST_Sequence"].ToString().PadLeft(7)}{Convert.ToDateTime(row["CustScannedOn"]).ToString("yyyyMMddHHmmss")}        {row["CUST_Sequence"].ToString().PadLeft(7)}              ";
+                                string custScannedOn = row["CustScannedOn"].ToString();
+                                string dnhScannedOn = row["DNKIScannedOn"].ToString();
+
+                                string formattedDNHAScannedOn = string.IsNullOrEmpty(dnhScannedOn) ? "" : Convert.ToDateTime(dnhScannedOn).ToString("yyyyMMdd");
+                                string formattedDNHAScannedOnDateTime = string.IsNullOrEmpty(dnhScannedOn) ? "" : Convert.ToDateTime(dnhScannedOn).ToString("yyyyMMddHHmmss");
+
+                                string formattedCustScannedOnDateTime = string.IsNullOrEmpty(custScannedOn) ? "" : Convert.ToDateTime(custScannedOn).ToString("yyyyMMddHHmmss");
+                                string formattedCustScannedOnDate = string.IsNullOrEmpty(custScannedOn) ? "" : Convert.ToDateTime(custScannedOn).ToString("yyyyMMdd");
+                                string str1 = "";
+                                if (formattedCustScannedOnDate == "")
+                                {
+                                    //string str1 = $"L{Sequence.PadLeft(4, '0')}{clsGlobal.mWarehouseNo.PadLeft(2, '0')}{clsGlobal.mDeviceID.PadLeft(2, '0')}    {clsGlobal.mUserId.PadRight(7)}{formattedCustScannedOn}1000{coUNT.ToString().PadRight(2, '0')}3000{TruckNo}{CustCode}{ShipTo}{Possition}                      CS{row["DNKI_PartNo"].ToString().PadRight(15)}{row["CUST_PartNo"].ToString().PadRight(25)}{row["CUST_PartQty"].ToString().PadRight(7)}{row["CUST_Sequence"].ToString().PadLeft(7)}{formattedCustScannedOn}        {row["CUST_Sequence"].ToString().PadLeft(7)}              ";
+                                    str1 = "L" + Sequence.PadLeft(4, '0') + clsGlobal.mWarehouseNo.PadLeft(2, '0') +
+                                      clsGlobal.mDeviceID.PadLeft(2, '0') + "    " + clsGlobal.mUserId.PadRight(7, ' ') + formattedDNHAScannedOn + "1000" + coUNT.ToString().PadRight(2, '0') + "3000" +
+                                      TruckNo + CustCode + ShipTo + Possition + "                " + "".ToString().PadRight(15, ' ') + "".PadRight(25, ' ') + "".ToString().PadRight(7, ' ') + "".ToString().PadLeft(17, ' ') +
+                                      //dt1.Rows[B]["DNKI_PartQty"].ToString() + dt1.Rows[B]["DNKI_PartQty"].ToString() + dt1.Rows[B]["DNKI_Sequence"].ToString().PadLeft(7, '0') +
+                                      //formattedCustScannedOnDateTime + "                             "; Commented by dipak pathak 08-03-2025
+                                      formattedDNHAScannedOnDateTime + "                             ";
+                                }
+                                else
+                                {
+                                    str1 = "L" + Sequence.PadLeft(4, '0') + clsGlobal.mWarehouseNo.PadLeft(2, '0') +
+                                      clsGlobal.mDeviceID.PadLeft(2, '0') + "    " + clsGlobal.mUserId.PadRight(7, ' ') + formattedCustScannedOnDate + "1000" + coUNT.ToString().PadRight(2, '0') + "3000" +
+                                      TruckNo + CustCode + ShipTo + Possition + "                      CS" + row["DNKI_PartNo"].ToString().PadRight(15, ' ') + row["CUST_PartNo"].ToString().PadRight(25, ' ') + row["CUST_PartQty"].ToString().PadRight(7, ' ') + row["CUST_Sequence"].ToString().PadLeft(7, ' ') +
+                                      //dt1.Rows[B]["DNKI_PartQty"].ToString() + dt1.Rows[B]["DNKI_PartQty"].ToString() + dt1.Rows[B]["DNKI_Sequence"].ToString().PadLeft(7, '0') +
+                                      //formattedCustScannedOnDateTime + "                             "; Commented by dipak pathak 08-03-2025
+                                      formattedCustScannedOnDateTime + "            ";
+                                }
+                                clsGlobal.WriteToFTPFile(datFilePath, str1 + "\r\n");
+                            }
+                            else
+                            {
+                                Sequence = (Convert.ToInt32(Sequence) + 1).ToString();
+                                //string str1 = $"L{Sequence.PadLeft(4, '0')}{clsGlobal.mWarehouseNo.PadLeft(2, '0')}{clsGlobal.mDeviceID.PadLeft(2, '0')}    {clsGlobal.mUserId.PadRight(7)}{Convert.ToDateTime(row["CustScannedOn"]).ToString("yyyyMMdd")}1000{coUNT.ToString().PadRight(2, '0')}3000{TruckNo}{CustCode}{ShipTo}{Possition}                      CS{DensoPart.PadRight(15)}{row["CUST_PartNo"].ToString().PadRight(25)}{row["CUST_PartQty"].ToString().PadRight(7)}{row["CUST_Sequence"].ToString().PadLeft(7)}{Convert.ToDateTime(row["CustScannedOn"]).ToString("yyyyMMddHHmmss")}        {row["CUST_Sequence"].ToString().PadLeft(7)}              ";
+                                string custScannedOn = row["CustScannedOn"].ToString();
+                                string dnhScannedOn = row["DNKIScannedOn"].ToString();
+
+                                string formattedDNHAScannedOn = string.IsNullOrEmpty(dnhScannedOn) ? "" : Convert.ToDateTime(dnhScannedOn).ToString("yyyyMMdd");
+                                string formattedDNHAScannedOnDateTime = string.IsNullOrEmpty(dnhScannedOn) ? "" : Convert.ToDateTime(dnhScannedOn).ToString("yyyyMMddHHmmss");
+
+                                string formattedCustScannedOnDateTime = string.IsNullOrEmpty(custScannedOn) ? "" : Convert.ToDateTime(custScannedOn).ToString("yyyyMMddHHmmss");
+                                string formattedCustScannedOnDate = string.IsNullOrEmpty(custScannedOn) ? "" : Convert.ToDateTime(custScannedOn).ToString("yyyyMMdd");
+                                string str1 = "";
+                                if (formattedCustScannedOnDate == "")
+                                {
+                                    //string str1 = $"L{Sequence.PadLeft(4, '0')}{clsGlobal.mWarehouseNo.PadLeft(2, '0')}{clsGlobal.mDeviceID.PadLeft(2, '0')}    {clsGlobal.mUserId.PadRight(7)}{formattedCustScannedOn}1000{coUNT.ToString().PadRight(2, '0')}3000{TruckNo}{CustCode}{ShipTo}{Possition}                      CS{DensoPart.PadRight(15)}{row["CUST_PartNo"].ToString().PadRight(25)}{row["CUST_PartQty"].ToString().PadRight(7)}{row["CUST_Sequence"].ToString().PadLeft(7)}{formattedCustScannedOn}        {row["CUST_Sequence"].ToString().PadLeft(7)}              ";
+                                    str1 = "L" + Sequence.PadLeft(4, '0') + clsGlobal.mWarehouseNo.PadLeft(2, '0') +
+                                       clsGlobal.mDeviceID.PadLeft(2, '0') + "    " + clsGlobal.mUserId.PadRight(7, ' ') + formattedDNHAScannedOn + "1000" + coUNT.ToString().PadRight(2, '0') + "3000" +
+                                       TruckNo + CustCode + ShipTo + Possition + "                " + "".PadRight(15, ' ') + "".ToString().PadRight(25, ' ') + "".ToString().PadRight(7, ' ') + "".ToString().PadLeft(15, ' ') +
+                                       //dt1.Rows[B]["DNKI_PartQty"].ToString() + dt1.Rows[B]["DNKI_PartQty"].ToString() + dt1.Rows[B]["DNKI_Sequence"].ToString().PadLeft(7, '0') +
+                                       //formattedCustScannedOnDateTime + "                             "; Commmented Dipak Pathak 08-03-25
+                                       formattedDNHAScannedOnDateTime + "                             ";
+                                }
+                                else
+                                {
+                                    str1 = "L" + Sequence.PadLeft(4, '0') + clsGlobal.mWarehouseNo.PadLeft(2, '0') +
+                                      clsGlobal.mDeviceID.PadLeft(2, '0') + "    " + clsGlobal.mUserId.PadRight(7, ' ') + formattedCustScannedOnDate + "1000" + coUNT.ToString().PadRight(2, '0') + "3000" +
+                                      TruckNo + CustCode + ShipTo + Possition + "                      CS" + DensoPart.PadRight(15, ' ') + row["CUST_PartNo"].ToString().PadRight(25, ' ') + row["CUST_PartQty"].ToString().PadRight(7, ' ') + row["CUST_Sequence"].ToString().PadLeft(7, ' ') +
+                                      //dt1.Rows[B]["DNKI_PartQty"].ToString() + dt1.Rows[B]["DNKI_PartQty"].ToString() + dt1.Rows[B]["DNKI_Sequence"].ToString().PadLeft(7, '0') +
+                                      //formattedCustScannedOnDateTime + "                             "; Commmented Dipak Pathak 08-03-25
+                                      formattedCustScannedOnDateTime + "            ";
+                                }
+                                clsGlobal.WriteToFTPFile(datFilePath, str1 + "\r\n");
+                            }
+                        }
+
+                        coUNT++;
+                        Thread.Sleep(2000);
                         Sequence = (Convert.ToInt32(Sequence) + 1).ToString();
-                        PartNo1 = dr2["DNKI_PartNo"].ToString();
-                        Qty = dt3.AsEnumerable().Where(r => r["DNKI_PartNo"].ToString() == PartNo1).Sum(r => Convert.ToInt32(r["DNKI_PartQty"]));
+                        string str2 = $"L{Sequence.PadLeft(4, '0')}{clsGlobal.mWarehouseNo.PadLeft(2, '0')}{clsGlobal.mDeviceID.PadLeft(2, '0')}    {clsGlobal.mUserId.PadRight(7)}{DateTime.Now:yyyyMMdd}3000{coUNT.ToString().PadRight(2, '0')}0000{TruckNo}{CustCode}{ShipTo}{Possition}                                                                              {DateTime.Now:yyyyMMdd}{DateTime.Now:HHmmss}                             ";
+                        clsGlobal.WriteToFTPFile(datFilePath, str2 + "\r\n");
 
-                        //string str = $"L{Sequence.PadLeft(4, '0')}{clsGlobal.mWarehouseNo.PadLeft(2, '0')}{clsGlobal.mDeviceID.PadLeft(2, '0')}    {clsGlobal.mUserId.PadRight(7)}{Convert.ToDateTime(SILScannedon).ToString("yyyyMMdd")}1000101000{TruckNo}{CustCode}{ShipTo}{Possition}{dr2["DNKI_PartNo"].ToString().PadRight(15)}{Qty.ToString().PadLeft(7, '0')}                                                        {Convert.ToDateTime(SILScannedon).ToString("yyyyMMddHHmmss")}                             ";
-                        string str = "L" + Sequence.PadLeft(4, '0') + clsGlobal.mWarehouseNo.PadLeft(2, '0') +
-                        clsGlobal.mDeviceID.PadLeft(2, '0') + "    " + clsGlobal.mUserId.PadRight(7, ' ') + Convert.ToDateTime(SILScannedon).ToString("yyyyMMdd") + "1000101000" +
-                        TruckNo + CustCode + ShipTo + Possition + dr2["DNKI_PartNo"].ToString().PadRight(15, ' ') +
-                        Qty.ToString().PadLeft(7, '0') + "                                                        " +
-                        Convert.ToDateTime(SILScannedon).ToString("yyyyMMddHHmmss") + "                             ";
-                        
-                        clsGlobal.WriteToFTPFile(datFilePath, str + "\r\n");
-                    }
-                }
+                        File.Delete(sequencePath);
+                        clsGlobal.WriteToFile(sequencePath, "0");
 
-                int coUNT = 1;
-                foreach (DataRow row in dt1.Rows)
-                {
-                    coUNT++;
-                    Sequence = (Convert.ToInt32(Sequence) + 1).ToString();
-                    // string str = $"L{Sequence.PadLeft(4, '0')}{clsGlobal.mWarehouseNo.PadLeft(2, '0')}{clsGlobal.mDeviceID.PadLeft(2, '0')}    {clsGlobal.mUserId.PadRight(7)}{Convert.ToDateTime(row["DNKIScannedOn"]).ToString("yyyyMMdd")}1000{coUNT.ToString().PadRight(2, '0')}2000{TruckNo}{CustCode}{ShipTo}{Possition}                      21{row["DNKI_PartNo"].ToString().PadRight(15)}{row["CUST_PartNo"].ToString().PadRight(25)}{row["DNKI_PartQty"].ToString().PadLeft(7)}{row["DNKI_Sequence"].ToString().PadLeft(7, '0')}{Convert.ToDateTime(row["DNKIScannedOn"]).ToString("yyyyMMddHHmmss")}                             ";
-                    string str = "L" + Sequence.PadLeft(4, '0') + clsGlobal.mWarehouseNo.PadLeft(2, '0') +
-                        clsGlobal.mDeviceID.PadLeft(2, '0') + "    " + clsGlobal.mUserId.PadRight(7, ' ') + Convert.ToDateTime(row["DNKIScannedOn"]).ToString("yyyyMMdd") + "1000" + coUNT.ToString().PadRight(2, '0') + "2000" +
-                        TruckNo + CustCode + ShipTo + Possition + "                      21" + row["DNKI_PartNo"].ToString().PadRight(15, ' ') + row["CUST_PartNo"].ToString().PadRight(25, ' ') +
-                        row["DNKI_PartQty"].ToString().PadLeft(7, ' ') + row["DNKI_Sequence"].ToString().PadLeft(7, '0') +
-                        Convert.ToDateTime(row["DNKIScannedOn"]).ToString("yyyyMMddHHmmss") + "        " + row["DNKI_Sequence"].ToString().PadLeft(7, '0') + "              ";
-                    clsGlobal.WriteToFTPFile(datFilePath, str + "\r\n");
-                    coUNT++;
+                        WriteFTPFile("ftp://" + clsGlobal.mFTPIP + "/SS" + System.DateTime.Now.ToString("yyMMdd") + System.DateTime.Now.ToString("HHmmss") + clsGlobal.mDeviceID + ".DAT", clsGlobal.mFTPUserID, clsGlobal.mFTPPassword);
+                        clsGlobal.DeleteDirectory(Path_1);
+                        SoundForOK();
+                        //});
+                        //clsGlobal.DeleteDirectory(strFinal);
+                        clsGlobal.ShowMessage($"This SIL File Transferred {spinnerSIL.SelectedItem.ToString().Replace("*", "")} Successfully!!!", this, MessageTitle.INFORMATION);
+                        BindSpinnerCompltedSIL();
+                        _ListItem.Clear();
+                        receivingItemAdapter.NotifyDataSetChanged();
 
-                    if (DensoPart != "")
-                    {
-                        Sequence = (Convert.ToInt32(Sequence) + 1).ToString();
-                        // string str1 = $"L{Sequence.PadLeft(4, '0')}{clsGlobal.mWarehouseNo.PadLeft(2, '0')}{clsGlobal.mDeviceID.PadLeft(2, '0')}    {clsGlobal.mUserId.PadRight(7)}{Convert.ToDateTime(row["CustScannedOn"]).ToString("yyyyMMdd")}1000{coUNT.ToString().PadRight(2, '0')}3000{TruckNo}{CustCode}{ShipTo}{Possition}                      CS{row["DNKI_PartNo"].ToString().PadRight(15)}{row["CUST_PartNo"].ToString().PadRight(25)}{row["CUST_PartQty"].ToString().PadRight(7)}{row["CUST_Sequence"].ToString().PadLeft(7)}{Convert.ToDateTime(row["CustScannedOn"]).ToString("yyyyMMddHHmmss")}        {row["CUST_Sequence"].ToString().PadLeft(7)}              ";
-                        string custScannedOn = row["CustScannedOn"].ToString();
-                        string formattedCustScannedOnDateTime = string.IsNullOrEmpty(custScannedOn) ? "" : Convert.ToDateTime(custScannedOn).ToString("yyyyMMddHHmmss");
-                        string formattedCustScannedOnDate = string.IsNullOrEmpty(custScannedOn) ? "" : Convert.ToDateTime(custScannedOn).ToString("yyyyMMdd");
+                    });
 
-                        //string str1 = $"L{Sequence.PadLeft(4, '0')}{clsGlobal.mWarehouseNo.PadLeft(2, '0')}{clsGlobal.mDeviceID.PadLeft(2, '0')}    {clsGlobal.mUserId.PadRight(7)}{formattedCustScannedOn}1000{coUNT.ToString().PadRight(2, '0')}3000{TruckNo}{CustCode}{ShipTo}{Possition}                      CS{row["DNKI_PartNo"].ToString().PadRight(15)}{row["CUST_PartNo"].ToString().PadRight(25)}{row["CUST_PartQty"].ToString().PadRight(7)}{row["CUST_Sequence"].ToString().PadLeft(7)}{formattedCustScannedOn}        {row["CUST_Sequence"].ToString().PadLeft(7)}              ";
-                        string str1 = "L" + Sequence.PadLeft(4, '0') + clsGlobal.mWarehouseNo.PadLeft(2, '0') +
-                           clsGlobal.mDeviceID.PadLeft(2, '0') + "    " + clsGlobal.mUserId.PadRight(7, ' ') + formattedCustScannedOnDate + "1000" + coUNT.ToString().PadRight(2, '0') + "3000" +
-                           TruckNo + CustCode + ShipTo + Possition + "                      CS" + row["DNKI_PartNo"].ToString().PadRight(15, ' ') + row["CUST_PartNo"].ToString().PadRight(25, ' ') + row["CUST_PartQty"].ToString().PadRight(7, ' ') + row["CUST_Sequence"].ToString().PadLeft(7, ' ') +
-                           //dt1.Rows[B]["DNKI_PartQty"].ToString() + dt1.Rows[B]["DNKI_PartQty"].ToString() + dt1.Rows[B]["DNKI_Sequence"].ToString().PadLeft(7, '0') +
-                           formattedCustScannedOnDateTime + "                             ";
-                        clsGlobal.WriteToFTPFile(datFilePath, str1 + "\r\n");
-                    }
-                    else
-                    {
-                        Sequence = (Convert.ToInt32(Sequence) + 1).ToString();
-                        //string str1 = $"L{Sequence.PadLeft(4, '0')}{clsGlobal.mWarehouseNo.PadLeft(2, '0')}{clsGlobal.mDeviceID.PadLeft(2, '0')}    {clsGlobal.mUserId.PadRight(7)}{Convert.ToDateTime(row["CustScannedOn"]).ToString("yyyyMMdd")}1000{coUNT.ToString().PadRight(2, '0')}3000{TruckNo}{CustCode}{ShipTo}{Possition}                      CS{DensoPart.PadRight(15)}{row["CUST_PartNo"].ToString().PadRight(25)}{row["CUST_PartQty"].ToString().PadRight(7)}{row["CUST_Sequence"].ToString().PadLeft(7)}{Convert.ToDateTime(row["CustScannedOn"]).ToString("yyyyMMddHHmmss")}        {row["CUST_Sequence"].ToString().PadLeft(7)}              ";
-                        string custScannedOn = row["CustScannedOn"].ToString();
-                        string formattedCustScannedOnDateTime = string.IsNullOrEmpty(custScannedOn) ? "" : Convert.ToDateTime(custScannedOn).ToString("yyyyMMddHHmmss");
-                        string formattedCustScannedOnDate = string.IsNullOrEmpty(custScannedOn) ? "" : Convert.ToDateTime(custScannedOn).ToString("yyyyMMdd");
-
-                        //string str1 = $"L{Sequence.PadLeft(4, '0')}{clsGlobal.mWarehouseNo.PadLeft(2, '0')}{clsGlobal.mDeviceID.PadLeft(2, '0')}    {clsGlobal.mUserId.PadRight(7)}{formattedCustScannedOn}1000{coUNT.ToString().PadRight(2, '0')}3000{TruckNo}{CustCode}{ShipTo}{Possition}                      CS{DensoPart.PadRight(15)}{row["CUST_PartNo"].ToString().PadRight(25)}{row["CUST_PartQty"].ToString().PadRight(7)}{row["CUST_Sequence"].ToString().PadLeft(7)}{formattedCustScannedOn}        {row["CUST_Sequence"].ToString().PadLeft(7)}              ";
-                        string str1 = "L" + Sequence.PadLeft(4, '0') + clsGlobal.mWarehouseNo.PadLeft(2, '0') +
-                            clsGlobal.mDeviceID.PadLeft(2, '0') + "    " + clsGlobal.mUserId.PadRight(7, ' ') + formattedCustScannedOnDate + "1000" + coUNT.ToString().PadRight(2, '0') + "3000" +
-                            TruckNo + CustCode + ShipTo + Possition + "                      CS" + DensoPart.PadRight(15, ' ') + row["CUST_PartNo"].ToString().PadRight(25, ' ') + row["CUST_PartQty"].ToString().PadRight(7, ' ') + row["CUST_Sequence"].ToString().PadLeft(7, ' ') +
-                            //dt1.Rows[B]["DNKI_PartQty"].ToString() + dt1.Rows[B]["DNKI_PartQty"].ToString() + dt1.Rows[B]["DNKI_Sequence"].ToString().PadLeft(7, '0') +
-                            formattedCustScannedOnDateTime + "                             ";
-                        clsGlobal.WriteToFTPFile(datFilePath, str1 + "\r\n");
-                    }
-                }
-
-                coUNT++;
-                Thread.Sleep(2000);
-                Sequence = (Convert.ToInt32(Sequence) + 1).ToString();
-                string str2 = $"L{Sequence.PadLeft(4, '0')}{clsGlobal.mWarehouseNo.PadLeft(2, '0')}{clsGlobal.mDeviceID.PadLeft(2, '0')}    {clsGlobal.mUserId.PadRight(7)}{DateTime.Now:yyyyMMdd}3000{coUNT.ToString().PadRight(2, '0')}0000{TruckNo}{CustCode}{ShipTo}{Possition}                                                                              {DateTime.Now:yyyyMMdd}{DateTime.Now:HHmmss}                             ";
-                clsGlobal.WriteToFTPFile(datFilePath, str2 + "\r\n");
-
-                File.Delete(sequencePath);
-                clsGlobal.WriteToFile(sequencePath, "0");
-
-                WriteFTPFile("ftp://" + clsGlobal.mFTPIP + "/SS" + System.DateTime.Now.ToString("yyMMdd") + System.DateTime.Now.ToString("HHmmss") + clsGlobal.mDeviceID + ".DAT", clsGlobal.mFTPUserID, clsGlobal.mFTPPassword);
-                //clsGlobal.DeleteDirectory(strFinal);
-                clsGLB.ShowMessage($"This SIL File Transferred {spinnerSIL.SelectedItem.ToString().Replace("*","")} Successfully!!!", this, MessageTitle.INFORMATION);
-                clsGlobal.DeleteDirectory(Path_1);
-                BindSpinnerCompltedSIL();
-                receivingItemAdapter.NotifyDataSetChanged();
-            
-               
-
+                });
             }
             catch (Exception ex)
             {
-
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                editProgressbar.Visibility = ViewStates.Gone;
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
+            finally
+            {
+                editProgressbar.Visibility = ViewStates.Gone;
+            }
+
+        }
+        private void SoundForOK()
+        {
+            try
+            {
+                Task.Run(() =>
+                { //Start Vibration
+                    long[] pattern = { 0, 2000, 500 }; //0 to start now, 200 to vibrate 200 ms, 0 to sleep for 0 ms.
+                    vibrator.Vibrate(pattern, -1);//
+                    StopPlayingSound();
+                    StartPlayingSound(true);
+                    Thread.Sleep(2000);
+                    StopPlayingSound();
+                    vibrator.Cancel();
+                });
+
+            }
+            catch (Exception ex) { throw ex; }
         }
         private string WriteFTPFile(string path, string Username, string password)
         {
             string strTranscationPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
-            string Path_1 = Path.Combine(strTranscationPath, spinnerSIL.SelectedItem.ToString().Replace("*",""));
+            string Path_1 = Path.Combine(strTranscationPath, spinnerSIL.SelectedItem.ToString().Replace("*", ""));
             string filePath = Path_1 + "//" + SILHeader + ".DAT";
             Uri severUri = new Uri(path);
             if (severUri.Scheme != Uri.UriSchemeFtp)
@@ -471,13 +561,13 @@ namespace SMPDisptach.ActivityClass
         private void SaveDataIntoTable(ref DataTable dtHead, ref DataTable dtDetails)
         {
             PL_HHT_DOWNLOAD _plObj = null;
-            
+
             BL_HHT_DOWNLOAD _blObj = new BL_HHT_DOWNLOAD();
             PL_DETAILS_DATA _plObjDetailsData = null;
             BL_DETAILS_DATA _blObjDetailsData = new BL_DETAILS_DATA();
             try
             {
-                
+
                 _plObj = new PL_HHT_DOWNLOAD();
                 _plObj.DbType = "DELETE";
                 _plObj.SIL_CODE = spinnerSIL.SelectedItem.ToString().Replace("*", "");
@@ -498,7 +588,7 @@ namespace SMPDisptach.ActivityClass
                     _plObj.TOTAL_QTY = Convert.ToInt32(dtHead.Rows[iHeader][1]);
                     _plObj.SCAN_QTY = Convert.ToInt32(dtHead.Rows[iHeader][2]);
                     _plObj.BAL_QTY = Convert.ToInt32(dtHead.Rows[iHeader][3]);
-                    _plObj.BinQty= Convert.ToInt32(dtHead.Rows[iHeader][4]);
+                    _plObj.BinQty = Convert.ToInt32(dtHead.Rows[iHeader][4]);
                     _plObj.CP_PROCESS = dtDetails.Columns.Count == 3 ? "2POINTS" : "3POINTS";
                     _plObj.CreatedBy = clsGlobal.mUserId;
 
@@ -509,7 +599,7 @@ namespace SMPDisptach.ActivityClass
                     _plObj = new PL_HHT_DOWNLOAD();
                     _plObj.DbType = "DETAILS";
                     _plObj.CP_PROCESS = dtDetails.Columns.Count == 3 ? "2POINTS" : "3POINTS";
-                    _plObj.SIL_CODE = spinnerSIL.SelectedItem.ToString().Replace("*", ""); 
+                    _plObj.SIL_CODE = spinnerSIL.SelectedItem.ToString().Replace("*", "");
                     _plObj.SIL_BARCODE = clsGlobal.ReplaceCaretWithNewlines(dtDetails.Rows[iDetails][0]?.ToString());
                     _plObj.BARCODE1 = dtDetails.Rows[iDetails][1]?.ToString();
                     if (_plObj.CP_PROCESS == "2POINTS")
@@ -533,7 +623,7 @@ namespace SMPDisptach.ActivityClass
                     _plObj.PART_NO = dtDetails.Rows[iDetails][3]?.ToString();
                     _plObj.CreatedBy = clsGlobal.mUserId;
                     _blObj.BL_ExecuteTask(_plObj);
-                     _plObjDetailsData=new PL_DETAILS_DATA();
+                    _plObjDetailsData = new PL_DETAILS_DATA();
                     _plObjDetailsData.DbType = "SAVE";
                     _plObjDetailsData.SILNo = spinnerSIL.SelectedItem.ToString().Replace("*", "");
                     _plObjDetailsData.SILBarcode = dtDetails.Rows[iDetails][0]?.ToString();
@@ -558,7 +648,7 @@ namespace SMPDisptach.ActivityClass
                     _plObjDetailsData.Barcode1SeqNo = dtDetails.Rows[iDetails][19]?.ToString() == "" ? "" : dtDetails.Rows[iDetails][19]?.ToString();
                     _plObjDetailsData.MatchBarcode2SeqNo = dtDetails.Rows[iDetails][20]?.ToString() == "" ? false : Convert.ToBoolean(dtDetails.Rows[iDetails][20]?.ToString());
                     _plObjDetailsData.Barcode2SeqNo = dtDetails.Rows[iDetails][21]?.ToString() == "" ? "" : dtDetails.Rows[iDetails][21]?.ToString();
-                     _blObjDetailsData = new BL_DETAILS_DATA();
+                    _blObjDetailsData = new BL_DETAILS_DATA();
                     _blObjDetailsData.BL_ExecuteTask(_plObjDetailsData);
 
 
@@ -575,7 +665,7 @@ namespace SMPDisptach.ActivityClass
             try
             {
                 string strTranscationPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
-                string strFinal = Path.Combine(strTranscationPath, spinnerSIL.SelectedItem.ToString().Replace("*","").Replace("*",""));
+                string strFinal = Path.Combine(strTranscationPath, spinnerSIL.SelectedItem.ToString().Replace("*", "").Replace("*", ""));
                 DataTable dtHead = null;
                 DataTable dtDetails = null;
                 string strMainScanFile = Path.Combine(strFinal, clsGlobal.SILDetailsFile);
@@ -584,18 +674,22 @@ namespace SMPDisptach.ActivityClass
                 string strAllString = File.ReadAllText(strMainScanFile);
                 clsGlobal.mBindDataTablesSep(strHeaderPath, strDetailsPath, "~", ref dtHead, ref dtDetails);
                 DataTable dtMain = CreateDataTable(strAllString);
+                if (string.IsNullOrEmpty(clsGlobal.mUserId))
+                {
+                    clsGlobal.mUserId = "1";
+                }
                 if (dtMain.Rows.Count > 0)
                 {
                     SaveDataIntoTable(ref dtHead, ref dtDetails);
                     DtSIL = ToDataTable(_ListItem);
                     FileGenerate(dtMain);
-                    
+
                 }
             }
             catch (Exception ex)
             {
 
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
             finally
             { StopPlayingSound(); }
@@ -606,7 +700,7 @@ namespace SMPDisptach.ActivityClass
             {
 
                 _ListItem.Clear();
-                string strSILCode = spinnerSIL.SelectedItem.ToString().Replace("*","");
+                string strSILCode = spinnerSIL.SelectedItem.ToString().Replace("*", "");
                 string strTranscationPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
                 string strFinalSILWiseDirectory = Path.Combine(strTranscationPath, strSILCode);
                 string strFinalFilePath = Path.Combine(strFinalSILWiseDirectory, clsGlobal.SILMasterDataFile);
@@ -615,6 +709,7 @@ namespace SMPDisptach.ActivityClass
                 if (File.Exists(strFinalFilePath))
                 {
                     _ListItem = clsGlobal.ReadSILFTPFileToList(strFinalFilePath);
+
                 }
 
                 receivingItemAdapter = new SILFTPScanningItemAdapter(this, _ListItem);
@@ -630,14 +725,14 @@ namespace SMPDisptach.ActivityClass
             {
                 _lstFlag.Clear();
                 _lstFlag.Add("--Select--");
-                string[] directoriesFinal = Directory.GetDirectories(path);
+                string[] directoriesFinal = Directory.GetDirectories(path).OrderBy(x => x).ToArray();
                 for (int i = 0; i < directoriesFinal.Length; i++)
                 {
                     string strCompltedSIL = Path.Combine(directoriesFinal[i].TrimEnd(Path.DirectorySeparatorChar), clsGlobal.SILCompletedFile);
                     if (File.Exists(strCompltedSIL))
                     {
                         string strSILCode = Path.GetFileName(directoriesFinal[i].TrimEnd(Path.DirectorySeparatorChar));
-                        _lstFlag.Add("*"+strSILCode);
+                        _lstFlag.Add("*" + strSILCode);
                     }
                 }
 
@@ -734,7 +829,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -747,7 +842,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 

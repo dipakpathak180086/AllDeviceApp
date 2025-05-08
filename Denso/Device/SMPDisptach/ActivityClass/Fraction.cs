@@ -38,7 +38,7 @@ namespace SMPDisptach.ActivityClass
         private BL_FRACTION _blObj = null;
         private PL_FRACTION _plObj = null;
         Vibrator vibrator;
-        clsGlobal clsGLB;
+        clsGlobal clsGlobal;
         EditText txtMasterBarcode, txtChildBarcode;
         Dictionary<string, string> dicRegPlant = new Dictionary<string, string>();
         TextView txtTotalQty, txtScanQty;
@@ -69,7 +69,7 @@ namespace SMPDisptach.ActivityClass
         {
             try
             {
-                clsGLB = new clsGlobal();
+                //clsGlobal = new clsGlobal();
                 _blObj = new BL_FRACTION();
 
             }
@@ -137,7 +137,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -176,7 +176,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -188,7 +188,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
         private void StartPlayingSound(bool isSaved = false)
@@ -302,7 +302,7 @@ namespace SMPDisptach.ActivityClass
                 }
                 catch
                 {
-                    clsGLB.showToastNGMessage($"Invalid DNHA Child Kanban Barcode.", this);
+                    clsGlobal.showToastNGMessage($"Invalid DNHA Child Kanban Barcode.", this);
 
                     SoundForNG();
                     ShowAlertPopUp();
@@ -310,7 +310,7 @@ namespace SMPDisptach.ActivityClass
                 }
                 if (!strMasterPartNo.Equals(strChildPartNo))
                 {
-                    clsGLB.showToastNGMessage($"Master And Child Kanban Part No should be same.", this);
+                    clsGlobal.showToastNGMessage($"Master And Child Kanban Part No should be same.", this);
                     txtChildBarcode.Text = "";
                     SoundForNG();
                     ShowAlertPopUp();
@@ -320,7 +320,7 @@ namespace SMPDisptach.ActivityClass
                 }
                 if (txtMasterBarcode.Text.Trim().Equals(txtChildBarcode.Text.Trim()))
                 {
-                    clsGLB.showToastNGMessage($"Master And Child Kanban should not be same.", this);
+                    clsGlobal.showToastNGMessage($"Master And Child Kanban should not be same.", this);
                     txtChildBarcode.Text = "";
                     SoundForNG();
                     ShowAlertPopUp();
@@ -330,7 +330,7 @@ namespace SMPDisptach.ActivityClass
                 }
                 if (iChildQty>iMasterQty)
                 {
-                    clsGLB.showToastNGMessage($"Child Kanban Qty should be less then Master Kanban Qty..", this);
+                    clsGlobal.showToastNGMessage($"Child Kanban Qty should be less then Master Kanban Qty.", this);
                     txtChildBarcode.Text = "";
                     SoundForNG();
                     ShowAlertPopUp();
@@ -340,7 +340,7 @@ namespace SMPDisptach.ActivityClass
                 }
                 if (_TotalQty == _ScanQty)
                 {
-                    clsGLB.showToastNGMessage($"Master Kanban Fraction Completed!!", this);
+                    clsGlobal.showToastNGMessage($"Master Kanban Fraction Completed!!", this);
                     clear();
                     return;
                 }
@@ -363,14 +363,14 @@ namespace SMPDisptach.ActivityClass
                         txtChildBarcode.Text = "";
                         if (_TotalQty == _ScanQty)
                         {
-                            clsGLB.showToastNGMessage($"Master Kanban Fraction Completed!!", this);
+                            clsGlobal.showToastNGMessage($"Master Kanban Fraction Completed!!", this);
                             clear();
                             return;
                         }
                     }
                     else
                     {
-                        clsGLB.showToastNGMessage($"{dtData.Rows[0]["Result"].ToString()}", this);
+                        clsGlobal.showToastNGMessage($"{dtData.Rows[0]["Result"].ToString()}", this);
                         txtChildBarcode.Text = "";
                         SoundForNG();
                         ShowAlertPopUp();
@@ -399,7 +399,7 @@ namespace SMPDisptach.ActivityClass
                 {
                     if (Convert.ToInt32(dtData.Rows[0]["Qty"].ToString()) == Convert.ToInt32(dtData.Rows[0]["ScanQty"].ToString()))
                     {
-                        clsGLB.showToastNGMessage($"Master Kanban Fraction Completed!!", this);
+                        clsGlobal.showToastNGMessage($"Master Kanban Fraction Completed!!", this);
                         clear();
                         return;
                     }
@@ -431,7 +431,7 @@ namespace SMPDisptach.ActivityClass
                     }
                     catch
                     {
-                        clsGLB.showToastNGMessage($"Invalid DNHA Master Kanban Barcode.", this);
+                        clsGlobal.showToastNGMessage($"Invalid DNHA Master Kanban Barcode.", this);
 
                         SoundForNG();
                         ShowAlertPopUp();
@@ -482,7 +482,7 @@ namespace SMPDisptach.ActivityClass
                 //{
 
                 //    lblResult.Text = $"This Delivery ({txtSILBarcode.Text.Trim()}) Data Saved Successfully!!!";
-                //    clsGLB.ShowMessage($"This Delivery ({txtSILBarcode.Text.Trim()}) Data Saved Successfully!!!", this, MessageTitle.INFORMATION);
+                //    clsGlobal.ShowMessage($"This Delivery ({txtSILBarcode.Text.Trim()}) Data Saved Successfully!!!", this, MessageTitle.INFORMATION);
                 //    txtDNHAKanbanBarcode.Text = "";
                 //    txtDNHAKanbanBarcode.RequestFocus();
 
@@ -516,7 +516,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
 
 
@@ -566,7 +566,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -579,7 +579,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -597,7 +597,7 @@ namespace SMPDisptach.ActivityClass
                         }
                         if (string.IsNullOrEmpty(txtMasterBarcode.Text.Trim()))
                         {
-                            clsGLB.showToastNGMessage($"Scan DNHA Kanban Barcode.", this);
+                            clsGlobal.showToastNGMessage($"Scan DNHA Kanban Barcode.", this);
                             txtMasterBarcode.Text = "";
                             txtMasterBarcode.RequestFocus();
                             SoundForNG();
@@ -606,7 +606,7 @@ namespace SMPDisptach.ActivityClass
                         }
                         else if (txtMasterBarcode.Text.Length < 25)
                         {
-                            clsGLB.showToastNGMessage($"Invalid DNHA Kanban Barcode.", this);
+                            clsGlobal.showToastNGMessage($"Invalid DNHA Kanban Barcode.", this);
                             txtMasterBarcode.Text = "";
                             txtMasterBarcode.RequestFocus();
                             SoundForNG();
@@ -623,7 +623,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
         private void TxtChildBarcode_KeyPress(object sender, View.KeyEventArgs e)
@@ -640,7 +640,7 @@ namespace SMPDisptach.ActivityClass
                         }
                         if (string.IsNullOrEmpty(txtMasterBarcode.Text.Trim()))
                         {
-                            clsGLB.showToastNGMessage($"Scan DNHA Master Kanban Barcode.", this);
+                            clsGlobal.showToastNGMessage($"Scan DNHA Master Kanban Barcode.", this);
                             txtMasterBarcode.Text = "";
                             txtMasterBarcode.RequestFocus();
                             SoundForNG();
@@ -649,7 +649,7 @@ namespace SMPDisptach.ActivityClass
                         }
                         else if (txtMasterBarcode.Text.Length < 25)
                         {
-                            clsGLB.showToastNGMessage($"Invalid DNHA Master Kanban Barcode.", this);
+                            clsGlobal.showToastNGMessage($"Invalid DNHA Master Kanban Barcode.", this);
                             txtMasterBarcode.Text = "";
                             txtMasterBarcode.RequestFocus();
                             SoundForNG();
@@ -658,7 +658,7 @@ namespace SMPDisptach.ActivityClass
                         }
                         else if (string.IsNullOrEmpty(txtChildBarcode.Text.Trim()))
                         {
-                            clsGLB.showToastNGMessage($"Scan DNHA Child Kanban Barcode.", this);
+                            clsGlobal.showToastNGMessage($"Scan DNHA Child Kanban Barcode.", this);
                             txtChildBarcode.Text = "";
                             txtChildBarcode.RequestFocus();
                             SoundForNG();
@@ -667,7 +667,7 @@ namespace SMPDisptach.ActivityClass
                         }
                         else if (txtChildBarcode.Text.Length < 25)
                         {
-                            clsGLB.showToastNGMessage($"Invalid DNHA Child Kanban Barcode.", this);
+                            clsGlobal.showToastNGMessage($"Invalid DNHA Child Kanban Barcode.", this);
                             txtChildBarcode.Text = "";
                             txtChildBarcode.RequestFocus();
                             SoundForNG();
@@ -676,7 +676,7 @@ namespace SMPDisptach.ActivityClass
                         }
                         else if (_ListItem.Count == 0)
                         {
-                            clsGLB.showToastNGMessage($"Scan First DNHA Master Kanban Barcode.", this);
+                            clsGlobal.showToastNGMessage($"Scan First DNHA Master Kanban Barcode.", this);
 
                             SoundForNG();
                             ShowAlertPopUp();
@@ -692,7 +692,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 

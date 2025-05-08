@@ -77,6 +77,8 @@ namespace SMPDisptach
 
         // Property for IsExpDate (manual set/get, no calculation)
         public bool IsExpDate { get; set; }
+
+        public string LotQty { get; set; }
     }
     public class PL_SUSPECTED_LOT
     {
@@ -146,7 +148,7 @@ namespace SMPDisptach
         public string PartNo { get; set; }
         public string SILQty { get; set; }
         public string DensoQty { get; set; }
-
+        public string Bin { get; set; }
         public string CustQty { get; set; }
     }
     public class ViewFraction
@@ -161,6 +163,7 @@ namespace SMPDisptach
         public string Code { get; set; }
         public string Name { get; set; }
         public string Patterns { get; set; }
+        public string Seperater { get; set; }
         public string ThreePointCheckDigit { get; set; }
         public string Fields { get; set; }
        // public Hashtable hsKeyValueData {  get; set; }=new Hashtable();

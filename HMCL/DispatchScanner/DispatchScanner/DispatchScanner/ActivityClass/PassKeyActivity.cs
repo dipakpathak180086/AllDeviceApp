@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
+using Android;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -34,12 +35,46 @@ namespace ScanAndSaveApp.ActivityClass
                 Toast.MakeText(this, ex.Message, ToastLength.Long).Show();
             }
         }
+        const int RequestId = 1;
+
+        readonly string[] PermissionsGroup =
+            {
+                            //TODO add more permissions
+                            Manifest.Permission.ReadExternalStorage,
+                            Manifest.Permission.WriteExternalStorage,
+             };
+        private void allowThePermission()
+        {
+            RequestPermissions(PermissionsGroup, RequestId);
+        }
+        async void GetPermissionDataAsync(object sender, DialogClickEventArgs e)
+        {
+            var progressDialog = ProgressDialog.Show(this, "", "Please wait...", true);
+            try
+            {
+                await Task.Run(() => allowThePermission());
+            }
+            catch (Exception)
+            {
+                progressDialog.Hide();
+                throw;
+            }
+            finally
+            {
+                progressDialog.Hide();
+            }
+
+        }
         protected override void OnCreate(Bundle savedInstanceState)
         {
             try
             {
                 base.OnCreate(savedInstanceState);
                 SetContentView(Resource.Layout.activity_passkey);
+                if ((int)Build.VERSION.SdkInt >= 23)
+                {
+                    allowThePermission();
+                }
 
                 Button btnLogin = FindViewById<Button>(Resource.Id.btnLogin);
                 btnLogin.Click += btnLogin_Click;
@@ -63,8 +98,12 @@ namespace ScanAndSaveApp.ActivityClass
                     ShowConfirmBox("Do you want to exit", this);
                     //Android.OS.Process.KillProcess(Android.OS.Process.MyPid());
                 };
-
-                if (File.Exists(Path.Combine(clsGlobal.FilePath, "UIDP.SYS")))
+                string mainFolder = Path.Combine(clsGlobal.FilePath, clsGlobal.FileFolder);
+                if (!Directory.Exists(mainFolder))
+                {
+                    Directory.CreateDirectory(mainFolder);
+                }
+                if (File.Exists(Path.Combine(mainFolder, "UIDP.SYS")))
                     ReadServerIP();
                 else
                     WriteServerIP();
@@ -184,7 +223,12 @@ namespace ScanAndSaveApp.ActivityClass
         {
             try
             {
-                string filename = Path.Combine(clsGlobal.FilePath, "UIDP.SYS");
+                string mainFolder = Path.Combine(clsGlobal.FilePath, clsGlobal.FileFolder);
+                if (!Directory.Exists(mainFolder))
+                {
+                    Directory.CreateDirectory(mainFolder);
+                }
+                string filename = Path.Combine(mainFolder, "UIDP.SYS");
                 FileInfo ServerFile = new FileInfo(filename);
                 StreamReader ReadServer;
                 string[] strCon;
@@ -225,7 +269,12 @@ namespace ScanAndSaveApp.ActivityClass
         {
             try
             {
-                string filename = Path.Combine(clsGlobal.FilePath, "UIDP.SYS");
+                string mainFolder = Path.Combine(clsGlobal.FilePath, clsGlobal.FileFolder);
+                if (!Directory.Exists(mainFolder))
+                {
+                    Directory.CreateDirectory(mainFolder);
+                }
+                string filename = Path.Combine(mainFolder, "UIDP.SYS");
                 StreamWriter WriteServer = new StreamWriter(filename, false);
                 //WriteServer.WriteLine(ModInit.GstrServerIP + "~" + ModInit.GintServerPort);
                 WriteServer.WriteLine("1" + "~" + "1");

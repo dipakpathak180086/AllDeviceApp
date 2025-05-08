@@ -4,11 +4,17 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:background="#E8E8EC">
+  <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="20dp">
     <TextView
         android:text="Delivery No."
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
         />
     <EditText
         android:id="@+id/editDeliveryNo"
@@ -21,9 +27,9 @@
         android:layout_width="fill_parent" />
     <TextView
         android:text="Truck No."
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+       android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
         />
     <EditText
         android:id="@+id/editTruckNo"
@@ -36,8 +42,8 @@
     <TextView
         android:text="Frame No"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
         />
     <EditText
         android:id="@+id/editFrameNo"
@@ -49,9 +55,9 @@
         android:imeOptions="actionGo|flagNoFullscreen"
         android:layout_width="fill_parent" />
 
-   
+
     <Button
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="5dp"
         android:text="Clear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,37 +67,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnExit" />
-
-  
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="fill_parent"
-        
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:gravity="center_horizontal">
-     <TextView
+    <TextView
         android:text="0"
-        android:textSize="@dimen/notification_large_icon_height"
+        android:textSize="50sp"
+        android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/lblScanneCount" 
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:id="@+id/lblScanneCount"
         />
-  </LinearLayout>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="fill_parent"
-        
-    android:orientation="vertical"
-    android:layout_width="fill_parent">
-     <TextView
+    <TextView
         android:text="Last Scan:"
             android:textSize="17dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/lblLastScan1" 
+        android:id="@+id/lblLastScan1"
         />
   </LinearLayout>
+
+
+    
 
   </LinearLayout>

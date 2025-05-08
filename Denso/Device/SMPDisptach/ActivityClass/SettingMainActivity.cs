@@ -23,7 +23,7 @@ namespace SMPDisptach
     [Activity(Label = "SMPDisptach", WindowSoftInputMode = SoftInput.StateHidden, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class SettingMainActivity : AppCompatActivity
     {
-        clsGlobal clsGLB;
+        clsGlobal clsGlobal;
         //ModNet modnet;
         //ModFunctions modfunction;
         MediaPlayer mediaPlayerSound;
@@ -31,9 +31,12 @@ namespace SMPDisptach
         Timer timer;
         TextView txtDate;
         TextView txtTime;
+        ProgressBar editProgressBar;
         const int RequestId = 1;
         private BL_HHT_UPLOAD _blObj = null;
         private PL_HHT_UPLOAD _plObj = null;
+        private BL_LOG_INFO _blLogObj = null;
+        private PL_LOG_INFO _plLogObj = null;
         readonly string[] PermissionsGroup =
             {
                             //TODO add more permissions
@@ -68,7 +71,7 @@ namespace SMPDisptach
         {
             try
             {
-                clsGLB = new clsGlobal();
+                //clsGlobal = new clsGlobal();
                 _blObj = new BL_HHT_UPLOAD();
                 //modnet = new ModNet();
                 //modfunction = new ModFunctions();
@@ -99,6 +102,10 @@ namespace SMPDisptach
                 Button btnMasterSync = FindViewById<Button>(Resource.Id.btnMasterDataSync);
                 btnMasterSync.Click += BtnMasterSync_Click;
 
+                Button btnLogSync = FindViewById<Button>(Resource.Id.btnLogSync);
+                btnLogSync.Click += BtnLogSync_Click;
+
+                editProgressBar = FindViewById<ProgressBar>(Resource.Id.progressBar);
                 //Button btnReverseDelivery = FindViewById<Button>(Resource.Id.btnReverseDelivery);
                 //btnReverseDelivery.Click += BtnReverseDelivery_Click;
                 //ReadFTPSetting();
@@ -113,15 +120,18 @@ namespace SMPDisptach
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
+
+
+
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             // Update the TextView with the current date and time on the UI thread
             RunOnUiThread(() =>
             {
-                txtDate.Text = "Date: "+DateTime.Now.ToString("dd/MM/yyyy");
+                txtDate.Text = "Date: " + DateTime.Now.ToString("dd/MM/yyyy");
                 txtTime.Text = "Time: " + DateTime.Now.ToString("HH:mm:ss");
             });
         }
@@ -134,7 +144,7 @@ namespace SMPDisptach
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -147,7 +157,7 @@ namespace SMPDisptach
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
         private void BtnMasterSync_Click(object sender, EventArgs e)
@@ -160,123 +170,222 @@ namespace SMPDisptach
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+            }
+            finally
+            {
             }
 
         }
 
-        protected void MasterSyncAll(object sender, DialogClickEventArgs e)
+        private void BtnLogSync_Click(object sender, EventArgs e)
         {
-            var progressDialog = ProgressDialog.Show(this, "", "Please Wait....", true);
             try
             {
-                DirectoryInfo _dir = null;
-                _dir = new DirectoryInfo(clsGlobal.FilePath + "//" + clsGlobal.MasterFolder);
-                if (_dir.Exists == false)
-                {
-                    _dir.Create();
-                }
-                _dir = new DirectoryInfo(clsGlobal.FilePath + "//" + clsGlobal.MasterFolder + "//" + clsGlobal.mPatternPath + "//" + clsGlobal.mDNHADir);
-                if (_dir.Exists == false)
-                {
-                    _dir.Create();
-                }
-                _dir = new DirectoryInfo(clsGlobal.FilePath + "//" + clsGlobal.MasterFolder + "//" + clsGlobal.mPatternPath + "//" + clsGlobal.mCustomerDir);
-                if (_dir.Exists == false)
-                {
-                    _dir.Create();
-                }
-                _dir = new DirectoryInfo(clsGlobal.FilePath + "//" + clsGlobal.MasterFolder + "//" + clsGlobal.mPatternPath + "//" + clsGlobal.mSupplierDir);
-                if (_dir.Exists == false)
-                {
-                    _dir.Create();
-                }
-                DataTable dtData = null;
-                _plObj = new PL_HHT_UPLOAD();
-                _plObj.DbType = "USER_LIST";
-                dtData = _blObj.BL_ExecuteTask(_plObj);
-                if (dtData.Rows.Count > 0)
-                {
-                    string strFinaPath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "//LOGIN.txt");
-                    clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
 
-                }
-                _plObj = new PL_HHT_UPLOAD();
-                _plObj.DbType = "DNHA_PART_LIST";
-                dtData = _blObj.BL_ExecuteTask(_plObj);
-                if (dtData.Rows.Count > 0)
-                {
-                    string strFinaPath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "//DNHA_PART_DATA.txt");
-                    clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
+                ShowConfirmBox($"Are you sure want to sync all log to server?", this, LogSyncAll);
 
-                }
-                _plObj = new PL_HHT_UPLOAD();
-                _plObj.DbType = "SUP_PART_LIST";
-                dtData = _blObj.BL_ExecuteTask(_plObj);
-                if (dtData.Rows.Count > 0)
-                {
-                    string strFinaPath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "//SUP_PART_DATA.txt");
-                    clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
-
-                }
-                _plObj = new PL_HHT_UPLOAD();
-                _plObj.DbType = "CUST_PART_LIST";
-                dtData = _blObj.BL_ExecuteTask(_plObj);
-                if (dtData.Rows.Count > 0)
-                {
-                    string strFinaPath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "//CUST_PART_DATA.txt");
-                    clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
-
-                }
-                _plObj = new PL_HHT_UPLOAD();
-                _plObj.DbType = "DNHA_PATTERN_LIST";
-                dtData = _blObj.BL_ExecuteTask(_plObj);
-                if (dtData.Rows.Count > 0)
-                {
-                    string strFinaPath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "//" + clsGlobal.mPatternPath + "//" + clsGlobal.mDNHADir + "//DNHA_PATTERN_DATA.txt");
-                    clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
-
-                }
-                _plObj.DbType = "SUPPLIER_PATTERN_LIST";
-                dtData = _blObj.BL_ExecuteTask(_plObj);
-                if (dtData.Rows.Count > 0)
-                {
-                    string strFinaPath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "//" + clsGlobal.mPatternPath + "//" + clsGlobal.mSupplierDir + "//SUPPLIER_PATTERN_DATA.txt");
-                    clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
-
-                }
-                _plObj.DbType = "CUSTOMER_PATTERN_LIST";
-                dtData = _blObj.BL_ExecuteTask(_plObj);
-                if (dtData.Rows.Count > 0)
-                {
-                    string strFinaPath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "//" + clsGlobal.mPatternPath + "//" + clsGlobal.mCustomerDir + "//CUSTOMER_PATTERN_DATA.txt");
-                    clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
-
-                }
-                _plObj.DbType = "ALERT_PASSWORD";
-                dtData = _blObj.BL_ExecuteTask(_plObj);
-                if (dtData.Rows.Count > 0)
-                {
-                    string strFinaPath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "//ALERT_PASS.txt");
-                    clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
-
-                }
-                _plObj.DbType = "NG_LOT_LIST";
-                dtData = _blObj.BL_ExecuteTask(_plObj);
-                if (dtData.Rows.Count > 0)
-                {
-                    string strFinaPath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "//NG_PART_DATA.txt");
-                    clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
-
-                }
-
-                progressDialog.Hide();
-                clsGLB.ShowMessage($"All Master Data Sync Successfully!!!", this, MessageTitle.INFORMATION);
             }
             catch (Exception ex)
             {
-                progressDialog.Hide();
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+            }
+            finally
+            {
+            }
+        }
+
+        protected async void MasterSyncAll(object sender, DialogClickEventArgs e)
+        {
+            editProgressBar.Visibility = ViewStates.Visible;
+
+
+            //var progressDialog = ProgressDialog.Show(this, "", "Please Wait....", true);
+            try
+            {
+                await Task.Run(() =>
+                {
+                    DirectoryInfo _dir = null;
+                    _dir = new DirectoryInfo(clsGlobal.FilePath + "//" + clsGlobal.MasterFolder);
+                    if (_dir.Exists == false)
+                    {
+                        _dir.Create();
+                    }
+                    _dir = new DirectoryInfo(clsGlobal.FilePath + "//" + clsGlobal.MasterFolder + "//" + clsGlobal.mPatternPath + "//" + clsGlobal.mDNHADir);
+                    if (_dir.Exists == false)
+                    {
+                        _dir.Create();
+                    }
+                    _dir = new DirectoryInfo(clsGlobal.FilePath + "//" + clsGlobal.MasterFolder + "//" + clsGlobal.mPatternPath + "//" + clsGlobal.mCustomerDir);
+                    if (_dir.Exists == false)
+                    {
+                        _dir.Create();
+                    }
+                    _dir = new DirectoryInfo(clsGlobal.FilePath + "//" + clsGlobal.MasterFolder + "//" + clsGlobal.mPatternPath + "//" + clsGlobal.mSupplierDir);
+                    if (_dir.Exists == false)
+                    {
+                        _dir.Create();
+                    }
+                    DataTable dtData = null;
+                    _plObj = new PL_HHT_UPLOAD();
+                    _plObj.DbType = "USER_LIST";
+                    dtData = _blObj.BL_ExecuteTask(_plObj);
+                    if (dtData.Rows.Count > 0)
+                    {
+                        string strFinaPath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "//LOGIN.txt");
+                        clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
+
+                    }
+                    _plObj = new PL_HHT_UPLOAD();
+                    _plObj.DbType = "DNHA_PART_LIST";
+                    dtData = _blObj.BL_ExecuteTask(_plObj);
+                    if (dtData.Rows.Count > 0)
+                    {
+                        string strFinaPath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "//DNHA_PART_DATA.txt");
+                        clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
+
+                    }
+                    _plObj = new PL_HHT_UPLOAD();
+                    _plObj.DbType = "SUP_PART_LIST";
+                    dtData = _blObj.BL_ExecuteTask(_plObj);
+                    if (dtData.Rows.Count > 0)
+                    {
+                        string strFinaPath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "//SUP_PART_DATA.txt");
+                        clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
+
+                    }
+                    _plObj = new PL_HHT_UPLOAD();
+                    _plObj.DbType = "CUST_PART_LIST";
+                    dtData = _blObj.BL_ExecuteTask(_plObj);
+                    if (dtData.Rows.Count > 0)
+                    {
+                        string strFinaPath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "//CUST_PART_DATA.txt");
+                        clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
+
+                    }
+                    _plObj = new PL_HHT_UPLOAD();
+                    _plObj.DbType = "DNHA_PATTERN_LIST";
+                    dtData = _blObj.BL_ExecuteTask(_plObj);
+                    if (dtData.Rows.Count > 0)
+                    {
+                        string strFinaPath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "//" + clsGlobal.mPatternPath + "//" + clsGlobal.mDNHADir + "//DNHA_PATTERN_DATA.txt");
+                        clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
+
+                    }
+                    _plObj.DbType = "SUPPLIER_PATTERN_LIST";
+                    dtData = _blObj.BL_ExecuteTask(_plObj);
+                    if (dtData.Rows.Count > 0)
+                    {
+                        string strFinaPath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "//" + clsGlobal.mPatternPath + "//" + clsGlobal.mSupplierDir + "//SUPPLIER_PATTERN_DATA.txt");
+                        clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
+
+                    }
+                    _plObj.DbType = "CUSTOMER_PATTERN_LIST";
+                    dtData = _blObj.BL_ExecuteTask(_plObj);
+                    if (dtData.Rows.Count > 0)
+                    {
+                        string strFinaPath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "//" + clsGlobal.mPatternPath + "//" + clsGlobal.mCustomerDir + "//CUSTOMER_PATTERN_DATA.txt");
+                        clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
+
+                    }
+                    _plObj.DbType = "ALERT_PASSWORD";
+                    dtData = _blObj.BL_ExecuteTask(_plObj);
+                    if (dtData.Rows.Count > 0)
+                    {
+                        string strFinaPath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "//ALERT_PASS.txt");
+                        clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
+
+                    }
+                    _plObj.DbType = "NG_LOT_LIST";
+                    dtData = _blObj.BL_ExecuteTask(_plObj);
+                    if (dtData.Rows.Count > 0)
+                    {
+                        string strFinaPath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "//NG_PART_DATA.txt");
+                        clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
+
+                    }
+                    _plObj.DbType = "HHT_VERSION";
+                    dtData = _blObj.BL_ExecuteTask(_plObj);
+                    if (dtData.Rows.Count > 0)
+                    {
+                        string strFinaPath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "//HHT_VERSION.txt");
+                        clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
+
+                    }
+
+                    //progressDialog.Hide();
+
+                });
+                clsGlobal.ShowMessage($"All Master Data Sync Successfully!!!", this, MessageTitle.INFORMATION);
+            }
+            catch (Exception ex)
+            {
+                //progressDialog.Hide();
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+            }
+            finally
+            {
+                editProgressBar.Visibility = ViewStates.Gone;
+            }
+        }
+        protected async void LogSyncAll(object sender, DialogClickEventArgs e)
+        {
+            editProgressBar.Visibility = ViewStates.Visible;
+
+            string strFinaPath = Path.Combine(clsGlobal.FilePath, clsGlobal.LogTag + "//" + clsGlobal.LogFileName);
+            if(!File.Exists(strFinaPath))
+            {
+                clsGlobal.ShowMessage($"No Log File Found!!!", this, MessageTitle.INFORMATION);
+                editProgressBar.Visibility = ViewStates.Gone;
+                return;
+            }
+            //var progressDialog = ProgressDialog.Show(this, "", "Please Wait....", true);
+            try
+            {
+                await Task.Run(() =>
+                {
+
+                    DataTable dtData = null;
+                    List<PL_LOG_INFO> lstLogInfo = clsGlobal.mReadLogs();
+                    if (lstLogInfo.Count > 0)
+                    {
+                        for (int i = 0; i < lstLogInfo.Count; i++)
+                        {
+                            _plLogObj = new PL_LOG_INFO();
+                            _blLogObj = new BL_LOG_INFO();
+                            _plLogObj.DbType = "SAVE_HHT_LOG";
+                            _plLogObj.Timestamp = lstLogInfo[i].Timestamp;
+                            _plLogObj.User = lstLogInfo[i].User;
+                            _plLogObj.Process = lstLogInfo[i].Process;
+                            _plLogObj.Function = lstLogInfo[i].Function;
+                            _plLogObj.Message = lstLogInfo[i].Message;
+                            _plLogObj.CreatedBy = clsGlobal.mUserId;
+                            dtData = _blLogObj.BL_ExecuteTask(_plLogObj).Tables[0];
+                            _blLogObj = null;
+                            _plLogObj = null;
+                        }
+                        if (dtData.Rows.Count > 0)
+                        {
+                            
+                            File.Delete(strFinaPath);
+
+                        }
+
+                    }
+                    //progressDialog.Hide();
+
+                });
+                clsGlobal.ShowMessage($"All HHT Log Data Sync Successfully!!!", this, MessageTitle.INFORMATION);
+            }
+
+            catch (Exception ex)
+            {
+                //progressDialog.Hide();
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+            }
+            finally
+            {
+                editProgressBar.Visibility = ViewStates.Gone;
             }
         }
         public bool ReadServerIP()
@@ -395,7 +504,7 @@ namespace SMPDisptach
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
         private void StartPlayingSound()
@@ -449,7 +558,7 @@ namespace SMPDisptach
         {
             // Stop and dispose of the timer when the activity is destroyed
             base.OnDestroy();
-           
+
         }
 
     }

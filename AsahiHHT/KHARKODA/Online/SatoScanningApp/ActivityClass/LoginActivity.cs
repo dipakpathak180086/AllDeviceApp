@@ -349,10 +349,12 @@ namespace AISScanningApp
                     clsGlobal.mFtpAddress = sr.ReadLine();
                     clsGlobal.mFtpUserName = sr.ReadLine();
                     clsGlobal.mFtpPassword = sr.ReadLine();
+                    clsGlobal.mFtpFolder = sr.ReadLine();
 
                     sr.Close();
                     sr.Dispose();
                     sr = null;
+
 
                     return true;
                 }

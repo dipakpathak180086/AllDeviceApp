@@ -102,8 +102,8 @@
 
 
             </LinearLayout>
-            
-           
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -133,10 +133,10 @@
                     android:gravity="center_vertical"
                     android:layout_weight="1.2"
                     android:maxLength="500"
-                    android:maxLines="1"
                     android:padding="2dp"
                     android:paddingLeft="5dp"
                     android:paddingStart="8dp"
+                    android:maxLines="1"
                     android:singleLine="true"
                     android:visibility="gone"
                     android:textColor="@color/black"
@@ -169,16 +169,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight=".4"
                     android:padding="2dp"
-                    android:text="Check Points:"
+                    android:text="Bal. Bin:"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
-                 <TextView
+                <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".4"
                     android:padding="2dp"
-                    android:text="Part Count:"
+                    android:text="Bal. Part:"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
@@ -263,7 +263,7 @@
                 android:layout_marginTop="3dp"
                 android:paddingBottom="3dp">
 
-                
+
                 <TextView
                     android:id="@+id/listPartNo"
                     android:text="Part No"
@@ -275,7 +275,7 @@
                     android:gravity="center"
                     android:background="@drawable/borderstyle"
                     android:textColor="#000000" />
-                 <TextView
+                <TextView
                     android:id="@+id/listBinQty"
                     android:text="Bin"
                     android:layout_marginLeft="3dp"
@@ -297,7 +297,7 @@
                     android:gravity="center"
                     android:background="@drawable/borderstyle"
                     android:textColor="#000000" />
-                
+
 
                 <TextView
                     android:id="@+id/listSQty"
@@ -312,7 +312,7 @@
                     android:textColor="#000000" />
                 <TextView
                     android:id="@+id/listBalance"
-                    android:text="Balance"
+                    android:text="Bal. Qty"
                     android:layout_marginLeft="3dp"
                     android:textStyle="bold"
                     android:layout_width="0dp"
@@ -338,17 +338,17 @@
                     android:scrollbarSize="5dp"
                     android:scrollbarStyle="outsideOverlay"/>
             </LinearLayout>
-           
-           
 
-           
+
+
+
             <LinearLayout
                 android:layout_height="fill_parent"
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:gravity="center_horizontal"
                 android:layout_marginVertical="20dp">
-               
+
                 <Button
                     android:text="Back"
                     android:layout_width="wrap_content"

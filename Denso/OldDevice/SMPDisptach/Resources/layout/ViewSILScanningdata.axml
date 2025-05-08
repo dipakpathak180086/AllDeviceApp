@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="2dp"
+    android:paddingBottom="2dp"
+    android:background="#FFFFFF">
+		
+  
+				<TextView
+					android:id="@+id/listtxtPartNo"
+					android:text="Part No"
+					android:layout_marginLeft="3dp"
+					android:layout_width="0dp"
+					android:layout_height="fill_parent"
+					android:layout_weight="3.5"
+					android:gravity="center"
+					android:background="@drawable/borderstyle"
+					
+					android:textColor="#000000" />
+		<TextView
+					android:id="@+id/listtxtBin"
+					android:text="Bin"
+					android:layout_marginLeft="3dp"
+					android:layout_width="0dp"
+					android:layout_height="fill_parent"
+					 android:layout_weight="1"
+					android:gravity="center"
+					android:background="@drawable/borderstyle"
+					
+					android:textColor="#000000" />
+				<TextView
+					android:id="@+id/listtxtQty"
+					android:text="Qty"
+					android:layout_marginLeft="3dp"
+					android:layout_width="0dp"
+					android:layout_height="fill_parent"
+					 android:layout_weight="1"
+					android:gravity="center"
+					android:background="@drawable/borderstyle"
+					
+					android:textColor="#000000" />
+				
+				<TextView
+					android:id="@+id/listtxtSQty"
+					android:text="Scan Qty"
+					android:layout_marginLeft="3dp"
+					android:layout_width="0dp"
+					android:layout_height="fill_parent"
+					android:layout_weight="1.5"
+					android:gravity="center"
+					android:background="@drawable/borderstyle"
+					android:textColor="#000000" />
+				<TextView
+					android:id="@+id/listtxtBalance"
+					android:text="Balance"
+					android:layout_marginLeft="3dp"
+					android:layout_width="0dp"
+					android:layout_height="fill_parent"
+					android:layout_weight="1.5"
+					android:background="@drawable/borderstyle"
+					android:gravity="center"
+					android:textColor="#000000" />
+</LinearLayout>
+        
+</LinearLayout>
+

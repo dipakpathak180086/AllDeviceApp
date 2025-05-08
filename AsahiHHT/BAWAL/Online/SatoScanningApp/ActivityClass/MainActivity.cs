@@ -61,7 +61,10 @@ namespace AISScanningApp
                 btnVerifiedPrinting.Click += btnVerifiedPrinting_Click;
 
                 btnMisVerifiedPrinting = FindViewById<Button>(Resource.Id.btnMissVerifiedPrinting);
-                btnMisVerifiedPrinting.Click += BtnMisVerifiedPrinting_Click; ;
+                btnMisVerifiedPrinting.Click += BtnMisVerifiedPrinting_Click;
+
+                Button btnPLCVerifiedPrinting = FindViewById<Button>(Resource.Id.btnPLCVerifiedPrinting);
+                btnPLCVerifiedPrinting.Click += BtnPLCVerifiedPrinting_Click;
 
                 //btnRMMovements.Visibility = ViewStates.Gone;
 
@@ -71,6 +74,19 @@ namespace AISScanningApp
                 //    GetUserRight();
                 //}
 
+            }
+            catch (Exception ex)
+            {
+                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+            }
+        }
+
+        private void BtnPLCVerifiedPrinting_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                clsGlobal.Process_Header_Text = "PLC Printing Verification";
+                OpenActivity(typeof(PLCVerifedPrintingActivity));
             }
             catch (Exception ex)
             {

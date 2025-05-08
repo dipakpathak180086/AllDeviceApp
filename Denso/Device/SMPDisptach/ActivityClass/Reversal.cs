@@ -39,7 +39,7 @@ namespace SMPDisptach.ActivityClass
         private BL_REVERSAL _blObj = null;
         private PL_REVERSAL _plObj = null;
         Vibrator vibrator;
-        clsGlobal clsGLB;
+        clsGlobal clsGlobal;
         EditText txtSILBarcode, txtDNHASupBarcode;
         Dictionary<string, string> dicRegPlant = new Dictionary<string, string>();
         TextView txtTotalQty, txtScanQty;
@@ -73,7 +73,7 @@ namespace SMPDisptach.ActivityClass
         {
             try
             {
-                clsGLB = new clsGlobal();
+                //clsGlobal = new clsGlobal();
                 _blObj = new BL_REVERSAL();
 
             }
@@ -97,8 +97,12 @@ namespace SMPDisptach.ActivityClass
 
                 vibrator = this.GetSystemService(VibratorService) as Vibrator;
 
+                Button btnSilDelete = FindViewById<Button>(Resource.Id.btnSILDelete);
+                btnSilDelete.Click += BtnSilDelete_Click;
+
                 Button btn = FindViewById<Button>(Resource.Id.btnBack);
                 btn.Click += Btnback_Click;
+
                 Button btnClear = FindViewById<Button>(Resource.Id.btnClear);
                 btnClear.Click += BtnClear_Click;
 
@@ -135,9 +139,11 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
+
+
 
 
 
@@ -174,7 +180,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -186,7 +192,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
         private void StartPlayingSound(bool isSaved = false)
@@ -348,24 +354,24 @@ namespace SMPDisptach.ActivityClass
             try
             {
                 bool isCheckBarcode = dtDetails.AsEnumerable().Any(row => row.ItemArray[1].ToString() == txtDNHASupBarcode.Text.Trim());
-              
+
                 if (!isCheckBarcode)
                 {
-                    clsGLB.showToastNGMessage($"Invalid DNHA/SUP Barcode or Not available in the list.", this);
+                    clsGlobal.showToastNGMessage($"Invalid DNHA/SUP Barcode or Not available in the list.", this);
                     txtDNHASupBarcode.Text = "";
                     SoundForNG();
                     ShowAlertPopUp();
                     return;
                 }
-                if (dtDetails.Rows.Count == 1)
-                {
-                    clsGLB.showToastNGMessage($"Last data can't remove you need to go SIL Delete option", this);
-                    txtDNHASupBarcode.Text = "";
-                    SoundForNG();
-                    ShowAlertPopUp();
-                    return;
+                //if (dtDetails.Rows.Count == 1)
+                //{
+                //    clsGlobal.showToastNGMessage($"Last data can't remove you need to go SIL Delete option", this);
+                //    txtDNHASupBarcode.Text = "";
+                //    SoundForNG();
+                //    ShowAlertPopUp();
+                //    return;
 
-                }
+                //}
                 string strTranscationPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
                 string strFinalSILWiseDirectory = Path.Combine(strTranscationPath, _SILCode);
                 string strFinalFilePath = Path.Combine(strFinalSILWiseDirectory, clsGlobal.SILMasterDataFile);
@@ -411,14 +417,14 @@ namespace SMPDisptach.ActivityClass
                         }
                         try
                         {
-                            Directory.Delete(strFinalSILWiseDirectory,true);
+                            Directory.Delete(strFinalSILWiseDirectory, true);
                             Directory.CreateDirectory(strFinalSILWiseDirectory);
                             MediaScannerConnection.ScanFile(this, new String[] { strTranscationPath }, null, null);
                         }
                         catch (Exception ex)
                         {
 
-                            clsGLB.showToastNGMessage($"{ex.Message}", this);
+                            clsGlobal.showToastNGMessage($"{ex.Message}", this);
                             txtDNHASupBarcode.Text = "";
                             SoundForNG();
                             ShowAlertPopUp();
@@ -452,14 +458,14 @@ namespace SMPDisptach.ActivityClass
                         txtDNHASupBarcode.RequestFocus();
                         //if (_TotalQty == _ScanQty)
                         //{
-                        //    clsGLB.showToastNGMessage($"Master Kanban Fraction Completed!!", this);
+                        //    clsGlobal.showToastNGMessage($"Master Kanban Fraction Completed!!", this);
                         //    clear();
                         //    return;
                         //}
                     }
                     else
                     {
-                        clsGLB.showToastNGMessage($"{dtData.Rows[0]["Result"].ToString()}", this);
+                        clsGlobal.showToastNGMessage($"{dtData.Rows[0]["Result"].ToString()}", this);
                         txtDNHASupBarcode.Text = "";
                         SoundForNG();
                         ShowAlertPopUp();
@@ -475,35 +481,44 @@ namespace SMPDisptach.ActivityClass
 
 
 
-        private void SaveData(object sender, DialogClickEventArgs e)
+        private void DeleteAllData(object sender, DialogClickEventArgs e)
         {
             try
             {
+                _SILCode = txtSILBarcode.Text.Trim().Substring(0, 7);
+                string strTranscationPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
+                string strFinalSILWiseDirectory = Path.Combine(strTranscationPath, _SILCode);
+                string strFinalFilePath = Path.Combine(strFinalSILWiseDirectory, clsGlobal.SILMasterDataFile);
+                string strSILBarcodeFilePath = Path.Combine(strFinalSILWiseDirectory, clsGlobal.SILBarcode);
+                string strCompltedSIL = Path.Combine(strFinalSILWiseDirectory, clsGlobal.SILCompletedFile);
+                _plObj = new PL_REVERSAL();
+                _plObj.DbType = "DELETE";
+                _plObj.SIL_NO = _SILCode;
+                _plObj.CreatedBy = clsGlobal.mUserId;
+                DataTable dtData = _blObj.BL_ExecuteTask(_plObj).Tables[0];
+                if (dtData.Rows.Count > 0)
+                {
+                    if (dtData.Rows[0]["Result"].ToString() == "Y")
+                    {
+                        try
+                        {
+                            Directory.Delete(strFinalSILWiseDirectory, true);
+                            Directory.CreateDirectory(strFinalSILWiseDirectory);
+                            MediaScannerConnection.ScanFile(this, new String[] { strTranscationPath }, null, null);
+                            clsGlobal.ShowMessage($"This SIL all Data Reversed Successfully!!!", this, MessageTitle.INFORMATION);
+                            clear();
+                        }
+                        catch (Exception ex)
+                        {
 
-                //bool bReturn = false;
-                //for (int i = 0; i < _ListScanItem.Count; i++)
-                //{
-                //    bReturn = ModNet.BatteryScanningDataSave(txtSILBarcode.Text.Trim(), _ListScanItem[i].SKU, _ListScanItem[i].PartNo);
-                //}
-                //if (bReturn)
-                //{
+                            clsGlobal.showToastNGMessage($"{ex.Message}", this);
+                            txtDNHASupBarcode.Text = "";
+                            SoundForNG();
+                            ShowAlertPopUp();
+                        }
 
-                //    lblResult.Text = $"This Delivery ({txtSILBarcode.Text.Trim()}) Data Saved Successfully!!!";
-                //    clsGLB.ShowMessage($"This Delivery ({txtSILBarcode.Text.Trim()}) Data Saved Successfully!!!", this, MessageTitle.INFORMATION);
-                //    txtDNHAKanbanBarcode.Text = "";
-                //    txtDNHAKanbanBarcode.RequestFocus();
-
-                //    clear();
-                //    this.Finish();
-                //    OpenActivity(typeof(BatteryScanningMainActivity));
-                //}
-                //else
-                //{
-                //    lblResult.Text = ModInit.Gstrarr[0];
-                //    txtDNHAKanbanBarcode.Text = "";
-                //    txtDNHAKanbanBarcode.RequestFocus();
-                //    SoundForNG();
-                //}
+                    }
+                }
             }
             catch (Exception)
             {
@@ -513,23 +528,6 @@ namespace SMPDisptach.ActivityClass
             finally
             { StopPlayingSound(); }
         }
-        private void FinalSaveData()
-        {
-            try
-            {
-
-                ShowConfirmBox("Submit Scanned Data?", this, SaveData);
-
-            }
-            catch (Exception ex)
-            {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
-            }
-
-
-        }
-
-
         private void DismissKeyboard()
         {
             var view = CurrentFocus;
@@ -564,7 +562,37 @@ namespace SMPDisptach.ActivityClass
 
         #region Activiy Events
 
+        private void BtnSilDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(txtSILBarcode.Text.Trim()))
+                {
+                    clsGlobal.showToastNGMessage($"Scan SIL Barcode First", this);
+                    txtSILBarcode.Text = "";
+                    txtSILBarcode.RequestFocus();
+                    SoundForNG();
+                    ShowAlertPopUp();
+                    return;
+                }
+                if (_ListItem.Count == 0)
+                {
+                    clsGlobal.showToastNGMessage($"No Data Found", this);
+                    txtSILBarcode.Text = "";
+                    txtSILBarcode.RequestFocus();
+                    SoundForNG();
+                    ShowAlertPopUp();
+                    return;
+                }
+                string strSILCode = txtSILBarcode.Text.Trim().Substring(0, 7);
+                ShowConfirmBox($"Are you sure want to Reversed this SIL {strSILCode} all data ?", this, DeleteAllData);
 
+            }
+            catch (Exception ex)
+            {
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+            }
+        }
 
         private void BtnClear_Click(object sender, EventArgs e)
         {
@@ -574,7 +602,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -587,7 +615,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -605,7 +633,7 @@ namespace SMPDisptach.ActivityClass
                         }
                         if (string.IsNullOrEmpty(txtSILBarcode.Text.Trim()))
                         {
-                            clsGLB.showToastNGMessage($"Scan SIL Barcode.", this);
+                            clsGlobal.showToastNGMessage($"Scan SIL Barcode.", this);
                             txtSILBarcode.Text = "";
                             txtSILBarcode.RequestFocus();
                             SoundForNG();
@@ -619,16 +647,25 @@ namespace SMPDisptach.ActivityClass
                         string strFinalFilePath = Path.Combine(strFinalSILWiseDirectory, clsGlobal.SILMasterDataFile);
                         string strSILBarcodeFilePath = Path.Combine(strFinalSILWiseDirectory, clsGlobal.SILBarcode);
                         string strCompltedSIL = Path.Combine(strFinalSILWiseDirectory, clsGlobal.SILCompletedFile);
-                        if(!File.Exists(strCompltedSIL))
+                        dtHead = null;
+                        dtDetails = null;
+                        _plObj = new PL_REVERSAL();
+                        _plObj.DbType = "GET_SIL_DATA";
+                        _plObj.SIL_NO = _SILCode;
+                        DataSet ds1 = _blObj.BL_ExecuteTask(_plObj);
+                        if (ds1.Tables.Count == 0)
                         {
-                            clsGLB.showToastNGMessage($"Invalid SIL Barcode or SIL is incompleted.", this);
-                            txtSILBarcode.Text = "";
-                            txtSILBarcode.RequestFocus();
-                            SoundForNG();
-                            ShowAlertPopUp();
-                            return;
+                            if (!File.Exists(strCompltedSIL))
+                            {
+                                clsGlobal.showToastNGMessage($"Invalid SIL Barcode or SIL is incompleted.", this);
+                                txtSILBarcode.Text = "";
+                                txtSILBarcode.RequestFocus();
+                                SoundForNG();
+                                ShowAlertPopUp();
+                                return;
+                            }
                         }
-                            if (File.Exists(strCompltedSIL))
+                        if (File.Exists(strCompltedSIL))
                         {
                             dtHead = null;
                             dtDetails = null;
@@ -673,7 +710,7 @@ namespace SMPDisptach.ActivityClass
                             DataSet ds = _blObj.BL_ExecuteTask(_plObj);
                             if (ds.Tables.Count == 0)
                             {
-                                clsGLB.showToastNGMessage($"Invalid SIL Barcode or SIL is incompleted.", this);
+                                clsGlobal.showToastNGMessage($"Invalid SIL Barcode or SIL is incompleted.", this);
                                 txtSILBarcode.Text = "";
                                 txtSILBarcode.RequestFocus();
                                 SoundForNG();
@@ -720,7 +757,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
         private void txtDNHASupBarcode_KeyPress(object sender, View.KeyEventArgs e)
@@ -737,7 +774,7 @@ namespace SMPDisptach.ActivityClass
                         }
                         if (string.IsNullOrEmpty(txtSILBarcode.Text.Trim()))
                         {
-                            clsGLB.showToastNGMessage($"Scan SIL Barcode.", this);
+                            clsGlobal.showToastNGMessage($"Scan SIL Barcode.", this);
                             txtSILBarcode.Text = "";
                             txtSILBarcode.RequestFocus();
                             SoundForNG();
@@ -746,7 +783,7 @@ namespace SMPDisptach.ActivityClass
                         }
                         else if (txtSILBarcode.Text.Length < 25)
                         {
-                            clsGLB.showToastNGMessage($"Invalid SIL Barcode.", this);
+                            clsGlobal.showToastNGMessage($"Invalid SIL Barcode.", this);
                             txtSILBarcode.Text = "";
                             txtSILBarcode.RequestFocus();
                             SoundForNG();
@@ -755,7 +792,7 @@ namespace SMPDisptach.ActivityClass
                         }
                         else if (string.IsNullOrEmpty(txtDNHASupBarcode.Text.Trim()))
                         {
-                            clsGLB.showToastNGMessage($"Scan DNHA/SUP Kanban Barcode.", this);
+                            clsGlobal.showToastNGMessage($"Scan DNHA/SUP Kanban Barcode.", this);
                             txtDNHASupBarcode.Text = "";
                             txtDNHASupBarcode.RequestFocus();
                             SoundForNG();
@@ -764,7 +801,7 @@ namespace SMPDisptach.ActivityClass
                         }
                         else if (txtDNHASupBarcode.Text.Length < 25)
                         {
-                            clsGLB.showToastNGMessage($"Invalid DNHA/SUP Kanban Barcode.", this);
+                            clsGlobal.showToastNGMessage($"Invalid DNHA/SUP Kanban Barcode.", this);
                             txtDNHASupBarcode.Text = "";
                             txtDNHASupBarcode.RequestFocus();
                             SoundForNG();
@@ -773,7 +810,7 @@ namespace SMPDisptach.ActivityClass
                         }
                         else if (_ListItem.Count == 0)
                         {
-                            clsGLB.showToastNGMessage($"Scan First DNHA Master Kanban Barcode.", this);
+                            clsGlobal.showToastNGMessage($"Scan First DNHA Master Kanban Barcode.", this);
 
                             SoundForNG();
                             ShowAlertPopUp();
@@ -789,7 +826,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 

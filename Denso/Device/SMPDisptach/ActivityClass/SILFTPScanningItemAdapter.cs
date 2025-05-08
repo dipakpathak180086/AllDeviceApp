@@ -67,12 +67,14 @@ namespace SMPDisptach
             public TextView SILQty;
             public TextView CustQty;
             public TextView DensoQty;
+            public TextView Bin;
             public ViewHolder(View v) : base(v)
             {
                 PartNo = (TextView)v.FindViewById(Resource.Id.listtxtPartNo);
                 SILQty = (TextView)v.FindViewById(Resource.Id.listtxtSILQty);
                 DensoQty = (TextView)v.FindViewById(Resource.Id.listtxtDensoQty);
                 CustQty = (TextView)v.FindViewById(Resource.Id.listtxtCustQty);
+                Bin = (TextView)v.FindViewById(Resource.Id.listtxtNoOfBin);
             }
         }
 
@@ -108,6 +110,7 @@ namespace SMPDisptach
                 vh.SILQty.Text = data[position].SILQty.ToString();
                 vh.DensoQty.Text = data[position].DensoQty.ToString();
                 vh.CustQty.Text = data[position].CustQty.ToString();
+                vh.Bin.Text = data[position].Bin.ToString();
 
             }
             catch (System.Exception ex) { Toast.MakeText(context, ex.Message, ToastLength.Long).Show(); }

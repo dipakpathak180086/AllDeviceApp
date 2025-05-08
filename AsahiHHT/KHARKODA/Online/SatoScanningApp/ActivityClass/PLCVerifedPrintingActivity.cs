@@ -16,6 +16,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Drawing;
+using Org.Apache.Http;
+using System.Net;
+using System.IO;
+using System.Linq;
 
 namespace AISScanningApp
 {
@@ -549,21 +553,326 @@ namespace AISScanningApp
                         ShowMessageBox("No option match from comm server", this);
                         break;
                 }
-              
+
             }
             catch (Exception ex)
             {
                 clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
-               
+
             }
             finally
             {
             }
             return "";
         }
+        private void EnsureFTPDirectory(string ftpPath, string username, string password)
+        {
+            if (!FtpDirectoryExists(ftpPath, username, password))
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpPath);
+                request.Method = WebRequestMethods.Ftp.MakeDirectory;
+                request.Credentials = new NetworkCredential(username, password);
+                try
+                {
+                    using (var response = (FtpWebResponse)request.GetResponse()) { }
+                }
+                catch (WebException ex)
+                {
+                    var response = (FtpWebResponse)ex.Response;
+                    if (response.StatusCode != FtpStatusCode.ActionNotTakenFileUnavailable)
+                    {
+                        throw;
+                    }
+                }
+            }
+        }
+
+        private bool FtpDirectoryExists(string ftpPath, string username, string password)
+        {
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpPath);
+                request.Method = WebRequestMethods.Ftp.ListDirectory;
+                request.Credentials = new NetworkCredential(username, password);
+
+                using (var response = (FtpWebResponse)request.GetResponse())
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        private DateTime GetFtpFileTimestamp(string ftpPath, string filename, string username, string password)
+        {
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpPath + "/" + filename);
+            request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
+            request.Credentials = new NetworkCredential(username, password);
+
+            using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+            {
+                return response.LastModified;
+            }
+        }
+        private string GetLatestFtpFile(string ftpPath, string username, string password)
+        {
+            var files = GetFtpFiles(ftpPath, username, password);
+
+            if (files.Count == 0)
+                return null;
+
+            return files.OrderByDescending(f => GetFtpFileTimestamp(ftpPath, f, username, password)).FirstOrDefault();
+        }
+        // Helper method to get file modified date
+        private static DateTime GetFileModifiedDate(string fileUrl, string username, string password)
+        {
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(fileUrl);
+                request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
+                request.Credentials = new NetworkCredential(username, password);
+
+                using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+                {
+                    return response.LastModified;
+                }
+            }
+            catch
+            {
+                return DateTime.MinValue;
+            }
+        }
+        private List<string> GetFtpFiles(string ftpPath, string username, string password)
+        {
+            List<string> files = new List<string>();
+
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpPath);
+                request.Method = WebRequestMethods.Ftp.ListDirectory;
+                request.Credentials = new NetworkCredential(username, password);
+
+                using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+                using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                {
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        if (line.EndsWith(".JPEG", StringComparison.OrdinalIgnoreCase) || line.EndsWith(".JPG", StringComparison.OrdinalIgnoreCase))
+                        {
+                            files.Add(line);
+                        }
+                    }
+                }
+
+                if (files.Count == 0)
+                    return new List<string>(); // Return empty list if no files found
+
+                // Sort files by last modified date (latest first)
+                return files.OrderByDescending(f => GetFileModifiedDate(ftpPath + "/" + f, username, password)).ToList();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                return new List<string>(); // Return empty list on error
+            }
+        }
+        private void RenameAndMoveFtpFile(string ftpPath, string username, string password, string latestFile, string newFileName, string backupFolderPath)
+        {
+            string latestFilePath = $"{ftpPath}/{Path.GetFileName(latestFile)}";
+            string newFilePath = $"{ftpPath}/{Path.GetFileName(newFileName)}";
+            string backupFilePath = $"{backupFolderPath}/{ Path.GetFileName( newFileName)}";
+
+            // ✅ 1. Rename the latest file
+            RenameFtpFile(latestFilePath, newFilePath, username, password);
+
+            // ✅ 2. Move renamed file to backup folder
+            RenameFtpFile(newFilePath, backupFilePath, username, password);
+            // Upload the file to FTP
+            MoveFtpFile(newFilePath, backupFilePath, username, password);
+
+            // ✅ 3. Delete all other files
+            var files = GetFtpFiles(ftpPath, username, password);
+            foreach (var file in files)
+            {
+                if (file != Path.GetFileName(newFileName)) // Keep only the latest renamed file
+                {
+                    DeleteFtpFile($"{ftpPath}/{Path.GetFileName(file)}", username, password);
+                }
+            }
+            
+
+        }
+        private void DeleteFtpFile(string filePath, string username, string password)
+        {
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(filePath);
+            request.Method = WebRequestMethods.Ftp.DeleteFile;
+            request.Credentials = new NetworkCredential(username, password);
+
+            using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+            {
+                Console.WriteLine($"File Deleted: {filePath}");
+            }
+        }
+        private void MoveFtpFile(string sourceFilePath, string destinationFilePath, string username, string password)
+        {
+            try
+            {
+                // Step 1: Copy file to destination
+                CopyFtpFile(sourceFilePath, destinationFilePath, username, password);
+
+                // Step 2: Delete the original file after successful copy
+                DeleteFtpFileFinal(sourceFilePath, username, password);
+
+                Console.WriteLine($"File moved from {sourceFilePath} to {destinationFilePath}");
+            }
+            catch (WebException ex)
+            {
+                Console.WriteLine($"Error moving file: {ex.Message}");
+            }
+        }
+
+        // ✅ Helper method to COPY file on FTP
+        private void CopyFtpFile(string sourceFilePath, string destinationFilePath, string username, string password)
+        {
+            try
+            {
+                // Download file from source FTP location
+                byte[] fileBytes;
+                FtpWebRequest downloadRequest = (FtpWebRequest)WebRequest.Create(sourceFilePath);
+                downloadRequest.Method = WebRequestMethods.Ftp.DownloadFile;
+                downloadRequest.Credentials = new NetworkCredential(username, password);
+
+                using (FtpWebResponse response = (FtpWebResponse)downloadRequest.GetResponse())
+                using (System.IO.Stream responseStream = response.GetResponseStream())
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    responseStream.CopyTo(memoryStream);
+                    fileBytes = memoryStream.ToArray();
+                }
+
+                // Upload file to destination FTP location
+                FtpWebRequest uploadRequest = (FtpWebRequest)WebRequest.Create(destinationFilePath);
+                uploadRequest.Method = WebRequestMethods.Ftp.UploadFile;
+                uploadRequest.Credentials = new NetworkCredential(username, password);
+
+                using (System.IO.Stream requestStream = uploadRequest.GetRequestStream())
+                {
+                    requestStream.Write(fileBytes, 0, fileBytes.Length);
+                }
+            }
+            catch (WebException ex)
+            {
+                Console.WriteLine($"Error copying file: {ex.Message}");
+                throw;
+            }
+        }
+
+        // ✅ Helper method to DELETE file from FTP
+        private void DeleteFtpFileFinal(string filePath, string username, string password)
+        {
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(filePath);
+                request.Method = WebRequestMethods.Ftp.DeleteFile;
+                request.Credentials = new NetworkCredential(username, password);
+
+                using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+                {
+                    Console.WriteLine($"File Deleted: {filePath}");
+                }
+            }
+            catch (WebException ex)
+            {
+                Console.WriteLine($"Error deleting file: {ex.Message}");
+                throw;
+            }
+        }
+        private void MoveFtpFileOLD(string sourceFilePath, string destinationFilePath, string username, string password)
+        {
+            try
+            {
+                // Extract only the filename from the destination path
+                string fileName = Path.GetFileName(destinationFilePath);
+
+                // Create FTP request to rename the file (move)
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(sourceFilePath);
+                request.Method = WebRequestMethods.Ftp.Rename;
+                request.Credentials = new NetworkCredential(username, password);
+
+                // RenameTo only takes the filename, assuming the destination directory is correct
+                request.RenameTo = fileName;
+
+                using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+                {
+                    Console.WriteLine($"File moved from {sourceFilePath} to {destinationFilePath}");
+                }
+            }
+            catch (WebException ex)
+            {
+                Console.WriteLine($"Error moving file: {ex.Message}");
+            }
+        }
+
+        private void RenameFtpFile(string oldPath, string newPath, string username, string password)
+        {
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(oldPath);
+            request.Method = WebRequestMethods.Ftp.Rename;
+            request.Credentials = new NetworkCredential(username, password);
+            request.RenameTo = Path.GetFileName(newPath);
+
+            using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+            {
+                Console.WriteLine($"File Renamed: {oldPath} -> {newPath}");
+            }
+        }
+
+        DateTime ExtractDateTimeFromFileName(string fileName)
+        {
+            string pattern = @"\d{8}_\d{6}"; // Example: 20250318_153045 (yyyyMMdd_HHmmss)
+            var match = System.Text.RegularExpressions.Regex.Match(fileName, pattern);
+
+            if (match.Success && DateTime.TryParseExact(match.Value, "yyyyMMdd_HHmmss", null, System.Globalization.DateTimeStyles.None, out DateTime date))
+                return date;
+
+            return DateTime.MinValue; // Default if no date is found
+        }
+        private string WriteFTPFile(string path, string username, string password, string barcode)
+        {
+            try
+            {
 
 
+                string transactionPath = Path.Combine(path, clsGlobal.mFtpFolder);
+                // string folderPath = Path.Combine(transactionPath, spinnerSIL.SelectedItem.ToString().Replace("*", ""));
+                string backupFolderPath = Path.Combine(transactionPath, "MES_BCK");
 
+                // Ensure the backup directory exists
+                EnsureFTPDirectory(backupFolderPath, username, password);
+
+                // Get the latest file in descending order
+                var files = GetFtpFiles(transactionPath,username,password);
+
+                if (files.Count == 0)
+                    return ""; // No files to process
+
+                string latestFile = files.First();
+                string newFileName = Path.Combine(transactionPath, barcode + ".JPG");
+                string backupFilePath = Path.Combine(backupFolderPath, Path.GetFileName(newFileName));
+
+                RenameAndMoveFtpFile(transactionPath, username, password, latestFile, newFileName, backupFolderPath);
+
+                
+                return backupFilePath;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
 
         private async void SaveDataAsync()
         {
@@ -581,6 +890,16 @@ namespace AISScanningApp
                     case "VALID":
                         txtMsg.Text = _RESPONSE[1].Trim();
                         txtLastVerifiedPart.Text = txtBarcode.Text.Trim();
+                        try
+                        {
+                            WriteFTPFile("ftp://"+clsGlobal.mFtpAddress, clsGlobal.mFtpUserName, clsGlobal.mFtpPassword, txtBarcode.Text.Trim().Replace(":", "_"));
+                        }
+                        catch (Exception ex)
+                        {
+                            Toast.MakeText(this, ex.Message, ToastLength.Long).Show();
+                        }
+
+                        //await Task.Run(() => );
                         txtBarcode.Text = "";
                         txtBarcode.RequestFocus();
                         break;
@@ -630,7 +949,7 @@ namespace AISScanningApp
             }
         }
 
-        private  bool CheckVerifyData()
+        private bool CheckVerifyData()
         {
             bool bFlag = false;
             try
@@ -643,7 +962,7 @@ namespace AISScanningApp
                 switch (_RESPONSE[0])
                 {
                     case "VALID":
-                        bFlag= true;
+                        bFlag = true;
                         break;
 
                     case "INVALID":
@@ -675,11 +994,11 @@ namespace AISScanningApp
             catch (Exception ex)
             {
                 clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
-               
+
             }
             finally
             {
-               
+
             }
             return bFlag;
         }

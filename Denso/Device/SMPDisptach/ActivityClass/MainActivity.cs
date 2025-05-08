@@ -20,7 +20,7 @@ namespace SMPDisptach
     [Activity(Label = "SMPDisptach", WindowSoftInputMode = SoftInput.StateHidden, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : AppCompatActivity
     {
-        clsGlobal clsGLB;
+        clsGlobal clsGlobal;
         //ModNet modnet;
         //ModFunctions modfunction;
         MediaPlayer mediaPlayerSound;
@@ -65,7 +65,7 @@ namespace SMPDisptach
         {
             try
             {
-                clsGLB = new clsGlobal();
+                //clsGlobal = new clsGlobal();
                 _blObj = new BL_HHT_UPLOAD();
                 //modnet = new ModNet();
                 //modfunction = new ModFunctions();
@@ -227,13 +227,13 @@ namespace SMPDisptach
                 }
 
                
-                clsGLB.ShowMessage($"All Master Data Sync Successfully!!!", this, MessageTitle.INFORMATION);
+                clsGlobal.ShowMessage($"All Master Data Sync Successfully!!!", this, MessageTitle.INFORMATION);
                 progressDialog.Hide();
             }
             catch (Exception ex)
             {
                
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
                 progressDialog.Hide();
             }
         }
@@ -286,7 +286,7 @@ namespace SMPDisptach
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -310,7 +310,7 @@ namespace SMPDisptach
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -322,7 +322,7 @@ namespace SMPDisptach
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -334,7 +334,7 @@ namespace SMPDisptach
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -347,7 +347,7 @@ namespace SMPDisptach
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
         private void BtnFraction_Click(object sender, EventArgs e)
@@ -358,7 +358,7 @@ namespace SMPDisptach
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
         private void BtnReversal_Click(object sender, EventArgs e)
@@ -369,7 +369,7 @@ namespace SMPDisptach
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
         private void BtnMasterSync_Click(object sender, EventArgs e)
@@ -382,7 +382,7 @@ namespace SMPDisptach
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
             
         }
@@ -446,7 +446,7 @@ namespace SMPDisptach
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
         private void StartPlayingSound()

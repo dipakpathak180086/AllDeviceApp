@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="ActivityClass\PickLocationActivity.cs" />
     <Compile Include="ActivityClass\ManualVerifedPrintingActivity.cs" />
+    <Compile Include="ActivityClass\PLCVerifedPrintingActivity.cs" />
     <Compile Include="ActivityClass\VerifedPrintingActivity.cs" />
     <Compile Include="ActivityClass\LoginActivity.cs" />
     <Compile Include="ActivityClass\SettingActivity.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Adapter\PickingLocationAdapter.cs" />
     <Compile Include="Models\clsGlobal.cs" />
     <Compile Include="Models\clsNetwork.cs" />
+    <Compile Include="Models\clsPLC_Update.cs" />
     <Compile Include="Models\FtpHandler.cs" />
     <Compile Include="Models\FTPMain.cs" />
     <Compile Include="Models\ModelClass.cs" />
@@ -210,6 +212,11 @@
     <AndroidResource Include="Resources\layout\activity_ManualVerifiedPrinting.axml">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
       <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_PLCVerifiedPrinting.axml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

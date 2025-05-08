@@ -23,6 +23,7 @@ using Android.Views.InputMethods;
 using Android.Widget;
 using Java.Sql;
 using Java.Util;
+using Java.Util.Functions;
 using static Android.Net.Wifi.WifiEnterpriseConfig;
 using static Android.Support.V7.Widget.RecyclerView;
 
@@ -36,7 +37,7 @@ namespace SMPDisptach.ActivityClass
     {
         #region Private Variables
         Vibrator vibrator;
-        clsGlobal clsGLB;
+        clsGlobal clsGlobal;
         Spinner spinnerSIL;
         List<string> _lstSIL = new List<string>();
         EditText txtDNHASUPKanbanBarcode, txtCustKanbanBarcode;
@@ -91,6 +92,7 @@ namespace SMPDisptach.ActivityClass
         string Possition = string.Empty;
         string SILScannedON = string.Empty;
         #endregion
+
         #region DNHAVariable
         string CustPart = string.Empty;
         string PartNo = string.Empty;
@@ -112,7 +114,7 @@ namespace SMPDisptach.ActivityClass
         {
             try
             {
-                clsGLB = new clsGlobal();
+               // clsGlobal = new clsGlobal();
 
                 //modnet = new ModNet();
 
@@ -200,7 +202,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -237,7 +239,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -249,7 +251,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
         private void StartPlayingSound(bool isSaved = false)
@@ -286,39 +288,99 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex) { throw ex; }
         }
+        //private void SoundForOK()
+        //{
+        //    try
+        //    {
+        //        Task.Run(() =>
+        //        { //Start Vibration
+        //            long[] pattern = { 0, 2000, 500 }; //0 to start now, 200 to vibrate 200 ms, 0 to sleep for 0 ms.
+        //            vibrator.Vibrate(pattern, -1);//
+        //            StopPlayingSound();
+        //            StartPlayingSound(true);
+        //            Thread.Sleep(2000);
+        //            StopPlayingSound();
+        //            vibrator.Cancel();
+        //        });
+
+        //    }
+        //    catch (Exception ex) { throw ex; }
+        //}
+        private CancellationTokenSource _cts = new CancellationTokenSource();
         private void SoundForOK()
         {
-            try
-            {
-                Task.Run(() =>
-                { //Start Vibration
-                    long[] pattern = { 0, 2000, 500 }; //0 to start now, 200 to vibrate 200 ms, 0 to sleep for 0 ms.
-                    vibrator.Vibrate(pattern, -1);//
-                    StopPlayingSound();
-                    StartPlayingSound(true);
-                    Thread.Sleep(2000);
-                    StopPlayingSound();
-                    vibrator.Cancel();
-                });
+            _cts.Cancel(); // Stop previous task
+            _cts = new CancellationTokenSource();
+            var token = _cts.Token;
 
-            }
-            catch (Exception ex) { throw ex; }
-        }
-        private void SoundForNG()
-        {
-            try
+            Task.Run(() =>
             {
-                Task.Run(() =>
+               
+                StopPlayingSound();
+                StartPlayingSound(true);
+
+                Thread.Sleep(500); // Wait for 2 seconds
+
+                if (!token.IsCancellationRequested)
                 {
                     StopPlayingSound();
-                    StartPlayingSound();
-                    Thread.Sleep(3000);
-                    StopPlayingSound();
-                });
-
-            }
-            catch (Exception ex) { throw ex; }
+                    
+                }
+            }, token);
         }
+        private void SoundForOKVibrate()
+        {
+            _cts.Cancel(); // Stop previous task
+            _cts = new CancellationTokenSource();
+            var token = _cts.Token;
+
+            Task.Run(() =>
+            {
+                vibrator.Vibrate(new long[] { 0, 2000, 500 }, -1);
+                StopPlayingSound();
+                StartPlayingSound(true);
+
+                Thread.Sleep(500); // Wait for 2 seconds
+
+                if (!token.IsCancellationRequested)
+                {
+                    StopPlayingSound();
+                    vibrator.Cancel();
+                }
+            }, token);
+        }
+
+        //private void SoundForNG()
+        //{
+        //    try
+        //    {
+        //        Task.Run(() =>
+        //        {
+        //            StopPlayingSound();
+        //            StartPlayingSound();
+        //            Thread.Sleep(3000);
+        //            StopPlayingSound();
+        //        });
+
+        //    }
+        //    catch (Exception ex) { throw ex; }
+        //}
+        private CancellationTokenSource _ctsNG = new CancellationTokenSource();
+
+        private void SoundForNG()
+        {
+            _ctsNG.Cancel();
+            _ctsNG = new CancellationTokenSource();
+
+            Task.Run(async () =>
+            {
+                StopPlayingSound();
+                StartPlayingSound();
+                await Task.Delay(3000);
+                StopPlayingSound();
+            }, _ctsNG.Token);
+        }
+
         private void SoundForFinalSave()
         {
             try
@@ -358,7 +420,7 @@ namespace SMPDisptach.ActivityClass
             {
                 _lstSIL.Clear();
                 _lstSIL.Add("--Select--");
-                string[] directoriesFinal = Directory.GetDirectories(path);
+                string[] directoriesFinal = Directory.GetDirectories(path).OrderBy(x=>x).ToArray();
                 for (int i = 0; i < directoriesFinal.Length; i++)
                 {
                     string strCompltedSIL = Path.Combine(directoriesFinal[i].TrimEnd(Path.DirectorySeparatorChar), clsGlobal.SILCompletedFile);
@@ -373,6 +435,7 @@ namespace SMPDisptach.ActivityClass
                         string strSILCode = Path.GetFileName(directoriesFinal[i].TrimEnd(Path.DirectorySeparatorChar));
                         _lstSIL.Add(strSILCode);
                     }
+                   
                 }
 
                 // Get all directories
@@ -389,6 +452,8 @@ namespace SMPDisptach.ActivityClass
             string strTranscationPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
             BindALLSIL(strTranscationPath);
 
+            
+
             ArrayAdapter arrayAdapter = new ArrayAdapter(this, Resource.Layout.Spinner, _lstSIL);
             arrayAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             spinnerSIL.Adapter = arrayAdapter;
@@ -403,12 +468,12 @@ namespace SMPDisptach.ActivityClass
                 if (strSILBarcode.Length > 0)
                 {
                     clsGlobal.mSILType = clsGlobal.mGetCheckPoints(strSILBarcode.Trim());
-                    clsGlobal.mCustomerCode = clsGlobal.mGetCustomerCode(strSILBarcode.Trim());
+                    clsGlobal.mCustomerCode = Convert.ToString(Convert.ToInt32(clsGlobal.mGetCustomerCode(strSILBarcode.Trim())));
                     clsGlobal.mShipmentType = clsGlobal.mCheckSILTILType(strSILBarcode.Trim());
-                    if (clsGlobal.mShipmentType != "SIL")
+                    if (clsGlobal.mShipmentType != "SIL" && clsGlobal.mShipmentType != "TIL")
                     {
                         txtDNHASUPKanbanBarcode.Enabled = false;
-                        clsGLB.showToastNGMessage("Invalid SIL Barcode.", this);
+                        clsGlobal.showToastNGMessage("Invalid SIL/TIL Barcode.", this);
                         SoundForNG();
                         ShowAlertPopUp();
                         return;
@@ -461,14 +526,14 @@ namespace SMPDisptach.ActivityClass
 
                             throw ex;
                         }
-                        SoundForOK();
+                        SoundForOKVibrate();
                     }
                     else
                     {
                         txtDNHASUPKanbanBarcode.Enabled = false;
 
                         spinnerSIL.SetSelection(0);
-                        clsGLB.showToastNGMessage("Invalid SIL Barcode.", this);
+                        clsGlobal.showToastNGMessage("Invalid SIL Barcode.", this);
                         SoundForNG();
                         ShowAlertPopUp();
 
@@ -478,11 +543,28 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
 
             }
 
 
+        }
+        private void GetUpdateScannedBinCount()
+        {
+            int iRemainedBin = 0;
+            for (int i = 0; i < _ListItem.Count; i++)
+            {
+                int iBinSize = Convert.ToInt32(clsGlobal.mlistDNHA.Where(x => x.DNHAPartNo == _ListItem[i].PartNo).Select(m => m.LotSize).FirstOrDefault());
+
+                if (iBinSize > 0)
+                {
+                    int iSumScanQty = Convert.ToInt32(_ListItem.Where(x => x.PartNo == _ListItem[i].PartNo).Select(m => m.ScanQty).FirstOrDefault());
+                    int iBin = Convert.ToInt32(_ListItem.Where(x => x.PartNo == _ListItem[i].PartNo).Select(m => m.Bin).FirstOrDefault());
+                    int ibinsUsed = iSumScanQty / iBinSize;
+                    iRemainedBin += Math.Max(iBin - ibinsUsed, 0);
+                }
+            }
+            txtCheckPoint.Text = iRemainedBin.ToString();
         }
         private void GetSetTotalAndScanQty()
         {
@@ -560,6 +642,11 @@ namespace SMPDisptach.ActivityClass
                     {
                         txtCheckPoint.Text = "2-Points";
                     }
+                    var partNoSet = new HashSet<string>(_ListItem.Select(x => x.PartNo));
+                    var mlistCustomer = clsGlobal.mlistCustomer.Where(c => partNoSet.Contains(c.DNHAPartNo)).ToList();
+
+                    //var filteredList = clsGlobal.mlistCustomer.Where(part => _ListItem.Contains(part.DNHAPartNo)).ToList();
+                    clsGlobal.mlistCustomer = mlistCustomer.ToList();
                 }
                 else
                 {
@@ -586,7 +673,11 @@ namespace SMPDisptach.ActivityClass
                         txtTruckSILCodeNo.Text = _SILCode = lst[i].TruckNo;
                         _ListItem.Add(_listBindView);
 
+                        var partNoSet = new HashSet<string>(_ListItem.Select(x => x.PartNo));
+                        var mlistCustomer = clsGlobal.mlistCustomer.Where(c => partNoSet.Contains(c.DNHAPartNo)).ToList();
 
+                        //var filteredList = clsGlobal.mlistCustomer.Where(part => _ListItem.Contains(part.DNHAPartNo)).ToList();
+                        clsGlobal.mlistCustomer = mlistCustomer.ToList();
                     }
                     clsGlobal.WriteSILFileFromList(strFinalFilePath, _ListItem);
                 }
@@ -599,13 +690,14 @@ namespace SMPDisptach.ActivityClass
                 {
                     txtCheckPoint.Text = "2-Points";
                 }
+
                 GetSetTotalAndScanQty();
 
                 receivingItemAdapter = new SILScanItemAdapter(this, _ListItem);
                 recyclerViewItem.SetAdapter(receivingItemAdapter);
                 lblPartCount.Text = Convert.ToString(_ListItem.Count(x => x.Balance != "0"));
                 receivingItemAdapter.NotifyDataSetChanged();
-
+                GetUpdateScannedBinCount();
             }
             catch (Exception ex) { throw ex; }
         }
@@ -641,6 +733,7 @@ namespace SMPDisptach.ActivityClass
                     GetSetTotalAndScanQty();
                     lblPartCount.Text = Convert.ToString(_ListItem.Count(x => x.Balance != "0"));
                     txtScanQty.Text = "Scan Qty : " + _ScanQty.ToString();
+                    GetUpdateScannedBinCount();
                 }
                 //RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.recyclerView);
 
@@ -754,7 +847,7 @@ namespace SMPDisptach.ActivityClass
                 //{
 
                 //    lblResult.Text = $"This Delivery ({txtSILBarcode.Text.Trim()}) Data Saved Successfully!!!";
-                //    clsGLB.ShowMessage($"This Delivery ({txtSILBarcode.Text.Trim()}) Data Saved Successfully!!!", this, MessageTitle.INFORMATION);
+                //    clsGlobal.ShowMessage($"This Delivery ({txtSILBarcode.Text.Trim()}) Data Saved Successfully!!!", this, MessageTitle.INFORMATION);
                 //    txtDNHAKanbanBarcode.Text = "";
                 //    txtDNHAKanbanBarcode.RequestFocus();
 
@@ -788,7 +881,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
 
 
@@ -913,6 +1006,29 @@ namespace SMPDisptach.ActivityClass
                 }
             }
         }
+        private bool CheckPartAndQty(List<ViewSILScanData> lst, string strPartNo, string qty)
+        {
+            bool bCheck = false;
+            try
+            {
+
+                for (int i = 0; i < lst.Count; i++)
+                {
+                    if (_ListItem[i].PartNo == strPartNo && Convert.ToInt32(qty) > Convert.ToInt32(_ListItem[i].Balance))
+                    {
+                        return bCheck = true;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return bCheck;
+
+        }
         private void ScanningDNHAKanbanBarcode()
         {
             try
@@ -921,7 +1037,7 @@ namespace SMPDisptach.ActivityClass
                 {
                     //if (_dicBarcode1.ContainsKey(txtDNHASUPKanbanBarcode.Text.Trim()))
                     //{
-                    //    clsGLB.showToastNGMessage($"DNHA Barcode {txtDNHASUPKanbanBarcode.Text.Trim()} Already Exist!!", this);
+                    //    clsGlobal.showToastNGMessage($"DNHA Barcode {txtDNHASUPKanbanBarcode.Text.Trim()} Already Exist!!", this);
                     //    txtDNHASUPKanbanBarcode.Text = "";
                     //    txtDNHASUPKanbanBarcode.RequestFocus();
                     //    SoundForNG();
@@ -930,7 +1046,7 @@ namespace SMPDisptach.ActivityClass
                     //}
                     strDNHAPartNo = "";
                     _DnhaSupQty = 0;
-               
+
                     string partNo = string.Empty;
                     string qty = "0";
                     string mfg = "";
@@ -991,6 +1107,15 @@ namespace SMPDisptach.ActivityClass
                             // MFG Date and Suspected Lot are true, Expiry Date is false
                             break;
                         }
+                        else if ((isMatchPart && isMatchQty) && !isMatchMFGDate && !isMatchExpiryDate && !isMatchSuspectedLot)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            //Added by dipak 27-02-25 
+                            isMatchPart = false; isMatchQty = false; isMatchMFGDate = false; isMatchExpiryDate = false; isMatchSeqNo = false; isMatchSuspectedLot = false;
+                        }
 
                         //if (isMatchPart)
                         //{
@@ -1003,122 +1128,297 @@ namespace SMPDisptach.ActivityClass
                             // Get the start and end indexes from the keyValueData entry
                             int startIndex = Convert.ToInt32(entry.keyValueData[i].Item2.ToString().Split('-')[0]);
                             int endIndex = Convert.ToInt32(entry.keyValueData[i].Item2.ToString().Split('-')[1]);
+                            string sepraterIndex = Convert.ToString(entry.keyValueData[i].Item2.ToString().Split('-')[2]);
+                            string strTheSeprator = Convert.ToString(entry.Seperater);
 
                             // Extract the part number or quantity based on the current counter
                             int length = endIndex - startIndex;
                             if (entry.keyValueData[i].Item1.Trim().ToUpper() == "DNHAPARTNO")
                             {
-                                try
+                                if (strTheSeprator != "")
                                 {
-                                    partNo = txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length).Trim();
+                                    try
+                                    {
+                                        string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(Convert.ToChar(strTheSeprator));
+                                        //string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(new char[] { Convert.ToChar(strTheSeprator) }, StringSplitOptions.RemoveEmptyEntries);
+                                        if (startIndex == endIndex)
+                                        {
+                                            partNo = sArrBarcode[Convert.ToInt32(sepraterIndex)];
+                                        }
+                                        else
+                                        {
+                                            partNo = sArrBarcode[Convert.ToInt32(sepraterIndex)].Substring(startIndex, length);
+                                        }
+                                    }
+                                    catch
+                                    {
+                                        partNo = "";
+
+                                    }
 
                                 }
-                                catch
+                                else
                                 {
-                                    partNo = "";
-                                }
+                                    try
+                                    {
+                                        partNo = txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length).Trim();
 
+                                    }
+                                    catch
+                                    {
+                                        partNo = "";
+                                    }
+                                }
                             }
                             else if (entry.keyValueData[i].Item1.Trim().ToUpper() == "QTY")
                             {
-                                try
+                                int number = 0;
+                                if (strTheSeprator != "")
                                 {
-                                    int number;
-                                    int.TryParse(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length), out number);
-                                    qty = number.ToString().Trim();
-                                    iQrCode1Qty = _DnhaSupQty = number;
+                                    try
+                                    {
+                                        string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(Convert.ToChar(strTheSeprator));
+                                        //string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(new char[] { Convert.ToChar(strTheSeprator) }, StringSplitOptions.RemoveEmptyEntries);
+                                        if (startIndex == endIndex)
+                                        {
+                                            int.TryParse(sArrBarcode[Convert.ToInt32(sepraterIndex)], out number);
+                                        }
+                                        else
+                                        {
+                                            int.TryParse(sArrBarcode[Convert.ToInt32(sepraterIndex)].Substring(startIndex, length), out number);
+
+                                        }
+                                        qty = number.ToString().Trim();
+                                        iQrCode1Qty = _DnhaSupQty = number;
+                                    }
+                                    catch
+                                    {
+                                        qty = "";
+
+                                    }
+
                                 }
-                                catch
+                                else
                                 {
-                                    qty = "";
+                                    try
+                                    {
+
+                                        int.TryParse(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length), out number);
+                                        qty = number.ToString().Trim();
+                                        iQrCode1Qty = _DnhaSupQty = number;
+                                        isMatchQty = true;//Added by dipak 10-03-25
+                                    }
+                                    catch
+                                    {
+                                        qty = "";
+                                    }
                                 }
 
                             }
                             else if (entry.keyValueData[i].Item1.Trim().ToUpper() == "MFG")
                             {
-                                try
+                                DateTime? date;
+                                if (strTheSeprator != "")
                                 {
-
-                                    //string[] formats = { "dd-MM-yyyy", "MM-dd-yyyy", "yyyy-MM-dd" };  // Add all possible formats
-                                    DateTime? date;
-                                    //DateTime.TryParseExact(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length), formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out date);
-                                    date = clsGlobal.ParseDate(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length));
-                                    if (date == null || date == DateTime.MinValue)
+                                    try
+                                    {
+                                        string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(Convert.ToChar(strTheSeprator));
+                                        //string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(new char[] { Convert.ToChar(strTheSeprator) }, StringSplitOptions.RemoveEmptyEntries);
+                                        if (startIndex == endIndex)
+                                        {
+                                            date = clsGlobal.ParseDate(sArrBarcode[Convert.ToInt32(sepraterIndex)]);
+                                        }
+                                        else
+                                        {
+                                            date = clsGlobal.ParseDate(sArrBarcode[Convert.ToInt32(sepraterIndex)].Substring(startIndex, length));
+                                        }
+                                        if (date == null || date == DateTime.MinValue)
+                                        {
+                                            mfg = "";
+                                        }
+                                        else
+                                        {
+                                            mfg = date?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture).Trim();
+                                        }
+                                    }
+                                    catch
                                     {
                                         mfg = "";
-                                    }
-                                    else
-                                    {
-                                        mfg = date?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture).Trim();
+
                                     }
 
                                 }
-                                catch
+                                else
                                 {
-                                    mfg = "";
+                                    try
+                                    {
+
+                                        //string[] formats = { "dd-MM-yyyy", "MM-dd-yyyy", "yyyy-MM-dd" };  // Add all possible formats
+
+                                        //DateTime.TryParseExact(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length), formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out date);
+                                        date = clsGlobal.ParseDate(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length));
+                                        if (date == null || date == DateTime.MinValue)
+                                        {
+                                            mfg = "";
+                                        }
+                                        else
+                                        {
+                                            mfg = date?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture).Trim();
+                                        }
+
+                                    }
+                                    catch
+                                    {
+                                        mfg = "";
+                                    }
                                 }
 
                             }
                             else if (entry.keyValueData[i].Item1.Trim().ToUpper() == "EXP")
                             {
-                                try
+                                DateTime? date;
+                                if (strTheSeprator != "")
                                 {
-                                    DateTime? date;
-                                    //DateTime.TryParse(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length), out date);
-                                    //date = DateTime.ParseExact(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length), "MM/dd/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
-                                    date = clsGlobal.ParseDate(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length));
-                                    if (date == null || date == DateTime.MinValue)
+                                    try
+                                    {
+                                        string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(Convert.ToChar(strTheSeprator));
+                                        //string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(new char[] { Convert.ToChar(strTheSeprator) }, StringSplitOptions.RemoveEmptyEntries); 
+                                        if (startIndex == endIndex)
+                                        {
+                                            date = clsGlobal.ParseDate(sArrBarcode[Convert.ToInt32(sepraterIndex)]);
+                                        }
+                                        else
+                                        {
+                                            date = clsGlobal.ParseDate(sArrBarcode[Convert.ToInt32(sepraterIndex)].Substring(startIndex, length));
+                                        }
+                                        if (date == null || date == DateTime.MinValue)
+                                        {
+                                            exp = "";
+                                        }
+                                        else
+                                        {
+                                            exp = date?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture).Trim();
+                                        }
+                                    }
+                                    catch
+                                    {
+                                        exp = "";
+
+                                    }
+
+                                }
+                                else
+                                {
+                                    try
+                                    {
+
+                                        //DateTime.TryParse(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length), out date);
+                                        //date = DateTime.ParseExact(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length), "MM/dd/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                        date = clsGlobal.ParseDate(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length));
+                                        if (date == null || date == DateTime.MinValue)
+                                        {
+                                            exp = "";
+                                        }
+                                        else
+                                        {
+
+                                            exp = date?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture).Trim();
+                                        }
+                                    }
+                                    catch
                                     {
                                         exp = "";
                                     }
-                                    else
-                                    {
-
-                                        exp = date?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture).Trim();
-                                    }
-                                }
-                                catch
-                                {
-                                    exp = "";
                                 }
 
                             }
                             else if (entry.keyValueData[i].Item1.Trim().ToUpper() == "LOT")
                             {
-                                try
+                                if (strTheSeprator != "")
                                 {
+                                    try
+                                    {
+                                        string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(Convert.ToChar(strTheSeprator));
+                                        //string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(new char[] { Convert.ToChar(strTheSeprator) }, StringSplitOptions.RemoveEmptyEntries);
+                                        if (startIndex == endIndex)
+                                        {
+                                            lot = sArrBarcode[Convert.ToInt32(sepraterIndex)];
+                                        }
+                                        else
+                                        {
+                                            lot = sArrBarcode[Convert.ToInt32(sepraterIndex)].Substring(startIndex, length);
+                                        }
+                                    }
+                                    catch
+                                    {
+                                        lot = "";
 
-                                    lot = txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length).Trim();
-
+                                    }
 
                                 }
-                                catch
+                                else
                                 {
-                                    lot = "";
+                                    try
+                                    {
+
+
+                                        lot = txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length).Trim();
+
+
+                                    }
+                                    catch
+                                    {
+                                        lot = "";
+                                    }
                                 }
 
                             }
                             else if (entry.keyValueData[i].Item1.Trim().ToUpper() == "SEQNO")
                             {
-                                try
+                                string strSEQNo = "";
+                                if (strTheSeprator != "")
                                 {
-                                    string strSEQNo = "";
+                                    try
+                                    {
+                                        string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(Convert.ToChar(strTheSeprator));
+                                        //string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(new char[] { Convert.ToChar(strTheSeprator) }, StringSplitOptions.RemoveEmptyEntries);
+                                        if (startIndex == endIndex)
+                                        {
+                                            strSEQNo = sArrBarcode[Convert.ToInt32(sepraterIndex)];
+                                        }
+                                        else
+                                        {
+                                            strSEQNo = sArrBarcode[Convert.ToInt32(sepraterIndex)].Substring(startIndex, length);
+                                        }
+                                    }
+                                    catch
+                                    {
+                                        strSEQNo = "";
 
-                                    strSEQNo = txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length);
+                                    }
 
-                                    seqNo = clsGlobal.mDNHASupSeqNo = strSEQNo.ToString().Trim();
-                                    combinedKey = $"{partNo}^{seqNo}";
-                                    valueombinedBarcode1Key = combinedKey;
-                                    isMatchSeqNo = true;
-                                    isvalueMatchBarcode1SeqNo = true;
                                 }
-                                catch
+                                else
                                 {
-                                    seqNo = "0";
+                                    try
+                                    {
 
 
+                                        strSEQNo = txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length);
+
+                                    }
+                                    catch
+                                    {
+                                        strSEQNo = "";
+
+
+                                    }
                                 }
-
+                                seqNo = clsGlobal.mDNHASupSeqNo = strSEQNo.ToString().Trim();
+                                combinedKey = $"{partNo}^{seqNo}";
+                                valueombinedBarcode1Key = combinedKey;
+                                isMatchSeqNo = true;
+                                isvalueMatchBarcode1SeqNo = true;
 
                             }
                             //CheckNGSuspectedLot
@@ -1132,7 +1432,7 @@ namespace SMPDisptach.ActivityClass
                             if (clsGlobal.mlistDNHA.Exists(x => x.DNHAPartNo == partNo && x.IsMfgDate == true))
                             {
                                 isMatchPart = true;
-                                isMatchQty = true;
+                                isMatchQty = true; //Commented by dipak 10-03-25
                                 if (clsGlobal.mlistDNHA.Exists(x => x.DNHAPartNo == partNo && x.IsMfgDate == true && mfg != ""))
                                 {
                                     isMatchMFGDate = true;
@@ -1200,7 +1500,7 @@ namespace SMPDisptach.ActivityClass
                             else if (clsGlobal.mlistDNHA.Exists(x => x.DNHAPartNo == partNo && x.IsExpDate == true && exp != ""))
                             {
                                 isMatchPart = true;
-                                isMatchQty = true;
+                                isMatchQty = true; //Commented by dipak 10-03-25
                                 isMatchExpiryDate = true;
                                 bool atucalExp = clsGlobal.mlistDNHA.Where(x => x.DNHAPartNo == partNo).Select(p => p.IsExpDate).FirstOrDefault();
                                 string strExpShipDays = clsGlobal.mlistDNHA.Where(x => x.DNHAPartNo == partNo).Select(p => p.EXPShipDays).FirstOrDefault();
@@ -1243,21 +1543,42 @@ namespace SMPDisptach.ActivityClass
                             }
                             else
                             {
-                                if (clsGlobal.mlistDNHA.Exists(x => x.DNHAPartNo == partNo))
+                                if (clsGlobal.mlistDNHA.Exists(x => x.DNHAPartNo == partNo) && _ListItem.Exists(p => p.PartNo == partNo)) //(Part should be exists in master file and also in listitem.)
                                 {
                                     strDNHAPattern = entry.Patterns;
+                                    isMatchPart = true;
+                                    isMatchQty = true; //Commented by dipak 10-03-25
                                 }
-                                isMatchPart = true;
-                                isMatchQty = true;
+                                else //Added by dipak 27-02-2025
+                                {
+                                    if (i == 0)
+                                    {
+                                        goto NextForeachIteration;
+                                    }
+                                }
+
                             }
                             counter++;
                         }
+                    NextForeachIteration:
+                        continue;
 
 
                     }
                     if (!isMatchPart)
                     {
-                        clsGLB.showToastNGMessage("Invalid DNHA Kanban Barcode.", this);
+                        clsGlobal.showToastNGMessage("Invalid DNHA Kanban Barcode.", this);
+                        txtDNHASUPKanbanBarcode.Text = "";
+                        txtDNHASUPKanbanBarcode.RequestFocus();
+                        clsGlobal.WriteLog("Invalid DNHA Kanban Barcode.");
+                        SoundForNG();
+                        ShowAlertPopUp();
+                        return;
+                    }
+                    if (!isMatchQty) //Added by dipak 10-03-2025
+                    {
+                        clsGlobal.showToastNGMessage("Qty is required for DNHA Kanban Barcode.", this);
+                        clsGlobal.WriteLog($"Qty is required for DNHA Kanban Barcode.");
                         txtDNHASUPKanbanBarcode.Text = "";
                         txtDNHASUPKanbanBarcode.RequestFocus();
                         SoundForNG();
@@ -1266,7 +1587,8 @@ namespace SMPDisptach.ActivityClass
                     }
                     if (!_ListItem.Exists(p => p.PartNo == partNo))
                     {
-                        clsGLB.showToastNGMessage($"Part No. {partNo} isn't available in SIL List! ", this);
+                        clsGlobal.showToastNGMessage($"Part No. {partNo} isn't available in SIL List! ", this);
+                        clsGlobal.WriteLog($"Part No. {partNo} isn't available in SIL List! ");
                         txtDNHASUPKanbanBarcode.Text = "";
                         txtDNHASUPKanbanBarcode.RequestFocus();
                         SoundForNG();
@@ -1276,7 +1598,8 @@ namespace SMPDisptach.ActivityClass
                     }
                     if (isNGSuspectedLot)
                     {
-                        clsGLB.showToastNGMessage($"This product Lot {lot} is suspected {partNo},Scanned valid product", this);
+                        clsGlobal.showToastNGMessage($"This product Lot {lot} is suspected {partNo},Scanned valid product", this);
+                        clsGlobal.WriteLog($"This product Lot {lot} is suspected {partNo},Scanned valid product");
                         txtDNHASUPKanbanBarcode.Text = "";
                         txtDNHASUPKanbanBarcode.RequestFocus();
                         SoundForNG();
@@ -1285,7 +1608,8 @@ namespace SMPDisptach.ActivityClass
                     }
                     if (clsGlobal.mlistDNHA.Exists(x => x.DNHAPartNo == partNo && (x.IsExpDate == true) && isMatchExpiryDate == false))
                     {
-                        clsGLB.showToastNGMessage($"This product is registered with expiary check {partNo},Scanned valid product or check pattern", this);
+                        clsGlobal.showToastNGMessage($"This product is registered with expiary check {partNo},Scanned valid product or check pattern", this);
+                        clsGlobal.WriteLog($"This product is registered with expiary check {partNo},Scanned valid product or check pattern");
                         txtDNHASUPKanbanBarcode.Text = "";
                         txtDNHASUPKanbanBarcode.RequestFocus();
                         SoundForNG();
@@ -1294,7 +1618,8 @@ namespace SMPDisptach.ActivityClass
                     }
                     if (clsGlobal.mlistDNHA.Exists(x => x.DNHAPartNo == partNo && (x.IsMfgDate == true) && isMatchMFGDate == false))
                     {
-                        clsGLB.showToastNGMessage($"This product is registered with manufacturing check {partNo},Scanned valid product or check pattern", this);
+                        clsGlobal.showToastNGMessage($"This product is registered with manufacturing check {partNo},Scanned valid product or check pattern", this);
+                        clsGlobal.WriteLog($"This product is registered with manufacturing check {partNo},Scanned valid product or check pattern");
                         txtDNHASUPKanbanBarcode.Text = "";
                         txtDNHASUPKanbanBarcode.RequestFocus();
                         SoundForNG();
@@ -1303,7 +1628,8 @@ namespace SMPDisptach.ActivityClass
                     }
                     if (isProductMFGShippedDateCross)
                     {
-                        clsGLB.showToastNGMessage($"This product is MFG Shipping date over {partNo},Scanned valid product", this);
+                        clsGlobal.showToastNGMessage($"This product is MFG Shipping date over {partNo},Scanned valid product", this);
+                        clsGlobal.WriteLog($"This product is MFG Shipping date over {partNo},Scanned valid product");
                         txtDNHASUPKanbanBarcode.Text = "";
                         txtDNHASUPKanbanBarcode.RequestFocus();
                         SoundForNG();
@@ -1312,7 +1638,8 @@ namespace SMPDisptach.ActivityClass
                     }
                     if (isProductEXPShippedDateCross)
                     {
-                        clsGLB.showToastNGMessage($"This product is EXP Shipping date over {partNo},Scanned valid product", this);
+                        clsGlobal.showToastNGMessage($"This product is EXP Shipping date over {partNo},Scanned valid product", this);
+                        clsGlobal.WriteLog($"This product is EXP Shipping date over {partNo},Scanned valid product");
                         txtDNHASUPKanbanBarcode.Text = "";
                         txtDNHASUPKanbanBarcode.RequestFocus();
                         SoundForNG();
@@ -1321,7 +1648,8 @@ namespace SMPDisptach.ActivityClass
                     }
                     if (isProductExpired)
                     {
-                        clsGLB.showToastNGMessage($"This product is Expired {partNo},Scanned valid product", this);
+                        clsGlobal.showToastNGMessage($"This product is Expired {partNo},Scanned valid product", this);
+                        clsGlobal.WriteLog($"This product is Expired {partNo},Scanned valid product");
                         txtDNHASUPKanbanBarcode.Text = "";
                         txtDNHASUPKanbanBarcode.RequestFocus();
                         SoundForNG();
@@ -1332,7 +1660,8 @@ namespace SMPDisptach.ActivityClass
 
                     if (!clsGlobal.mlistDNHA.Exists(p => p.DNHAPartNo == partNo))
                     {
-                        clsGLB.showToastNGMessage($"Scanned Part {partNo} isn't available in main master list! ", this);
+                        clsGlobal.showToastNGMessage($"Scanned Part {partNo} isn't available in main master list! ", this);
+                        clsGlobal.WriteLog($"Scanned Part {partNo} isn't available in main master list!");
                         txtDNHASUPKanbanBarcode.Text = "";
                         txtDNHASUPKanbanBarcode.RequestFocus();
                         SoundForNG();
@@ -1342,7 +1671,8 @@ namespace SMPDisptach.ActivityClass
                     }
                     if (string.IsNullOrEmpty(qty))
                     {
-                        clsGLB.showToastNGMessage($"Qty is not available! ", this);
+                        clsGlobal.showToastNGMessage($"Qty is not available! ", this);
+                        clsGlobal.WriteLog($"Qty is not available! ");
                         txtDNHASUPKanbanBarcode.Text = "";
                         txtDNHASUPKanbanBarcode.RequestFocus();
                         SoundForNG();
@@ -1352,7 +1682,8 @@ namespace SMPDisptach.ActivityClass
                     }
                     if (_ListItem.Exists(p => Convert.ToInt32(p.Balance) == 0 && p.PartNo == partNo))
                     {
-                        clsGLB.showToastNGMessage($"This Part No {partNo} Scanning Completed! ", this);
+                        clsGlobal.showToastNGMessage($"This Part No {partNo} Scanning Completed! ", this);
+                        clsGlobal.WriteLog($"This Part No {partNo} Scanning Completed! ");
                         txtDNHASUPKanbanBarcode.Text = "";
                         txtDNHASUPKanbanBarcode.RequestFocus();
                         SoundForNG();
@@ -1362,7 +1693,8 @@ namespace SMPDisptach.ActivityClass
                     }
                     if (_ListItem.Exists(p => Convert.ToInt32(qty) > Convert.ToInt32(p.Balance) && p.PartNo == partNo))
                     {
-                        clsGLB.showToastNGMessage($"Scanned Barcode Qty {qty} should be not be greater then SIL Part Qty! ", this);
+                        clsGlobal.showToastNGMessage($"Scanned Barcode Qty {qty} should be not be greater then SIL Part Qty! ", this);
+                        clsGlobal.WriteLog($"Scanned Barcode Qty {qty} should be not be greater then SIL Part Qty! ");
                         txtDNHASUPKanbanBarcode.Text = "";
                         txtDNHASUPKanbanBarcode.RequestFocus();
                         SoundForNG();
@@ -1374,7 +1706,8 @@ namespace SMPDisptach.ActivityClass
                     {
                         if (_dicBarcode1.ContainsKey(combinedKey.Trim()))
                         {
-                            clsGLB.showToastNGMessage($"DNHA Barcode {txtDNHASUPKanbanBarcode.Text.Trim()} Already Exist!!", this);
+                            clsGlobal.showToastNGMessage($"DNHA Barcode {txtDNHASUPKanbanBarcode.Text.Trim()} Already Exist!!", this);
+                            clsGlobal.WriteLog($"DNHA Barcode {txtDNHASUPKanbanBarcode.Text.Trim()} Already Exist!!");
                             txtDNHASUPKanbanBarcode.Text = "";
                             txtDNHASUPKanbanBarcode.RequestFocus();
                             SoundForNG();
@@ -1391,6 +1724,10 @@ namespace SMPDisptach.ActivityClass
                         SequenceNo = txtDNHASUPKanbanBarcode.Text.Substring(118, 7).Trim();
                         DensoBarcode = txtDNHASUPKanbanBarcode.Text.Substring(0, 150).Trim();
                         DNHAScannedOn = DateTime.Now.ToString();
+                        if (partNo != PartNo)
+                        {
+                            PartNo = partNo;
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -1417,12 +1754,14 @@ namespace SMPDisptach.ActivityClass
                         if (_TotalQty == _ScanQty)
                         {
                             WriteSILCompltedFile(TruckNo);
-                            clsGLB.showToastOKMessage($"SIL No. {TruckNo} Completed! ", this);
+                            clsGlobal.showToastOKMessage($"SIL No. {TruckNo} Completed! ", this);
                             txtDNHASUPKanbanBarcode.Text = "";
                             txtDNHASUPKanbanBarcode.RequestFocus();
                             clear();
                             BindSpinnerRegisteredSIL();
                         }
+                        txtDNHASUPKanbanBarcode.Text = "";
+                        SoundForOKVibrate();
                     }
                     else
                     {
@@ -1445,30 +1784,6 @@ namespace SMPDisptach.ActivityClass
             }
 
         }
-        private bool CheckPartAndQty(List<ViewSILScanData> lst, string strPartNo, string qty)
-        {
-            bool bCheck = false;
-            try
-            {
-
-                for (int i = 0; i < lst.Count; i++)
-                {
-                    if (_ListItem[i].PartNo == strPartNo && Convert.ToInt32(qty) > Convert.ToInt32(_ListItem[i].Balance))
-                    {
-                        return bCheck = true;
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-            return bCheck;
-
-        }
-
         private void ScanningSUPKanbanBarcode()
         {
             try
@@ -1478,7 +1793,7 @@ namespace SMPDisptach.ActivityClass
                     //if (_dicBarcode1.ContainsKey(txtDNHASUPKanbanBarcode.Text.Trim()))
                     //{
 
-                    //    clsGLB.showToastNGMessage($"Supplier Barcode {txtDNHASUPKanbanBarcode.Text.Trim()} Already Exist!!", this);
+                    //    clsGlobal.showToastNGMessage($"Supplier Barcode {txtDNHASUPKanbanBarcode.Text.Trim()} Already Exist!!", this);
                     //    txtDNHASUPKanbanBarcode.Text = "";
                     //    txtDNHASUPKanbanBarcode.RequestFocus();
                     //    SoundForNG();
@@ -1507,185 +1822,405 @@ namespace SMPDisptach.ActivityClass
                     bool isProductMFGShippedDateCross = false;
                     bool isProductEXPShippedDateCross = false;
                     bool isNGSuspectedLot = false;
-                    var maxEntry = clsGlobal.mlistSupplierPattern
-                                         .OrderByDescending(entry => entry.keyValueData.Count);
+                    //var maxEntry = clsGlobal.mlistSupplierPattern
+                    //                     .OrderByDescending(entry => entry.keyValueData.Count);
+                    string strCode = Convert.ToInt32(clsGlobal.mCustomerCode).ToString();
+                    var maxEntry = clsGlobal.mlistSupplierPattern.Where(x => x.Code.TrimStart('0') == strCode).Select(x => x).ToList();
+                    if (maxEntry.Count == 0)
+                    {
+                        clsGlobal.showToastNGMessage($"Supplier Barcode {txtCustKanbanBarcode.Text.Trim()} Pattern Code Not Matched!!", this);
+                        txtCustKanbanBarcode.Text = "";
+                        txtCustKanbanBarcode.RequestFocus();
+                        SoundForNG();
+                        ShowAlertPopUp();
+                        return;
+                    }
                     // Loop through the list of patterns
                     foreach (var entry in maxEntry)
                     {
                         counter = 0;
                         // Permutations of the flags
-                        if (isMatchPart && isMatchQty && isMatchMFGDate && isMatchExpiryDate && isMatchSuspectedLot)
+                        if ((isMatchPart && isMatchQty) && isMatchMFGDate && isMatchExpiryDate && isMatchSuspectedLot)
                         {
-                            // All flags are true
+                            // All remaining flags are true
                             break;
                         }
-                        else if (isMatchPart && isMatchQty && !isMatchMFGDate && !isMatchExpiryDate && !isMatchSuspectedLot)
+                        else if ((isMatchPart && isMatchQty) && isMatchMFGDate && isMatchExpiryDate && !isMatchSuspectedLot)
                         {
-                            // Only Part and Qty are true
+                            // MFG Date and Expiry Date are true, Suspected Lot is false
                             break;
                         }
-                        else if (isMatchPart && isMatchQty && isMatchMFGDate && !isMatchExpiryDate && !isMatchSuspectedLot)
+                        else if ((isMatchPart && isMatchQty) && isMatchMFGDate && !isMatchExpiryDate && !isMatchSuspectedLot)
                         {
-                            // Part, Qty, and MFGDate are true
+                            // Only MFG Date is true
                             break;
                         }
-                        else if (isMatchPart && !isMatchQty && !isMatchMFGDate && !isMatchExpiryDate && !isMatchSuspectedLot)
+                        else if ((isMatchPart && isMatchQty) && !isMatchMFGDate && isMatchExpiryDate && isMatchSuspectedLot)
                         {
-                            // Only Part is true
+                            // Expiry Date and Suspected Lot are true, MFG Date is false
                             break;
                         }
-                        else if (!isMatchPart && isMatchQty && isMatchMFGDate && isMatchExpiryDate && isMatchSuspectedLot)
+                        else if ((isMatchPart && isMatchQty) && !isMatchMFGDate && isMatchExpiryDate && !isMatchSuspectedLot)
                         {
-                            // All except Part are true
+                            // Only Expiry Date is true
                             break;
                         }
-                        else if (!isMatchPart && isMatchQty && !isMatchMFGDate && !isMatchExpiryDate && !isMatchSuspectedLot)
+                        else if ((isMatchPart && isMatchQty) && !isMatchMFGDate && !isMatchExpiryDate && isMatchSuspectedLot)
                         {
-                            // Only Qty is true
+                            // Only Suspected Lot is true
                             break;
                         }
-                        else if (isMatchPart && isMatchQty && !isMatchMFGDate && isMatchExpiryDate && !isMatchSuspectedLot)
+                        else if ((isMatchPart && isMatchQty) && isMatchMFGDate && !isMatchExpiryDate && isMatchSuspectedLot)
                         {
-                            // Part, Qty, and ExpiryDate are true
+                            // MFG Date and Suspected Lot are true, Expiry Date is false
                             break;
                         }
+                        else if ((isMatchPart && isMatchQty) && !isMatchMFGDate && !isMatchExpiryDate && !isMatchSuspectedLot)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            //Added by dipak 27-02-25 
+                            isMatchPart = false; isMatchQty = false; isMatchMFGDate = false; isMatchExpiryDate = false; isMatchSeqNo = false; isMatchSuspectedLot = false;
+                        }
+
                         // Step 4: Iterate through the hashtable inside the dictionary
                         for (int i = 0; i < entry.keyValueData.Count; i++)
                         {
                             // Get the start and end indexes from the keyValueData entry
                             int startIndex = Convert.ToInt32(entry.keyValueData[i].Item2.ToString().Split('-')[0]);
                             int endIndex = Convert.ToInt32(entry.keyValueData[i].Item2.ToString().Split('-')[1]);
+                            string sepraterIndex = Convert.ToString(entry.keyValueData[i].Item2.ToString().Split('-')[2]);
+                            string strTheSeprator = Convert.ToString(entry.Seperater);
 
                             // Extract the part number or quantity based on the current counter
                             int length = endIndex - startIndex;
                             if (entry.keyValueData[i].Item1.Trim().ToUpper() == "SUPPLIERPARTNO")
                             {
-                                try
+                                if (strTheSeprator != "")
                                 {
-                                    partNo = txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length).Trim();
-                                }
-                                catch
-                                {
-                                    partNo = "";
-                                }
-                                try
-                                {
-                                    dnhaPartNo = clsGlobal.mlistSupplier.Where(x => (x.DNHAPartNo == partNo || x.SupplierPartNo == partNo)).Select(x => x.DNHAPartNo).First();
-                                }
-                                catch 
-                                {
-                                    clsGLB.showToastNGMessage($"Invalid Scanned Barcode! ", this);
-                                    txtDNHASUPKanbanBarcode.Text = "";
-                                    txtDNHASUPKanbanBarcode.RequestFocus();
-                                    SoundForNG();
-                                    ShowAlertPopUp();
-                                    return;
+                                    try
+                                    {
+                                        string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(Convert.ToChar(strTheSeprator));
+                                        //string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(new char[] { Convert.ToChar(strTheSeprator) }, StringSplitOptions.RemoveEmptyEntries);
+                                        if (startIndex == endIndex)
+                                        {
+                                            partNo = sArrBarcode[Convert.ToInt32(sepraterIndex)];
+                                        }
+                                        else
+                                        {
+                                            partNo = sArrBarcode[Convert.ToInt32(sepraterIndex)].Substring(startIndex, length);
+                                        }
+                                    }
+                                    catch
+                                    {
+
+
+                                    }
 
                                 }
-                                
+                                else
+                                {
+                                    try
+                                    {
+                                        partNo = txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length).Trim();
+                                    }
+                                    catch
+                                    {
+                                        partNo = "";
+                                    }
+                                }
+                                if (clsGlobal.mlistSupplier.Exists(x => (x.DNHAPartNo == partNo || x.SupplierPartNo == partNo)))
+                                {
+                                    dnhaPartNo = clsGlobal.mlistSupplier.Where(x => (x.DNHAPartNo == partNo || x.SupplierPartNo == partNo)).Select(x => x.DNHAPartNo).First();
+                                    if (clsGlobal.mlistSupplier.Any(x => (x.DNHAPartNo == partNo || x.SupplierPartNo == partNo) && !string.IsNullOrWhiteSpace(x.LotQty)))
+                                    {
+                                        int number = 0;
+                                        int.TryParse(clsGlobal.mlistSupplier.Where(x => (x.DNHAPartNo == partNo || x.SupplierPartNo == partNo)).Select(x => x.LotQty).First(), out number);
+                                        qty = number.ToString();
+                                        iQrCode1Qty = _DnhaSupQty = number;
+                                        if (iQrCode1Qty > 0)
+                                            isMatchQty = true;
+                                    }
+                                }
+                                else //Added by dipak 27-02-2025
+                                {
+                                    if (i == 0)
+                                    {
+                                        goto NextForeachIteration;
+                                    }
+                                }
+
+                                //Commentd By Dipak 27-02-2025
+                                //try
+                                //{
+                                //dnhaPartNo = clsGlobal.mlistSupplier.Where(x => (x.DNHAPartNo == partNo || x.SupplierPartNo == partNo)).Select(x => x.DNHAPartNo).First();
+                                //}
+                                //catch
+                                //{
+                                //    clsGlobal.showToastNGMessage($"Invalid Scanned Barcode! ", this);
+                                //    txtDNHASUPKanbanBarcode.Text = "";
+                                //    txtDNHASUPKanbanBarcode.RequestFocus();
+                                //    SoundForNG();
+                                //    ShowAlertPopUp();
+                                //    return;
+
+                                //}
+
 
                             }
                             else if (entry.keyValueData[i].Item1.Trim().ToUpper() == "QTY")
                             {
-                                try
+                                int number = 0;
+                                if (strTheSeprator != "")
                                 {
-                                    int number;
-                                    int.TryParse(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length).Trim(), out number);
-                                    qty = number.ToString();
-                                    iQrCode1Qty = _DnhaSupQty = number;
-                                }
-                                catch
-                                {
+                                    try
+                                    {
+                                        string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(Convert.ToChar(strTheSeprator));
+                                        //string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(new char[] { Convert.ToChar(strTheSeprator) }, StringSplitOptions.RemoveEmptyEntries);
+                                        if (startIndex == endIndex)
+                                        {
+                                            int.TryParse(sArrBarcode[Convert.ToInt32(sepraterIndex)], out number);
+                                        }
+                                        else
+                                        {
+                                            int.TryParse(sArrBarcode[Convert.ToInt32(sepraterIndex)].Substring(startIndex, length), out number);
 
-                                    qty = "";
+                                        }
+                                        qty = number.ToString();
+                                        iQrCode1Qty = _DnhaSupQty = number;
+                                        if (iQrCode1Qty > 0)
+                                            isMatchQty = true;
+                                    }
+                                    catch
+                                    {
+                                        qty = "";
+
+                                    }
+
+                                }
+                                else
+                                {
+                                    try
+                                    {
+
+                                        int.TryParse(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length).Trim(), out number);
+                                        qty = number.ToString();
+                                        iQrCode1Qty = _DnhaSupQty = number;
+                                        if (iQrCode1Qty > 0)
+                                            isMatchQty = true;
+                                    }
+                                    catch
+                                    {
+
+                                        qty = "";
+                                    }
                                 }
 
                             }
                             else if (entry.keyValueData[i].Item1.Trim().ToUpper() == "MFG")
                             {
-                                try
+                                DateTime? date;
+                                if (strTheSeprator != "")
                                 {
-                                    //string[] formats = { "dd-MM-yyyy", "MM-dd-yyyy", "yyyy-MM-dd" };  // Add all possible formats
-                                    DateTime? date;
-                                    //DateTime.TryParseExact(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length), formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out date);
-                                    date = clsGlobal.ParseDate(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length).Trim());
-                                    if (date == null || date == DateTime.MinValue)
+                                    try
+                                    {
+                                        string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(Convert.ToChar(strTheSeprator));
+                                        //string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(new char[] { Convert.ToChar(strTheSeprator) }, StringSplitOptions.RemoveEmptyEntries);
+                                        if (startIndex == endIndex)
+                                        {
+                                            date = clsGlobal.ParseDate(sArrBarcode[Convert.ToInt32(sepraterIndex)]);
+                                        }
+                                        else
+                                        {
+                                            date = clsGlobal.ParseDate(sArrBarcode[Convert.ToInt32(sepraterIndex)].Substring(startIndex, length));
+                                        }
+                                        if (date == null || date == DateTime.MinValue)
+                                        {
+                                            mfg = "";
+                                        }
+                                        else
+                                        {
+                                            mfg = date?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture).Trim();
+                                        }
+                                    }
+                                    catch
                                     {
                                         mfg = "";
-                                    }
-                                    else
-                                    {
-                                        mfg = date?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture).Trim();
+
                                     }
 
                                 }
-                                catch
+                                else
                                 {
-                                    mfg = "";
+                                    try
+                                    {
+                                        //string[] formats = { "dd-MM-yyyy", "MM-dd-yyyy", "yyyy-MM-dd" };  // Add all possible formats
+
+                                        //DateTime.TryParseExact(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length), formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out date);
+                                        date = clsGlobal.ParseDate(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length).Trim());
+                                        if (date == null || date == DateTime.MinValue)
+                                        {
+                                            mfg = "";
+                                        }
+                                        else
+                                        {
+                                            mfg = date?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture).Trim();
+                                        }
+
+                                    }
+                                    catch
+                                    {
+                                        mfg = "";
+                                    }
                                 }
 
                             }
                             else if (entry.keyValueData[i].Item1.Trim().ToUpper() == "EXP")
                             {
-                                try
+                                DateTime? date;
+                                if (strTheSeprator != "")
                                 {
-                                    DateTime? date;
-                                    //DateTime.TryParse(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length), out date);
-                                    //date = DateTime.ParseExact(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length), "MM/dd/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
-                                    date = clsGlobal.ParseDate(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length).Trim());
-                                    if (date == null || date == DateTime.MinValue)
+                                    try
+                                    {
+                                        string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(Convert.ToChar(strTheSeprator));
+                                        //string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(new char[] { Convert.ToChar(strTheSeprator) }, StringSplitOptions.RemoveEmptyEntries);
+                                        if (startIndex == endIndex)
+                                        {
+                                            date = clsGlobal.ParseDate(sArrBarcode[Convert.ToInt32(sepraterIndex)]);
+                                        }
+                                        else
+                                        {
+                                            date = clsGlobal.ParseDate(sArrBarcode[Convert.ToInt32(sepraterIndex)].Substring(startIndex, length));
+                                        }
+                                        if (date == null || date == DateTime.MinValue)
+                                        {
+                                            exp = "";
+                                        }
+                                        else
+                                        {
+                                            exp = date?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture).Trim();
+                                        }
+                                    }
+                                    catch
+                                    {
+                                        exp = "";
+
+                                    }
+
+                                }
+                                else
+                                {
+                                    try
+                                    {
+
+                                        //DateTime.TryParse(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length), out date);
+                                        //date = DateTime.ParseExact(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length), "MM/dd/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                                        date = clsGlobal.ParseDate(txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length).Trim());
+                                        if (date == null || date == DateTime.MinValue)
+                                        {
+                                            exp = "";
+                                        }
+                                        else
+                                        {
+
+                                            exp = date?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture).Trim();
+                                        }
+                                    }
+                                    catch
                                     {
                                         exp = "";
                                     }
-                                    else
-                                    {
-
-                                        exp = date?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture).Trim();
-                                    }
-                                }
-                                catch
-                                {
-                                    exp = "";
                                 }
 
                             }
                             else if (entry.keyValueData[i].Item1.Trim().ToUpper() == "LOT")
                             {
-                                try
+                                if (strTheSeprator != "")
                                 {
+                                    try
+                                    {
+                                        string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(Convert.ToChar(strTheSeprator));
+                                        //string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(new char[] { Convert.ToChar(strTheSeprator) }, StringSplitOptions.RemoveEmptyEntries);
+                                        if (startIndex == endIndex)
+                                        {
+                                            lot = sArrBarcode[Convert.ToInt32(sepraterIndex)];
+                                        }
+                                        else
+                                        {
+                                            lot = sArrBarcode[Convert.ToInt32(sepraterIndex)].Substring(startIndex, length);
+                                        }
+                                    }
+                                    catch
+                                    {
+                                        lot = "";
 
-                                    lot = txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length).Trim();
-
+                                    }
 
                                 }
-                                catch
+                                else
                                 {
-                                    lot = "";
-                                }
+                                    try
+                                    {
 
+                                        lot = txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length).Trim();
+
+
+                                    }
+                                    catch
+                                    {
+                                        lot = "";
+                                    }
+                                }
                             }
                             else if (entry.keyValueData[i].Item1.Trim().ToUpper() == "SEQNO")
                             {
-                                try
+                                string strSEQNo = "";
+                                if (strTheSeprator != "")
                                 {
-                                    string strSEQNo = "";
+                                    try
+                                    {
+                                        string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(Convert.ToChar(strTheSeprator));
+                                        //string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(new char[] { Convert.ToChar(strTheSeprator) }, StringSplitOptions.RemoveEmptyEntries);
+                                        if (startIndex == endIndex)
+                                        {
+                                            strSEQNo = sArrBarcode[Convert.ToInt32(sepraterIndex)];
+                                        }
+                                        else
+                                        {
+                                            strSEQNo = sArrBarcode[Convert.ToInt32(sepraterIndex)].Substring(startIndex, length);
+                                        }
 
-                                    strSEQNo = txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length);
+                                    }
+                                    catch
+                                    {
+                                        strSEQNo = "";
 
-                                    seqNo = clsGlobal.mDNHASupSeqNo = strSEQNo.ToString().Trim();
-                                    combinedKey = $"{partNo}^{seqNo}";
-                                    isvalueMatchBarcode1SeqNo = true ;
-                                    valueombinedBarcode1Key = combinedKey;
-                                    isMatchSeqNo = true;
+                                    }
+
                                 }
-                                catch
+                                else
                                 {
-                                    seqNo = "0";
+                                    try
+                                    {
+
+                                        strSEQNo = txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length);
+
+                                    }
+                                    catch
+                                    {
+                                        strSEQNo = "0";
 
 
+                                    }
                                 }
 
-
+                                seqNo = clsGlobal.mDNHASupSeqNo = strSEQNo.ToString().Trim();
+                                combinedKey = $"{partNo}^{seqNo}";
+                                isvalueMatchBarcode1SeqNo = true;
+                                valueombinedBarcode1Key = combinedKey;
+                                isMatchSeqNo = true;
                             }
 
 
@@ -1698,7 +2233,7 @@ namespace SMPDisptach.ActivityClass
                             if (clsGlobal.mlistSupplier.Exists(x => (x.DNHAPartNo == partNo || x.SupplierPartNo == partNo) && x.IsMfgDate == true))
                             {
                                 isMatchPart = true;
-                                isMatchQty = true;
+                                //isMatchQty = true; //Commented by dipak 10-03-25
                                 isMatchMFGDate = true;
                                 strDNHAPartNo = clsGlobal.mlistSupplier.Where(x => (x.DNHAPartNo == partNo || x.SupplierPartNo == partNo)).Select(p => p.DNHAPartNo).FirstOrDefault();
                                 if (clsGlobal.mlistSupplier.Exists(x => (x.DNHAPartNo == partNo || x.SupplierPartNo == partNo) && x.IsMfgDate == true && mfg != ""))
@@ -1766,7 +2301,7 @@ namespace SMPDisptach.ActivityClass
                             else if (clsGlobal.mlistSupplier.Exists(x => x.DNHAPartNo == partNo && x.IsExpDate == true && exp != ""))
                             {
                                 isMatchPart = true;
-                                isMatchQty = true;
+                                //isMatchQty = true; //Commented by dipak 10-03-25
                                 isMatchExpiryDate = true;
                                 strDNHAPartNo = clsGlobal.mlistSupplier.Where(x => (x.DNHAPartNo == partNo || x.SupplierPartNo == partNo)).Select(p => p.DNHAPartNo).FirstOrDefault();
                                 bool atucalExp = clsGlobal.mlistSupplier.Where(x => x.DNHAPartNo == partNo || x.SupplierPartNo == partNo).Select(p => p.IsExpDate).FirstOrDefault();
@@ -1814,8 +2349,15 @@ namespace SMPDisptach.ActivityClass
                                 {
                                     strSupplierPattern = entry.Patterns;
                                 }
+                                else //Added by dipak 27-02-2025
+                                {
+                                    if (i == 0)
+                                    {
+                                        goto NextForeachIteration;
+                                    }
+                                }
                                 isMatchPart = true;
-                                isMatchQty = true;
+                                //isMatchQty = true; //Commented by dipak 10-03-25
                             }
                             // Check if the part number exists in the DNHA list
                             if (clsGlobal.mlistSupplier.Exists(x => (x.DNHAPartNo == partNo || x.SupplierPartNo == partNo)))
@@ -1824,6 +2366,13 @@ namespace SMPDisptach.ActivityClass
                                 {
                                     strSupplierPattern = entry.Patterns;
                                 }
+                                else //Added by dipak 27-02-2025
+                                {
+                                    if (i == 0)
+                                    {
+                                        goto NextForeachIteration;
+                                    }
+                                }
                                 //Now part is matched then need to check this partno into Main Master table any Expiry or specific validation is there then match the data
                                 //If not matched it will go for next pattern if any
                                 //
@@ -1831,17 +2380,41 @@ namespace SMPDisptach.ActivityClass
                                 dnhaPartNo = clsGlobal.mlistSupplier.Where(x => (x.DNHAPartNo == partNo || x.SupplierPartNo == partNo)).Select(x => x.DNHAPartNo).First();
                                 dnhaPartQty = qty;
                                 isMatchPart = true;
-                                isMatchQty = true;
+                                //isMatchQty = true; //Commented by dipak 10-03-25
 
                             }
                             counter++;
                         }
+                    NextForeachIteration:
+                        continue;
 
 
                     }
+
                     if (!isMatchPart)
                     {
-                        clsGLB.showToastNGMessage("Invalid Supplier Kanban Barcode.", this);
+                        clsGlobal.showToastNGMessage("Invalid Supplier Kanban Barcode.", this);
+                        clsGlobal.WriteLog($"Invalid Supplier Kanban Barcode.");
+                        txtDNHASUPKanbanBarcode.Text = "";
+                        txtDNHASUPKanbanBarcode.RequestFocus();
+                        SoundForNG();
+                        ShowAlertPopUp();
+                        return;
+                    }
+                    if (!isMatchQty) //Added by dipak 10-03-2025
+                    {
+                        clsGlobal.showToastNGMessage("Qty is required for Supplier Kanban Barcode.", this);
+                        clsGlobal.WriteLog($"Qty is required for Supplier Kanban Barcode.");
+                        txtDNHASUPKanbanBarcode.Text = "";
+                        txtDNHASUPKanbanBarcode.RequestFocus();
+                        SoundForNG();
+                        ShowAlertPopUp();
+                        return;
+                    }
+                    if (dnhaPartQty == "0") //Added by dipak 10-03-2025
+                    {
+                        clsGlobal.showToastNGMessage("Qty is required for Supplier Kanban Barcode.", this);
+                        clsGlobal.WriteLog($"Qty is required for Supplier Kanban Barcode.");
                         txtDNHASUPKanbanBarcode.Text = "";
                         txtDNHASUPKanbanBarcode.RequestFocus();
                         SoundForNG();
@@ -1850,7 +2423,8 @@ namespace SMPDisptach.ActivityClass
                     }
                     if (!_ListItem.Exists(p => p.PartNo == dnhaPartNo))
                     {
-                        clsGLB.showToastNGMessage($"Part No. {partNo} isn't available in SIL List! ", this);
+                        clsGlobal.showToastNGMessage($"Part No. {dnhaPartNo} isn't available in SIL List! ", this);
+                        clsGlobal.WriteLog($"Part No. {dnhaPartNo} isn't available in SIL List! ");
                         txtDNHASUPKanbanBarcode.Text = "";
                         txtDNHASUPKanbanBarcode.RequestFocus();
                         SoundForNG();
@@ -1860,25 +2434,28 @@ namespace SMPDisptach.ActivityClass
                     }
                     if (isNGSuspectedLot)
                     {
-                        clsGLB.showToastNGMessage($"This product Lot {lot} is suspected {partNo},Scanned valid product", this);
+                        clsGlobal.showToastNGMessage($"This product Lot {lot} is suspected {dnhaPartNo},Scanned valid product", this);
+                        clsGlobal.WriteLog($"This product Lot {lot} is suspected {dnhaPartNo},Scanned valid product");
                         txtDNHASUPKanbanBarcode.Text = "";
                         txtDNHASUPKanbanBarcode.RequestFocus();
                         SoundForNG();
                         ShowAlertPopUp();
                         return;
                     }
-                    if (clsGlobal.mlistDNHA.Exists(x => x.DNHAPartNo == partNo && (x.IsExpDate == true) && isMatchExpiryDate == false))
+                    if (clsGlobal.mlistDNHA.Exists(x => x.DNHAPartNo == dnhaPartNo && (x.IsExpDate == true) && isMatchExpiryDate == false))
                     {
-                        clsGLB.showToastNGMessage($"This product is registered with expiary check {partNo},Scanned valid product or check pattern", this);
+                        clsGlobal.showToastNGMessage($"This product is registered with expiary check {dnhaPartNo},Scanned valid product or check pattern", this);
+                        clsGlobal.WriteLog($"This product is registered with expiary check {dnhaPartNo},Scanned valid product or check pattern");
                         txtDNHASUPKanbanBarcode.Text = "";
                         txtDNHASUPKanbanBarcode.RequestFocus();
                         SoundForNG();
                         ShowAlertPopUp();
                         return;
                     }
-                    if (clsGlobal.mlistDNHA.Exists(x => x.DNHAPartNo == partNo && (x.IsMfgDate == true) && isMatchMFGDate == false))
+                    if (clsGlobal.mlistDNHA.Exists(x => x.DNHAPartNo == dnhaPartNo && (x.IsMfgDate == true) && isMatchMFGDate == false))
                     {
-                        clsGLB.showToastNGMessage($"This product is registered with manufacturing check {partNo},Scanned valid product or check pattern", this);
+                        clsGlobal.showToastNGMessage($"This product is registered with manufacturing check {dnhaPartNo},Scanned valid product or check pattern", this);
+                        clsGlobal.WriteLog($"This product is registered with manufacturing check {dnhaPartNo},Scanned valid product or check pattern");
                         txtDNHASUPKanbanBarcode.Text = "";
                         txtDNHASUPKanbanBarcode.RequestFocus();
                         SoundForNG();
@@ -1887,7 +2464,8 @@ namespace SMPDisptach.ActivityClass
                     }
                     if (isProductMFGShippedDateCross)
                     {
-                        clsGLB.showToastNGMessage($"This product is MFG Shipping date over {partNo},Scanned valid product", this);
+                        clsGlobal.showToastNGMessage($"This product is MFG Shipping date over {dnhaPartNo},Scanned valid product", this);
+                        clsGlobal.WriteLog($"This product is MFG Shipping date over {dnhaPartNo},Scanned valid product");
                         txtDNHASUPKanbanBarcode.Text = "";
                         txtDNHASUPKanbanBarcode.RequestFocus();
                         SoundForNG();
@@ -1896,7 +2474,8 @@ namespace SMPDisptach.ActivityClass
                     }
                     if (isProductEXPShippedDateCross)
                     {
-                        clsGLB.showToastNGMessage($"This product is EXP Shipping date over {partNo},Scanned valid product", this);
+                        clsGlobal.showToastNGMessage($"This product is EXP Shipping date over {dnhaPartNo},Scanned valid product", this);
+                        clsGlobal.WriteLog($"This product is EXP Shipping date over {dnhaPartNo},Scanned valid product");
                         txtDNHASUPKanbanBarcode.Text = "";
                         txtDNHASUPKanbanBarcode.RequestFocus();
                         SoundForNG();
@@ -1905,7 +2484,8 @@ namespace SMPDisptach.ActivityClass
                     }
                     if (isProductExpired)
                     {
-                        clsGLB.showToastNGMessage($"This product is Expired {partNo},Scanned valid product", this);
+                        clsGlobal.showToastNGMessage($"This product is Expired {dnhaPartNo},Scanned valid product", this);
+                        clsGlobal.WriteLog($"This product is Expired {dnhaPartNo},Scanned valid product");
                         txtDNHASUPKanbanBarcode.Text = "";
                         txtDNHASUPKanbanBarcode.RequestFocus();
                         SoundForNG();
@@ -1913,9 +2493,10 @@ namespace SMPDisptach.ActivityClass
                         return;
                     }
 
-                    if (!clsGlobal.mlistSupplier.Exists(p => p.DNHAPartNo == partNo || p.SupplierPartNo == partNo))
+                    if (!clsGlobal.mlistSupplier.Exists(p => p.DNHAPartNo == dnhaPartNo || p.SupplierPartNo == partNo))
                     {
-                        clsGLB.showToastNGMessage($"Scanned Part {partNo} isn't available in main master list! ", this);
+                        clsGlobal.showToastNGMessage($"Scanned Part {dnhaPartNo} isn't available in main master list! ", this);
+                        clsGlobal.WriteLog($"Scanned Part {dnhaPartNo} isn't available in main master list! ");
                         txtDNHASUPKanbanBarcode.Text = "";
                         txtDNHASUPKanbanBarcode.RequestFocus();
                         SoundForNG();
@@ -1925,7 +2506,8 @@ namespace SMPDisptach.ActivityClass
                     }
                     if (string.IsNullOrEmpty(qty))
                     {
-                        clsGLB.showToastNGMessage($"Qty is not available! ", this);
+                        clsGlobal.showToastNGMessage($"Qty is not available! ", this);
+                        clsGlobal.WriteLog($"Qty is not available! ");
                         txtDNHASUPKanbanBarcode.Text = "";
                         txtDNHASUPKanbanBarcode.RequestFocus();
                         SoundForNG();
@@ -1935,7 +2517,8 @@ namespace SMPDisptach.ActivityClass
                     }
                     if (_ListItem.Exists(p => Convert.ToInt32(p.Balance) == 0 && p.PartNo == dnhaPartNo))
                     {
-                        clsGLB.showToastNGMessage($"This Part No {dnhaPartNo} Scanning Completed! ", this);
+                        clsGlobal.showToastNGMessage($"This Part No {dnhaPartNo} Scanning Completed! ", this);
+                        clsGlobal.WriteLog($"This Part No {dnhaPartNo} Scanning Completed! ");
                         txtDNHASUPKanbanBarcode.Text = "";
                         txtDNHASUPKanbanBarcode.RequestFocus();
                         SoundForNG();
@@ -1945,7 +2528,8 @@ namespace SMPDisptach.ActivityClass
                     }
                     if (_ListItem.Exists(p => Convert.ToInt32(qty) > Convert.ToInt32(p.Balance) && p.PartNo == dnhaPartNo))
                     {
-                        clsGLB.showToastNGMessage($"Scanned Barcode Qty {qty} should be not be greater then SIL Part Qty! ", this);
+                        clsGlobal.showToastNGMessage($"Scanned Barcode Qty {qty} should be not be greater then SIL Part Qty! ", this);
+                        clsGlobal.WriteLog($"Scanned Barcode Qty {qty} should be not be greater then SIL Part Qty! ");
                         txtDNHASUPKanbanBarcode.Text = "";
                         txtDNHASUPKanbanBarcode.RequestFocus();
                         SoundForNG();
@@ -1957,7 +2541,8 @@ namespace SMPDisptach.ActivityClass
                     {
                         if (_dicBarcode1.ContainsKey(combinedKey.Trim()))
                         {
-                            clsGLB.showToastNGMessage($"Supplier Barcode {txtDNHASUPKanbanBarcode.Text.Trim()} Already Exist!!", this);
+                            clsGlobal.showToastNGMessage($"Supplier Barcode {txtDNHASUPKanbanBarcode.Text.Trim()} Already Exist!!", this);
+                            clsGlobal.WriteLog($"Supplier Barcode {txtDNHASUPKanbanBarcode.Text.Trim()} Already Exist!!");
                             txtDNHASUPKanbanBarcode.Text = "";
                             txtDNHASUPKanbanBarcode.RequestFocus();
                             SoundForNG();
@@ -2007,12 +2592,14 @@ namespace SMPDisptach.ActivityClass
                         if (_TotalQty == _ScanQty)
                         {
                             WriteSILCompltedFile(TruckNo);
-                            clsGLB.showToastOKMessage($"SIL No. {TruckNo} Completed! ", this);
+                            clsGlobal.showToastOKMessage($"SIL No. {TruckNo} Completed! ", this);
                             txtDNHASUPKanbanBarcode.Text = "";
                             txtDNHASUPKanbanBarcode.RequestFocus();
                             clear();
                             BindSpinnerRegisteredSIL();
                         }
+                        txtDNHASUPKanbanBarcode.Text = "";
+                        SoundForOKVibrate();
                     }
                     else
                     {
@@ -2034,6 +2621,366 @@ namespace SMPDisptach.ActivityClass
                 throw ex;
             }
 
+        }
+
+        private string CheckSupplierOrDNHA()
+        {
+            string strSupplierOrDNHA = "";
+            try
+            {
+                if (!CheckScanningSupplierAKanbanBarcode())
+                {
+                    if (CheckScanningDNHAKanbanBarcode())
+                    {
+                        strSupplierOrDNHA = "DNHA";
+                    }
+                    else
+                    {
+                        strSupplierOrDNHA = "INVALID";
+                    }
+                }
+                else
+                {
+                    strSupplierOrDNHA = "SUPPLIER";
+                }
+            }
+            catch (Exception ex)
+            {
+
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+            }
+            return strSupplierOrDNHA;
+
+
+        }
+        private bool CheckScanningDNHAKanbanBarcode()
+        {
+            bool _isDNHA = false;
+            try
+            {
+                if (ValidateDNHAControls())
+                {
+
+                    string partNo = string.Empty;
+                    int counter = 0;
+                    bool isMatchPart = false;
+                    bool isMatchMFGDate = false;
+                    bool isMatchExpiryDate = false;
+                    bool isMatchQty = false;
+                    bool isMatchSuspectedLot = false;
+                    var maxEntry = clsGlobal.mlistDNHAPattern
+                       .OrderByDescending(entry => entry.keyValueData.Count);
+                    // Loop through the list of patterns
+                    foreach (var entry in maxEntry)
+                    {
+                        counter = 0;
+                        // Permutations of the flags
+                        if ((isMatchPart && isMatchQty) && isMatchMFGDate && isMatchExpiryDate && isMatchSuspectedLot)
+                        {
+                            // All remaining flags are true
+                            break;
+                        }
+                        else if ((isMatchPart && isMatchQty) && isMatchMFGDate && isMatchExpiryDate && !isMatchSuspectedLot)
+                        {
+                            // MFG Date and Expiry Date are true, Suspected Lot is false
+                            break;
+                        }
+                        else if ((isMatchPart && isMatchQty) && isMatchMFGDate && !isMatchExpiryDate && !isMatchSuspectedLot)
+                        {
+                            // Only MFG Date is true
+                            break;
+                        }
+                        else if ((isMatchPart && isMatchQty) && !isMatchMFGDate && isMatchExpiryDate && isMatchSuspectedLot)
+                        {
+                            // Expiry Date and Suspected Lot are true, MFG Date is false
+                            break;
+                        }
+                        else if ((isMatchPart && isMatchQty) && !isMatchMFGDate && isMatchExpiryDate && !isMatchSuspectedLot)
+                        {
+                            // Only Expiry Date is true
+                            break;
+                        }
+                        else if ((isMatchPart && isMatchQty) && !isMatchMFGDate && !isMatchExpiryDate && isMatchSuspectedLot)
+                        {
+                            // Only Suspected Lot is true
+                            break;
+                        }
+                        else if ((isMatchPart && isMatchQty) && isMatchMFGDate && !isMatchExpiryDate && isMatchSuspectedLot)
+                        {
+                            // MFG Date and Suspected Lot are true, Expiry Date is false
+                            break;
+                        }
+                        else if ((isMatchPart && isMatchQty) && !isMatchMFGDate && !isMatchExpiryDate && !isMatchSuspectedLot)
+                        {
+                            break;
+                        }
+
+                        //if (isMatchPart)
+                        //{
+                        //    break;
+                        //}
+                        // Step 4: Iterate through the hashtable inside the dictionary
+                        for (int i = 0; i < entry.keyValueData.Count; i++)
+                        {
+
+                            // Get the start and end indexes from the keyValueData entry
+                            int startIndex = Convert.ToInt32(entry.keyValueData[i].Item2.ToString().Split('-')[0]);
+                            int endIndex = Convert.ToInt32(entry.keyValueData[i].Item2.ToString().Split('-')[1]);
+                            string sepraterIndex = Convert.ToString(entry.keyValueData[i].Item2.ToString().Split('-')[2]);
+                            string strTheSeprator = Convert.ToString(entry.Seperater);
+
+                            // Extract the part number or quantity based on the current counter
+                            int length = endIndex - startIndex;
+                            if (entry.keyValueData[i].Item1.Trim().ToUpper() == "DNHAPARTNO")
+                            {
+                                if (strTheSeprator != "")
+                                {
+                                    try
+                                    {
+                                        string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(Convert.ToChar(strTheSeprator));
+                                        //string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(new char[] { Convert.ToChar(strTheSeprator) }, StringSplitOptions.RemoveEmptyEntries);
+                                        if (startIndex == endIndex)
+                                        {
+                                            partNo = sArrBarcode[Convert.ToInt32(sepraterIndex)];
+                                        }
+                                        else
+                                        {
+                                            partNo = sArrBarcode[Convert.ToInt32(sepraterIndex)].Substring(startIndex, length);
+                                        }
+                                    }
+                                    catch
+                                    {
+                                        partNo = "";
+
+                                    }
+
+                                }
+                                else
+                                {
+                                    try
+                                    {
+                                        partNo = txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length).Trim();
+
+                                    }
+                                    catch
+                                    {
+                                        partNo = "";
+                                    }
+                                }
+                            }
+
+                            if (clsGlobal.mlistDNHA.Exists(x => x.DNHAPartNo == partNo) && _ListItem.Exists(p => p.PartNo == partNo)) //(Part should be exists in master file and also in listitem.)
+                            {
+                                isMatchPart = true;
+                            }
+                            else //Added by dipak 27-02-2025
+                            {
+                                if (i == 0)
+                                {
+                                    goto NextForeachIteration;
+                                }
+                            }
+
+
+                            counter++;
+                        }
+                    NextForeachIteration:
+                        continue;
+
+                    }
+                    if (!isMatchPart)
+                    {
+                        _isDNHA = false;
+                    }
+                    else
+                    {
+                        _isDNHA = true;
+                    }
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return _isDNHA;
+        }
+        private bool CheckScanningSupplierAKanbanBarcode()
+        {
+            bool _isDSUP = false;
+            try
+            {
+                if (ValidateSupplierControls())
+                {
+
+                    string partNo = string.Empty;
+                    int counter = 0;
+                    bool isMatchPart = false;
+                    bool isMatchMFGDate = false;
+                    bool isMatchExpiryDate = false;
+                    bool isMatchQty = false;
+                    bool isMatchSuspectedLot = false;
+                    //var maxEntry = clsGlobal.mlistSupplierPattern
+                    //   .OrderByDescending(entry => entry.keyValueData.Count);
+                    string strCode = Convert.ToInt32( clsGlobal.mCustomerCode).ToString();
+                    var maxEntry = clsGlobal.mlistSupplierPattern.Where(x => x.Code.TrimStart('0') == strCode).Select(x => x).ToList();
+                    if (maxEntry.Count == 0)
+                    {
+                        _isDSUP = false;
+                        return _isDSUP;
+                    }
+                    // Loop through the list of patterns
+                    foreach (var entry in maxEntry)
+                    {
+                        counter = 0;
+                        // Permutations of the flags
+                        if ((isMatchPart && isMatchQty) && isMatchMFGDate && isMatchExpiryDate && isMatchSuspectedLot)
+                        {
+                            // All remaining flags are true
+                            break;
+                        }
+                        else if ((isMatchPart && isMatchQty) && isMatchMFGDate && isMatchExpiryDate && !isMatchSuspectedLot)
+                        {
+                            // MFG Date and Expiry Date are true, Suspected Lot is false
+                            break;
+                        }
+                        else if ((isMatchPart && isMatchQty) && isMatchMFGDate && !isMatchExpiryDate && !isMatchSuspectedLot)
+                        {
+                            // Only MFG Date is true
+                            break;
+                        }
+                        else if ((isMatchPart && isMatchQty) && !isMatchMFGDate && isMatchExpiryDate && isMatchSuspectedLot)
+                        {
+                            // Expiry Date and Suspected Lot are true, MFG Date is false
+                            break;
+                        }
+                        else if ((isMatchPart && isMatchQty) && !isMatchMFGDate && isMatchExpiryDate && !isMatchSuspectedLot)
+                        {
+                            // Only Expiry Date is true
+                            break;
+                        }
+                        else if ((isMatchPart && isMatchQty) && !isMatchMFGDate && !isMatchExpiryDate && isMatchSuspectedLot)
+                        {
+                            // Only Suspected Lot is true
+                            break;
+                        }
+                        else if ((isMatchPart && isMatchQty) && isMatchMFGDate && !isMatchExpiryDate && isMatchSuspectedLot)
+                        {
+                            // MFG Date and Suspected Lot are true, Expiry Date is false
+                            break;
+                        }
+                        else if ((isMatchPart && isMatchQty) && !isMatchMFGDate && !isMatchExpiryDate && !isMatchSuspectedLot)
+                        {
+                            break;
+                        }
+
+                        //if (isMatchPart)
+                        //{
+                        //    break;
+                        //}
+                        // Step 4: Iterate through the hashtable inside the dictionary
+                        for (int i = 0; i < entry.keyValueData.Count; i++)
+                        {
+
+                            // Get the start and end indexes from the keyValueData entry
+                            int startIndex = Convert.ToInt32(entry.keyValueData[i].Item2.ToString().Split('-')[0]);
+                            int endIndex = Convert.ToInt32(entry.keyValueData[i].Item2.ToString().Split('-')[1]);
+                            string sepraterIndex = Convert.ToString(entry.keyValueData[i].Item2.ToString().Split('-')[2]);
+                            string strTheSeprator = Convert.ToString(entry.Seperater);
+
+                            // Extract the part number or quantity based on the current counter
+                            int length = endIndex - startIndex;
+                            if (entry.keyValueData[i].Item1.Trim().ToUpper() == "SUPPLIERPARTNO")
+                            {
+                                if (strTheSeprator != "")
+                                {
+                                    try
+                                    {
+                                        string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(Convert.ToChar(strTheSeprator));
+                                       // string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(new char[] { Convert.ToChar(strTheSeprator) }, StringSplitOptions.RemoveEmptyEntries);
+                                        if (startIndex == endIndex)
+                                        {
+                                            partNo = sArrBarcode[Convert.ToInt32(sepraterIndex)];
+                                        }
+                                        else
+                                        {
+                                            partNo = sArrBarcode[Convert.ToInt32(sepraterIndex)].Substring(startIndex, length);
+                                        }
+                                    }
+                                    catch
+                                    {
+                                        partNo = "";
+
+                                    }
+
+                                }
+                                else
+                                {
+                                    try
+                                    {
+                                        partNo = txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length).Trim();
+
+                                    }
+                                    catch
+                                    {
+                                        partNo = "";
+                                    }
+                                }
+                            }
+
+                            if (clsGlobal.mlistSupplier.Exists(x => (x.DNHAPartNo == partNo || x.SupplierPartNo == partNo))) //(Part should be exists in master file and also in listitem.)
+                            {
+
+                                isMatchPart = true;
+                            }
+                            else //Added by dipak 27-02-2025
+                            {
+                                if (i == 0)
+                                {
+                                    goto NextForeachIteration;
+                                }
+                            }
+
+
+                            counter++;
+                        }
+                    NextForeachIteration:
+                        continue;
+
+                    }
+                    if (!isMatchPart)
+                    {
+                        _isDSUP = false;
+                    }
+                    else
+                    {
+                        _isDSUP = true;
+                    }
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return _isDSUP;
+        }
+        bool ContainsJunkCharacters(string text)
+        {
+            if (text.Contains("~"))
+            {
+                return true;
+            }
+            else
+            {
+                // Allow standard printable ASCII, Unicode, and spaces but reject `~`
+                //return Regex.IsMatch(text, @"[\x00-\x1F\x7F-\x9F\u07DE-\u07FF\u2000-\u206F]");
+                return Regex.IsMatch(text, @"[\x7F-\x9F\u07DE-\u07FF\u2000-\u206F]");
+            }
         }
         #endregion
 
@@ -2057,7 +3004,7 @@ namespace SMPDisptach.ActivityClass
 
                     if (spinnerSIL.SelectedItem.ToString().Contains("*"))
                     {
-                        clsGLB.showToastNGMessage($"This SIL Already Completed!!", this);
+                        clsGlobal.showToastNGMessage($"This SIL Already Completed!!", this);
                         txtCustKanbanBarcode.Text = "";
                         txtCustKanbanBarcode.RequestFocus();
                         SoundForNG();
@@ -2073,7 +3020,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
         private void TxtDNHAKanbanBarcode_KeyPress(object sender, View.KeyEventArgs e)
@@ -2086,17 +3033,42 @@ namespace SMPDisptach.ActivityClass
                     {
                         //DismissKeyboard();
                         txtDNHASUPKanbanBarcode.SelectAll();
-                        if (txtDNHASUPKanbanBarcode.Text.Trim().StartsWith("DISC"))
+                        //if (txtDNHASUPKanbanBarcode.Text.Trim().StartsWith("DISC"))
+                        //{
+
+                        //    ScanningDNHAKanbanBarcode();
+
+                        //}
+                        //else
+                        //{
+
+                        //    ScanningSUPKanbanBarcode();
+
+                        //}
+                        
+                        if (CheckSupplierOrDNHA() == "DNHA")
                         {
 
                             ScanningDNHAKanbanBarcode();
 
                         }
-                        else
+                        else if (CheckSupplierOrDNHA() == "SUPPLIER")
                         {
 
                             ScanningSUPKanbanBarcode();
 
+                        }
+                        else
+                        {
+                            if (!string.IsNullOrEmpty(txtDNHASUPKanbanBarcode.Text.Trim()))
+                            {
+                                clsGlobal.showToastNGMessage($"Invalid DNHA/Supplier Barcode", this);
+                                clsGlobal.WriteLog($"Invalid DNHA/Supplier Barcode");
+                                txtDNHASUPKanbanBarcode.Text = "";
+                                txtDNHASUPKanbanBarcode.RequestFocus();
+                                SoundForNG();
+                                ShowAlertPopUp();
+                            }
                         }
                     }
                     else
@@ -2105,7 +3077,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
 
             }
         }
@@ -2135,31 +3107,43 @@ namespace SMPDisptach.ActivityClass
                             string dnhaPartNo = string.Empty;
                             string dnhaPartQty = string.Empty;
 
-                            var mlistCustomerPatternFinal = clsGlobal.mlistCustomerPattern.Where(x => x.ThreePointCheckDigit == clsGlobal.m3CheckPointsDigit && x.Code==clsGlobal.mCustomerCode).Select(x => x).ToList();
+                            var mlistCustomerPatternFinal = clsGlobal.mlistCustomerPattern.Where(x => x.ThreePointCheckDigit == clsGlobal.m3CheckPointsDigit && Convert.ToInt32(x.Code) == Convert.ToInt32(clsGlobal.mCustomerCode)).Select(x => x).ToList();
                             if (mlistCustomerPatternFinal.Count == 0)
                             {
-                                clsGLB.showToastNGMessage($"Customer Barcode {txtCustKanbanBarcode.Text.Trim()} 3CheckDigitNot Matched!!", this);
+                                clsGlobal.showToastNGMessage($"Customer Barcode {txtCustKanbanBarcode.Text.Trim()} 3CheckDigitNot Matched!!", this);
                                 txtCustKanbanBarcode.Text = "";
                                 txtCustKanbanBarcode.RequestFocus();
                                 SoundForNG();
                                 ShowAlertPopUp();
                                 return;
                             }
+
+                            txtCustKanbanBarcode.Text = txtCustKanbanBarcode.Text.Trim().Replace("\n", "").Replace("\r", "").Replace("\r\n", "").Trim();
                             // Loop through the list of patterns
                             //foreach (var entry in clsGlobal.mlistCustomerPattern)
                             foreach (var entry in mlistCustomerPatternFinal)
                             {
+
                                 counter = 0;
                                 if (isMatchPart && isMatchQty)
                                 {
                                     break;
                                 }
+                                else
+                                {
+                                    //Added by dipak 27-02-2025
+                                    isMatchPart = false;
+                                    isMatchQty = false;
+                                }
+
                                 // Step 4: Iterate through the hashtable inside the dictionary
                                 for (int i = 0; i < entry.keyValueData.Count; i++)
                                 {
                                     // Get the start and end indexes from the keyValueData entry
                                     int startIndex = Convert.ToInt32(entry.keyValueData[i].Item2.ToString().Split('-')[0]);
                                     int endIndex = Convert.ToInt32(entry.keyValueData[i].Item2.ToString().Split('-')[1]);
+                                    string sepraterIndex = Convert.ToString(entry.keyValueData[i].Item2.ToString().Split('-')[2]);
+                                    string strTheSeprator = Convert.ToString(entry.Seperater);
 
                                     // Extract the part number or quantity based on the current counter
                                     int length = endIndex - startIndex;
@@ -2167,25 +3151,33 @@ namespace SMPDisptach.ActivityClass
                                     {
                                         try
                                         {
-                                            if (txtCustKanbanBarcode.Text.TrimEnd().Contains(",") && clsGlobal.m3CheckPointsDigit == "Y")
+                                            if (strTheSeprator != "")
                                             {
                                                 try
                                                 {
-                                                    string[] sArr = txtCustKanbanBarcode.Text.TrimEnd().Split(",");
-                                                    partNo = sArr[12].Trim();
+                                                    string[] sArrBarcode = txtCustKanbanBarcode.Text.Split(Convert.ToChar(strTheSeprator));
+                                                    //string[] sArrBarcode = txtCustKanbanBarcode.Text.Split(new char[] { Convert.ToChar(strTheSeprator) }, StringSplitOptions.RemoveEmptyEntries);
+                                                    if (startIndex == endIndex)
+                                                    {
+                                                        partNo = sArrBarcode[Convert.ToInt32(sepraterIndex)];
+                                                    }
+                                                    else
+                                                    {
+                                                        partNo = sArrBarcode[Convert.ToInt32(sepraterIndex)].Substring(startIndex, length);
+                                                    }
                                                 }
                                                 catch
                                                 {
-                                                    partNo = txtCustKanbanBarcode.Text.Trim().Substring(startIndex, length).Trim();
-                                                }
 
+
+                                                }
 
                                             }
                                             else
                                             {
                                                 partNo = txtCustKanbanBarcode.Text.Trim().Substring(startIndex, length).Trim();
-
                                             }
+
                                             qty = _DnhaSupQty.ToString();
                                         }
                                         catch
@@ -2202,34 +3194,30 @@ namespace SMPDisptach.ActivityClass
                                             isMatchQty = false;
                                             qty = "";
                                             int number = 0;
-                                            if (txtCustKanbanBarcode.Text.TrimEnd().Contains(","))
+                                            if (strTheSeprator != "")
                                             {
-                                                string[] sArr = txtCustKanbanBarcode.Text.TrimEnd().Split(",");
-                                                string strPartNoExtract = "";
-                                                int iQtyExtract = 0;
-                                                if (sArr.Length > 5)
+                                                try
                                                 {
-                                                    int.TryParse(txtCustKanbanBarcode.Text.TrimEnd().Split(",")[6].TrimEnd(), out number);
-                                                    if (number == 0)
+                                                    string[] sArrBarcode = txtCustKanbanBarcode.Text.Split(Convert.ToChar(strTheSeprator));
+                                                    //string[] sArrBarcode = txtCustKanbanBarcode.Text.Split(new char[] { Convert.ToChar(strTheSeprator) }, StringSplitOptions.RemoveEmptyEntries);
+                                                    if (startIndex == endIndex)
                                                     {
-                                                        if (!clsGlobal.mlistCustomer.Exists(x => (x.DNHAPartNo == partNo.Trim() || x.CustomerPartNo.Trim().Replace("-", "").Replace(",", "") == partNo.Trim().Replace("-", "").Replace(",", "")) && x.DNHAPartNo == strDNHAPartNo))
-                                                        {
-                                                            clsGlobal.ParseBarcode(txtCustKanbanBarcode.Text.Trim(), out strPartNoExtract, out iQtyExtract);
-                                                            partNo = strPartNoExtract.Trim();
-                                                            number = iQtyExtract;
-                                                        }
+                                                        int.TryParse(sArrBarcode[Convert.ToInt32(sepraterIndex)], out number);
                                                     }
-                                                    //else
-                                                    //{
-                                                    //    int.TryParse(txtCustKanbanBarcode.Text.TrimEnd().Split(",")[6].TrimEnd(), out number);
-                                                    //}
+                                                    else
+                                                    {
+                                                        int.TryParse(sArrBarcode[Convert.ToInt32(sepraterIndex)].Substring(startIndex, length), out number);
+
+                                                    }
                                                 }
-                                                else
+                                                catch
                                                 {
-                                                    int.TryParse(txtCustKanbanBarcode.Text.Trim().Substring(startIndex, length), out number);
+
+
                                                 }
 
                                             }
+
                                             else
                                             {
                                                 int.TryParse(txtCustKanbanBarcode.Text.Trim().Substring(startIndex, length), out number);
@@ -2252,8 +3240,32 @@ namespace SMPDisptach.ActivityClass
                                         try
                                         {
                                             string strSEQNo = "";
+                                            if (strTheSeprator != "")
+                                            {
+                                                try
+                                                {
+                                                    string[] sArrBarcode = txtCustKanbanBarcode.Text.Split(Convert.ToChar(strTheSeprator));
+                                                   // string[] sArrBarcode = txtCustKanbanBarcode.Text.Split(new char[] { Convert.ToChar(strTheSeprator) }, StringSplitOptions.RemoveEmptyEntries);
+                                                    if (startIndex == endIndex)
+                                                    {
+                                                        strSEQNo = sArrBarcode[Convert.ToInt32(sepraterIndex)];
+                                                    }
+                                                    else
+                                                    {
+                                                        strSEQNo = sArrBarcode[Convert.ToInt32(sepraterIndex)].Substring(startIndex, length);
+                                                    }
+                                                }
+                                                catch
+                                                {
 
-                                            strSEQNo = txtCustKanbanBarcode.Text.Trim().Substring(startIndex, length);
+
+                                                }
+
+                                            }
+                                            else
+                                            {
+                                                strSEQNo = txtCustKanbanBarcode.Text.Trim().Substring(startIndex, length);
+                                            }
 
                                             seqNo = clsGlobal.mCustSeqNo = strSEQNo.ToString().Trim();
                                             combinedKey = $"{partNo}^{seqNo}";
@@ -2271,18 +3283,22 @@ namespace SMPDisptach.ActivityClass
 
                                     }
                                     // Check if the part number exists in the DNHA list
-                                    if (clsGlobal.mlistCustomer.Exists(x => (x.DNHAPartNo == partNo.Trim() || x.CustomerPartNo.Trim().Replace("-", "").Replace(",", "") == partNo.Trim().Replace("-", "").Replace(",", "")) && x.DNHAPartNo == strDNHAPartNo))
+                                    if (clsGlobal.mlistCustomer.Exists(x => (x.DNHAPartNo == partNo.Trim() || x.CustomerPartNo.Trim().Replace("-", "").Replace(",", "").Replace(" ", "") == partNo.Trim().Replace("-", "").Replace(",", "").Replace(" ","")) && x.DNHAPartNo == strDNHAPartNo))
                                     {
                                         //Now part is matched then need to check this partno into Main Master table any Expiry or specific validation is there then match the data
                                         //If not matched it will go for next pattern if any
                                         //
-                                       
-                                        dnhaPartNo = clsGlobal.mlistCustomer.Where(x => (x.DNHAPartNo == partNo.Trim() || x.CustomerPartNo.Trim().Replace("-", "").Replace(",", "") == partNo.Trim().Replace("-", "").Replace(",", "")) && x.DNHAPartNo == strDNHAPartNo).Select(x => x.DNHAPartNo).First();
+
+                                        dnhaPartNo = clsGlobal.mlistCustomer.Where(x => (x.DNHAPartNo == partNo.Trim() || x.CustomerPartNo.Trim().Replace("-", "").Replace(",", "").Replace(" ", "") == partNo.Trim().Replace("-", "").Replace(",", "").Replace(" ", "")) && x.DNHAPartNo == strDNHAPartNo).Select(x => x.DNHAPartNo).First();
                                         dnhaPartQty = qty;
                                         strCustomerPattern = entry.Patterns;
                                         iQrCode2Qty = Convert.ToInt32(qty);
                                         isMatchPart = true;
-                                        if (iQrCode2Qty > 0 && _DnhaSupQty==iQrCode2Qty)
+                                        //if (iQrCode2Qty > 0 && _DnhaSupQty == iQrCode2Qty)
+                                        //{
+                                        //    isMatchQty = true;
+                                        //}
+                                        if (iQrCode2Qty > 0 && int.Parse(dnhaPartQty) > 0)
                                         {
                                             isMatchQty = true;
                                         }
@@ -2290,15 +3306,25 @@ namespace SMPDisptach.ActivityClass
 
 
                                     }
+                                    else //Added by dipak 27-02-2025
+                                    {
+                                        if (i == 0)
+                                        {
+                                            goto NextForeachIteration;
+                                        }
+                                    }
+
                                     counter++;
                                 }
 
-
+                            NextForeachIteration:
+                                continue;
                             }
-
+                            if (string.IsNullOrEmpty(partNo)) { isMatchPart = false; }
                             if (!isMatchPart)
                             {
-                                clsGLB.showToastNGMessage("Invalid Customer Kanban Barcode.", this);
+                                clsGlobal.showToastNGMessage($"Invalid Customer Kanban Barcode. {partNo.Trim().Replace("-", "").Replace(",", "").Replace(" ", "")} ", this);
+                                clsGlobal.WriteLog($"Invalid Customer Kanban Barcode. {partNo.Trim().Replace("-", "").Replace(",", "").Replace(" ", "")} ");
                                 txtCustKanbanBarcode.Text = "";
                                 txtCustKanbanBarcode.RequestFocus();
                                 SoundForNG();
@@ -2307,7 +3333,8 @@ namespace SMPDisptach.ActivityClass
                             }
                             if (!_ListItem.Exists(p => p.PartNo == dnhaPartNo))
                             {
-                                clsGLB.showToastNGMessage($"Part No. {dnhaPartNo} isn't available in SIL List! ", this);
+                                clsGlobal.showToastNGMessage($"Part No. {dnhaPartNo} isn't available in SIL List! ", this);
+                                clsGlobal.WriteLog($"Part No. {dnhaPartNo} isn't available in SIL List! ");
                                 txtCustKanbanBarcode.Text = "";
                                 txtCustKanbanBarcode.RequestFocus();
                                 SoundForNG();
@@ -2315,11 +3342,12 @@ namespace SMPDisptach.ActivityClass
                                 return;
 
                             }
-                            if (!clsGlobal.mlistCustomer.Exists(x => (x.DNHAPartNo == partNo.Trim() || x.CustomerPartNo.Trim().Replace("-", "").Replace(",", "") == partNo.Trim().Replace("-", "").Replace(",", "")) && x.DNHAPartNo == strDNHAPartNo))
+                            if (!clsGlobal.mlistCustomer.Exists(x => (x.DNHAPartNo == partNo.Trim() || x.CustomerPartNo.Trim().Replace("-", "").Replace(",", "").Replace(" ", "") == partNo.Trim().Replace("-", "").Replace(",", "").Replace(" ", "")) && x.DNHAPartNo == strDNHAPartNo))
                             {
-                                clsGLB.showToastNGMessage($"Scanned Part. {partNo} isn't available in main master list! ", this);
-                                txtDNHASUPKanbanBarcode.Text = "";
-                                txtDNHASUPKanbanBarcode.RequestFocus();
+                                clsGlobal.showToastNGMessage($"Scanned Part. {partNo} isn't available in main master list! ", this);
+                                clsGlobal.WriteLog($"Scanned Part. {partNo} isn't available in main master list! ");
+                                txtCustKanbanBarcode.Text = "";
+                                txtCustKanbanBarcode.RequestFocus();
                                 SoundForNG();
                                 ShowAlertPopUp();
                                 return;
@@ -2327,7 +3355,8 @@ namespace SMPDisptach.ActivityClass
                             }
                             if (string.IsNullOrEmpty(qty))
                             {
-                                clsGLB.showToastNGMessage($"Qty is not available! ", this);
+                                clsGlobal.showToastNGMessage($"Qty is not available! ", this);
+                                clsGlobal.WriteLog($"Qty is not available!");
                                 txtCustKanbanBarcode.Text = "";
                                 txtCustKanbanBarcode.RequestFocus();
                                 SoundForNG();
@@ -2337,9 +3366,10 @@ namespace SMPDisptach.ActivityClass
                             }
                             if (_ListItem.Exists(p => Convert.ToInt32(p.Balance) == 0 && p.PartNo == dnhaPartNo))
                             {
-                                clsGLB.showToastNGMessage($"This Part No {dnhaPartNo} Scanning Completed! ", this);
-                                txtDNHASUPKanbanBarcode.Text = "";
-                                txtDNHASUPKanbanBarcode.RequestFocus();
+                                clsGlobal.showToastNGMessage($"This Part No {dnhaPartNo} Scanning Completed! ", this);
+                                clsGlobal.WriteLog($"This Part No {dnhaPartNo} Scanning Completed!");
+                                txtCustKanbanBarcode.Text = "";
+                                txtCustKanbanBarcode.RequestFocus();
                                 SoundForNG();
                                 ShowAlertPopUp();
                                 return;
@@ -2347,7 +3377,8 @@ namespace SMPDisptach.ActivityClass
                             }
                             if (_ListItem.Exists(p => Convert.ToInt32(qty) > Convert.ToInt32(p.Balance) && p.PartNo == dnhaPartNo))
                             {
-                                clsGLB.showToastNGMessage($"Scanned Barcode Qty {qty} should be not be greater then SIL Part Qty! ", this);
+                                clsGlobal.showToastNGMessage($"Scanned Barcode Qty {qty} should be not be greater then SIL Part Qty! ", this);
+                                clsGlobal.WriteLog($"Scanned Barcode Qty {qty} should be not be greater then SIL Part Qty!");
                                 txtCustKanbanBarcode.Text = "";
                                 txtCustKanbanBarcode.RequestFocus();
                                 SoundForNG();
@@ -2362,7 +3393,8 @@ namespace SMPDisptach.ActivityClass
                                     if (_dicBarcode1.ContainsKey(combinedKey.Trim()))
                                     {
 
-                                        clsGLB.showToastNGMessage($"Customer Barcode {txtCustKanbanBarcode.Text.Trim()} Already Exist!!", this);
+                                        clsGlobal.showToastNGMessage($"Customer Barcode {txtCustKanbanBarcode.Text.Trim()} Already Exist!!", this);
+                                        clsGlobal.WriteLog($"Customer Barcode {txtCustKanbanBarcode.Text.Trim()} Already Exist!!");
                                         txtCustKanbanBarcode.Text = "";
                                         txtCustKanbanBarcode.RequestFocus();
                                         SoundForNG();
@@ -2375,7 +3407,8 @@ namespace SMPDisptach.ActivityClass
                                     if (_dicBarcode2.ContainsKey(combinedKey.Trim()))
                                     {
 
-                                        clsGLB.showToastNGMessage($"Customer Barcode {txtCustKanbanBarcode.Text.Trim()} Already Exist!!", this);
+                                        clsGlobal.showToastNGMessage($"Customer Barcode {txtCustKanbanBarcode.Text.Trim()} Already Exist!!", this);
+                                        clsGlobal.WriteLog($"Customer Barcode {txtCustKanbanBarcode.Text.Trim()} Already Exist!!");
                                         txtCustKanbanBarcode.Text = "";
                                         txtCustKanbanBarcode.RequestFocus();
                                         SoundForNG();
@@ -2400,7 +3433,8 @@ namespace SMPDisptach.ActivityClass
                             {
                                 if (iQrCode1Qty != iQrCode2Qty)
                                 {
-                                    clsGLB.showToastNGMessage($"QR Code1 Qty {iQrCode1Qty} should be equal to QR Code2 Qty {iQrCode2Qty} ! ", this);
+                                    clsGlobal.showToastNGMessage($"QR Code1 Qty {iQrCode1Qty} should be equal to QR Code2 Qty {iQrCode2Qty} ! ", this);
+                                    clsGlobal.WriteLog($"QR Code1 Qty {iQrCode1Qty} should be equal to QR Code2 Qty {iQrCode2Qty} !");
                                     txtCustKanbanBarcode.Text = "";
                                     txtCustKanbanBarcode.RequestFocus();
                                     SoundForNG();
@@ -2444,13 +3478,13 @@ namespace SMPDisptach.ActivityClass
                             if (_TotalQty == _ScanQty)
                             {
                                 WriteSILCompltedFile(TruckNo);
-                                clsGLB.showToastOKMessage($"SIL No. {TruckNo} Completed! ", this);
+                                clsGlobal.showToastOKMessage($"SIL No. {TruckNo} Completed! ", this);
                                 txtDNHASUPKanbanBarcode.Text = "";
                                 txtDNHASUPKanbanBarcode.RequestFocus();
                                 clear();
                                 BindSpinnerRegisteredSIL();
                             }
-                            SoundForOK();
+                            SoundForOKVibrate();
                         }
 
                     }
@@ -2460,7 +3494,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
 
             }
             finally
@@ -2476,7 +3510,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -2489,7 +3523,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -2517,7 +3551,7 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -2533,7 +3567,7 @@ namespace SMPDisptach.ActivityClass
 
                 if (spinnerSIL.SelectedItemPosition <= 0)
                 {
-                    clsGLB.showToastNGMessage($"Scan SIL Barcode.", this);
+                    clsGlobal.showToastNGMessage($"Scan SIL Barcode.", this);
                     spinnerSIL.RequestFocus();
                     IsValidate = false;
                     SoundForNG();
@@ -2542,16 +3576,28 @@ namespace SMPDisptach.ActivityClass
 
                 else if (string.IsNullOrEmpty(txtDNHASUPKanbanBarcode.Text.Trim()))
                 {
-                    clsGLB.showToastNGMessage($"Scan DNHA Kanban Barcode.", this);
+                    return false;
+                    //clsGlobal.showToastNGMessage($"Scan DNHA Kanban Barcode.", this);
+                    //txtDNHASUPKanbanBarcode.Text = "";
+                    //txtDNHASUPKanbanBarcode.RequestFocus();
+                    //IsValidate = false;
+                    //SoundForNG();
+                    //ShowAlertPopUp();
+                }
+                else if (txtDNHASUPKanbanBarcode.Text.Length < 25)
+                {
+                    clsGlobal.showToastNGMessage($"Invalid DNHA Kanban Barcode.", this);
+                    clsGlobal.WriteLog($"Invalid DNHA Kanban Barcode.");
                     txtDNHASUPKanbanBarcode.Text = "";
                     txtDNHASUPKanbanBarcode.RequestFocus();
                     IsValidate = false;
                     SoundForNG();
                     ShowAlertPopUp();
                 }
-                else if (txtDNHASUPKanbanBarcode.Text.Length < 25)
+                else if (ContainsJunkCharacters(txtDNHASUPKanbanBarcode.Text))
                 {
-                    clsGLB.showToastNGMessage($"Invalid DNHA Kanban Barcode.", this);
+                    clsGlobal.showToastNGMessage($"Re-Scan Supplier/DNHA Kanban Barcode,Junk Character is not allowd.", this);
+                    clsGlobal.WriteLog($"Re-Scan Supplier/DNHA Kanban Barcode,Junk Character is not allowd.");
                     txtDNHASUPKanbanBarcode.Text = "";
                     txtDNHASUPKanbanBarcode.RequestFocus();
                     IsValidate = false;
@@ -2560,7 +3606,7 @@ namespace SMPDisptach.ActivityClass
                 }
                 else if (_TotalQty == _ScanQty)
                 {
-                    clsGLB.showToastNGMessage($"Scan Completed of this SIL.", this);
+                    clsGlobal.showToastNGMessage($"Scan Completed of this SIL.", this);
                     txtDNHASUPKanbanBarcode.Text = "";
                     txtDNHASUPKanbanBarcode.RequestFocus();
                     IsValidate = false;
@@ -2570,7 +3616,7 @@ namespace SMPDisptach.ActivityClass
 
                 else if (_ListItem.Count == 0)
                 {
-                    clsGLB.showToastNGMessage($"SIL Data is not Available", this);
+                    clsGlobal.showToastNGMessage($"SIL Data is not Available", this);
                     txtDNHASUPKanbanBarcode.Text = "";
                     txtDNHASUPKanbanBarcode.RequestFocus();
                     IsValidate = false;
@@ -2592,7 +3638,7 @@ namespace SMPDisptach.ActivityClass
 
                 if (spinnerSIL.SelectedItemPosition <= 0)
                 {
-                    clsGLB.showToastNGMessage($"Scan SIL Barcode.", this);
+                    clsGlobal.showToastNGMessage($"Scan SIL Barcode.", this);
                     spinnerSIL.RequestFocus();
                     IsValidate = false;
                     SoundForNG();
@@ -2601,7 +3647,7 @@ namespace SMPDisptach.ActivityClass
 
                 else if (string.IsNullOrEmpty(txtCustKanbanBarcode.Text.Trim()))
                 {
-                    clsGLB.showToastNGMessage($"Scan Customer Kanban Barcode.", this);
+                    clsGlobal.showToastNGMessage($"Scan Customer Kanban Barcode.", this);
                     txtCustKanbanBarcode.Text = "";
                     txtCustKanbanBarcode.RequestFocus();
                     IsValidate = false;
@@ -2610,16 +3656,26 @@ namespace SMPDisptach.ActivityClass
                 }
                 //else if (txtCustKanbanBarcode.Text.Trim().Length < 25)
                 //{
-                //    clsGLB.showToastNGMessage($"Invalid Customer Kanban Barcode.", this);
+                //    clsGlobal.showToastNGMessage($"Invalid Customer Kanban Barcode.", this);
                 //    txtCustKanbanBarcode.Text = "";
                 //    txtCustKanbanBarcode.RequestFocus();
                 //    IsValidate = false;
                 //    SoundForNG();
                 //    ShowAlertPopUp();
                 //}
+                else if (ContainsJunkCharacters(txtCustKanbanBarcode.Text))
+                {
+                    clsGlobal.showToastNGMessage($"Re-Scan Customer Kanban Barcode,Junk Character is not allowd.", this);
+                    clsGlobal.WriteLog($"Re-Scan Supplier Kanban Barcode,Junk Character is not allowd.");
+                    txtCustKanbanBarcode.Text = "";
+                    txtCustKanbanBarcode.RequestFocus();
+                    IsValidate = false;
+                    SoundForNG();
+                    ShowAlertPopUp();
+                }
                 else if (_TotalQty == _ScanQty)
                 {
-                    clsGLB.showToastNGMessage($"Scan Completed of this SIL.", this);
+                    clsGlobal.showToastNGMessage($"Scan Completed of this SIL.", this);
                     txtCustKanbanBarcode.Text = "";
                     txtCustKanbanBarcode.RequestFocus();
                     IsValidate = false;
@@ -2628,7 +3684,7 @@ namespace SMPDisptach.ActivityClass
                 }
                 else if (_ListItem.Count == 0)
                 {
-                    clsGLB.showToastNGMessage($"SIL Data is not Available", this);
+                    clsGlobal.showToastNGMessage($"SIL Data is not Available", this);
                     txtCustKanbanBarcode.Text = "";
                     txtCustKanbanBarcode.RequestFocus();
                     IsValidate = false;
@@ -2649,7 +3705,8 @@ namespace SMPDisptach.ActivityClass
 
                 if (spinnerSIL.SelectedItemPosition <= 0)
                 {
-                    clsGLB.showToastNGMessage($"Scan SIL Barcode.", this);
+                    clsGlobal.showToastNGMessage($"Scan SIL Barcode.", this);
+                    
                     spinnerSIL.RequestFocus();
                     IsValidate = false;
                     SoundForNG();
@@ -2658,16 +3715,29 @@ namespace SMPDisptach.ActivityClass
 
                 else if (string.IsNullOrEmpty(txtDNHASUPKanbanBarcode.Text.Trim()))
                 {
-                    clsGLB.showToastNGMessage($"Scan Supplier Kanban Barcode.", this);
+                    return false;
+                    //clsGlobal.showToastNGMessage($"Scan Supplier Kanban Barcode.", this);
+                    //txtDNHASUPKanbanBarcode.Text = "";
+                    //txtDNHASUPKanbanBarcode.RequestFocus();
+                    //IsValidate = false;
+                    //SoundForNG();
+                    //ShowAlertPopUp();
+                }
+
+                else if (txtDNHASUPKanbanBarcode.Text.Length < 25)
+                {
+                    clsGlobal.showToastNGMessage($"Invalid Supplier Kanban Barcode.", this);
+                    clsGlobal.WriteLog($"Invalid Supplier Kanban Barcode.");
                     txtDNHASUPKanbanBarcode.Text = "";
                     txtDNHASUPKanbanBarcode.RequestFocus();
                     IsValidate = false;
                     SoundForNG();
                     ShowAlertPopUp();
                 }
-                else if (txtDNHASUPKanbanBarcode.Text.Length < 25)
+                else if (ContainsJunkCharacters(txtDNHASUPKanbanBarcode.Text))
                 {
-                    clsGLB.showToastNGMessage($"Invalid Supplier Kanban Barcode.", this);
+                    clsGlobal.showToastNGMessage($"Re-Scan Supplier/DNHA Kanban Barcode,Junk Character is not allowd.", this);
+                    clsGlobal.WriteLog($"Re-Scan Supplier/DNHA Kanban Barcode,Junk Character is not allowd.");
                     txtDNHASUPKanbanBarcode.Text = "";
                     txtDNHASUPKanbanBarcode.RequestFocus();
                     IsValidate = false;
@@ -2676,7 +3746,7 @@ namespace SMPDisptach.ActivityClass
                 }
                 else if (_TotalQty == _ScanQty)
                 {
-                    clsGLB.showToastNGMessage($"Scan Completed of this SIL.", this);
+                    clsGlobal.showToastNGMessage($"Scan Completed of this SIL.", this);
                     txtDNHASUPKanbanBarcode.Text = "";
                     txtDNHASUPKanbanBarcode.RequestFocus();
                     IsValidate = false;
@@ -2685,7 +3755,7 @@ namespace SMPDisptach.ActivityClass
                 }
                 else if (_ListItem.Count == 0)
                 {
-                    clsGLB.showToastNGMessage($"SIL Data is not Available", this);
+                    clsGlobal.showToastNGMessage($"SIL Data is not Available", this);
                     txtDNHASUPKanbanBarcode.Text = "";
                     txtDNHASUPKanbanBarcode.RequestFocus();
                     IsValidate = false;
@@ -2738,6 +3808,7 @@ namespace SMPDisptach.ActivityClass
             {
                 receivingItemAdapter.NotifyDataSetChanged();
                 lblPartCount.Text = Convert.ToString(_ListItem.Count(x => x.Balance != "0"));
+                GetUpdateScannedBinCount();
             }
 
             txtTotalQty.Text = "Total Qty : " + _TotalQty.ToString();

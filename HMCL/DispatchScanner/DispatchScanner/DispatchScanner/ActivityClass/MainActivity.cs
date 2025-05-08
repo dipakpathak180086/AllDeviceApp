@@ -198,7 +198,7 @@ namespace ScanAndSaveApp
                 {
                     if (!string.IsNullOrEmpty(txtTruckNo.Text))
                     {
-                        clsGlobal.CaseFileName =  txtTruckNo.Text + ".txt";
+                        clsGlobal.CaseFileName = txtTruckNo.Text + ".txt";
                         ReadCaseFile();
                     }
                 }
@@ -260,19 +260,36 @@ namespace ScanAndSaveApp
                                         {
                                             if ((txtFrameNo.Text.Trim().Length == 17) || (txtFrameNo.Text.Trim().Length == 14))
                                             {
+                                                //17 length is Frame and 14 digit length is ENGIN.
                                                 //Check barcode is already scanned or not
                                                 bool IsAlreadyScanned = _listScanCase.Contains(txtFrameNo.Text.Trim().ToUpper());
                                                 //if not scanned then save
                                                 if (IsAlreadyScanned == false)
                                                 {
                                                     lblLastScan.Text = "Last Scan: " + txtFrameNo.Text.Trim();
-                                                    WriteFile(txtDeliveryNo.Text.Trim() + '\t'  + txtTruckNo.Text.Trim() + '\t' + txtFrameNo.Text.Trim()+'\r');
+                                                    if (txtFrameNo.Text.Trim().Length == 17)
+                                                    {
+                                                        WriteFile(txtDeliveryNo.Text.Trim() + '\t' + txtTruckNo.Text.Trim() + '\t' + txtFrameNo.Text.Trim() +'\t' +""+ '\r');
+                                                        _listScanCase.Add(txtFrameNo.Text.Trim());
+                                                    }
+                                                    else
+                                                    {
+                                                        WriteFile(txtDeliveryNo.Text.Trim() + '\t' + txtTruckNo.Text.Trim() + '\t' + ""+ '\t' + txtFrameNo.Text.Trim() + '\r');
+                                                        _listScanCase.Add(txtFrameNo.Text.Trim());
+                                                    }
                                                     txtFrameNo.Text = "";
                                                     txtFrameNo.RequestFocus();
                                                 }
                                                 else
                                                 {
-                                                    Toast.MakeText(this, "Frame No. already scanned", ToastLength.Long).Show();
+                                                    if (txtFrameNo.Text.Trim().Length == 17)
+                                                    {
+                                                        Toast.MakeText(this, "Frame No. already scanned", ToastLength.Long).Show();
+                                                    }
+                                                    else
+                                                    {
+                                                        Toast.MakeText(this, "Engine No. already scanned", ToastLength.Long).Show();
+                                                    }
                                                     txtFrameNo.Text = "";
                                                     txtFrameNo.RequestFocus();
                                                 }
@@ -425,6 +442,10 @@ namespace ScanAndSaveApp
             try
             {
                 string folderPath = Path.Combine(clsGlobal.FilePath, clsGlobal.FileFolder);
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
                 string filename = Path.Combine(folderPath, clsGlobal.CaseFileName);
 
                 if (File.Exists(filename))
@@ -433,7 +454,14 @@ namespace ScanAndSaveApp
                     while (!sr.EndOfStream)
                     {
                         string[] str = sr.ReadLine().ToString().Split('\t');
-                        _listScanCase.Add(str[2].Trim().ToUpper());
+                        if (str[2].Trim().ToUpper() == "")
+                        {
+                            _listScanCase.Add(str[3].Trim().ToUpper());
+                        }
+                        else
+                        {
+                            _listScanCase.Add(str[2].Trim().ToUpper());
+                        }
                         _iScanCount++;
                     }
 

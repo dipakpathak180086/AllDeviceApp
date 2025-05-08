@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_width="fill_parent">
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:gravity="center_horizontal"
+                android:layout_marginVertical="5dp">
+                <TextView
+                    android:text="FTP SERVER SETTINGS"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:paddingBottom="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/orange2"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight=".7"
+                    android:padding="2dp"
+                        android:text="WAREHOUSE NO"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+                <EditText
+                    android:id="@+id/editWarehouseNo"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:hint="  Enter Warehouse No"
+                    android:background="@drawable/common_edittext"
+                    android:imeOptions="actionGo|flagNoFullscreen"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1.2"
+                    android:maxLength="9000"
+                    android:maxLines="1"
+                    android:padding="2dp"
+                    android:paddingLeft="5dp"
+                    android:paddingStart="8dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight=".7"
+                    android:padding="2dp"
+                        android:text="DEVICE ID"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+                <EditText
+                    android:id="@+id/editDeviceId"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:hint="  Enter Device ID"
+                    android:background="@drawable/common_edittext"
+                    android:imeOptions="actionGo|flagNoFullscreen"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1.2"
+                    android:maxLength="9000"
+                    android:maxLines="1"
+                    android:padding="2dp"
+                    android:paddingLeft="5dp"
+                    android:paddingStart="8dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight=".7"
+                    android:padding="2dp"
+                    android:text="FTP IP"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+                <EditText
+                    android:id="@+id/editFTPIP"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:hint="  Enter FTP IP"
+                    android:background="@drawable/common_edittext"
+                    android:imeOptions="actionGo|flagNoFullscreen"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1.2"
+                    android:maxLength="9000"
+                    android:maxLines="1"
+                    android:padding="2dp"
+                    android:paddingLeft="5dp"
+                    android:paddingStart="8dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight=".7"
+                    android:padding="2dp"
+                        android:text="FTP USER ID"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+                <EditText
+                    android:id="@+id/editFTPUserID"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:hint="  Enter FTP User ID"
+                    android:background="@drawable/common_edittext"
+                    android:imeOptions="actionGo|flagNoFullscreen"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1.2"
+                    android:maxLength="9000"
+                    android:maxLines="1"
+                    android:padding="2dp"
+                    android:paddingLeft="5dp"
+                    android:paddingStart="8dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight=".7"
+                    android:padding="2dp"
+                    android:text="FTP PASSWORD"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+                <EditText
+                    android:id="@+id/editFTPPassword"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:hint="  Enter FTP Password"
+                    android:background="@drawable/common_edittext"
+                    android:imeOptions="actionGo|flagNoFullscreen"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1.2"
+                    android:maxLength="9000"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:padding="2dp"
+                    android:paddingLeft="5dp"
+                    android:paddingStart="8dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+
+
+            </LinearLayout>
+           
+           
+
+           
+            <LinearLayout
+                android:layout_height="fill_parent"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:gravity="center_horizontal"
+                android:layout_marginVertical="20dp">
+                <Button
+                    android:text="Save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnSave"
+                    android:textStyle="bold"
+                    android:layout_marginRight="10dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/rounded_edittext"
+                    android:backgroundTint="@color/orange2"
+                    />
+                <Button
+                    android:text="Back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnBack"
+                    android:layout_marginRight="10dp"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/rounded_edittext"
+                    android:backgroundTint="@color/orange2"
+				/>
+                
+                <Button
+                    android:text="Clear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnClear"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/rounded_edittext"
+                    android:backgroundTint="@color/orange2"
+                    />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

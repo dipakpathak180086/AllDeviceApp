@@ -22,6 +22,8 @@ using Android.Text;
 using static Android.Renderscripts.ScriptGroup;
 using System.Data;
 using System.Globalization;
+using Android.Util;
+using System.Diagnostics;
 
 namespace SMPDisptach
 {
@@ -59,6 +61,9 @@ namespace SMPDisptach
         public static string SILDetailsFile = "SILDetailsData.txt";
         public static string SILCompletedFile = "SILCompleted.txt";
         public static string SILBarcode = "SILBarcode.txt";
+        public static readonly string LogTag = "Logs";
+        public static readonly string LogFileName = "app_log.txt";
+
         public static string mSILType = "";
         public static string FilePath = global::Android.OS.Environment.ExternalStorageDirectory.AbsolutePath + "/" + MainFolder;
         public static TcpClient mTcpClient;
@@ -66,7 +71,7 @@ namespace SMPDisptach
         internal static Int32 mSockPort = 0;
         public static string LineId = "";
         public static string mEnterDelivery = "";
-        public static string mUserId = "";
+        public static string mUserId = "1";
         public static string mDNHAKanbanString = "";
         public static string mCustomerKanbanString = "";
         public static string mSupplierKanbanString = "";
@@ -235,7 +240,7 @@ namespace SMPDisptach
             string[] formats = {
             "dd-MM-yyyy", "MM-dd-yyyy", "yyyy-MM-dd",
             "dd/MM/yyyy", "MM/dd/yyyy", "yyyy/MM/dd",
-            "dd.MM.yyyy", "MM.dd.yyyy", "yyyy.MM.dd"
+            "dd.MM.yyyy", "MM.dd.yyyy", "yyyy.MM.dd","yyyyMMdd"
         };
 
             foreach (string format in formats)
@@ -663,6 +668,8 @@ namespace SMPDisptach
 
                                 IsExpDate = parts[6].Trim() == "" ? Convert.ToBoolean(false) : Convert.ToBoolean(parts[6].Trim()),     // Valid product, not expired
                                 EXPShipDays = parts[7].Trim(),
+
+                                LotQty = parts.Length > 8 ? parts[8].Trim() : null
                             };
                             mlistSupplier.Add(plMaster);
                         }
@@ -981,16 +988,31 @@ namespace SMPDisptach
                 {
                     // Split the line into parts assuming CSV format (Comma-Separated Values)
                     string[] parts = line.Split('~');
-
+                    int BinQty = 0;
+                    int BinNo = 0;
                     // Assuming the file has columns: PartNo, Qty, ScanQty, Balance (adjust as necessary)
                     if (parts.Length >= 4)
                     {
+                        if (mlistDNHA.Count > 0)
+                        {
+                          
+                            try
+                            {
+                                BinQty = Convert.ToInt32(mlistDNHA.Where(x => x.DNHAPartNo == parts[0]).Select(m => m.LotSize).FirstOrDefault());
+                                BinNo = Convert.ToInt32(parts[2]) / BinQty;
+                            }
+                            catch
+                            {
+                                BinQty = 0;
+                            }
+                        }
                         ViewFTPScanData data = new ViewFTPScanData
                         {
                             PartNo = parts[0],
                             SILQty = parts[1],
                             DensoQty = parts[2],
                             CustQty = parts[2],
+                            Bin=Convert.ToString( BinNo)
                         };
 
                         // Add the parsed object to the list
@@ -1133,8 +1155,9 @@ namespace SMPDisptach
                             login.Code = parts[0].Trim();
                             login.Name = parts[1].Trim();
                             login.Patterns = parts[2].Trim();
-                            login.Fields = parts[3].Trim();
-                            string[] fields = parts[3].Split(',');
+                            login.Seperater = parts[3];
+                            login.Fields = parts[4].Trim();
+                            string[] fields = parts[4].Split(',');
 
                             foreach (var field in fields)
                             {
@@ -1188,8 +1211,9 @@ namespace SMPDisptach
                             login.Name = parts[1].Trim();
                             login.Patterns = parts[2].Trim();
                             login.ThreePointCheckDigit = parts[3].Trim();
-                            login.Fields = parts[4].Trim();
-                            string[] fields = parts[4].Split(',');
+                            login.Seperater = parts[4];
+                            login.Fields = parts[5].Trim();
+                            string[] fields = parts[5].Split(',');
 
                             foreach (var field in fields)
                             {
@@ -1240,8 +1264,9 @@ namespace SMPDisptach
                             login.Code = parts[0].Trim();
                             login.Name = parts[1].Trim();
                             login.Patterns = parts[2].Trim();
-                            login.Fields = parts[3].Trim();
-                            string[] fields = parts[3].Split(',');
+                            login.Seperater = parts[3];
+                            login.Fields = parts[4].Trim();
+                            string[] fields = parts[4].Split(',');
 
                             foreach (var field in fields)
                             {
@@ -1347,17 +1372,19 @@ namespace SMPDisptach
 
         }
         //***************************************
-        public void ShowMessage(string msg, Activity activity, MessageTitle MsgTitle)
+        public static void ShowMessage(string msg, Activity activity, MessageTitle MsgTitle)
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
             builder.SetTitle(MsgTitle.ToString());
             builder.SetMessage(msg);
             builder.SetCancelable(false);
-            builder.SetPositiveButton("OK", delegate { Finish(); });
+            builder.SetPositiveButton("OK", (sender, e) => {
+                //activity.Finish();
+            });
             builder.Show();
         }
 
-        public void showToastNGMessage(string Message, Context con)
+        public static void showToastNGMessage(string Message, Context con)
         {
             string message = "<b><font color='#FFFFFF'>" + Message + "</font></b>";
             Toast tost = Toast.MakeText(con, Html.FromHtml(message), ToastLength.Long);
@@ -1377,7 +1404,7 @@ namespace SMPDisptach
             }
             tost.Show();
         }
-        public void showToastOKMessage(string Message, Context con)
+        public static void showToastOKMessage(string Message, Context con)
         {
             Toast tost = Toast.MakeText(con, Message, ToastLength.Long);
             View v = tost.View;
@@ -1386,7 +1413,93 @@ namespace SMPDisptach
             tost.Show();
         }
 
+        private static string GetLogFilePath()
+        {
+            string logDir;
 
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
+            {
+                logDir = Application.Context.GetExternalFilesDir(null).AbsolutePath;
+            }
+            else
+            {
+                logDir = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
+            }
+
+            // Create "Logs" folder inside the directory
+            string fullDir = Path.Combine(clsGlobal.FilePath, clsGlobal.LogTag);
+
+            if (!Directory.Exists(fullDir))
+                Directory.CreateDirectory(fullDir);
+
+            return Path.Combine(fullDir, LogFileName);
+        }
+
+        public static void WriteLog(string message)
+        {
+            try
+            {
+                string logFilePath = GetLogFilePath();
+
+                // Get process name
+                string processName = Application.Context.ApplicationInfo.ProcessName;
+
+                // Get caller method and class
+                var stackTrace = new StackTrace();
+                var frame = stackTrace.GetFrame(1); // 1 = caller
+                var method = frame?.GetMethod();
+                string className = method?.DeclaringType?.Name ?? "UnknownClass";
+                string methodName = method?.Name ?? "UnknownMethod";
+
+                // Build log entry
+                string logMessage = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} | " +
+                                     $"User: {clsGlobal.mUserId} | " +
+                                     $"Process: {processName} | " +
+                                     $"Function: {className}.{methodName} | " +
+                                     $"Message: {message}{System.Environment.NewLine}";
+
+                File.AppendAllText(logFilePath, logMessage);
+
+            }
+            catch (Exception ex)
+            {
+                Log.Error(LogTag, "Failed to write log: " + ex.Message);
+            }
+        }
+        public static List<PL_LOG_INFO> mReadLogs()
+        {
+            var entries = new List<PL_LOG_INFO>();
+            string logFilePath = GetLogFilePath();
+
+            if (!File.Exists(logFilePath))
+                return entries;
+
+            string[] lines = File.ReadAllLines(logFilePath);
+
+            var logPattern = new Regex(@"^(?<timestamp>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) \| " +
+                                       @"User: (?<user>.*?) \| " +
+                                       @"Process: (?<process>.*?) \| " +
+                                       @"Function: (?<function>.*?) \| " +
+                                       @"Message: (?<message>.*)$");
+
+            foreach (var line in lines)
+            {
+                var match = logPattern.Match(line);
+                if (match.Success)
+                {
+                    entries.Add(new PL_LOG_INFO
+                    {
+                        Timestamp = DateTime.Parse(match.Groups["timestamp"].Value),
+                        User = match.Groups["user"].Value,
+                        Process = match.Groups["process"].Value,
+                        Function = match.Groups["function"].Value,
+                        Message = match.Groups["message"].Value
+                    });
+                }
+            }
+
+            return entries;
+        }
     }
 
 

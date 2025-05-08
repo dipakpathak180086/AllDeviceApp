@@ -21,7 +21,7 @@ namespace SMPDisptach
     public class ServerSettingActivity : Activity
     {
         //clsNetwork oNetwork;
-        clsGlobal clsGLB;
+        clsGlobal clsGlobal;
         EditText txtServerIp;
         EditText txtDatabase;
         EditText txtUserID;
@@ -35,7 +35,7 @@ namespace SMPDisptach
         {
             try
             {
-                clsGLB = new clsGlobal();
+                //clsGlobal = new clsGlobal();
                 //oNetwork = new clsNetwork();
             }
             catch (Exception ex)
@@ -79,7 +79,7 @@ namespace SMPDisptach
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -112,7 +112,7 @@ namespace SMPDisptach
                 }
             }
             catch (Exception ex)
-            { clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR); }
+            { clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR); }
         }
         void handllerCancelButton(object sender, DialogClickEventArgs e)
         {
@@ -122,7 +122,7 @@ namespace SMPDisptach
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
 
@@ -134,7 +134,7 @@ namespace SMPDisptach
             }
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
         private void StartPlayingSound(bool isSaved = false)

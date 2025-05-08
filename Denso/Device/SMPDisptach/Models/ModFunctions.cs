@@ -16,18 +16,18 @@ namespace SMPDisptach
     class ModFunctions : Activity
     {
         //ModInit ModInit;
-        clsGlobal clsGLB;
+        clsGlobal clsGlobal;
         public ModFunctions()
         {
             try
             {
                 //ModInit = new ModInit();
-                clsGLB = new clsGlobal();
+                //clsGlobal = new clsGlobal();
             }
 
             catch (Exception ex)
             {
-                clsGLB.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
         public bool ReadServerIP()

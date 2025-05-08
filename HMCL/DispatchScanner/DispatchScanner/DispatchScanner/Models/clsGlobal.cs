@@ -24,8 +24,8 @@ namespace IOCLAndroidApp
 
     public class clsGlobal : Activity
     {
-        public static string FileFolder = "SatoFiles";
-        public static string CaseFileName = "CaseBarcode.txt";
+        public static string FileFolder = "SatoHMCLFiles";
+        public static string CaseFileName = "ENG_FRM_Barcode.txt";
         public static string ServerIpFileName = "ServerIP.txt";
         public static string FilePath = global::Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
         public static TcpClient mTcpClient;

@@ -14,11 +14,15 @@ namespace IOCLAndroidApp
 
     public class clsGlobal : Activity
     {
+        public static string mFtpFolder = "";
         public static string mFtpAddress = "";
         public static string mFtpUserName = "";
         public static string mFtpPassword = "";
-        public static string mFtpPort = "";
-        public static string FileFolder = "SatoFiles";
+        public static string mFtpPort = "21";
+        public static string mPLCIp = "";
+        public static int mPLCPort = 0;
+        public static string mMachineNo = "";
+        public static string FileFolder = "SatoAISFiles";
         public static string ServerIpFileName = "ServerIP.txt";
         public static string FilePath = global::Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
         internal static string mSockIp = "";
