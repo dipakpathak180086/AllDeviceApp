@@ -215,7 +215,7 @@ namespace SATOOffLineScanApp
                             {
                                 _listScanCase.Add(new ScanCaseModel(new_table.Rows[i]["Part No."].ToString().Trim().ToString(), new_table.Rows[i]["Barcode"].ToString().Trim().ToString(), "OK"));
                             }
-                            listViewScanCase.Adapter = new CaseItemAdapter(this, _listScanCase);
+                            listViewScanCase.Adapter = new CaseItemAdapter(this, _listScanCase.OrderByDescending(x => x._Barcode).ToList());
                             txtScanQty.Text = "Scan Qty: " + new_table.Rows.Count;
                         }
                         else
@@ -224,7 +224,7 @@ namespace SATOOffLineScanApp
                             {
                                 _listScanCase.Add(new ScanCaseModel(new_table.Rows[i]["Part No."].ToString().Trim().ToString(), new_table.Rows[i]["Barcode"].ToString().Trim().ToString(), "OK"));
                             }
-                            listViewScanCase.Adapter = new CaseItemAdapter(this, _listScanCase);
+                            listViewScanCase.Adapter = new CaseItemAdapter(this, _listScanCase.OrderByDescending(x => x._Barcode).ToList());
                             txtScanQty.Text = "Scan Qty: " + new_table.Rows.Count;
                         }
 
@@ -331,7 +331,7 @@ namespace SATOOffLineScanApp
 
 
                             _listScanCase.Add(new ScanCaseModel(_dic[spinnerPickListNo.SelectedItem.ToString().Trim().ToString()], editItemBarcode.Text, "OK"));
-                            listViewScanCase.Adapter = new CaseItemAdapter(this, _listScanCase);
+                            listViewScanCase.Adapter = new CaseItemAdapter(this, _listScanCase.OrderByDescending(x=>x._Barcode).ToList());
 
                             txtScanQty.Text = "Scan Qty : " + _listScanCase.Count().ToString();
                             txtMsg.Text = "Successfully Scanned";

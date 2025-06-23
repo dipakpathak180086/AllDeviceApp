@@ -40,6 +40,7 @@
     <BundleAssemblies>false</BundleAssemblies>
     <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
     <AndroidSupportedAbis />
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -66,10 +67,10 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapter\CaseItemAdapter.cs" />
     <Compile Include="ActivityClass\PalletMappingActivity.cs" />
     <Compile Include="ActivityClass\LoginActivity.cs" />
     <Compile Include="ActivityClass\MainActivity.cs" />
-    <Compile Include="Adapter\CaseItemAdapter.cs" />
     <Compile Include="Models\clsGlobal.cs" />
     <Compile Include="Models\clsNetwork.cs" />
     <Compile Include="Models\ModelClass.cs" />

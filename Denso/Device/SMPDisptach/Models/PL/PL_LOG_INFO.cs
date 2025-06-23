@@ -16,4 +16,5 @@ namespace SMPDisptach
         public string Message { get; set; }
         public string CreatedBy { get; set; }
     }
+   
 }

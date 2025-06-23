@@ -230,11 +230,11 @@ namespace SMPDisptach.ActivityClass
         {
             if (spinnerSIL.SelectedItemPosition > 0)
             {
-                FinalDeleteData();
+                FinalFTPTransferData();
             }
         }
 
-        private void FinalDeleteData()
+        private void FinalFTPTransferData()
         {
             try
             {
@@ -482,6 +482,7 @@ namespace SMPDisptach.ActivityClass
                         //});
                         //clsGlobal.DeleteDirectory(strFinal);
                         clsGlobal.ShowMessage($"This SIL File Transferred {spinnerSIL.SelectedItem.ToString().Replace("*", "")} Successfully!!!", this, MessageTitle.INFORMATION);
+                        clsGlobal.WriteLog($"This SIL File Transferred {spinnerSIL.SelectedItem.ToString().Replace("*", "")} Successfully!!!");
                         BindSpinnerCompltedSIL();
                         _ListItem.Clear();
                         receivingItemAdapter.NotifyDataSetChanged();
@@ -494,6 +495,7 @@ namespace SMPDisptach.ActivityClass
             {
                 editProgressbar.Visibility = ViewStates.Gone;
                 clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+                clsGlobal.WriteLog($"{ex.Message}");
             }
             finally
             {
@@ -521,22 +523,31 @@ namespace SMPDisptach.ActivityClass
         }
         private string WriteFTPFile(string path, string Username, string password)
         {
-            string strTranscationPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
-            string Path_1 = Path.Combine(strTranscationPath, spinnerSIL.SelectedItem.ToString().Replace("*", ""));
-            string filePath = Path_1 + "//" + SILHeader + ".DAT";
-            Uri severUri = new Uri(path);
-            if (severUri.Scheme != Uri.UriSchemeFtp)
-                return "";
-
-
-            using (var client = new WebClient())
+            try
             {
-                client.Credentials = new NetworkCredential(Username, password);
-                client.UploadFile(path, WebRequestMethods.Ftp.UploadFile, filePath);
-                client.Dispose();
-            }
+                string strTranscationPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
+                string Path_1 = Path.Combine(strTranscationPath, spinnerSIL.SelectedItem.ToString().Replace("*", ""));
+                string filePath = Path_1 + "//" + SILHeader + ".DAT";
+                Uri severUri = new Uri(path);
+                if (severUri.Scheme != Uri.UriSchemeFtp)
+                    return "";
 
-            return filePath;
+
+                using (var client = new WebClient())
+                {
+                    client.Credentials = new NetworkCredential(Username, password);
+                    client.UploadFile(path, WebRequestMethods.Ftp.UploadFile, filePath);
+                    client.Dispose();
+                }
+
+                return filePath;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+           
             //string strTransactionPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
             //string path1 = Path.Combine(strTransactionPath, spinnerSIL.SelectedItem.ToString().Replace("*",""));
             //string filePath = path1 + "//" + SILHeader + ".DAT";

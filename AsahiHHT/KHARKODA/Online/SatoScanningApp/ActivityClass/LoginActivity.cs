@@ -340,11 +340,9 @@ namespace AISScanningApp
                     clsGlobal.mSockIp = sr.ReadLine();
                     clsGlobal.mSockPort = Convert.ToInt32(sr.ReadLine());
 
-                    clsGlobal.mLine = sr.ReadLine();
+                    clsGlobal.mMachineNo = sr.ReadLine();
 
 
-                    clsGlobal.mPLCIp = sr.ReadLine();
-                    clsGlobal.mPLCPort = Convert.ToInt32(sr.ReadLine());
 
                     clsGlobal.mFtpAddress = sr.ReadLine();
                     clsGlobal.mFtpUserName = sr.ReadLine();

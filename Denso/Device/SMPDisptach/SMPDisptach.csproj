@@ -102,6 +102,7 @@
     <Compile Include="Models\BiSocket.cs" />
     <Compile Include="ActivityClass\MainActivity.cs" />
     <Compile Include="Models\BL\BL_DETAILS_DATA.cs" />
+    <Compile Include="Models\BL\BL_HHT_APK_FILE.cs" />
     <Compile Include="Models\BL\BL_LOG_INFO.cs" />
     <Compile Include="Models\BL\BL_REVERSAL.cs" />
     <Compile Include="Models\BL\BL_FRACTION.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Models\clsGlobal.cs" />
     <Compile Include="Models\clsNetwork.cs" />
     <Compile Include="Models\DL\DL_DETAILS_DATA.cs" />
+    <Compile Include="Models\DL\DL_HHT_APK_FILE.cs" />
     <Compile Include="Models\DL\DL_LOG_INFO.cs" />
     <Compile Include="Models\DL\DL_REVERSAL.cs" />
     <Compile Include="Models\DL\DL_FRACTION.cs" />
@@ -118,6 +120,7 @@
     <Compile Include="Models\ModFunctions.cs" />
     <Compile Include="Models\ModInIt.cs" />
     <Compile Include="Models\ModNet.cs" />
+    <Compile Include="Models\PL\PL_HHT_APK_FILE.cs" />
     <Compile Include="Models\PL\PL_LOG_INFO.cs" />
     <Compile Include="Models\PL\PL_SIL_DETAILS_DATA.cs" />
     <Compile Include="Models\PL\PL_REVERSAL.cs" />

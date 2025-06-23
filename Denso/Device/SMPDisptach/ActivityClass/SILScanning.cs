@@ -193,6 +193,7 @@ namespace SMPDisptach.ActivityClass
                 clsGlobal.ReadDNHAMaster();
                 clsGlobal.ReadAlertMessage();
                 clsGlobal.ReadSuspectedLotMaster();
+                clsGlobal.ReadCUSTExpMaster();
                 if (clsGlobal.mAlertMeassage != "")
                 {
                     ShowAlertPopUp();
@@ -600,6 +601,7 @@ namespace SMPDisptach.ActivityClass
                 _ListItem.Clear();
                 _dicBarcode1.Clear();
                 _dicBarcode2.Clear();
+                clsGlobal.mlistCustomer.Clear();
                 ; _sb.Length = 0;
                 string strSILCode = lst.GroupBy(x => x.TruckNo).Select(g => g.First().TruckNo).FirstOrDefault();
                 string strTranscationPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
@@ -642,8 +644,11 @@ namespace SMPDisptach.ActivityClass
                     {
                         txtCheckPoint.Text = "2-Points";
                     }
+                    
+                  
+                    
                     var partNoSet = new HashSet<string>(_ListItem.Select(x => x.PartNo));
-                    var mlistCustomer = clsGlobal.mlistCustomer.Where(c => partNoSet.Contains(c.DNHAPartNo)).ToList();
+                    var mlistCustomer = clsGlobal.mlistAllCustomer.Where(c => partNoSet.Contains(c.DNHAPartNo)).ToList();
 
                     //var filteredList = clsGlobal.mlistCustomer.Where(part => _ListItem.Contains(part.DNHAPartNo)).ToList();
                     clsGlobal.mlistCustomer = mlistCustomer.ToList();
@@ -672,9 +677,10 @@ namespace SMPDisptach.ActivityClass
                         _listBindView.Balance = Convert.ToString(lst[i].Qty - 0);
                         txtTruckSILCodeNo.Text = _SILCode = lst[i].TruckNo;
                         _ListItem.Add(_listBindView);
+                        
 
                         var partNoSet = new HashSet<string>(_ListItem.Select(x => x.PartNo));
-                        var mlistCustomer = clsGlobal.mlistCustomer.Where(c => partNoSet.Contains(c.DNHAPartNo)).ToList();
+                        var mlistCustomer = clsGlobal.mlistAllCustomer.Where(c => partNoSet.Contains(c.DNHAPartNo)).ToList();
 
                         //var filteredList = clsGlobal.mlistCustomer.Where(part => _ListItem.Contains(part.DNHAPartNo)).ToList();
                         clsGlobal.mlistCustomer = mlistCustomer.ToList();
@@ -1054,6 +1060,7 @@ namespace SMPDisptach.ActivityClass
                     string lot = "";
                     int counter = 0;
                     string seqNo = "";
+                    string barcodeLength = "";
                     string combinedKey = "";
                     bool isMatchSeqNo = false;
                     bool isMatchPart = false;
@@ -1061,10 +1068,13 @@ namespace SMPDisptach.ActivityClass
                     bool isMatchExpiryDate = false;
                     bool isMatchQty = false;
                     bool isMatchSuspectedLot = false;
+                    bool isMatchBarcodeLength = false;
                     bool isProductExpired = false;
                     bool isProductMFGShippedDateCross = false;
                     bool isProductEXPShippedDateCross = false;
                     bool isNGSuspectedLot = false;
+                    bool isBarcodeLength = false;
+                    string strCode = Convert.ToInt32(clsGlobal.mCustomerCode).ToString();
                     var maxEntry = clsGlobal.mlistDNHAPattern
                        .OrderByDescending(entry => entry.keyValueData.Count);
                     // Loop through the list of patterns
@@ -1115,6 +1125,7 @@ namespace SMPDisptach.ActivityClass
                         {
                             //Added by dipak 27-02-25 
                             isMatchPart = false; isMatchQty = false; isMatchMFGDate = false; isMatchExpiryDate = false; isMatchSeqNo = false; isMatchSuspectedLot = false;
+                            isBarcodeLength = false;isMatchBarcodeLength = false;
                         }
 
                         //if (isMatchPart)
@@ -1373,6 +1384,47 @@ namespace SMPDisptach.ActivityClass
                                 }
 
                             }
+                            else if (entry.keyValueData[i].Item1.Trim().ToUpper() == "LENGTH")
+                            {
+                                if (strTheSeprator != "")
+                                {
+                                    try
+                                    {
+                                        string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(Convert.ToChar(strTheSeprator));
+                                        //string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(new char[] { Convert.ToChar(strTheSeprator) }, StringSplitOptions.RemoveEmptyEntries);
+                                        if (startIndex == endIndex)
+                                        {
+                                            barcodeLength = sArrBarcode[Convert.ToInt32(sepraterIndex)];
+                                        }
+                                        else
+                                        {
+                                            barcodeLength = sArrBarcode[Convert.ToInt32(sepraterIndex)].Substring(startIndex, length);
+                                        }
+                                    }
+                                    catch
+                                    {
+                                        barcodeLength = "";
+
+                                    }
+
+                                }
+                                else
+                                {
+                                    try
+                                    {
+
+
+                                        barcodeLength = txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length).Trim();
+
+
+                                    }
+                                    catch
+                                    {
+                                        barcodeLength = "";
+                                    }
+                                }
+
+                            }
                             else if (entry.keyValueData[i].Item1.Trim().ToUpper() == "SEQNO")
                             {
                                 string strSEQNo = "";
@@ -1421,6 +1473,7 @@ namespace SMPDisptach.ActivityClass
                                 isvalueMatchBarcode1SeqNo = true;
 
                             }
+
                             //CheckNGSuspectedLot
 
                             if (clsGlobal.mlistSuspectedLot.Exists(x => x.DNHAPartNo == partNo && x.LotNo == lot))
@@ -1428,8 +1481,91 @@ namespace SMPDisptach.ActivityClass
                                 isMatchSuspectedLot = true;
                                 isNGSuspectedLot = true;
                             }
-                            // Check if the part number exists in the DNHA list
-                            if (clsGlobal.mlistDNHA.Exists(x => x.DNHAPartNo == partNo && x.IsMfgDate == true))
+
+                            //Check Barcode Length
+                            if (clsGlobal.mlistSuspectedLot.Exists(x => x.DNHAPartNo == partNo) && barcodeLength!="")
+                            {
+                                isMatchBarcodeLength = true;
+                                isBarcodeLength = true;
+                                int iBarcodeLength = 0;
+                                int.TryParse(barcodeLength, out iBarcodeLength);
+                                if (txtDNHASUPKanbanBarcode.Text.Length != iBarcodeLength)
+                                {
+                                    if (i == 0)
+                                    {
+                                        goto NextForeachIteration;
+                                    }
+                                }
+                            }
+
+                            if (clsGlobal.mlistCustWiseExpiry.Exists(x => x.DNHAPartNo == partNo && x.CustomerCode.TrimStart('0') == strCode && x.IsMfgDate == true))
+                            {
+                                isMatchPart = true;
+                                isMatchQty = true; //Commented by dipak 10-03-25
+                                if (clsGlobal.mlistCustWiseExpiry.Exists(x => x.DNHAPartNo == partNo && x.CustomerCode.TrimStart('0') == strCode && x.IsMfgDate == true && mfg != ""))
+                                {
+                                    isMatchMFGDate = true;
+                                    string strExpDays = clsGlobal.mlistCustWiseExpiry.Where(x => x.DNHAPartNo == partNo && x.CustomerCode.TrimStart('0') == strCode).Select(p => p.ExpDays).FirstOrDefault();
+                                    string strShipDays = clsGlobal.mlistCustWiseExpiry.Where(x => x.DNHAPartNo == partNo && x.CustomerCode.TrimStart('0') == strCode).Select(p => p.MFGShipDays).FirstOrDefault();
+                                    if (strExpDays != null && strShipDays == null)
+                                    {
+                                        //DateTime dateTime = Convert.ToDateTime(mfg).AddDays(Convert.ToInt32(strExpDays));
+                                        string[] formats = { "dd-MM-yyyy", "MM-dd-yyyy", "yyyy-MM-dd" };   // Add all possible formats
+                                        DateTime dateTime;
+                                        DateTime.TryParseExact(mfg, formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dateTime);
+
+                                        dateTime = dateTime.AddDays(Convert.ToInt32(strExpDays));
+                                        DateTime todayDateTime;
+                                        DateTime.TryParseExact(DateTime.Today.ToString("yyyy-MM-dd"), formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out todayDateTime);
+
+
+                                        if (todayDateTime.Date > dateTime.Date)
+                                        {
+                                            isProductExpired = true;
+                                            break;
+                                        }
+                                    }
+                                    else if (strShipDays != null && strExpDays != null)
+                                    {
+                                        string[] formats = { "dd-MM-yyyy", "MM-dd-yyyy", "yyyy-MM-dd" };   // Add all possible formats
+                                        DateTime todayDateTime;
+                                        DateTime.TryParseExact(DateTime.Now.ToString("yyyy-MM-dd"), formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out todayDateTime);
+
+
+
+                                        DateTime dateExp;
+                                        DateTime.TryParseExact(mfg, formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dateExp);
+                                        dateExp = dateExp.AddDays(Convert.ToInt32(strExpDays));
+
+                                        DateTime dateShip;
+                                        DateTime.TryParseExact(mfg, formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dateShip);
+                                        dateShip = Convert.ToDateTime(mfg).AddDays(Convert.ToInt32(strShipDays));
+                                        if (todayDateTime.Date > dateExp.Date)
+                                        {
+                                            isProductExpired = true;
+                                            break;
+                                        }
+
+
+                                        else if (todayDateTime.Date >= dateShip.Date && todayDateTime.Date <= dateExp.Date)
+                                        {
+                                            isProductMFGShippedDateCross = true;
+                                            break;
+                                        }
+                                    }
+                                    //if (clsGlobal.mlistDNHA.Exists(x => x.DNHAPartNo == partNo
+                                    //    && x.IsMfgExp == true
+                                    //    && Convert.ToDateTime(mfg) >= x.MFGDate
+                                    //    && Convert.ToDateTime(mfg) <= x.EXPDate))
+                                    //{
+                                    //    isMatchKanbanMFGAndExp = true;
+                                    //    isMatchPart = true;
+                                    //    break;
+                                    //}
+
+                                }
+                            }
+                            else if (clsGlobal.mlistDNHA.Exists(x => x.DNHAPartNo == partNo && x.IsMfgDate == true))
                             {
                                 isMatchPart = true;
                                 isMatchQty = true; //Commented by dipak 10-03-25
@@ -1496,7 +1632,50 @@ namespace SMPDisptach.ActivityClass
 
                                 }
                             }
+                            else if (clsGlobal.mlistCustWiseExpiry.Exists(x => x.DNHAPartNo == partNo && x.CustomerCode.TrimStart('0') == strCode && x.IsExpDate == true && exp != ""))
+                            {
+                                isMatchPart = true;
+                                isMatchQty = true; //Commented by dipak 10-03-25
+                                isMatchExpiryDate = true;
+                                bool atucalExp = clsGlobal.mlistCustWiseExpiry.Where(x => x.DNHAPartNo == partNo && x.CustomerCode.TrimStart('0') == strCode).Select(p => p.IsExpDate).FirstOrDefault();
+                                string strExpShipDays = clsGlobal.mlistCustWiseExpiry.Where(x => x.DNHAPartNo == partNo && x.CustomerCode.TrimStart('0') == strCode).Select(p => p.EXPShipDays).FirstOrDefault();
+                                int iExpShipDays = strExpShipDays == "" ? 0 : Convert.ToInt32(strExpShipDays);
+                                if (atucalExp == true && (iExpShipDays == 0 || iExpShipDays == null))
+                                {
+                                    if (DateTime.TryParseExact(exp, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime expDate))
+                                    {
+                                        if (DateTime.Today > expDate)
+                                        {
+                                            isProductExpired = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                                else if (atucalExp == true && (iExpShipDays != 0 || iExpShipDays != null))
+                                {
 
+                                    if (DateTime.TryParseExact(exp, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime expDate))
+                                    {
+                                        if (DateTime.Today > expDate)
+                                        {
+                                            isProductExpired = true;
+                                            break;
+                                        }
+                                        else if (DateTime.Today > expDate.AddDays(-iExpShipDays))
+                                        {
+                                            isProductEXPShippedDateCross = true;
+                                            break;
+                                        }
+
+                                    }
+                                }
+
+                                //if (DateTime.Today > DateTime.ParseExact(exp, "yyyy-MM-dd", CultureInfo.DefaultThreadCurrentCulture).AddDays(-iExpShipDays))
+                                //{
+                                //    isProductExpired = true;
+                                //    break;
+                                //}
+                            }
                             else if (clsGlobal.mlistDNHA.Exists(x => x.DNHAPartNo == partNo && x.IsExpDate == true && exp != ""))
                             {
                                 isMatchPart = true;
@@ -1702,6 +1881,19 @@ namespace SMPDisptach.ActivityClass
                         return;
 
                     }
+                    if (isMatchBarcodeLength)
+                    {
+                        if (txtDNHASUPKanbanBarcode.Text.Length != int.Parse( barcodeLength))
+                        {
+                            clsGlobal.showToastNGMessage($"Scanned Barcode Length is {txtDNHASUPKanbanBarcode.Text.Length}  and pattern barcode length is {barcodeLength} ! ", this);
+                            clsGlobal.WriteLog($"Scanned Barcode Length is {txtDNHASUPKanbanBarcode.Text.Length}  and pattern barcode length is {barcodeLength} ! ");
+                            txtDNHASUPKanbanBarcode.Text = "";
+                            txtDNHASUPKanbanBarcode.RequestFocus();
+                            SoundForNG();
+                            ShowAlertPopUp();
+                            return;
+                        }
+                    }
                     if (isMatchSeqNo)
                     {
                         if (_dicBarcode1.ContainsKey(combinedKey.Trim()))
@@ -1727,6 +1919,10 @@ namespace SMPDisptach.ActivityClass
                         if (partNo != PartNo)
                         {
                             PartNo = partNo;
+                        }
+                        if (Qty != qty)
+                        {
+                            Qty = qty;
                         }
                     }
                     catch (Exception ex)
@@ -1812,16 +2008,19 @@ namespace SMPDisptach.ActivityClass
                     string exp = "";
                     string lot = "";
                     string seqNo = "";
+                    string barcodeLength = "";
                     string combinedKey = "";
                     bool isMatchSeqNo = false;
                     bool isMatchMFGDate = false;
                     bool isMatchExpiryDate = false;
                     bool isMatchQty = false;
                     bool isMatchSuspectedLot = false;
+                    bool isMatchBarcodeLength = false;
                     bool isProductExpired = false;
                     bool isProductMFGShippedDateCross = false;
                     bool isProductEXPShippedDateCross = false;
                     bool isNGSuspectedLot = false;
+                    bool isBarcodeLength = false;
                     //var maxEntry = clsGlobal.mlistSupplierPattern
                     //                     .OrderByDescending(entry => entry.keyValueData.Count);
                     string strCode = Convert.ToInt32(clsGlobal.mCustomerCode).ToString();
@@ -1883,6 +2082,7 @@ namespace SMPDisptach.ActivityClass
                         {
                             //Added by dipak 27-02-25 
                             isMatchPart = false; isMatchQty = false; isMatchMFGDate = false; isMatchExpiryDate = false; isMatchSeqNo = false; isMatchSuspectedLot = false;
+                            isBarcodeLength = false; isMatchBarcodeLength = false;
                         }
 
                         // Step 4: Iterate through the hashtable inside the dictionary
@@ -1915,7 +2115,7 @@ namespace SMPDisptach.ActivityClass
                                     }
                                     catch
                                     {
-
+                                        partNo = "";
 
                                     }
 
@@ -2174,6 +2374,47 @@ namespace SMPDisptach.ActivityClass
                                     }
                                 }
                             }
+                            else if (entry.keyValueData[i].Item1.Trim().ToUpper() == "LENGTH")
+                            {
+                                if (strTheSeprator != "")
+                                {
+                                    try
+                                    {
+                                        string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(Convert.ToChar(strTheSeprator));
+                                        //string[] sArrBarcode = txtDNHASUPKanbanBarcode.Text.Split(new char[] { Convert.ToChar(strTheSeprator) }, StringSplitOptions.RemoveEmptyEntries);
+                                        if (startIndex == endIndex)
+                                        {
+                                            barcodeLength = sArrBarcode[Convert.ToInt32(sepraterIndex)];
+                                        }
+                                        else
+                                        {
+                                            barcodeLength = sArrBarcode[Convert.ToInt32(sepraterIndex)].Substring(startIndex, length);
+                                        }
+                                    }
+                                    catch
+                                    {
+                                        barcodeLength = "";
+
+                                    }
+
+                                }
+                                else
+                                {
+                                    try
+                                    {
+
+
+                                        barcodeLength = txtDNHASUPKanbanBarcode.Text.Trim().Substring(startIndex, length).Trim();
+
+
+                                    }
+                                    catch
+                                    {
+                                        barcodeLength = "";
+                                    }
+                                }
+
+                            }
                             else if (entry.keyValueData[i].Item1.Trim().ToUpper() == "SEQNO")
                             {
                                 string strSEQNo = "";
@@ -2216,30 +2457,44 @@ namespace SMPDisptach.ActivityClass
                                     }
                                 }
 
-                                seqNo = clsGlobal.mDNHASupSeqNo = strSEQNo.ToString().Trim();
+                                seqNo = clsGlobal.mDNHASupSeqNo = strSEQNo.ToString().Trim().Replace("\n","").Replace("\r","").Trim();
                                 combinedKey = $"{partNo}^{seqNo}";
                                 isvalueMatchBarcode1SeqNo = true;
                                 valueombinedBarcode1Key = combinedKey;
                                 isMatchSeqNo = true;
                             }
 
-
+                            //Check Suspected Lot
                             if (clsGlobal.mlistSuspectedLot.Exists(x => x.DNHAPartNo == dnhaPartNo && x.LotNo == lot))
                             {
                                 isMatchSuspectedLot = true;
                                 isNGSuspectedLot = true;
                             }
-                            // Check if the part number exists in the DNHA list
-                            if (clsGlobal.mlistSupplier.Exists(x => (x.DNHAPartNo == partNo || x.SupplierPartNo == partNo) && x.IsMfgDate == true))
+                            ///Check Barcode length 
+                            if (clsGlobal.mlistSupplier.Exists(x => (x.DNHAPartNo == dnhaPartNo || x.SupplierPartNo == partNo) && barcodeLength!=""))
+                            {
+                                isBarcodeLength = true;
+                                isMatchBarcodeLength = true;
+                                int iBarcodeLength = 0;
+                                int.TryParse(barcodeLength, out iBarcodeLength);
+                                if (txtDNHASUPKanbanBarcode.Text.Length != iBarcodeLength)
+                                {
+                                    if (i == 0)
+                                    {
+                                        goto NextForeachIteration;
+                                    }
+                                }
+                            }
+                            if (clsGlobal.mlistCustWiseExpiry.Exists(x => (x.DNHAPartNo == dnhaPartNo && x.CustomerCode.TrimStart('0') == strCode) && x.IsMfgDate == true))
                             {
                                 isMatchPart = true;
                                 //isMatchQty = true; //Commented by dipak 10-03-25
                                 isMatchMFGDate = true;
-                                strDNHAPartNo = clsGlobal.mlistSupplier.Where(x => (x.DNHAPartNo == partNo || x.SupplierPartNo == partNo)).Select(p => p.DNHAPartNo).FirstOrDefault();
-                                if (clsGlobal.mlistSupplier.Exists(x => (x.DNHAPartNo == partNo || x.SupplierPartNo == partNo) && x.IsMfgDate == true && mfg != ""))
+                                strDNHAPartNo = clsGlobal.mlistCustWiseExpiry.Where(x => (x.DNHAPartNo == dnhaPartNo && x.CustomerCode.TrimStart('0') == strCode)).Select(p => p.DNHAPartNo).FirstOrDefault();
+                                if (clsGlobal.mlistCustWiseExpiry.Exists(x => (x.DNHAPartNo == dnhaPartNo && x.CustomerCode.TrimStart('0') == strCode) && x.IsMfgDate == true && mfg != ""))
                                 {
-                                    string strExpDays = clsGlobal.mlistSupplier.Where(x => (x.DNHAPartNo == partNo || x.SupplierPartNo == partNo)).Select(p => p.ExpDays).FirstOrDefault();
-                                    string strShipDays = clsGlobal.mlistSupplier.Where(x => (x.DNHAPartNo == partNo || x.SupplierPartNo == partNo)).Select(p => p.MFGShipDays).FirstOrDefault();
+                                    string strExpDays = clsGlobal.mlistCustWiseExpiry.Where(x => (x.DNHAPartNo == dnhaPartNo && x.CustomerCode.TrimStart('0') == strCode)).Select(p => p.ExpDays).FirstOrDefault();
+                                    string strShipDays = clsGlobal.mlistCustWiseExpiry.Where(x => (x.DNHAPartNo == dnhaPartNo && x.CustomerCode.TrimStart('0') == strCode)).Select(p => p.MFGShipDays).FirstOrDefault();
                                     if (strExpDays != null && strExpDays == null)
                                     {
                                         string[] formats = { "dd-MM-yyyy", "MM-dd-yyyy", "yyyy-MM-dd" };   // Add all possible formats
@@ -2297,15 +2552,126 @@ namespace SMPDisptach.ActivityClass
 
                                 }
                             }
+                            else if (clsGlobal.mlistSupplier.Exists(x => (x.DNHAPartNo == dnhaPartNo || x.SupplierPartNo == partNo) && x.IsMfgDate == true))
+                            {
+                                isMatchPart = true;
+                                //isMatchQty = true; //Commented by dipak 10-03-25
+                                isMatchMFGDate = true;
+                                strDNHAPartNo = clsGlobal.mlistSupplier.Where(x => (x.DNHAPartNo == dnhaPartNo || x.SupplierPartNo == partNo)).Select(p => p.DNHAPartNo).FirstOrDefault();
+                                if (clsGlobal.mlistSupplier.Exists(x => (x.DNHAPartNo == dnhaPartNo || x.SupplierPartNo == partNo) && x.IsMfgDate == true && mfg != ""))
+                                {
+                                    string strExpDays = clsGlobal.mlistSupplier.Where(x => (x.DNHAPartNo == dnhaPartNo || x.SupplierPartNo == partNo)).Select(p => p.ExpDays).FirstOrDefault();
+                                    string strShipDays = clsGlobal.mlistSupplier.Where(x => (x.DNHAPartNo == dnhaPartNo || x.SupplierPartNo == partNo)).Select(p => p.MFGShipDays).FirstOrDefault();
+                                    if (strExpDays != null && strExpDays == null)
+                                    {
+                                        string[] formats = { "dd-MM-yyyy", "MM-dd-yyyy", "yyyy-MM-dd" };   // Add all possible formats
+                                        DateTime dateTime;
+                                        DateTime.TryParseExact(mfg, formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dateTime);
 
-                            else if (clsGlobal.mlistSupplier.Exists(x => x.DNHAPartNo == partNo && x.IsExpDate == true && exp != ""))
+                                        dateTime = dateTime.AddDays(Convert.ToInt32(strExpDays));
+                                        DateTime todayDateTime;
+                                        DateTime.TryParseExact(DateTime.Today.ToString("yyyy-MM-dd"), formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out todayDateTime);
+
+
+                                        if (todayDateTime.Date > dateTime.Date)
+                                        {
+                                            isProductExpired = true;
+                                            break;
+                                        }
+                                    }
+                                    else if (strShipDays != null && strExpDays != null)
+                                    {
+                                        string[] formats = { "dd-MM-yyyy", "MM-dd-yyyy", "yyyy-MM-dd" };   // Add all possible formats
+                                        DateTime todayDateTime;
+                                        DateTime.TryParseExact(DateTime.Now.ToString("yyyy-MM-dd"), formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out todayDateTime);
+
+
+
+                                        DateTime dateExp;
+                                        DateTime.TryParseExact(mfg, formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dateExp);
+                                        dateExp = dateExp.AddDays(Convert.ToInt32(strExpDays));
+
+                                        DateTime dateShip;
+                                        DateTime.TryParseExact(mfg, formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dateShip);
+                                        dateShip = Convert.ToDateTime(mfg).AddDays(Convert.ToInt32(strShipDays));
+                                        if (todayDateTime.Date > dateExp.Date)
+                                        {
+                                            isProductExpired = true;
+                                            break;
+                                        }
+
+
+                                        else if (todayDateTime.Date >= dateShip.Date && todayDateTime.Date <= dateExp.Date)
+                                        {
+                                            isProductMFGShippedDateCross = true;
+                                            break;
+                                        }
+                                    }
+                                    //if (clsGlobal.mlistDNHA.Exists(x => x.DNHAPartNo == partNo
+                                    //    && x.IsMfgExp == true
+                                    //    && Convert.ToDateTime(mfg) >= x.MFGDate
+                                    //    && Convert.ToDateTime(mfg) <= x.EXPDate))
+                                    //{
+                                    //    isMatchKanbanMFGAndExp = true;
+                                    //    isMatchPart = true;
+                                    //    break;
+                                    //}
+
+                                }
+                            }
+                            else if (clsGlobal.mlistCustWiseExpiry.Exists(x => x.DNHAPartNo == dnhaPartNo && x.CustomerCode.TrimStart('0') == strCode && x.IsExpDate == true && exp != ""))
                             {
                                 isMatchPart = true;
                                 //isMatchQty = true; //Commented by dipak 10-03-25
                                 isMatchExpiryDate = true;
-                                strDNHAPartNo = clsGlobal.mlistSupplier.Where(x => (x.DNHAPartNo == partNo || x.SupplierPartNo == partNo)).Select(p => p.DNHAPartNo).FirstOrDefault();
-                                bool atucalExp = clsGlobal.mlistSupplier.Where(x => x.DNHAPartNo == partNo || x.SupplierPartNo == partNo).Select(p => p.IsExpDate).FirstOrDefault();
-                                string strExpShipDays = clsGlobal.mlistSupplier.Where(x => x.DNHAPartNo == partNo || x.SupplierPartNo == partNo).Select(p => p.EXPShipDays).FirstOrDefault();
+                                strDNHAPartNo = clsGlobal.mlistCustWiseExpiry.Where(x => (x.DNHAPartNo == dnhaPartNo && x.CustomerCode.TrimStart('0') == strCode)).Select(p => p.DNHAPartNo).FirstOrDefault();
+                                bool atucalExp = clsGlobal.mlistCustWiseExpiry.Where(x => x.DNHAPartNo == dnhaPartNo && x.CustomerCode.TrimStart('0') == strCode).Select(p => p.IsExpDate).FirstOrDefault();
+                                string strExpShipDays = clsGlobal.mlistCustWiseExpiry.Where(x => x.DNHAPartNo == dnhaPartNo && x.CustomerCode.TrimStart('0') == strCode).Select(p => p.EXPShipDays).FirstOrDefault();
+                                int iExpShipDays = strExpShipDays == "" ? 0 : Convert.ToInt32(strExpShipDays);
+                                if (atucalExp == true && (iExpShipDays == 0 || iExpShipDays == null))
+                                {
+                                    if (DateTime.TryParseExact(exp, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime expDate))
+                                    {
+                                        if (DateTime.Today > expDate)
+                                        {
+                                            isProductExpired = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                                else if (atucalExp == true && (iExpShipDays != 0 || iExpShipDays != null))
+                                {
+
+                                    if (DateTime.TryParseExact(exp, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime expDate))
+                                    {
+                                        if (DateTime.Today > expDate)
+                                        {
+                                            isProductExpired = true;
+                                            break;
+                                        }
+                                        else if (DateTime.Today > expDate.AddDays(-iExpShipDays))
+                                        {
+                                            isProductEXPShippedDateCross = true;
+                                            break;
+                                        }
+
+                                    }
+                                }
+
+                                //if (DateTime.Today > DateTime.ParseExact(exp, "yyyy-MM-dd", CultureInfo.DefaultThreadCurrentCulture).AddDays(-iExpShipDays))
+                                //{
+                                //    isProductExpired = true;
+                                //    break;
+                                //}
+                            }
+                            else if (clsGlobal.mlistSupplier.Exists(x => x.DNHAPartNo == dnhaPartNo && x.IsExpDate == true && exp != ""))
+                            {
+                                isMatchPart = true;
+                                //isMatchQty = true; //Commented by dipak 10-03-25
+                                isMatchExpiryDate = true;
+                                strDNHAPartNo = clsGlobal.mlistSupplier.Where(x => (x.DNHAPartNo == dnhaPartNo || x.SupplierPartNo == partNo)).Select(p => p.DNHAPartNo).FirstOrDefault();
+                                bool atucalExp = clsGlobal.mlistSupplier.Where(x => x.DNHAPartNo == dnhaPartNo || x.SupplierPartNo == partNo).Select(p => p.IsExpDate).FirstOrDefault();
+                                string strExpShipDays = clsGlobal.mlistSupplier.Where(x => x.DNHAPartNo == dnhaPartNo || x.SupplierPartNo == partNo).Select(p => p.EXPShipDays).FirstOrDefault();
                                 int iExpShipDays = strExpShipDays == "" ? 0 : Convert.ToInt32(strExpShipDays);
                                 if (atucalExp == true && (iExpShipDays == 0 || iExpShipDays == null))
                                 {
@@ -2345,7 +2711,7 @@ namespace SMPDisptach.ActivityClass
                             }
                             else
                             {
-                                if (clsGlobal.mlistSupplier.Exists(x => (x.DNHAPartNo == partNo || x.SupplierPartNo == partNo)))
+                                if (clsGlobal.mlistSupplier.Exists(x => (x.DNHAPartNo == dnhaPartNo || x.SupplierPartNo == partNo)))
                                 {
                                     strSupplierPattern = entry.Patterns;
                                 }
@@ -2360,9 +2726,9 @@ namespace SMPDisptach.ActivityClass
                                 //isMatchQty = true; //Commented by dipak 10-03-25
                             }
                             // Check if the part number exists in the DNHA list
-                            if (clsGlobal.mlistSupplier.Exists(x => (x.DNHAPartNo == partNo || x.SupplierPartNo == partNo)))
+                            if (clsGlobal.mlistSupplier.Exists(x => (x.DNHAPartNo == dnhaPartNo || x.SupplierPartNo == partNo)))
                             {
-                                if (clsGlobal.mlistSupplier.Exists(x => (x.DNHAPartNo == partNo || x.SupplierPartNo == partNo)))
+                                if (clsGlobal.mlistSupplier.Exists(x => (x.DNHAPartNo == dnhaPartNo || x.SupplierPartNo == partNo)))
                                 {
                                     strSupplierPattern = entry.Patterns;
                                 }
@@ -2537,6 +2903,19 @@ namespace SMPDisptach.ActivityClass
                         return;
 
                     }
+                    if (isMatchBarcodeLength)
+                    {
+                        if (txtDNHASUPKanbanBarcode.Text.Length != int.Parse(barcodeLength))
+                        {
+                            clsGlobal.showToastNGMessage($"Length is not matched,Scanned Barcode Length is {txtDNHASUPKanbanBarcode.Text.Length}  and pattern barcode length is {barcodeLength} ! ", this);
+                            clsGlobal.WriteLog($"Length is not matched,Scanned Barcode Length is {txtDNHASUPKanbanBarcode.Text.Length}  and pattern barcode length is {barcodeLength} ! ");
+                            txtDNHASUPKanbanBarcode.Text = "";
+                            txtDNHASUPKanbanBarcode.RequestFocus();
+                            SoundForNG();
+                            ShowAlertPopUp();
+                            return;
+                        }
+                    }
                     if (isMatchSeqNo)
                     {
                         if (_dicBarcode1.ContainsKey(combinedKey.Trim()))
@@ -2559,11 +2938,13 @@ namespace SMPDisptach.ActivityClass
                         //SequenceNo = txtDNHASUPKanbanBarcode.Text.Substring(118, 7).Trim();
                         //DensoBarcode = txtDNHASUPKanbanBarcode.Text.Substring(0, 150).Trim();
                         //DNHAScannedOn = DateTime.Now.ToString();
+                        string deviceId = clsGlobal.GetDeviceId(this);
+                        string serial = clsGlobal.GetUPICODE(7,deviceId);
                         CustPart = partNo.Trim();
                         PartNo = dnhaPartNo.Trim();
                         Qty = qty.Trim();
                         ProcessCode = "";
-                        SequenceNo = seqNo;
+                        SequenceNo = serial;
                         DensoBarcode = txtDNHASUPKanbanBarcode.Text.Trim();
                         DNHAScannedOn = DateTime.Now.ToString();
                     }
@@ -2580,7 +2961,7 @@ namespace SMPDisptach.ActivityClass
                         UpdateFinalListScanQty(dnhaPartNo, qty);
                         WriteDeatilsFile($"{_strSILBarCode.Trim()}~{clsGlobal.ReplaceNewlinesWithCaret(txtDNHASUPKanbanBarcode.Text.Trim())}~{clsGlobal.ReplaceNewlinesWithCaret(txtCustKanbanBarcode.Text.Trim())}" +
                             $"~{PartNo}~{CustPart}~{Qty}~{"0"}~{ProcessCode}~{TruckNo}~{ShipTo}~{CustCode}~{SequenceNo}~{clsGlobal.mCustSeqNo}~{clsGlobal.mUserId}" +
-                            $"~{SILScannedON}~{DNHAScannedOn}~{CustScannedOn}~{strDNHAPattern}~{isvalueMatchBarcode1SeqNo}~{valueombinedBarcode1Key}~{isvalueMatchBarcode2SeqNo}~{valueombinedBarcode2Key}");
+                            $"~{SILScannedON}~{DNHAScannedOn}~{CustScannedOn}~{strSupplierPattern}~{isvalueMatchBarcode1SeqNo}~{valueombinedBarcode1Key}~{isvalueMatchBarcode2SeqNo}~{valueombinedBarcode2Key}");
                         valueombinedBarcode1Key = "";
                         valueombinedBarcode2Key = "";
                         isvalueMatchBarcode1SeqNo = false;
@@ -3015,6 +3396,7 @@ namespace SMPDisptach.ActivityClass
                     string strFinalFilePath = Path.Combine(strFinalSILWiseDirectory, clsGlobal.SILMasterDataFile);
                     string strSILBarcodeFilePath = Path.Combine(strFinalSILWiseDirectory, clsGlobal.SILBarcode);
                     _strSILBarCode = clsGlobal.ReadSILBarcodeFromFile(strSILBarcodeFilePath);
+                   
                     GetSILScanData(_strSILBarCode);
                 }
             }
@@ -3045,7 +3427,7 @@ namespace SMPDisptach.ActivityClass
                         //    ScanningSUPKanbanBarcode();
 
                         //}
-                        
+                        txtDNHASUPKanbanBarcode.Text = txtDNHASUPKanbanBarcode.Text.Replace("\r","").Replace("\r", "");
                         if (CheckSupplierOrDNHA() == "DNHA")
                         {
 

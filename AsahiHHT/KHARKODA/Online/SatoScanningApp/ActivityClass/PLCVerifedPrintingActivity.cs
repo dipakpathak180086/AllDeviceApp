@@ -37,7 +37,7 @@ namespace AISScanningApp
         private Spinner spinnerPartNo;
         private EditText txtBarcode;
         private TextView txtMsg, txtLastVerifiedPart;
-        private Button btnReset, btnVerifiedPrinting, btnConnect;
+        private Button btnReset, btnVerifiedPrinting;
         private RecyclerView recycleViewPicking;
         private PickingAdapter pickingAdapter;
         private RecyclerView.LayoutManager mLayoutManager;
@@ -96,8 +96,7 @@ namespace AISScanningApp
                 btnReset = FindViewById<Button>(Resource.Id.btnReset);
                 btnReset.Click += BtnReset_Click;
 
-                btnConnect = FindViewById<Button>(Resource.Id.btnPLCConnect);
-                btnConnect.Click += BtnConnect_Click;
+               
 
                 spinnerPartNo.Enabled = true;
                 txtBarcode.Enabled = false;
@@ -105,11 +104,7 @@ namespace AISScanningApp
                 GetPartNoAsync();
 
                 spinnerPartNo.RequestFocus();
-                timer = new Timer();
-                timer.Interval = 1000; // 1 second
-                timer.Elapsed += Timer_Elapsed;
-                timer.Start();
-                BtnConnect_Click(null, null);
+                
             }
             catch (Exception ex)
             {
@@ -117,103 +112,10 @@ namespace AISScanningApp
             }
         }
 
-        private void BtnConnect_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (btnConnect.Text.Trim().ToUpper() == "PLC CONNECT")
-                {
-                    btnConnect.Text = "PLC DIS-CONNECT";
-                    if (_plc0 != null)
-                    {
-                        _plc0.Dispose();
-                        _plc0 = null;
-                    }
-                    _plc0 = new clsPLC_Update(clsGlobal.mPLCIp, clsGlobal.mPLCPort);
-                    if (_plc0.GetPLCStatus() == "Connected")
-                    {
-                        btnConnect.Text = "PLC CONNECTED";
-                        btnConnect.SetBackgroundColor(Android.Graphics.Color.Green);
-                    }
-                    else
-                    {
-                        btnConnect.Text = "PLC DIS-CONNECTED";
-                        btnConnect.SetBackgroundColor(Android.Graphics.Color.Red);
-                    }
-                }
+    
 
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            // Update the TextView with the current date and time on the UI thread
-            RunOnUiThread(() =>
-            {
-                try
-                {
-                    //if (!IsWaitingForPLC)
-                    //{
-                    IsWaitingForPLC = true;
-                    btnConnect.Enabled = false;
-                    if (_plc0 != null)
-                    {
-                        _plc0.Dispose();
-                        _plc0 = null;
-                    }
-                    _plc0 = new clsPLC_Update(clsGlobal.mPLCIp, clsGlobal.mPLCPort);
-                    if (_plc0.GetPLCStatus() == "Connected")
-                    {
-                        btnConnect.Text = "PLC CONNECTED";
-                        btnConnect.SetBackgroundColor(Android.Graphics.Color.Green);
-                    }
-                    else
-                    {
-                        btnConnect.Text = "PLC DIS-CONNECTED";
-                        btnConnect.SetBackgroundColor(Android.Graphics.Color.Red);
-                    }
-                    //}
-
-                }
-                catch
-                {
-                    //IsWaitingForPLC=false;
-
-                    btnConnect.Text = "PLC DIS-CONNECTED";
-                }
-
-            });
-        }
-        private void WritePLCInput0()
-        {
-
-            try
-            {
-                _status = _plc0.GetPLCStatus();
-                if (_IsPlc0Complete && _status == "Connected")
-                {
-                    _IsPlc0Complete = false;
-                    _plc0.WriteToPLC("1");
-                    _IsPlc0Complete = true;
-                }
-                else
-                {
-                    StartPlayingSound();
-                    ShowMessageBox("PLC Dis-Connected,Please check!!!!", this);
-                }
-            }
-            catch (Exception ex)
-            {
-                _status = "Error";
-                //GlobalVar.Logger.LogMessage(EventNotice.EventTypes.evtError, $"GetPLCInput0:{plc.IPAdress}:{plc.PortNo}", $"Error:" + ex.ToString());
-                _IsPlc0Complete = true;
-            }
-        }
+    
+      
 
         #endregion
 
@@ -275,10 +177,7 @@ namespace AISScanningApp
                     {
                         if (IsValidForItemBarcode())
                         {
-                            if (CheckVerifyData())
-                            {
-                                WritePLCInput0();
-                            }
+                            
                             SaveDataAsync();
                         }
                         else
@@ -495,7 +394,7 @@ namespace AISScanningApp
         {
             try
             {
-                string _MESSAGE = "PRINTING_VERIFIED~" + clsGlobal.Db_Type + "~" + spinnerPartNo.SelectedItem + "~" + txtBarcode.Text.Trim() + "~" + clsGlobal.UserId + "}";
+                string _MESSAGE = "PRINTING_VERIFIED~" + clsGlobal.Db_Type + "~" + spinnerPartNo.SelectedItem + "~" + txtBarcode.Text.Trim() + "~" + clsGlobal.UserId  +"~" + clsGlobal.mMachineNo + "}";
                 string[] _RESPONSE = oNetwork.fnSendReceiveData(_MESSAGE).Split('~');
                 return _RESPONSE;
             }
@@ -847,7 +746,7 @@ namespace AISScanningApp
 
                 string transactionPath = Path.Combine(path, clsGlobal.mFtpFolder);
                 // string folderPath = Path.Combine(transactionPath, spinnerSIL.SelectedItem.ToString().Replace("*", ""));
-                string backupFolderPath = Path.Combine(transactionPath, "MES_BCK");
+                string backupFolderPath = Path.Combine(transactionPath, "MES");
 
                 // Ensure the backup directory exists
                 EnsureFTPDirectory(backupFolderPath, username, password);
@@ -892,7 +791,7 @@ namespace AISScanningApp
                         txtLastVerifiedPart.Text = txtBarcode.Text.Trim();
                         try
                         {
-                            WriteFTPFile("ftp://"+clsGlobal.mFtpAddress, clsGlobal.mFtpUserName, clsGlobal.mFtpPassword, txtBarcode.Text.Trim().Replace(":", "_"));
+                            WriteFTPFile("ftp://" + clsGlobal.mFtpAddress, clsGlobal.mFtpUserName, clsGlobal.mFtpPassword, txtBarcode.Text.Trim().Replace(":", "_"));
                         }
                         catch (Exception ex)
                         {
@@ -1140,13 +1039,7 @@ namespace AISScanningApp
                     txtBarcode.RequestFocus();
                     return false;
                 }
-                if (btnConnect.Text.Trim().Equals("PLC DIS-CONNECTED"))
-                {
-                    StartPlayingSound();
-                    ShowMessageBox("PLC Disconnected, Check PLC Connection!!", this);
-                    txtBarcode.RequestFocus();
-                    return false;
-                }
+                
 
                 return true;
             }

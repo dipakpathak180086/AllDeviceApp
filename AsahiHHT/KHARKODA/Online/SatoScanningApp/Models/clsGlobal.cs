@@ -21,7 +21,7 @@ namespace IOCLAndroidApp
         public static string mFtpPort = "21";
         public static string mPLCIp = "";
         public static int mPLCPort = 0;
-        public static string mLine = "";
+        public static string mMachineNo = "";
         public static string FileFolder = "SatoAISFiles";
         public static string ServerIpFileName = "ServerIP.txt";
         public static string FilePath = global::Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;

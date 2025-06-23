@@ -301,12 +301,24 @@ namespace SMPDisptach
                 txtTime.Text = "Time: " + DateTime.Now.ToString("HH:mm:ss");
             });
         }
+        private void ShowAlertPopUp()
+        {
+            try
+            {
 
+                AlertActivity customDialog = new AlertActivity(this);
+                customDialog.SetCanceledOnTouchOutside(false);
+                customDialog.Show();
+            }
+            catch (Exception ex) { throw ex; }
+        }
         private void btnSILDelete_Click(object sender, EventArgs e)
         {
             try
             {
-                OpenActivity(typeof(SILDelete));
+               
+                    OpenActivity(typeof(SILDelete));
+                
             }
             catch (Exception ex)
             {

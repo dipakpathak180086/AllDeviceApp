@@ -108,10 +108,11 @@ namespace AISScanningApp.ActivityClass
                         clsGlobal.mSockPort = Convert.ToInt32(editPort.Text.Trim());
                         clsGlobal.mMachineNo = editMachineNo.Text.Trim();
 
-                        clsGlobal.mFtpFolder = editFTPFolder.Text.Trim();
+                        
                         clsGlobal.mFtpAddress = editFTPIp.Text.Trim();
                         clsGlobal.mFtpUserName = editFTPUser.Text.Trim();
-                        clsGlobal.mFtpPassword = editFTPUser.Text.Trim();
+                        clsGlobal.mFtpPassword = editFTPPass.Text.Trim();
+                        clsGlobal.mFtpFolder = editFTPFolder.Text.Trim();
 
                         Finish();
                     }

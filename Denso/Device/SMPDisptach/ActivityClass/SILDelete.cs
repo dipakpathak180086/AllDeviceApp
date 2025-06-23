@@ -156,7 +156,17 @@ namespace SMPDisptach.ActivityClass
             }
             catch (Exception ex) { throw ex; }
         }
+        private void ShowAlertPopUp()
+        {
+            try
+            {
 
+                AlertActivity customDialog = new AlertActivity(this);
+                customDialog.SetCanceledOnTouchOutside(false);
+                customDialog.Show();
+            }
+            catch (Exception ex) { throw ex; }
+        }
         protected override void OnCreate(Bundle savedInstanceState)
         {
             try
@@ -179,7 +189,16 @@ namespace SMPDisptach.ActivityClass
                 {
                     this.Finish();
                 };
-
+                clsGlobal.mAlertMeassage = "Enter Password For Delete the SIL";
+                ShowAlertPopUp();
+                //if (clsGlobal.mAlertMeassage != "")
+                //{
+                //    this.Finish();
+                //}
+                //else
+                //{
+                //    clsGlobal.mAlertMeassage = "";
+                //}
                 //txtBattery.Enabled = txtTruckNo.Enabled = false;
             }
             catch (Exception ex)
@@ -220,6 +239,8 @@ namespace SMPDisptach.ActivityClass
                 clsGlobal.DeleteDirectory(strFinal);
                 SoundForOK();
                 clsGlobal.ShowMessage($"This SIL {spinnerSIL.SelectedItem.ToString()} Deleted Successfully!!!", this, MessageTitle.INFORMATION);
+                clsGlobal.WriteLog($"This SIL {spinnerSIL.SelectedItem.ToString()} Deleted Successfully!!!");
+                
                 BindSpinnerSIL();
             }
             catch (Exception ex)

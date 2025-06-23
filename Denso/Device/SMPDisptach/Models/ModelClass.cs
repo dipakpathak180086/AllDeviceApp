@@ -85,6 +85,22 @@ namespace SMPDisptach
         public string DNHAPartNo { get; set; }
         public string LotNo { get; set; } 
     }
+    public class PL_CUST_EXP_MASTER
+    {
+        public string CustomerCode { get; set; }
+        public string DNHAPartNo { get; set; }
+        public string ExpDays { get; set; }
+
+        // Property for Ship Days
+        public string MFGShipDays { get; set; }
+        public string EXPShipDays { get; set; }
+
+        // Property for IsMfgExp (manual set/get, no calculation)
+        public bool IsMfgDate { get; set; }
+
+        // Property for IsExpDate (manual set/get, no calculation)
+        public bool IsExpDate { get; set; }
+    }
     #endregion
 
     #region Validate User

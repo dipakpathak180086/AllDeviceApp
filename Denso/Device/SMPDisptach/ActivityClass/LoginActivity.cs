@@ -25,7 +25,8 @@ namespace SMPDisptach
         string _AppVersion;
         private DataTable dt = null;
         EditText editUserId, editPassword;
-
+        private BL_HHT_APK_FILE _blObj = null;
+        private PL_HHT_APK_FILE _plObj = null;
         MediaPlayer mediaPlayerSound;
         Vibrator vibrator;
         const int RequestId = 1;
@@ -66,6 +67,7 @@ namespace SMPDisptach
             {
                 //clsGlobal = new clsGlobal();
                 oNetwork = new clsNetwork();
+                _blObj = new BL_HHT_APK_FILE();
             }
             catch (Exception ex)
             {
@@ -85,7 +87,7 @@ namespace SMPDisptach
                 if ((int)Build.VERSION.SdkInt >= 23)
                 {
                     allowThePermission();
-                    
+
                 }
 
                 Button btnLogin = FindViewById<Button>(Resource.Id.btnLogin);
@@ -109,12 +111,44 @@ namespace SMPDisptach
                 txtVersion.Text = "App Version : " + _AppVersion;
 
                 editUserId = FindViewById<EditText>(Resource.Id.editUserId);
+                editUserId.TextChanged += (sender, e) =>
+                {
+                    string inputText = e.Text.ToString();
+
+                    // Check if the last character is '^'
+                    if (!string.IsNullOrEmpty(inputText) && inputText[inputText.Length - 1] == '^')
+                    {
+                        if (editUserId.Text.Trim().Contains(":") || editPassword.Text.Trim().Contains(":"))
+                        {
+                            var (userId, password) = GetCredentials(editUserId.Text.TrimEnd('^'), editPassword.Text.TrimEnd('^'));
+                            editUserId.Text = userId;
+                            editPassword.Text = password;
+                            BtnLogin_Click(null, null);
+                        }
+                    }
+                };
                 editPassword = FindViewById<EditText>(Resource.Id.editPassword);
-              
+                editPassword.TextChanged += (sender, e) =>
+                {
+                    string inputText = e.Text.ToString();
+
+                    // Check if the last character is '^'
+                    if (!string.IsNullOrEmpty(inputText) && inputText[inputText.Length - 1] == '^')
+                    {
+                        if (editUserId.Text.Trim().Contains(":") || editPassword.Text.Trim().Contains(":"))
+                        {
+                            var (userId, password) = GetCredentials(editUserId.Text.TrimEnd('^'), editPassword.Text.TrimEnd('^'));
+                            editUserId.Text = userId;
+                            editPassword.Text = password;
+                            BtnLogin_Click(null, null);
+                        }
+                    }
+                };
+
                 vibrator = this.GetSystemService(VibratorService) as Vibrator;
                 clsGlobal.ReadAlertPasswordMaster();
 
-                
+
 
                 //GetLoginUser();
                 editUserId.RequestFocus();
@@ -139,6 +173,7 @@ namespace SMPDisptach
                 {
                     _dir.Create();
                 }
+                clsGlobal.ReadServerSetting();
                 // GetVersionAsync();
             }
             catch (Exception ex)
@@ -146,7 +181,8 @@ namespace SMPDisptach
                 clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
             }
         }
-       
+
+
 
         public override void OnBackPressed()
         {
@@ -162,7 +198,7 @@ namespace SMPDisptach
             try
             {
                 string strVersionFilePath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "//HHT_VERSION.txt");
-               
+
 
                 if (string.IsNullOrEmpty(editUserId.Text.Trim()))
                 {
@@ -179,16 +215,19 @@ namespace SMPDisptach
                 if (!IsNewVersionAvailable(strVersionFilePath, this))
                 {
                     clsGlobal.showToastNGMessage($"Old version application is running,Please update!!", this);
+                    ShowConfirmBox($"Are you sure want to download lates apk file?", this, DownloadApk);
                     editPassword.RequestFocus();
                     return;
                 }
 
                 else
                 {
+
                     if (CheckUserCredentials(editUserId.Text.Trim(), editPassword.Text.Trim()))
                     {
                         OpenActivity(typeof(MainActivity));
                         clsGlobal.mUserId = editUserId.Text;
+                        editUserId.Text = editPassword.Text = string.Empty;
                         return;
                     }
                     else
@@ -212,7 +251,88 @@ namespace SMPDisptach
         #endregion
 
         #region Methods
-        public  bool IsNewVersionAvailable(string filePath, Context context)
+        protected async void DownloadApk(object sender, DialogClickEventArgs e)
+        {
+            // In your activity
+            ProgressBar progressBar = FindViewById<ProgressBar>(Resource.Id.progressBar);
+            progressBar.Visibility = ViewStates.Visible;
+
+
+            try
+            {
+                string downloadsPath = global::Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
+                DirectoryInfo _dir = null;
+                _dir = new DirectoryInfo(downloadsPath + "//DENSO_SMPS_APK");
+                if (_dir.Exists == false)
+                {
+                    _dir.Create();
+                }
+
+                DataTable dtData = null;
+                _plObj = new PL_HHT_APK_FILE();
+                _plObj.DbType = "GET_APK";
+                dtData = _blObj.BL_ExecuteTask(_plObj);
+                if (dtData.Rows.Count > 0)
+                {
+                    if (File.Exists(downloadsPath + "//" + dtData.Rows[0]["FileName"].ToString()))
+                    {
+                        File.Delete(downloadsPath + "//" + dtData.Rows[0]["FileName"].ToString());
+                    }
+                    File.WriteAllBytes(_dir.FullName + "//" + dtData.Rows[0]["FileName"].ToString(), (byte[])dtData.Rows[0]["FileContent"]);
+                    long originalFileSize = new FileInfo(_dir.FullName + "//" + dtData.Rows[0]["FileName"].ToString()).Length;
+                    clsGlobal.ShowMessage($"APK file successfully downloaded to the path: {_dir.FullName}. Please navigate there manually to install it!", this, MessageTitle.INFORMATION);
+                }
+                else
+                {
+                    clsGlobal.ShowMessage($"No APK File Found!!", this, MessageTitle.INFORMATION);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                clsGlobal.ShowMessage(ex.Message, this, MessageTitle.ERROR);
+            }
+            finally
+            {
+                // ... do work ...
+                progressBar.Visibility = ViewStates.Gone;
+            }
+        }
+        private (string userId, string password) GetCredentials(string input1, string input2)
+        {
+            string userId = string.Empty;
+            string password = string.Empty;
+
+            // Check if input1 contains both userId and password
+            if (input1.Contains(":"))
+            {
+                var parts = input1.Split(':');
+                if (parts.Length == 2)
+                {
+                    userId = parts[0].Trim();
+                    password = parts[1].Trim();
+                }
+            }
+            // Else check input2
+            else if (input2.Contains(":"))
+            {
+                var parts = input2.Split(':');
+                if (parts.Length == 2)
+                {
+                    userId = parts[0].Trim();
+                    password = parts[1].Trim();
+                }
+            }
+            else
+            {
+                userId = input1.Trim();
+                password = input2.Trim();
+            }
+
+            return (userId, password);
+        }
+        public bool IsNewVersionAvailable(string filePath, Context context)
         {
             try
             {

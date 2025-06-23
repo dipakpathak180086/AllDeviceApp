@@ -21,7 +21,7 @@ namespace AISScanningApp.ActivityClass
     {
         clsNetwork oNetwork;
         clsGlobal clsGLB;
-        EditText editServerIP, editPLCIP, editPLCPort, editFTPIp,editFTPUser,editFTPPass,editLine,editFTPFolder;
+        EditText editServerIP, editFTPIp,editFTPUser,editFTPPass,editMachineNo,editFTPFolder;
         EditText editPort;
         MediaPlayer mediaPlayerSound;
         Vibrator vibrator;
@@ -50,13 +50,11 @@ namespace AISScanningApp.ActivityClass
 
                 editServerIP = FindViewById<EditText>(Resource.Id.txtServerIP);
                 editPort = FindViewById<EditText>(Resource.Id.txtPort);
-                editPLCIP = FindViewById<EditText>(Resource.Id.txtPLCIP);
-                editPLCPort = FindViewById<EditText>(Resource.Id.txtPLCPort);
                 editFTPIp = FindViewById<EditText>(Resource.Id.txtFTPIP);
                 editFTPUser = FindViewById<EditText>(Resource.Id.txtFTPUser);
                 editFTPPass = FindViewById<EditText>(Resource.Id.txtFTPPass);
                 editFTPFolder = FindViewById<EditText>(Resource.Id.txtFTPFolder);
-                editLine = FindViewById<EditText>(Resource.Id.txtLine);
+                editMachineNo = FindViewById<EditText>(Resource.Id.txtMachineNo);
                 vibrator = this.GetSystemService(VibratorService) as Vibrator;
 
                 ImageView imgBack = FindViewById<ImageView>(Resource.Id.imgBack);
@@ -96,9 +94,7 @@ namespace AISScanningApp.ActivityClass
                     {
                         streamWriter.WriteLine(editServerIP.Text.Trim());
                         streamWriter.WriteLine(editPort.Text.Trim());
-                        streamWriter.WriteLine(editLine.Text.Trim());
-                        streamWriter.WriteLine(editPLCIP.Text.Trim());
-                        streamWriter.WriteLine(editPLCPort.Text.Trim());
+                        streamWriter.WriteLine(editMachineNo.Text.Trim());
                         streamWriter.WriteLine(editFTPIp.Text.Trim());
                         streamWriter.WriteLine(editFTPUser.Text.Trim());
                         streamWriter.WriteLine(editFTPPass.Text.Trim());
@@ -110,14 +106,13 @@ namespace AISScanningApp.ActivityClass
 
                         clsGlobal.mSockIp = editServerIP.Text.Trim();
                         clsGlobal.mSockPort = Convert.ToInt32(editPort.Text.Trim());
-                        clsGlobal.mLine = editLine.Text.Trim();
+                        clsGlobal.mMachineNo = editMachineNo.Text.Trim();
 
-                        clsGlobal.mPLCIp = editPLCPort.Text.Trim();
-                        clsGlobal.mPLCPort = Convert.ToInt32(editPLCPort.Text.Trim());
-                        clsGlobal.mFtpFolder = editFTPFolder.Text.Trim();
+                        
                         clsGlobal.mFtpAddress = editFTPIp.Text.Trim();
                         clsGlobal.mFtpUserName = editFTPUser.Text.Trim();
-                        clsGlobal.mFtpPassword = editFTPUser.Text.Trim();
+                        clsGlobal.mFtpPassword = editFTPPass.Text.Trim();
+                        clsGlobal.mFtpFolder = editFTPFolder.Text.Trim();
 
                         Finish();
                     }
@@ -285,9 +280,7 @@ namespace AISScanningApp.ActivityClass
                     editServerIP.Text = sr.ReadLine();
                     editPort.Text = sr.ReadLine();
 
-                    editLine.Text = sr.ReadLine();
-                    editPLCIP.Text = sr.ReadLine();
-                    editPLCPort.Text = sr.ReadLine();
+                    editMachineNo.Text = sr.ReadLine();
                     
                    
                     editFTPIp.Text = sr.ReadLine();
@@ -301,7 +294,7 @@ namespace AISScanningApp.ActivityClass
 
                     clsGlobal.mSockIp = editServerIP.Text.Trim();
                     clsGlobal.mSockPort = Convert.ToInt32(editPort.Text.Trim());
-                    clsGlobal.mLine = editLine.Text.Trim();
+                    clsGlobal.mMachineNo = editMachineNo.Text.Trim();
                     clsGlobal.mFtpAddress = editFTPIp.Text.Trim();
                     clsGlobal.mFtpUserName = editFTPUser.Text.Trim();
                     clsGlobal.mFtpPassword = editFTPPass.Text.Trim();

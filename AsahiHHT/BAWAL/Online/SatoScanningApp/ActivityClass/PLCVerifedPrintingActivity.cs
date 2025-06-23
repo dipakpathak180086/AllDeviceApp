@@ -746,7 +746,7 @@ namespace AISScanningApp
 
                 string transactionPath = Path.Combine(path, clsGlobal.mFtpFolder);
                 // string folderPath = Path.Combine(transactionPath, spinnerSIL.SelectedItem.ToString().Replace("*", ""));
-                string backupFolderPath = Path.Combine(transactionPath, "MES_BCK");
+                string backupFolderPath = Path.Combine(transactionPath, "MES");
 
                 // Ensure the backup directory exists
                 EnsureFTPDirectory(backupFolderPath, username, password);

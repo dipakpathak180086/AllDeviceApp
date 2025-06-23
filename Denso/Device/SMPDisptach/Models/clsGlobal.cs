@@ -1,29 +1,23 @@
 using Android.App;
-using Android.Widget;
-using Android.OS;
 using Android.Content;
-using System;
-using System.Net.Http;
-using System.Text;
-using SMPDisptach;
-using System.Collections.Generic;
-using System.IO;
-using Android.Content.PM;
-using Android.Views;
-using Android.Net;
-using System.Net.Sockets;
-using SMPDisptach.ActivityClass;
-using System.Runtime.InteropServices;
-using System.Collections.ObjectModel;
-using System.Collections;
-using System.Linq;
-using System.Text.RegularExpressions;
+using Android.OS;
 using Android.Text;
-using static Android.Renderscripts.ScriptGroup;
-using System.Data;
-using System.Globalization;
 using Android.Util;
+using Android.Views;
+using Android.Widget;
+using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Net.Sockets;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.RegularExpressions;
+using Android.Content;
+using Android.Provider;
 
 namespace SMPDisptach
 {
@@ -39,7 +33,7 @@ namespace SMPDisptach
         public static string mMainSqlConString = "";
         public static string MainFolder = "SatoFiles";
         public static string MasterFolder = "Master";
-       // public static string mUploadPath = "HHTUpload";
+        // public static string mUploadPath = "HHTUpload";
         public static string TranscationFolder = "Transcation";
         public static string mPatternPath = "Patterns";
         public static string mDNHADir = "DNHA";
@@ -55,6 +49,8 @@ namespace SMPDisptach
         public static string DNHAPatternFileName = "DNHA_PATTERN_DATA.txt";
         public static string CustomerPatternFileName = "CUSTOMER_PATTERN_DATA.txt";
         public static string SupplierPatternFileName = "SUPPLIER_PATTERN_DATA.txt";
+
+        public static string CustomerWiseExpiry = "CUST_EXP_DATA.txt";
 
         public static string ServerIpFileName = "ServerIP.txt";
         public static string SILMasterDataFile = "SILMasterData.txt";
@@ -91,6 +87,85 @@ namespace SMPDisptach
         public static string mCustSeqNo = "";
         public static string mDNHASupSeqNo = "";
         public static string mCustomerCode = "";
+        public static string GetUPICODE(int length, string deviceId)
+        {
+            // Note: i, o, l, 0, and 1 have been removed to reduce 
+            // chances of user typos and mis-communication of passwords.
+            //'i', 'I',
+            //'l', 'L',
+            //'o', 'O',
+            //'0', '1',
+            char[] allowedCharacters = { 'a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', 'g', 'G', 'h', 'H', /*'i', 'I',*/ 'j', 'J', 'k', 'K', /*'l', 'L',*/ 'm', 'M', 'n', 'N', /*'o', 'O',*/ 'p', 'P', 'q', 'Q', 'r', 'R', 's', 'S', 't', 'T', 'u', 'U', 'v', 'V', 'w', 'W', 'x', 'X', 'y', 'Y', 'z', 'Z', /*'0', '1',*/ '2', '3', '4', '5', '6', '7', '8', '9' };
+            char[] allDevice = deviceId.ToCharArray();
+            // Create a byte array to hold the random bytes.
+            byte[] randomNumber = new byte[length];
+
+            // Create a new instance of the RNGCryptoServiceProvider.
+            RNGCryptoServiceProvider Gen = new RNGCryptoServiceProvider();
+
+            // Fill the array with a random value.
+            Gen.GetBytes(randomNumber);
+
+            string result = "";
+            int iCount = 1;
+            foreach (byte b in randomNumber)
+            {
+                // Convert the byte to an integer value to make the modulus operation easier.
+                int rand = Convert.ToInt32(b);
+                iCount += 1;
+                // Return the random number mod'ed.
+                // This yeilds a possible value for each character in the allowable range.
+                int value = (rand % allowedCharacters.Length) % allDevice.Length;
+
+                char thisChar = allowedCharacters[value];
+                if (iCount == 6)
+                {
+                    int milliseconds = DateTime.Now.Millisecond;
+                    string msTwoDigit = (milliseconds / 10).ToString("D2");
+                    result += msTwoDigit;
+                    result += thisChar;
+                    return result.ToUpper();
+                }
+
+                result += thisChar;
+            }
+
+            return result.ToUpper();
+        }
+
+        public static string GetDeviceId(Context context)
+        {
+            return Settings.Secure.GetString(context.ContentResolver, Settings.Secure.AndroidId);
+        }
+        public static string GenerateDeviceLinkedSerial(string deviceId)
+        {
+            using (SHA256 sha = SHA256.Create())
+            {
+                byte[] hash = sha.ComputeHash(Encoding.UTF8.GetBytes(deviceId));
+                long longHash = BitConverter.ToInt64(hash, 0);
+                if (longHash < 0) longHash = -longHash;
+
+                string base36 = Base36Encode(longHash).PadLeft(7, '0');
+
+                // Ensure it is alphanumeric and uppercase
+                base36 = Regex.Replace(base36.ToUpper(), "[^A-Z0-9]", "").Substring(0, 7);
+                return base36;
+            }
+        }
+
+        private static string Base36Encode(long value)
+        {
+            const string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            StringBuilder result = new StringBuilder();
+
+            do
+            {
+                result.Insert(0, chars[(int)(value % 36)]);
+                value /= 36;
+            } while (value > 0);
+
+            return result.ToString();
+        }
         public static string ReplaceCaretWithNewlines(string input)
         {
             if (string.IsNullOrEmpty(input))
@@ -272,7 +347,7 @@ namespace SMPDisptach
             if (Directory.Exists(directoryPath))
             {
                 // Get all files and subdirectories in the directory
-               
+
                 var subDirectories = Directory.GetDirectories(directoryPath);
 
                 // Recursively delete subdirectories
@@ -287,7 +362,7 @@ namespace SMPDisptach
                 }
 
                 // Finally, delete the directory itself
-               // Directory.Delete(directoryPath);
+                // Directory.Delete(directoryPath);
 
 
             }
@@ -389,6 +464,7 @@ namespace SMPDisptach
             return mCustomerCode;
         }
         public static List<PL_DNHA_MASTER> mlistDNHA = new List<PL_DNHA_MASTER>();
+        public static List<PL_CUSTOMER_MASTER> mlistAllCustomer = new List<PL_CUSTOMER_MASTER>();
         public static List<PL_CUSTOMER_MASTER> mlistCustomer = new List<PL_CUSTOMER_MASTER>();
         public static List<PL_SUPPLIER_MASTER> mlistSupplier = new List<PL_SUPPLIER_MASTER>();
         public static List<PL_SUSPECTED_LOT> mlistSuspectedLot = new List<PL_SUSPECTED_LOT>();
@@ -396,6 +472,7 @@ namespace SMPDisptach
         public static List<PL_PATTERN> mlistDNHAPattern = new List<PL_PATTERN>();
         public static List<PL_PATTERN> mlistCustomerPattern = new List<PL_PATTERN>();
         public static List<PL_PATTERN> mlistSupplierPattern = new List<PL_PATTERN>();
+        public static List<PL_CUST_EXP_MASTER> mlistCustWiseExpiry = new List<PL_CUST_EXP_MASTER>();
         public static List<KanbanData> GetSILData(string inputString)
         {
             var outputList = new List<KanbanData>();
@@ -606,7 +683,7 @@ namespace SMPDisptach
 
             try
             {
-                mlistCustomer.Clear();
+                mlistAllCustomer.Clear();
                 string filePath = Path.Combine(FilePath, MasterFolder + "/" + CustomerMaterFileName);
                 if (File.Exists(filePath))
                 {
@@ -624,7 +701,7 @@ namespace SMPDisptach
                                 CustomerPartNo = parts[1].Trim(),
                                 CustomerCode = parts[2].Trim()
                             };
-                            mlistCustomer.Add(plMaster);
+                            mlistAllCustomer.Add(plMaster);
                         }
                     }
                 }
@@ -634,7 +711,7 @@ namespace SMPDisptach
                 throw new Exception("Error reading file", ex);
             }
 
-            return mlistCustomer;
+            return mlistAllCustomer;
         }
         public static List<PL_SUPPLIER_MASTER> ReadSupplierMaster()
         {
@@ -705,7 +782,7 @@ namespace SMPDisptach
                             {
                                 DNHAPartNo = parts[0].Trim(),
                                 LotNo = parts[1].Trim(),
-                                
+
                             };
                             mlistSuspectedLot.Add(plMaster);
                         }
@@ -818,6 +895,54 @@ namespace SMPDisptach
 
             return mAlertPassword;
         }
+
+        public static List<PL_CUST_EXP_MASTER> ReadCUSTExpMaster()
+        {
+
+            try
+            {
+                mlistCustWiseExpiry.Clear();
+                string filePath = Path.Combine(FilePath, MasterFolder + "/" + CustomerWiseExpiry);
+                if (File.Exists(filePath))
+                {
+                    string[] lines = File.ReadAllLines(filePath);
+
+                    // Assuming each line follows a format like: UserId,UserName,Password
+                    for (int i = 0; i < lines.Length; i++) // Skipping the first line if it's a header
+                    {
+                        string[] parts = lines[i].Split('$'); // Assuming comma as the separator
+                        if (parts.Length >= 1) // Ensure we have 3 parts
+                        {
+                            PL_CUST_EXP_MASTER plMaster = new PL_CUST_EXP_MASTER
+                            {
+                                CustomerCode = parts[0].Trim(),
+                                DNHAPartNo = parts[1].Trim(),
+                                // Set manufacturing and expiry dates
+                                ExpDays = parts[2].Trim(),
+                                MFGShipDays = parts[3].Trim(),
+
+                                // Manually setting expiry-related fields
+                                IsMfgDate = parts[4].Trim() == "" ? Convert.ToBoolean(false) : Convert.ToBoolean(parts[4].Trim()),  // Assuming it's not expired
+
+                                IsExpDate = parts[5].Trim() == "" ? Convert.ToBoolean(false) : Convert.ToBoolean(parts[5].Trim()),     // Valid product, not expired
+
+                                EXPShipDays = parts[6].Trim(),
+                            };
+                            mlistCustWiseExpiry.Add(plMaster);
+                        }
+
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error reading  file", ex);
+            }
+
+            return mlistCustWiseExpiry;
+        }
+
         public static void ReplaceInFile(
                    string FilePath, string SearchText, string ReplaceText)
         {
@@ -995,7 +1120,7 @@ namespace SMPDisptach
                     {
                         if (mlistDNHA.Count > 0)
                         {
-                          
+
                             try
                             {
                                 BinQty = Convert.ToInt32(mlistDNHA.Where(x => x.DNHAPartNo == parts[0]).Select(m => m.LotSize).FirstOrDefault());
@@ -1012,7 +1137,7 @@ namespace SMPDisptach
                             SILQty = parts[1],
                             DensoQty = parts[2],
                             CustQty = parts[2],
-                            Bin=Convert.ToString( BinNo)
+                            Bin = Convert.ToString(BinNo)
                         };
 
                         // Add the parsed object to the list
@@ -1079,7 +1204,7 @@ namespace SMPDisptach
             return list;
         }
 
-        public static string  ReadSILBarcodeFromFile(string filePath)
+        public static string ReadSILBarcodeFromFile(string filePath)
         {
             string strBarcode = "";
 
@@ -1113,7 +1238,7 @@ namespace SMPDisptach
                     // Assuming the file has columns: PartNo, Barcode1, Barcode2
                     if (parts.Length >= 0)
                     {
-                      strBarcode = parts[0];
+                        strBarcode = parts[0];
                     }
                 }
             }
@@ -1378,7 +1503,8 @@ namespace SMPDisptach
             builder.SetTitle(MsgTitle.ToString());
             builder.SetMessage(msg);
             builder.SetCancelable(false);
-            builder.SetPositiveButton("OK", (sender, e) => {
+            builder.SetPositiveButton("OK", (sender, e) =>
+            {
                 //activity.Finish();
             });
             builder.Show();
@@ -1389,18 +1515,18 @@ namespace SMPDisptach
             string message = "<b><font color='#FFFFFF'>" + Message + "</font></b>";
             Toast tost = Toast.MakeText(con, Html.FromHtml(message), ToastLength.Long);
             View v = tost.View;
-            
+
             v.SetBackgroundColor(Android.Graphics.Color.Red);
             if (con is Activity act)
             {
-                if (act.Class.Name.Contains( "SILScanning") || act.Class.Name.Contains("Fraction") || act.Class.Name.Contains("Reversal"))
+                if (act.Class.Name.Contains("SILScanning") || act.Class.Name.Contains("Fraction") || act.Class.Name.Contains("Reversal"))
                 {
                     string filePath = Path.Combine(FilePath, MasterFolder + "/" + mAlertMessageFileName);
                     DeleteAlertMessage();
                     WriteNGMSGToFile(filePath, Message);
                     ReadAlertMessage();
                 }
-                
+
             }
             tost.Show();
         }

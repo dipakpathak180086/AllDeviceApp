@@ -312,6 +312,14 @@ namespace SMPDisptach
                         clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
 
                     }
+                    _plObj.DbType = "CUST_EXP_LIST";
+                    dtData = _blObj.BL_ExecuteTask(_plObj);
+                    if (dtData.Rows.Count > 0)
+                    {
+                        string strFinaPath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "//CUST_EXP_DATA.txt");
+                        clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
+
+                    }
 
                     //progressDialog.Hide();
 
