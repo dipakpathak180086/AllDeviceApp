@@ -280,6 +280,7 @@ namespace SMPDisptach.ActivityClass
         {
             try
             {
+                TILBarcodeInfo varResult = null;
                 editProgressbar.Visibility = ViewStates.Visible;
                 await Task.Run(() =>
                 {
@@ -293,6 +294,7 @@ namespace SMPDisptach.ActivityClass
                             if (dt.Rows[i]["SIL_TruckNo"].ToString() == spinnerSIL.SelectedItem.ToString().Replace("*", ""))
                             {
                                 SILbarcode = dt.Rows[i]["SIL_Barcode"].ToString();
+                                varResult = clsGlobal.TILParseBarcode(SILbarcode);
                                 SILScannedon = dt.Rows[i]["SILScannedOn"].ToString();
                                 break;
                             }
@@ -331,6 +333,7 @@ namespace SMPDisptach.ActivityClass
 
                             for (int A = 0; A < dt3.Rows.Count; A++)
                             {
+
                                 //string str = $" 0521{dr["DNKI_PartNo"].ToString().PadRight(15)}        {dr["DNKI_ProcessID"].ToString().PadRight(5)}{dr["DNKI_Sequence"].ToString().PadRight(7)}         {dr["DNKI_PartQty"].ToString().PadLeft(7, '0')}{TruckNo}{Convert.ToDateTime(Dv1.ToTable().Rows[Dv1.ToTable().Rows.Count - 1]["CustScannedOn"]).ToString("yyyyMMdd")}1{dr["DNKI_PartQty"].ToString().PadLeft(7, '0')}{CustCode}{clsGlobal.mWarehouseNo}{Convert.ToDateTime(Dv1.ToTable().Rows[Dv1.ToTable().Rows.Count - 1]["CustScannedOn"]).ToString("yyyyMMddHHmmss")}{clsGlobal.mDeviceID}{ShipTo}{dr["CUST_PartNo"].ToString().PadRight(30)}00000000                         {clsGlobal.mUserId.PadRight(7)}";
                                 string custScannedOn = Dv1.ToTable().Rows[Dv1.ToTable().Rows.Count - 1]["CustScannedOn"].ToString();
                                 string dnhScannedOn = Dv1.ToTable().Rows[Dv1.ToTable().Rows.Count - 1]["DNKIScannedOn"].ToString();
@@ -371,13 +374,25 @@ namespace SMPDisptach.ActivityClass
                                 Sequence = (Convert.ToInt32(Sequence) + 1).ToString();
                                 PartNo1 = dr2["DNKI_PartNo"].ToString();
                                 Qty = dt3.AsEnumerable().Where(r => r["DNKI_PartNo"].ToString() == PartNo1).Sum(r => Convert.ToInt32(r["DNKI_PartQty"]));
-
+                                string str = "";
                                 //string str = $"L{Sequence.PadLeft(4, '0')}{clsGlobal.mWarehouseNo.PadLeft(2, '0')}{clsGlobal.mDeviceID.PadLeft(2, '0')}    {clsGlobal.mUserId.PadRight(7)}{Convert.ToDateTime(SILScannedon).ToString("yyyyMMdd")}1000101000{TruckNo}{CustCode}{ShipTo}{Possition}{dr2["DNKI_PartNo"].ToString().PadRight(15)}{Qty.ToString().PadLeft(7, '0')}                                                        {Convert.ToDateTime(SILScannedon).ToString("yyyyMMddHHmmss")}                             ";
-                                string str = "L" + Sequence.PadLeft(4, '0') + clsGlobal.mWarehouseNo.PadLeft(2, '0') +
-                                clsGlobal.mDeviceID.PadLeft(2, '0') + "    " + clsGlobal.mUserId.PadRight(7, ' ') + Convert.ToDateTime(SILScannedon).ToString("yyyyMMdd") + "1000101000" +
-                                TruckNo + CustCode + ShipTo + Possition + dr2["DNKI_PartNo"].ToString().PadRight(15, ' ') +
-                                Qty.ToString().PadLeft(7, '0') + "                                                        " +
-                                Convert.ToDateTime(SILScannedon).ToString("yyyyMMddHHmmss") + "                             ";
+                                if (varResult.Type == "TIL")
+                                {
+                                    str = "L" + Sequence.PadLeft(4, '0') + clsGlobal.mWarehouseNo.PadLeft(2, '0') +
+                                    clsGlobal.mDeviceID.PadLeft(2, '0') + "    " + clsGlobal.mUserId.PadRight(7, ' ') + Convert.ToDateTime(SILScannedon).ToString("yyyyMMdd") + "1000101000" +
+                                    TruckNo + CustCode + ShipTo + Possition + " " + varResult.Value + " " + dr2["DNKI_PartNo"].ToString().PadRight(15, ' ') +
+                                    Qty.ToString().PadLeft(7, '0') + "                                                        " +
+                                    Convert.ToDateTime(SILScannedon).ToString("yyyyMMddHHmmss") + "                        ";
+                                }
+                                else
+                                {
+                                    str = "L" + Sequence.PadLeft(4, '0') + clsGlobal.mWarehouseNo.PadLeft(2, '0') +
+                                    clsGlobal.mDeviceID.PadLeft(2, '0') + "    " + clsGlobal.mUserId.PadRight(7, ' ') + Convert.ToDateTime(SILScannedon).ToString("yyyyMMdd") + "1000101000" +
+                                    TruckNo + CustCode + ShipTo + Possition + dr2["DNKI_PartNo"].ToString().PadRight(15, ' ') +
+                                    Qty.ToString().PadLeft(7, '0') + "                                                        " +
+                                    Convert.ToDateTime(SILScannedon).ToString("yyyyMMddHHmmss") + "                             ";
+
+                                }
 
                                 clsGlobal.WriteToFTPFile(datFilePath, str + "\r\n");
                             }
@@ -389,11 +404,24 @@ namespace SMPDisptach.ActivityClass
                             coUNT++;
                             Sequence = (Convert.ToInt32(Sequence) + 1).ToString();
                             // string str = $"L{Sequence.PadLeft(4, '0')}{clsGlobal.mWarehouseNo.PadLeft(2, '0')}{clsGlobal.mDeviceID.PadLeft(2, '0')}    {clsGlobal.mUserId.PadRight(7)}{Convert.ToDateTime(row["DNKIScannedOn"]).ToString("yyyyMMdd")}1000{coUNT.ToString().PadRight(2, '0')}2000{TruckNo}{CustCode}{ShipTo}{Possition}                      21{row["DNKI_PartNo"].ToString().PadRight(15)}{row["CUST_PartNo"].ToString().PadRight(25)}{row["DNKI_PartQty"].ToString().PadLeft(7)}{row["DNKI_Sequence"].ToString().PadLeft(7, '0')}{Convert.ToDateTime(row["DNKIScannedOn"]).ToString("yyyyMMddHHmmss")}                             ";
-                            string str = "L" + Sequence.PadLeft(4, '0') + clsGlobal.mWarehouseNo.PadLeft(2, '0') +
-                                clsGlobal.mDeviceID.PadLeft(2, '0') + "    " + clsGlobal.mUserId.PadRight(7, ' ') + Convert.ToDateTime(row["DNKIScannedOn"]).ToString("yyyyMMdd") + "1000" + coUNT.ToString().PadRight(2, '0') + "2000" +
-                                TruckNo + CustCode + ShipTo + Possition + "                      21" + row["DNKI_PartNo"].ToString().PadRight(15, ' ') + row["CUST_PartNo"].ToString().PadRight(25, ' ') +
-                                row["DNKI_PartQty"].ToString().PadLeft(7, ' ') + row["DNKI_Sequence"].ToString().PadLeft(7, '0') +
-                                Convert.ToDateTime(row["DNKIScannedOn"]).ToString("yyyyMMddHHmmss") + "        " + row["DNKI_Sequence"].ToString().PadLeft(7, '0') + "              ";
+                            string str = "";
+                            if (varResult.Type == "TIL")
+                            {
+                                str = "L" + Sequence.PadLeft(4, '0') + clsGlobal.mWarehouseNo.PadLeft(2, '0') +
+                                   clsGlobal.mDeviceID.PadLeft(2, '0') + "    " + clsGlobal.mUserId.PadRight(7, ' ') + Convert.ToDateTime(row["DNKIScannedOn"]).ToString("yyyyMMdd") + "1000" + coUNT.ToString().PadRight(2, '0') + "2000" +
+                                   TruckNo + CustCode + ShipTo + Possition + " " + varResult.Value + " " + "                      21" + row["DNKI_PartNo"].ToString().PadRight(15, ' ') + row["CUST_PartNo"].ToString().PadRight(25, ' ') +
+                                   row["DNKI_PartQty"].ToString().PadLeft(7, ' ') + row["DNKI_Sequence"].ToString().PadLeft(7, '0') +
+                                   Convert.ToDateTime(row["DNKIScannedOn"]).ToString("yyyyMMddHHmmss") + "        " + row["DNKI_Sequence"].ToString().PadLeft(7, '0') + "         ";
+                            }
+                            else
+                            {
+                                str = "L" + Sequence.PadLeft(4, '0') + clsGlobal.mWarehouseNo.PadLeft(2, '0') +
+                                   clsGlobal.mDeviceID.PadLeft(2, '0') + "    " + clsGlobal.mUserId.PadRight(7, ' ') + Convert.ToDateTime(row["DNKIScannedOn"]).ToString("yyyyMMdd") + "1000" + coUNT.ToString().PadRight(2, '0') + "2000" +
+                                   TruckNo + CustCode + ShipTo + Possition + "                      21" + row["DNKI_PartNo"].ToString().PadRight(15, ' ') + row["CUST_PartNo"].ToString().PadRight(25, ' ') +
+                                   row["DNKI_PartQty"].ToString().PadLeft(7, ' ') + row["DNKI_Sequence"].ToString().PadLeft(7, '0') +
+                                   Convert.ToDateTime(row["DNKIScannedOn"]).ToString("yyyyMMddHHmmss") + "        " + row["DNKI_Sequence"].ToString().PadLeft(7, '0') + "              ";
+
+                            }
                             clsGlobal.WriteToFTPFile(datFilePath, str + "\r\n");
                             coUNT++;
 
@@ -412,13 +440,26 @@ namespace SMPDisptach.ActivityClass
                                 string str1 = "";
                                 if (formattedCustScannedOnDate == "")
                                 {
-                                    //string str1 = $"L{Sequence.PadLeft(4, '0')}{clsGlobal.mWarehouseNo.PadLeft(2, '0')}{clsGlobal.mDeviceID.PadLeft(2, '0')}    {clsGlobal.mUserId.PadRight(7)}{formattedCustScannedOn}1000{coUNT.ToString().PadRight(2, '0')}3000{TruckNo}{CustCode}{ShipTo}{Possition}                      CS{row["DNKI_PartNo"].ToString().PadRight(15)}{row["CUST_PartNo"].ToString().PadRight(25)}{row["CUST_PartQty"].ToString().PadRight(7)}{row["CUST_Sequence"].ToString().PadLeft(7)}{formattedCustScannedOn}        {row["CUST_Sequence"].ToString().PadLeft(7)}              ";
-                                    str1 = "L" + Sequence.PadLeft(4, '0') + clsGlobal.mWarehouseNo.PadLeft(2, '0') +
-                                      clsGlobal.mDeviceID.PadLeft(2, '0') + "    " + clsGlobal.mUserId.PadRight(7, ' ') + formattedDNHAScannedOn + "1000" + coUNT.ToString().PadRight(2, '0') + "3000" +
-                                      TruckNo + CustCode + ShipTo + Possition + "                " + "".ToString().PadRight(15, ' ') + "".PadRight(25, ' ') + "".ToString().PadRight(7, ' ') + "".ToString().PadLeft(17, ' ') +
-                                      //dt1.Rows[B]["DNKI_PartQty"].ToString() + dt1.Rows[B]["DNKI_PartQty"].ToString() + dt1.Rows[B]["DNKI_Sequence"].ToString().PadLeft(7, '0') +
-                                      //formattedCustScannedOnDateTime + "                             "; Commented by dipak pathak 08-03-2025
-                                      formattedDNHAScannedOnDateTime + "                             ";
+                                    if (varResult.Type == "TIL") ///TIL TYPE FTP DATA ENTRY
+                                    {
+                                        //string str1 = $"L{Sequence.PadLeft(4, '0')}{clsGlobal.mWarehouseNo.PadLeft(2, '0')}{clsGlobal.mDeviceID.PadLeft(2, '0')}    {clsGlobal.mUserId.PadRight(7)}{formattedCustScannedOn}1000{coUNT.ToString().PadRight(2, '0')}3000{TruckNo}{CustCode}{ShipTo}{Possition}                      CS{row["DNKI_PartNo"].ToString().PadRight(15)}{row["CUST_PartNo"].ToString().PadRight(25)}{row["CUST_PartQty"].ToString().PadRight(7)}{row["CUST_Sequence"].ToString().PadLeft(7)}{formattedCustScannedOn}        {row["CUST_Sequence"].ToString().PadLeft(7)}              ";
+                                        str1 = "L" + Sequence.PadLeft(4, '0') + clsGlobal.mWarehouseNo.PadLeft(2, '0') +
+                                          clsGlobal.mDeviceID.PadLeft(2, '0') + "    " + clsGlobal.mUserId.PadRight(7, ' ') + formattedDNHAScannedOn + "1000" + coUNT.ToString().PadRight(2, '0') + "3000" +
+                                          TruckNo + CustCode + ShipTo + Possition + " " + varResult.Value + " " + "                " + "".ToString().PadRight(15, ' ') + "".PadRight(25, ' ') + "".ToString().PadRight(7, ' ') + "".ToString().PadLeft(17, ' ') +
+                                          //dt1.Rows[B]["DNKI_PartQty"].ToString() + dt1.Rows[B]["DNKI_PartQty"].ToString() + dt1.Rows[B]["DNKI_Sequence"].ToString().PadLeft(7, '0') +
+                                          //formattedCustScannedOnDateTime + "                             "; Commented by dipak pathak 08-03-2025
+                                          formattedDNHAScannedOnDateTime + "                        ";
+                                    }
+                                    else
+                                    {
+                                        //string str1 = $"L{Sequence.PadLeft(4, '0')}{clsGlobal.mWarehouseNo.PadLeft(2, '0')}{clsGlobal.mDeviceID.PadLeft(2, '0')}    {clsGlobal.mUserId.PadRight(7)}{formattedCustScannedOn}1000{coUNT.ToString().PadRight(2, '0')}3000{TruckNo}{CustCode}{ShipTo}{Possition}                      CS{row["DNKI_PartNo"].ToString().PadRight(15)}{row["CUST_PartNo"].ToString().PadRight(25)}{row["CUST_PartQty"].ToString().PadRight(7)}{row["CUST_Sequence"].ToString().PadLeft(7)}{formattedCustScannedOn}        {row["CUST_Sequence"].ToString().PadLeft(7)}              ";
+                                        str1 = "L" + Sequence.PadLeft(4, '0') + clsGlobal.mWarehouseNo.PadLeft(2, '0') +
+                                          clsGlobal.mDeviceID.PadLeft(2, '0') + "    " + clsGlobal.mUserId.PadRight(7, ' ') + formattedDNHAScannedOn + "1000" + coUNT.ToString().PadRight(2, '0') + "3000" +
+                                          TruckNo + CustCode + ShipTo + Possition + "                " + "".ToString().PadRight(15, ' ') + "".PadRight(25, ' ') + "".ToString().PadRight(7, ' ') + "".ToString().PadLeft(17, ' ') +
+                                          //dt1.Rows[B]["DNKI_PartQty"].ToString() + dt1.Rows[B]["DNKI_PartQty"].ToString() + dt1.Rows[B]["DNKI_Sequence"].ToString().PadLeft(7, '0') +
+                                          //formattedCustScannedOnDateTime + "                             "; Commented by dipak pathak 08-03-2025
+                                          formattedDNHAScannedOnDateTime + "                             ";
+                                    }
                                 }
                                 else
                                 {
@@ -446,13 +487,26 @@ namespace SMPDisptach.ActivityClass
                                 string str1 = "";
                                 if (formattedCustScannedOnDate == "")
                                 {
-                                    //string str1 = $"L{Sequence.PadLeft(4, '0')}{clsGlobal.mWarehouseNo.PadLeft(2, '0')}{clsGlobal.mDeviceID.PadLeft(2, '0')}    {clsGlobal.mUserId.PadRight(7)}{formattedCustScannedOn}1000{coUNT.ToString().PadRight(2, '0')}3000{TruckNo}{CustCode}{ShipTo}{Possition}                      CS{DensoPart.PadRight(15)}{row["CUST_PartNo"].ToString().PadRight(25)}{row["CUST_PartQty"].ToString().PadRight(7)}{row["CUST_Sequence"].ToString().PadLeft(7)}{formattedCustScannedOn}        {row["CUST_Sequence"].ToString().PadLeft(7)}              ";
-                                    str1 = "L" + Sequence.PadLeft(4, '0') + clsGlobal.mWarehouseNo.PadLeft(2, '0') +
-                                       clsGlobal.mDeviceID.PadLeft(2, '0') + "    " + clsGlobal.mUserId.PadRight(7, ' ') + formattedDNHAScannedOn + "1000" + coUNT.ToString().PadRight(2, '0') + "3000" +
-                                       TruckNo + CustCode + ShipTo + Possition + "                " + "".PadRight(15, ' ') + "".ToString().PadRight(25, ' ') + "".ToString().PadRight(7, ' ') + "".ToString().PadLeft(15, ' ') +
-                                       //dt1.Rows[B]["DNKI_PartQty"].ToString() + dt1.Rows[B]["DNKI_PartQty"].ToString() + dt1.Rows[B]["DNKI_Sequence"].ToString().PadLeft(7, '0') +
-                                       //formattedCustScannedOnDateTime + "                             "; Commmented Dipak Pathak 08-03-25
-                                       formattedDNHAScannedOnDateTime + "                             ";
+                                    if (varResult.Type == "TIL")
+                                    {
+                                        //string str1 = $"L{Sequence.PadLeft(4, '0')}{clsGlobal.mWarehouseNo.PadLeft(2, '0')}{clsGlobal.mDeviceID.PadLeft(2, '0')}    {clsGlobal.mUserId.PadRight(7)}{formattedCustScannedOn}1000{coUNT.ToString().PadRight(2, '0')}3000{TruckNo}{CustCode}{ShipTo}{Possition}                      CS{DensoPart.PadRight(15)}{row["CUST_PartNo"].ToString().PadRight(25)}{row["CUST_PartQty"].ToString().PadRight(7)}{row["CUST_Sequence"].ToString().PadLeft(7)}{formattedCustScannedOn}        {row["CUST_Sequence"].ToString().PadLeft(7)}              ";
+                                        str1 = "L" + Sequence.PadLeft(4, '0') + clsGlobal.mWarehouseNo.PadLeft(2, '0') +
+                                           clsGlobal.mDeviceID.PadLeft(2, '0') + "    " + clsGlobal.mUserId.PadRight(7, ' ') + formattedDNHAScannedOn + "1000" + coUNT.ToString().PadRight(2, '0') + "3000" +
+                                           TruckNo + CustCode + ShipTo + Possition + " " + varResult.Value + " " + "                " + "".PadRight(15, ' ') + "".ToString().PadRight(25, ' ') + "".ToString().PadRight(7, ' ') + "".ToString().PadLeft(15, ' ') +
+                                           //dt1.Rows[B]["DNKI_PartQty"].ToString() + dt1.Rows[B]["DNKI_PartQty"].ToString() + dt1.Rows[B]["DNKI_Sequence"].ToString().PadLeft(7, '0') +
+                                           //formattedCustScannedOnDateTime + "                             "; Commmented Dipak Pathak 08-03-25
+                                           formattedDNHAScannedOnDateTime + "                        ";
+                                    }
+                                    else
+                                    {
+                                        //string str1 = $"L{Sequence.PadLeft(4, '0')}{clsGlobal.mWarehouseNo.PadLeft(2, '0')}{clsGlobal.mDeviceID.PadLeft(2, '0')}    {clsGlobal.mUserId.PadRight(7)}{formattedCustScannedOn}1000{coUNT.ToString().PadRight(2, '0')}3000{TruckNo}{CustCode}{ShipTo}{Possition}                      CS{DensoPart.PadRight(15)}{row["CUST_PartNo"].ToString().PadRight(25)}{row["CUST_PartQty"].ToString().PadRight(7)}{row["CUST_Sequence"].ToString().PadLeft(7)}{formattedCustScannedOn}        {row["CUST_Sequence"].ToString().PadLeft(7)}              ";
+                                        str1 = "L" + Sequence.PadLeft(4, '0') + clsGlobal.mWarehouseNo.PadLeft(2, '0') +
+                                           clsGlobal.mDeviceID.PadLeft(2, '0') + "    " + clsGlobal.mUserId.PadRight(7, ' ') + formattedDNHAScannedOn + "1000" + coUNT.ToString().PadRight(2, '0') + "3000" +
+                                           TruckNo + CustCode + ShipTo + Possition + "                " + "".PadRight(15, ' ') + "".ToString().PadRight(25, ' ') + "".ToString().PadRight(7, ' ') + "".ToString().PadLeft(15, ' ') +
+                                           //dt1.Rows[B]["DNKI_PartQty"].ToString() + dt1.Rows[B]["DNKI_PartQty"].ToString() + dt1.Rows[B]["DNKI_Sequence"].ToString().PadLeft(7, '0') +
+                                           //formattedCustScannedOnDateTime + "                             "; Commmented Dipak Pathak 08-03-25
+                                           formattedDNHAScannedOnDateTime + "                             ";
+                                    }
                                 }
                                 else
                                 {
@@ -470,8 +524,16 @@ namespace SMPDisptach.ActivityClass
                         coUNT++;
                         Thread.Sleep(2000);
                         Sequence = (Convert.ToInt32(Sequence) + 1).ToString();
-                        string str2 = $"L{Sequence.PadLeft(4, '0')}{clsGlobal.mWarehouseNo.PadLeft(2, '0')}{clsGlobal.mDeviceID.PadLeft(2, '0')}    {clsGlobal.mUserId.PadRight(7)}{DateTime.Now:yyyyMMdd}3000{coUNT.ToString().PadRight(2, '0')}0000{TruckNo}{CustCode}{ShipTo}{Possition}                                                                              {DateTime.Now:yyyyMMdd}{DateTime.Now:HHmmss}                             ";
-                        clsGlobal.WriteToFTPFile(datFilePath, str2 + "\r\n");
+                        string str2 = "";
+                        if (varResult.Type == "TIL")
+                        {
+                            str2 = $"L{Sequence.PadLeft(4, '0')}{clsGlobal.mWarehouseNo.PadLeft(2, '0')}{clsGlobal.mDeviceID.PadLeft(2, '0')}    {clsGlobal.mUserId.PadRight(7)}{DateTime.Now:yyyyMMdd}3000{coUNT.ToString().PadRight(2, '0')}0000{TruckNo}{CustCode}{ShipTo}{Possition} {varResult.Value}                                                                               {DateTime.Now:yyyyMMdd}{DateTime.Now:HHmmss}                        ";
+                        }
+                        else
+                        {
+                            str2 = $"L{Sequence.PadLeft(4, '0')}{clsGlobal.mWarehouseNo.PadLeft(2, '0')}{clsGlobal.mDeviceID.PadLeft(2, '0')}    {clsGlobal.mUserId.PadRight(7)}{DateTime.Now:yyyyMMdd}3000{coUNT.ToString().PadRight(2, '0')}0000{TruckNo}{CustCode}{ShipTo}{Possition}                                                                              {DateTime.Now:yyyyMMdd}{DateTime.Now:HHmmss}                             ";
+                        }
+                            clsGlobal.WriteToFTPFile(datFilePath, str2 + "\r\n");
 
                         File.Delete(sequencePath);
                         clsGlobal.WriteToFile(sequencePath, "0");
@@ -547,7 +609,7 @@ namespace SMPDisptach.ActivityClass
 
                 throw ex;
             }
-           
+
             //string strTransactionPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
             //string path1 = Path.Combine(strTransactionPath, spinnerSIL.SelectedItem.ToString().Replace("*",""));
             //string filePath = path1 + "//" + SILHeader + ".DAT";

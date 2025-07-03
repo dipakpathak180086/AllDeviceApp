@@ -320,6 +320,14 @@ namespace SMPDisptach
                         clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
 
                     }
+                    _plObj.DbType = "EXPIRY_CONTROL";
+                    dtData = _blObj.BL_ExecuteTask(_plObj);
+                    if (dtData.Rows.Count > 0)
+                    {
+                        string strFinaPath = Path.Combine(clsGlobal.FilePath, clsGlobal.MasterFolder + "//EXPIRY_CONTROL_MASTER.txt");
+                        clsGlobal.ConvertDataTableToTxt(dtData, strFinaPath);
+
+                    }
 
                     //progressDialog.Hide();
 

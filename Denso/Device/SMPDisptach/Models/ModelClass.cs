@@ -64,7 +64,7 @@ namespace SMPDisptach
         public string SupplierPartNo { get; set; }
         public string SupplierCode { get; set; }
         public string SupplierName { get; set; }
-       
+
         public string DNHAPartNo { get; set; }
         public string ExpDays { get; set; }
 
@@ -83,7 +83,7 @@ namespace SMPDisptach
     public class PL_SUSPECTED_LOT
     {
         public string DNHAPartNo { get; set; }
-        public string LotNo { get; set; } 
+        public string LotNo { get; set; }
     }
     public class PL_CUST_EXP_MASTER
     {
@@ -101,6 +101,31 @@ namespace SMPDisptach
         // Property for IsExpDate (manual set/get, no calculation)
         public bool IsExpDate { get; set; }
     }
+    public class PL_EXPIRY_CONTROL
+    {
+        // HD Fields
+        public string ProcessType;
+        public string CigmaCode;
+        public string PartNo;
+
+        // DTL Fields
+        public string? RefDay;
+        public string? RefMonth;
+        public string? RefYear;
+        public string? RefSeparator;
+
+        public string? ActualDay;
+        public string? ActualMonth;
+        public string? ActualYear;
+        public string? ActualSeparator;
+
+
+    }
+    public class TILBarcodeInfo
+    {
+        public string Type { get; set; } // TIL or SIL
+        public string Value { get; set; } // Value after two spaces, before Z
+    }
     #endregion
 
     #region Validate User
@@ -115,7 +140,7 @@ namespace SMPDisptach
 
     #region HHTDowload
 
-   
+
 
     #endregion
 
@@ -139,7 +164,7 @@ namespace SMPDisptach
         public string Barcode1 { get; set; }
         public string Barcode2 { get; set; }
         public string Barcode1SEQNo { get; set; }
-        public bool isMatchBarcode1SeqNo { get; set; }=false;
+        public bool isMatchBarcode1SeqNo { get; set; } = false;
         public string Barcode2SEQNo { get; set; }
         public bool isMatchBarcode2SeqNo { get; set; } = false;
     }
@@ -160,7 +185,7 @@ namespace SMPDisptach
     }
     public class ViewFTPScanData
     {
-      
+
         public string PartNo { get; set; }
         public string SILQty { get; set; }
         public string DensoQty { get; set; }
@@ -182,10 +207,10 @@ namespace SMPDisptach
         public string Seperater { get; set; }
         public string ThreePointCheckDigit { get; set; }
         public string Fields { get; set; }
-       // public Hashtable hsKeyValueData {  get; set; }=new Hashtable();
-       public List<Tuple<string, string>> keyValueData = new List<Tuple<string, string>>();
+        // public Hashtable hsKeyValueData {  get; set; }=new Hashtable();
+        public List<Tuple<string, string>> keyValueData = new List<Tuple<string, string>>();
     }
     #endregion
 
-  
+
 }

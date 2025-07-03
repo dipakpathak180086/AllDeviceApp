@@ -51,6 +51,7 @@ namespace SMPDisptach
         public static string SupplierPatternFileName = "SUPPLIER_PATTERN_DATA.txt";
 
         public static string CustomerWiseExpiry = "CUST_EXP_DATA.txt";
+        public static string ExpiryControlMaster = "EXPIRY_CONTROL_MASTER.txt";
 
         public static string ServerIpFileName = "ServerIP.txt";
         public static string SILMasterDataFile = "SILMasterData.txt";
@@ -87,6 +88,55 @@ namespace SMPDisptach
         public static string mCustSeqNo = "";
         public static string mDNHASupSeqNo = "";
         public static string mCustomerCode = "";
+        public static bool mIsTIL = false;
+
+
+
+        public static string[] mDateFormatAll = new string[]
+{
+    // ISO / Standard formats
+    "yyyy-MM-dd",       // 2025-06-25
+    "yyyy/MM/dd",       // 2025/06/25
+    "yyyy.MM.dd",       // 2025.06.25
+    "yyyyMMdd",         // 20250625
+
+    // Day-Month-Year
+    "dd-MM-yyyy",       // 25-06-2025
+    "dd/MM/yyyy",       // 25/06/2025
+    "dd.MM.yyyy",       // 25.06.2025
+    "d-M-yyyy",         // 5-6-2025
+    "d/M/yyyy",         // 5/6/2025
+    "d.M.yyyy",         // 5.6.2025
+
+    // Month-Day-Year (US-style)
+    "MM-dd-yyyy",       // 06-25-2025
+    "MM/dd/yyyy",       // 06/25/2025
+    "M-d-yyyy",         // 6-5-2025
+    "M/d/yyyy",         // 6/5/2025
+
+    // Textual month formats
+    "dd MMM yyyy",      // 25 Jun 2025
+    "dd MMMM yyyy",     // 25 June 2025
+    "d MMM yyyy",       // 5 Jun 2025
+    "d MMMM yyyy",      // 5 June 2025
+
+    "MMM dd, yyyy",     // Jun 25, 2025
+    "MMMM dd, yyyy",    // June 25, 2025
+    "MMM d, yyyy",      // Jun 5, 2025
+    "MMMM d, yyyy",     // June 5, 2025
+
+    "yyyy MMM dd",      // 2025 Jun 25
+    "yyyy MMMM dd",     // 2025 June 25
+
+    // No separators
+    "ddMMyyyy",         // 25062025
+    "yyMMdd",
+    "MMddyyyy",         // 06252025
+
+    // Day only formats (rare, but useful in flexible parsing)
+    "dd MMM",           // 25 Jun
+    "dd MMMM",          // 25 June
+};
         public static string GetUPICODE(int length, string deviceId)
         {
             // Note: i, o, l, 0, and 1 have been removed to reduce 
@@ -337,6 +387,7 @@ namespace SMPDisptach
                     // Return the first valid and logically correct date
                     return date;
                 }
+
             }
 
             // If no format matches
@@ -473,6 +524,7 @@ namespace SMPDisptach
         public static List<PL_PATTERN> mlistCustomerPattern = new List<PL_PATTERN>();
         public static List<PL_PATTERN> mlistSupplierPattern = new List<PL_PATTERN>();
         public static List<PL_CUST_EXP_MASTER> mlistCustWiseExpiry = new List<PL_CUST_EXP_MASTER>();
+        public static List<PL_EXPIRY_CONTROL> mlistExpiryControl = new List<PL_EXPIRY_CONTROL>();
         public static List<KanbanData> GetSILData(string inputString)
         {
             var outputList = new List<KanbanData>();
@@ -862,8 +914,9 @@ namespace SMPDisptach
                 if (File.Exists(filePath))
                 {
                     File.Delete(filePath);
-                    clsGlobal.mAlertMeassage = "";
+
                 }
+                clsGlobal.mAlertMeassage = "";
             }
             catch (Exception ex)
             {
@@ -941,6 +994,54 @@ namespace SMPDisptach
             }
 
             return mlistCustWiseExpiry;
+        }
+
+        public static List<PL_EXPIRY_CONTROL> ReadExpiryControlMaster()
+        {
+
+            try
+            {
+                mlistExpiryControl.Clear();
+                string filePath = Path.Combine(FilePath, MasterFolder + "/" + ExpiryControlMaster);
+                if (File.Exists(filePath))
+                {
+                    string[] lines = File.ReadAllLines(filePath);
+
+
+                    for (int i = 0; i < lines.Length; i++)
+                    {
+                        string[] parts = lines[i].Split('$');
+                        if (parts.Length >= 1)
+                        {
+                            PL_EXPIRY_CONTROL plMaster = new PL_EXPIRY_CONTROL();
+                            plMaster.ProcessType = parts[0].Trim();
+                            plMaster.CigmaCode = parts[1].Trim();
+                            plMaster.PartNo = parts[2].Trim();
+                            plMaster.RefDay = string.IsNullOrWhiteSpace(parts[3]) ? (string?)"" : Convert.ToString(parts[3].Trim());
+                            plMaster.RefMonth = string.IsNullOrWhiteSpace(parts[4]) ? (string?)"" : Convert.ToString(parts[4].Trim());
+                            plMaster.RefYear = string.IsNullOrWhiteSpace(parts[5]) ? (string?)"" : Convert.ToString(parts[5].Trim());
+                            plMaster.RefSeparator = string.IsNullOrWhiteSpace(parts[6]) ? (string?)"" : Convert.ToString(parts[6].Trim());
+
+                            plMaster.ActualDay = string.IsNullOrWhiteSpace(parts[7]) ? (string?)"" : Convert.ToString(parts[7].Trim());
+                            plMaster.ActualMonth = string.IsNullOrWhiteSpace(parts[8]) ? (string?)"" : Convert.ToString(parts[8].Trim());
+                            plMaster.ActualYear = string.IsNullOrWhiteSpace(parts[9]) ? (string?)"" : Convert.ToString(parts[9].Trim());
+                            plMaster.ActualSeparator = string.IsNullOrWhiteSpace(parts[10]) ? (string?)"" : Convert.ToString(parts[10].Trim());
+
+                            
+                        
+                        mlistExpiryControl.Add(plMaster);
+                        }
+
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error reading  file", ex);
+            }
+
+            return mlistExpiryControl;
         }
 
         public static void ReplaceInFile(
@@ -1626,7 +1727,42 @@ namespace SMPDisptach
 
             return entries;
         }
+
+        public static TILBarcodeInfo TILParseBarcode(string barcode)
+        {
+            if (string.IsNullOrWhiteSpace(barcode))
+                return null;
+
+            // Determine if it starts with two spaces -> TIL
+            string type = barcode.Contains("  ") ? "TIL" : "SIL";
+
+            string zValue = "";
+
+            if (type == "TIL")
+            {
+                // Try to extract the value after two spaces and before 'Z'
+                // Example: "  1 Z11HA210531-00701U0000072"
+                // Goal: Extract "1"
+                string trimmed = barcode.TrimStart();
+                string[] parts = trimmed.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+                if (parts.Length > 0)
+                {
+                    zValue = parts[1] + " " + parts[2].Substring(0, 1); // First token after two spaces
+                }
+                mIsTIL = true;
+            }
+
+            return new TILBarcodeInfo
+            {
+                Type = type,
+                Value = zValue
+            };
+        }
+
+
     }
+
 
 
 

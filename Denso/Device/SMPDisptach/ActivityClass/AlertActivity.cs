@@ -115,6 +115,7 @@ namespace SMPDisptach
                     }
                        
                     clsGlobal.DeleteAlertMessage();
+
                     Dismiss();
                 };
 

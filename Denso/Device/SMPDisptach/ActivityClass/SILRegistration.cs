@@ -313,6 +313,7 @@ namespace SMPDisptach.ActivityClass
 
                         txtSILBarcode.Text = "";
                         clsGlobal.showToastNGMessage("Invalid SIL/TIL Barcode.", this);
+                        clsGlobal.WriteLog($"Invalid SIL/TIL Barcode.");
                         SoundForNG();
                        // ShowAlertPopUp();
                         return;
@@ -322,7 +323,8 @@ namespace SMPDisptach.ActivityClass
                     {
 
                         txtSILBarcode.Text = "";
-                        clsGlobal.showToastNGMessage("Invalid SIL Barcode.", this);
+                        clsGlobal.showToastNGMessage("Invalid SIL/TIL Barcode.", this);
+                        clsGlobal.WriteLog($"Invalid SIL/TIL Barcode.");
                         SoundForNG();
                         //ShowAlertPopUp();
                         return;
@@ -343,7 +345,8 @@ namespace SMPDisptach.ActivityClass
                     else
                     {
                         txtSILBarcode.Text = "";
-                        clsGlobal.showToastNGMessage("Invalid SIL Barcode.", this);
+                        clsGlobal.showToastNGMessage("Invalid SIL/TIL Barcode.", this);
+                        clsGlobal.WriteLog($"Invalid SIL/TIL Barcode.");
                         SoundForNG();
                         //ShowAlertPopUp();
 
@@ -380,6 +383,7 @@ namespace SMPDisptach.ActivityClass
                 _dicBarcode2.Clear();
                 ; _sb.Length = 0;
                 string strSILCode = lst.GroupBy(x => x.TruckNo).Select(g => g.First().TruckNo).FirstOrDefault();
+                clsGlobal.WriteLog($"SIL {strSILCode} SCANNED");
                 string strTranscationPath = Path.Combine(clsGlobal.FilePath, clsGlobal.TranscationFolder);
                 string strFinalSILWiseDirectory = Path.Combine(strTranscationPath, strSILCode);
                 string strFinalFilePath = Path.Combine(strFinalSILWiseDirectory, clsGlobal.SILMasterDataFile);
